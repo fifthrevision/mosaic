@@ -1,0 +1,216 @@
+@import "sonner/dist/styles.css";
+@import "./colors.generated.css";
+@source "./";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  body {
+    font-weight: var(--font-weight-regular);
+    /* Subpixel rendering makes Inter read ~50 weight units heavier than Figma;
+       grayscale antialiasing lets the token values match the design 1:1. */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* -------------------------------------------------- */
+/* Semantic tokens (light/dark)                       */
+/* Generated into ./colors.generated.css from design-tokens/colors.dtg.yaml
+   via `pnpm dtg emit` (@fifthrevision/dtg; output path set in dtg.yaml). */
+/* -------------------------------------------------- */
+
+:root {
+  /* Tells the browser which mode is active */
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+/* -------------------------------------------------- */
+/* Theme                                              */
+/* -------------------------------------------------- */
+
+/* -------------------------------------------------- */
+/* Animations                                         */
+/* -------------------------------------------------- */
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes menu-out {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95) translateY(-4px);
+  }
+}
+
+@keyframes dialog-overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes dialog-overlay-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes dialog-content-in {
+  from {
+    opacity: 0;
+    scale: 0.92;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@keyframes dialog-content-out {
+  from {
+    opacity: 1;
+    scale: 1;
+  }
+  to {
+    opacity: 0;
+    scale: 0.92;
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+
+@theme {
+  /* Typography */
+  --font-sans: "Inter Variable", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+  --text-xs: 0.6875rem; /* 11px */
+  --text-sm: 0.75rem; /* 12px */
+  --text-md: 0.8125rem; /* 13px */
+  --text-base: 0.875rem; /* 14px */
+  --text-lg: 1rem;
+  --text-xl: 1.125rem;
+  --text-2xl: 1.3125rem;
+  --text-3xl: 1.5rem;
+
+  /* Dialog widths */
+  --width-dialog-small: 17.5rem; /* 280px */
+  --width-dialog-medium: 35rem; /* 560px */
+  --width-dialog-large: 52.5rem; /* 840px */
+
+  /* Radius */
+  --radius-sm: 0.25rem; /* 4px */
+  --radius-md: 0.5rem; /* 8px */
+  --radius-lg: 1rem; /* 16px */
+
+  /* Font weights (Inter Variable) */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+}
+
+@utility control-shadow {
+  box-shadow: 0px 1px 1px var(--color-shadow-3);
+}
+
+@utility card-shadow {
+  box-shadow: 0px 1px 1px var(--color-shadow-2);
+}
+
+@utility overlay-shadow {
+  box-shadow:
+    0px 10px 15px -3px var(--color-shadow-1),
+    0px 4px 6px -4px var(--color-shadow-3);
+}
+
+@utility dialog-shadow {
+  box-shadow: 0px 8px 40px var(--color-shadow-1);
+}
+
+@utility control-shadow-active {
+  box-shadow: 0px 0px 1px var(--color-shadow-3);
+}
+
+@utility control-focus-ring {
+  outline: 2px solid var(--color-shape-primary);
+  outline-offset: 2px;
+}
+
+@utility page-title {
+  @apply text-lg font-medium;
+}
+
+@utility page-header {
+  @apply text-base font-medium text-label;
+}
+
+@utility label-header {
+  @apply text-md font-medium text-label-secondary;
+}
+
+@utility section-title {
+  @apply text-lg font-medium leading-6 text-label;
+}
+
+/* Single-line overflow that fades out instead of clipping or ellipsing.
+   The mid stop sits 25% into the band, making an ease-out: alpha drops fast,
+   then trails off.
+
+   Apply only to elements whose width comes from their container (flex-1,
+   w-full, a fixed w-*, a grid cell). On a content-sized element the right
+   edge is where the text ends, so the fade would eat the last characters of
+   text that fits fine. Such a caller needs padding-right >= 1.5rem to push
+   that edge past the fade region -- see WorkspaceControl, where that padding
+   doubles as the chevron's slot. */
+@utility truncate-fade {
+  overflow: hidden;
+  white-space: nowrap;
+  mask-image: linear-gradient(
+    to right,
+    black calc(100% - 1.5rem),
+    calc(100% - 1.25rem),
+    transparent calc(100% - 0.4rem)
+  );
+}
+
+@utility shimmer-text {
+  background: linear-gradient(
+    90deg,
+    var(--color-label-secondary) 0%,
+    var(--color-label-shimmer) 50%,
+    var(--color-label-secondary) 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 1.6s linear infinite;
+}

@@ -1,0 +1,6 @@
+# Definitions are discovered by convention (design-tokens/*.dtg.yaml). The CSS
+# output lives beside styles.css, which imports it.
+outputs:
+  css:
+    path: src/colors.generated.css
+    format: tailwind

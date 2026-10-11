@@ -1,0 +1,4 @@
+node_modules/
+.zed
+.claude/settings.local.json
+.DS_Store

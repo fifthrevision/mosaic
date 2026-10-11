@@ -7,7 +7,7 @@ repo as a pnpm git dependency; the TypeScript source is the package.
 ## Consuming
 
 ```sh
-pnpm add "@fifthrevision/mosaic@github:johncch/mosaic#main"
+pnpm add "@fifthrevision/mosaic@github:fifthrevision/mosaic#main"
 ```
 
 The lockfile pins the commit. To pick up new changes, run
@@ -27,11 +27,12 @@ Components are subpath imports, one per module:
 
 ```ts
 import { Button } from "@fifthrevision/mosaic/button";
-import { NavTabs } from "@fifthrevision/mosaic/router/nav-tabs";
 ```
 
-Everything under `router/` needs `react-router`, which is an optional peer.
-Apps without a router never import from there and need not install it.
+Mosaic has no routing dependency. Route-driven navigation (a tab strip
+backed by `NavLink`, say) lives in the app, built on the class recipes
+`tabs.tsx` exports (`tabClassName`, `tabIconClassName`) so the look stays
+here.
 
 Apps that render on the server (Vite SSR) must add the package to
 `ssr.noExternal`, since the source is `.tsx`.

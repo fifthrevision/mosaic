@@ -38,10 +38,7 @@
     "./toaster": "./src/toaster.tsx",
     "./tooltip": "./src/tooltip.tsx",
     "./truncated-text": "./src/truncated-text.tsx",
-    "./workspace-control": "./src/workspace-control.tsx",
-    "./router/nav-item": "./src/router/nav-item.tsx",
-    "./router/nav-tabs": "./src/router/nav-tabs.tsx",
-    "./router/page-title": "./src/router/page-title.tsx"
+    "./workspace-control": "./src/workspace-control.tsx"
   },
   "scripts": {
     "studio": "vite dev --config studio/vite.config.ts",
@@ -56,13 +53,7 @@
   "peerDependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router": ">=7.0.0",
     "tailwindcss": "^4.0.0"
-  },
-  "peerDependenciesMeta": {
-    "react-router": {
-      "optional": true
-    }
   },
   "dependencies": {
     "@codemirror/autocomplete": "^6.20.3",
@@ -98,7 +89,6 @@
     "prettier": "^3.9.9",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "react-router": "^8.4.0",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.71.1",

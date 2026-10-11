@@ -16,8 +16,21 @@ export function TabsList({
   );
 }
 
-export const tabClassName =
+const tabShapeClassName =
   "group inline-flex h-8 w-fit items-center gap-1.75 rounded-md px-3 text-base font-medium select-none focus-visible:control-focus-ring";
+
+export function tabClassName(active: boolean): string {
+  return cn(
+    tabShapeClassName,
+    active
+      ? "bg-state-selected text-label control-shadow"
+      : "text-label-secondary hover:bg-state-hover",
+  );
+}
+
+export function tabIconClassName(active: boolean): string {
+  return cn("shrink-0", active ? "text-theme-primary" : "text-shape-secondary");
+}
 
 export function TabsTrigger({
   icon: Icon,
@@ -32,7 +45,7 @@ export function TabsTrigger({
     <TabsPrimitive.Trigger
       {...props}
       className={cn(
-        tabClassName,
+        tabShapeClassName,
         "text-label-secondary hover:not-data-[state=active]:bg-state-hover",
         "data-[state=active]:bg-state-selected data-[state=active]:text-label data-[state=active]:control-shadow",
         className,

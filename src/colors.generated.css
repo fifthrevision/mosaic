@@ -8,23 +8,23 @@
   --color-light-3_5: #f1f5f7;
   --color-light-4_5: #eff3f5;
   --color-light-6_5: #eaeef1;
-  --color-light-8: #e6ebee;
+  --color-light-8: #e0e6ea;
   --color-light-15: #d5dbdf;
   --color-light-20: #c8d0d4;
   --color-light-30: #afb9bf;
   --color-light-40: #96a2a9;
   --color-light-60: #64757e;
   /* night (ink-ramp) */
-  --color-dark-0: #151c1f;
-  --color-dark-1: #171e21;
-  --color-dark-1_5: #181f22;
-  --color-dark-2: #1a2123;
-  --color-dark-6_5: #242b2e;
-  --color-dark-8: #272e31;
-  --color-dark-12: #30373a;
-  --color-dark-30: #5a5f62;
-  --color-dark-40: #717679;
-  --color-dark-60: #9ea3a5;
+  --color-dark-0: #15181f;
+  --color-dark-1: #171a21;
+  --color-dark-1_5: #181b22;
+  --color-dark-2: #1a1d23;
+  --color-dark-6_5: #24272e;
+  --color-dark-8: #272a31;
+  --color-dark-12: #30333a;
+  --color-dark-30: #5a5d62;
+  --color-dark-40: #717479;
+  --color-dark-60: #9ea1a5;
   /* theme (oklch-scale) */
   --color-theme-50: #f1f9fe;
   --color-theme-100: #e7f4fd;

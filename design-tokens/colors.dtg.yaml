@@ -38,7 +38,7 @@ systems:
     algorithm: ink-ramp
     alias: dark
     params:
-      base: "#151c1f"
+      base: "#15181f"
       ink: "#fafdff"
   # Chromatic scales: OKLCH blend from the 500 base toward the sky base
   # (50–400) and the sky ink (600–950). Declared stops: these are a public

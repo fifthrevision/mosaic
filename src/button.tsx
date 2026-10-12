@@ -31,8 +31,8 @@ const variantConfig = {
     icon: "text-shape-primary",
   },
   subtle: {
-    container: "text-shape-primary hover:not-disabled:bg-state-control-hover",
-    icon: "text-shape-primary",
+    container: "text-label hover:not-disabled:bg-state-control-hover",
+    icon: "text-shape-secondary",
   },
   destructive: {
     container:

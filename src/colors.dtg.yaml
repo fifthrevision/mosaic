@@ -1,0 +1,166 @@
+# The color system, as decisions.
+#
+# Grammar (dtg: 1):
+# - `systems` declares color systems: a name → { algorithm, ...params }
+#   or a plain hex for statics. Algorithms are named functions registered
+#   with the tool; params belong to the algorithm, this file doesn't
+#   interpret them. `defaults` supplies shared params per algorithm.
+#   Reserved keys (tool's, never the algorithm's): algorithm, alias,
+#   overrides.
+# - A ref is system(selector) — everything inside the parentheses belongs
+#   to the algorithm (sky(3.5) = 3.5% tint over the sky base; theme(600) =
+#   the 600 stop; shadow(40) = 40% opacity overlay). What kind of value a
+#   ref produces (surface hex vs translucent rgba) is the algorithm's nature.
+# - system(selector tint) is the step's unflattened form — the tint alone
+#   at the step's alpha, not composited. Only tint systems have one.
+# - A ref may also be a role path with a dot (surface.card), pointing at
+#   another decision.
+# - Raw hex is legal ONLY inside `systems`. The roles tier points and
+#   derives; every color must trace back to an anchor.
+# - A role maps to one ref per mode, in `modes` order. That is the entire
+#   role grammar — no flags, no options.
+
+dtg: 1
+
+modes:
+  light:
+    scheme: light
+  dark:
+    scheme: dark
+  black:
+    extends: dark
+
+systems:
+  # Neutral ramps: tint composited over base; a step is the tint's alpha %.
+  # No declared steps — the steps that exist are the ones refs demand.
+  # `alias` preserves the shipped CSS names (--color-light-*, --color-dark-*).
+  sky:
+    algorithm: tint
+    alias: light
+    params:
+      base: "#fafdff"
+      tint: "#001a28"
+  night:
+    algorithm: tint
+    alias: dark
+    params:
+      base: "#15181f"
+      tint: "#fafdff"
+  midnight:
+    algorithm: tint
+    alias: midnight
+    params:
+      base: "#010206"
+      tint: "#fafdff"
+  # Chromatic scales: OKLCH blend from the 500 base toward the sky base
+  # (50–400) and the sky tint (600–950). Declared stops: these are a public
+  # palette, usable directly as utilities, not just via refs.
+  theme:
+    algorithm: scale
+    params: { base: "#03a2e8" }
+  yellow:
+    algorithm: scale
+    params: { base: "#fead3c" }
+  emerald:
+    algorithm: scale
+    params: { base: "#0e9d51" }
+  ruby:
+    algorithm: scale
+    params: { base: "#c50101" }
+
+  # Pure overlay: color at selector % opacity. Never flattens — that's the
+  # algorithm's nature, which is why shadows aren't a tint.
+  shadow:
+    algorithm: overlay
+    params: { color: "#000000" }
+
+  white: "#ffffff"
+  black: "#000000"
+
+defaults:
+  scale:
+    toward: ["#fafdff", "#001a28"]
+    # 0 locks every stop to the base hue; 100 follows the natural OKLCH
+    # path toward the blend target.
+    hueShift: 15
+    stops:
+      "50": 0.05
+      "100": 0.1
+      "150": 0.2
+      "200": 0.3
+      "300": 0.5
+      "400": 0.75
+      "500": 1
+      "600": 0.75
+      "700": 0.5
+      "800": 0.3
+      "850": 0.2
+      "900": 0.1
+      "950": 0.05
+
+roles:
+  surface:
+    canvas: [sky(3), night(0), midnight(0)]
+    navigation: [sky(4.5), night(1.5), midnight(3.5)]
+    panel: [sky(4.5), night(1.5), midnight(3.5)]
+    card: [sky(1), night(1), midnight(2)]
+    card-subdued: [sky(3), night(0), midnight(0)]
+    floating: [surface.card, night(0), midnight(0)]
+    control: [sky(6.5), night(8), midnight(8)]
+    control-sunken: [sky(3.5 tint), night(2.5 tint), midnight(2.5 tint)]
+    control-deep: [sky(30), night(30), midnight(30)]
+    bubble: [theme(150), theme(700)]
+
+  state:
+    # Unflattened so hover is a relative shift over any surface. Steps were
+    # solved against the sidebar's lightness step per mode — dark needs the
+    # larger step to read the same.
+    hover: [sky(3 tint), night(4 tint), midnight(6.5 tint)]
+    selected: [sky(0), night(6.5), midnight(12)]
+    active: [sky(8), night(8), midnight(16)]
+    control-hover: [sky(8), night(12), midnight(12)]
+
+  # Labels draw from the opposite mode's ramp: text on a sky surface is a
+  # point on the night ramp, and vice versa.
+  label:
+    # omit drops the segment: emits --label / Figma "label", beside
+    # label-secondary etc.
+    primary:
+      omit: true
+      refs: [night(0), sky(0)]
+    secondary: [night(30), sky(40)]
+    tertiary: [night(60), sky(60)]
+    shimmer: [theme(400), sky(0)]
+    intent-primary: [theme(700), theme(150)]
+    intent-destructive: [ruby(700), ruby(150)]
+    context-destructive: [ruby(700), ruby(150)]
+    theme: [theme(600), theme(400)]
+
+  theme:
+    primary: [theme(600), theme(400)]
+
+  shape:
+    primary: [theme(600), theme(400)]
+    secondary: [night(40), sky(40)]
+    tertiary: [night(60), sky(60)]
+    destructive: [ruby(600), ruby(400)]
+    constructive: [emerald(600), emerald(400)]
+
+  separator:
+    primary: [sky(15), night(12), midnight(12)]
+    primary-translucent: [sky(15 tint), night(12 tint), midnight(12 tint)]
+    secondary: [sky(8), night(8), midnight(8)]
+    secondary-translucent: [sky(8 tint), night(8 tint), midnight(8 tint)]
+    control-hover: [sky(20), theme(800)]
+    control-active: [theme(400), theme(600)]
+
+  shadow:
+    "1": [shadow(5), shadow(40)]
+    "2": [shadow(10), shadow(50)]
+    "3": [shadow(15), shadow(60)]
+
+  diff:
+    added-line: [emerald(100), emerald(950)]
+    added-text: [emerald(200), emerald(700)]
+    removed-line: [ruby(100), ruby(950)]
+    removed-text: [ruby(200), ruby(700)]

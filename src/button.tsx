@@ -31,7 +31,7 @@ const variantConfig = {
     icon: "text-shape-primary",
   },
   subtle: {
-    container: "text-label hover:not-disabled:bg-state-control-hover",
+    container: "text-label hover:not-disabled:bg-state-hover",
     icon: "text-shape-secondary",
   },
   destructive: {

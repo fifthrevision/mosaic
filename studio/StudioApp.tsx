@@ -8,13 +8,16 @@ const designModules = import.meta.glob<Record<string, unknown>>(
   { eager: false },
 );
 
-const metaModules = import.meta.glob<{ title?: string }>(
+const metaModules = import.meta.glob<{ title?: string; group?: string }>(
   "../src/**/*.design.tsx",
   { eager: true, import: "meta" },
 );
 
+const DEFAULT_GROUP = "Components";
+
 type DesignEntry = {
   name: string;
+  group: string;
   path: string;
   load: () => Promise<Record<string, unknown>>;
 };
@@ -29,10 +32,21 @@ function parseEntries(): DesignEntry[] {
     const urlPath = encodeURIComponent(fileName);
     return {
       name,
+      group: meta?.group ?? DEFAULT_GROUP,
       path: urlPath,
       load: load as () => Promise<Record<string, unknown>>,
     };
   });
+}
+
+function groupEntries(entries: DesignEntry[]): [string, DesignEntry[]][] {
+  const groups = new Map<string, DesignEntry[]>();
+  for (const entry of entries) {
+    const members = groups.get(entry.group) ?? [];
+    members.push(entry);
+    groups.set(entry.group, members);
+  }
+  return [...groups.entries()].sort(([a], [b]) => a.localeCompare(b));
 }
 
 function getPath() {
@@ -51,14 +65,21 @@ function navigate(path: string) {
   window.dispatchEvent(new PopStateEvent("popstate"));
 }
 
-function isDarkMode() {
-  return document.documentElement.classList.contains("dark");
+const STUDIO_THEMES = ["light", "dark", "black"] as const;
+type StudioTheme = (typeof STUDIO_THEMES)[number];
+
+function currentTheme(): StudioTheme {
+  const classes = document.documentElement.classList;
+  if (classes.contains("black")) return "black";
+  if (classes.contains("dark")) return "dark";
+  return "light";
 }
 
-function toggleDarkMode() {
-  const next = !isDarkMode();
-  document.documentElement.classList.toggle("dark", next);
-  localStorage.setItem("studio-theme", next ? "dark" : "light");
+function applyTheme(theme: StudioTheme) {
+  const classes = document.documentElement.classList;
+  classes.remove("dark", "black");
+  if (theme !== "light") classes.add(theme);
+  localStorage.setItem("studio-theme", theme);
 }
 
 function Sidebar({
@@ -68,36 +89,54 @@ function Sidebar({
   entries: DesignEntry[];
   activePath: string;
 }) {
-  const [dark, setDark] = useState(() => isDarkMode());
+  const [theme, setTheme] = useState(currentTheme);
 
   return (
     <aside className="fixed left-0 top-0 flex h-full w-52 flex-col border-r border-separator-primary bg-surface-card p-4">
       <h1 className="mb-4 text-sm font-bold text-label-secondary uppercase tracking-wide">
         Studio
       </h1>
-      <ul className="space-y-0.5 flex-1">
-        {entries.map((e) => (
-          <li key={e.path}>
-            <button
-              onClick={() => navigate(e.path)}
-              className={`w-full rounded-lg px-3 py-1.5 text-left text-base text-label hover:bg-state-hover ${
-                activePath === e.path ? "bg-state-selected" : ""
-              }`}
-            >
-              {e.name}
-            </button>
-          </li>
+      <nav className="-mx-4 min-h-0 flex-1 space-y-4 overflow-y-auto px-4">
+        {groupEntries(entries).map(([group, members]) => (
+          <section key={group}>
+            <h2 className="mb-1 px-3 text-sm font-medium text-label-tertiary">
+              {group}
+            </h2>
+            <ul className="space-y-0.5">
+              {members.map((e) => (
+                <li key={e.path}>
+                  <button
+                    onClick={() => navigate(e.path)}
+                    className={`w-full rounded-lg px-3 py-1.5 text-left text-base text-label hover:bg-state-hover ${
+                      activePath === e.path ? "bg-state-selected" : ""
+                    }`}
+                  >
+                    {e.name}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </section>
         ))}
-      </ul>
-      <button
-        onClick={() => {
-          toggleDarkMode();
-          setDark((d) => !d);
-        }}
-        className="rounded-lg px-3 py-1.5 text-left text-sm text-label-secondary hover:bg-state-hover"
-      >
-        {dark ? "Light mode" : "Dark mode"}
-      </button>
+      </nav>
+      <div className="flex gap-0.5">
+        {STUDIO_THEMES.map((option) => (
+          <button
+            key={option}
+            onClick={() => {
+              applyTheme(option);
+              setTheme(option);
+            }}
+            className={`flex-1 rounded-lg py-1.5 text-sm capitalize hover:bg-state-hover ${
+              theme === option
+                ? "bg-state-selected text-label"
+                : "text-label-secondary"
+            }`}
+          >
+            {option}
+          </button>
+        ))}
+      </div>
     </aside>
   );
 }

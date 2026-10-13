@@ -4,7 +4,7 @@ import type { Theme } from "./theme";
 export function Toaster({ theme = "system" }: { theme?: Theme }) {
   return (
     <SonnerToaster
-      theme={theme}
+      theme={theme === "black" ? "dark" : theme}
       position="bottom-right"
       closeButton
       toastOptions={{

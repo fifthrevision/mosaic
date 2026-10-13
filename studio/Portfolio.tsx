@@ -3,6 +3,7 @@ import { DesignRenderer } from "./DesignRenderer";
 
 type DesignMeta = {
   title?: string;
+  group?: string;
   description?: string;
 };
 

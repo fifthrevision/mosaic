@@ -2,8 +2,7 @@ import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import { createContext, useContext } from "react";
 
 type CollisionPadding =
-  | number
-  | Partial<Record<"top" | "right" | "bottom" | "left", number>>;
+  number | Partial<Record<"top" | "right" | "bottom" | "left", number>>;
 
 const CollisionPaddingContext = createContext<CollisionPadding>(8);
 

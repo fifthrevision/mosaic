@@ -1,0 +1,9 @@
+definitions: src/colors.dtg.yaml
+outputs:
+  css:
+    path: src/colors.generated.css
+    format: tailwind
+dev:
+  backgrounds:
+    white: "#ffffff"
+    black: "#000000"

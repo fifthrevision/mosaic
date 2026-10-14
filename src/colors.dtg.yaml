@@ -108,7 +108,7 @@ roles:
     floating: [surface.card, night(0), midnight(0)]
     control: [sky(6.5), night(8), midnight(8)]
     control-sunken: [sky(3.5 tint), night(2.5 tint), midnight(2.5 tint)]
-    control-deep: [sky(30), night(30), midnight(30)]
+    control-deep: [sky(12), night(12 tint), midnight(15 tint)]
     bubble: [theme(150), theme(700)]
 
   state:
@@ -147,12 +147,13 @@ roles:
     constructive: [emerald(600), emerald(400)]
 
   separator:
-    primary: [sky(15), night(12), midnight(12)]
-    primary-translucent: [sky(15 tint), night(12 tint), midnight(12 tint)]
+    primary: [sky(15), night(16), midnight(16)]
+    primary-translucent: [sky(15 tint), night(16 tint), midnight(16 tint)]
     secondary: [sky(8), night(8), midnight(8)]
     secondary-translucent: [sky(8 tint), night(8 tint), midnight(8 tint)]
-    control-hover: [sky(20), theme(800)]
+    control-hover: [sky(20), theme(800), ~]
     control-active: [theme(400), theme(600)]
+    control-selected: [theme(700), theme(700)]
 
   shadow:
     "1": [shadow(5), shadow(40)]

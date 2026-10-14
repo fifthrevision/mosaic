@@ -59,8 +59,8 @@ export function Switch({
           "focus-visible:control-focus-ring disabled:cursor-not-allowed",
           isChecked ? "bg-shape-primary" : "bg-surface-control-deep",
           disabled
-            ? "border-separator-secondary-translucent opacity-50"
-            : "border-separator-primary-translucent",
+            ? "border-separator-secondary opacity-50"
+            : "border-separator-primary hover:border-separator-control-hover",
           className,
         )}
       >

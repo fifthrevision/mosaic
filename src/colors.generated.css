@@ -8,9 +8,9 @@
   --color-light-4_5: #eff3f5;
   --color-light-6_5: #eaeef1;
   --color-light-8: #e6ebee;
+  --color-light-12: #dce2e5;
   --color-light-15: #d5dbdf;
   --color-light-20: #c8d0d4;
-  --color-light-30: #afb9bf;
   --color-light-40: #96a2a9;
   --color-light-60: #64757e;
   /* night (tint) */
@@ -20,6 +20,7 @@
   --color-dark-6_5: #24272e;
   --color-dark-8: #272a31;
   --color-dark-12: #30333a;
+  --color-dark-16: #3a3d43;
   --color-dark-30: #5a5d62;
   --color-dark-40: #717479;
   --color-dark-60: #9ea1a5;
@@ -30,7 +31,6 @@
   --color-midnight-8: #15161a;
   --color-midnight-12: #1f2024;
   --color-midnight-16: #292a2e;
-  --color-midnight-30: #4c4d51;
   /* theme (scale) */
   --color-theme-50: #f1f9fe;
   --color-theme-100: #e7f4fd;
@@ -102,7 +102,7 @@
   --surface-floating: var(--surface-card);
   --surface-control: var(--color-light-6_5);
   --surface-control-sunken: rgba(0, 26, 40, 0.035);
-  --surface-control-deep: var(--color-light-30);
+  --surface-control-deep: var(--color-light-12);
   --surface-bubble: var(--color-theme-150);
   --state-hover: rgba(0, 26, 40, 0.03);
   --state-selected: var(--color-light-0);
@@ -128,6 +128,7 @@
   --separator-secondary-translucent: rgba(0, 26, 40, 0.08);
   --separator-control-hover: var(--color-light-20);
   --separator-control-active: var(--color-theme-400);
+  --separator-control-selected: var(--color-theme-700);
   --shadow-1: rgba(0, 0, 0, 0.05);
   --shadow-2: rgba(0, 0, 0, 0.1);
   --shadow-3: rgba(0, 0, 0, 0.15);
@@ -147,7 +148,7 @@
   --surface-floating: var(--color-dark-0);
   --surface-control: var(--color-dark-8);
   --surface-control-sunken: rgba(250, 253, 255, 0.025);
-  --surface-control-deep: var(--color-dark-30);
+  --surface-control-deep: rgba(250, 253, 255, 0.12);
   --surface-bubble: var(--color-theme-700);
   --state-hover: rgba(250, 253, 255, 0.04);
   --state-selected: var(--color-dark-6_5);
@@ -167,12 +168,13 @@
   --shape-tertiary: var(--color-light-60);
   --shape-destructive: var(--color-ruby-400);
   --shape-constructive: var(--color-emerald-400);
-  --separator-primary: var(--color-dark-12);
-  --separator-primary-translucent: rgba(250, 253, 255, 0.12);
+  --separator-primary: var(--color-dark-16);
+  --separator-primary-translucent: rgba(250, 253, 255, 0.16);
   --separator-secondary: var(--color-dark-8);
   --separator-secondary-translucent: rgba(250, 253, 255, 0.08);
   --separator-control-hover: var(--color-theme-800);
   --separator-control-active: var(--color-theme-600);
+  --separator-control-selected: var(--color-theme-700);
   --shadow-1: rgba(0, 0, 0, 0.4);
   --shadow-2: rgba(0, 0, 0, 0.5);
   --shadow-3: rgba(0, 0, 0, 0.6);
@@ -191,13 +193,13 @@
   --surface-floating: var(--color-midnight-0);
   --surface-control: var(--color-midnight-8);
   --surface-control-sunken: rgba(250, 253, 255, 0.025);
-  --surface-control-deep: var(--color-midnight-30);
+  --surface-control-deep: rgba(250, 253, 255, 0.15);
   --state-hover: rgba(250, 253, 255, 0.065);
   --state-selected: var(--color-midnight-12);
   --state-active: var(--color-midnight-16);
   --state-control-hover: var(--color-midnight-12);
-  --separator-primary: var(--color-midnight-12);
-  --separator-primary-translucent: rgba(250, 253, 255, 0.12);
+  --separator-primary: var(--color-midnight-16);
+  --separator-primary-translucent: rgba(250, 253, 255, 0.16);
   --separator-secondary: var(--color-midnight-8);
   --separator-secondary-translucent: rgba(250, 253, 255, 0.08);
 }
@@ -238,6 +240,7 @@
   --color-separator-secondary-translucent: var(--separator-secondary-translucent);
   --color-separator-control-hover: var(--separator-control-hover);
   --color-separator-control-active: var(--separator-control-active);
+  --color-separator-control-selected: var(--separator-control-selected);
   --color-shadow-1: var(--shadow-1);
   --color-shadow-2: var(--shadow-2);
   --color-shadow-3: var(--shadow-3);

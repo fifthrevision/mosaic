@@ -41,7 +41,6 @@ export function Checkbox({
     useState(defaultChecked);
   const isControlled = checked !== undefined;
   const checkedState = isControlled ? checked : uncontrolledChecked;
-  const isFilled = checkedState !== false;
 
   function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
     onClick?.(event);
@@ -71,11 +70,8 @@ export function Checkbox({
         disabled={disabled}
         onClick={handleClick}
         className={cn(
-          "inline-flex size-4 shrink-0 items-center justify-center rounded-sm border text-surface-card transition-colors duration-150 ease-out select-none",
-          "focus-visible:control-focus-ring disabled:cursor-not-allowed disabled:opacity-50",
-          isFilled
-            ? "border-separator-primary-translucent bg-shape-primary"
-            : "border-separator-secondary bg-surface-control-sunken shadow-[inset_0px_0px_4px_var(--color-shadow-1)] hover:not-disabled:border-separator-control-hover",
+          "inline-flex size-4 shrink-0 items-center justify-center rounded-sm border border-separator-primary bg-surface-control-deep text-shape-primary shadow-[inset_0px_0px_4px_var(--color-shadow-1)] select-none",
+          "hover:not-disabled:border-separator-control-hover focus-visible:control-focus-ring disabled:cursor-not-allowed disabled:opacity-50",
           className,
         )}
       >

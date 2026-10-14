@@ -1,4 +1,5 @@
 import { Box, SlidersHorizontal } from "lucide-react";
+import { useState } from "react";
 import { Tabs, TabsList, TabsPanel, TabsTrigger } from "./tabs";
 
 export const meta = {
@@ -34,3 +35,30 @@ export const WithoutIcons = () => (
     </TabsList>
   </Tabs>
 );
+
+const closableTabs = ["Draft one", "Draft two", "Draft three"];
+
+export const Closable = () => {
+  const [openTabs, setOpenTabs] = useState(closableTabs);
+  const [activeTab, setActiveTab] = useState(closableTabs[0]);
+
+  function closeTab(tab: string) {
+    const remainingTabs = openTabs.filter((openTab) => openTab !== tab);
+    setOpenTabs(remainingTabs);
+    if (tab === activeTab) {
+      setActiveTab(remainingTabs[0] ?? "");
+    }
+  }
+
+  return (
+    <Tabs value={activeTab} onValueChange={setActiveTab}>
+      <TabsList>
+        {openTabs.map((tab) => (
+          <TabsTrigger key={tab} value={tab} onClose={() => closeTab(tab)}>
+            {tab}
+          </TabsTrigger>
+        ))}
+      </TabsList>
+    </Tabs>
+  );
+};

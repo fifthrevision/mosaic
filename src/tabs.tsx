@@ -1,6 +1,7 @@
 import * as TabsPrimitive from "@radix-ui/react-tabs";
-import type { LucideIcon } from "lucide-react";
+import { X, type LucideIcon } from "lucide-react";
 import { cn } from "./cn";
+import { IconButton } from "./icon-button";
 
 export const Tabs = TabsPrimitive.Root;
 
@@ -36,18 +37,22 @@ export function TabsTrigger({
   icon: Icon,
   children,
   className,
+  onClose,
   ...props
 }: {
   icon?: LucideIcon;
   children: React.ReactNode;
+  onClose?: () => void;
 } & React.ComponentProps<typeof TabsPrimitive.Trigger>) {
-  return (
+  const trigger = (
     <TabsPrimitive.Trigger
       {...props}
       className={cn(
         tabShapeClassName,
         "text-label-secondary hover:not-data-[state=active]:bg-state-hover",
         "data-[state=active]:bg-state-selected data-[state=active]:text-label data-[state=active]:control-shadow",
+        onClose &&
+          "pr-8 group-hover/closable:not-data-[state=active]:bg-state-hover",
         className,
       )}
     >
@@ -59,6 +64,26 @@ export function TabsTrigger({
       )}
       <span className="truncate">{children}</span>
     </TabsPrimitive.Trigger>
+  );
+
+  if (!onClose) {
+    return trigger;
+  }
+
+  // A button cannot nest inside the trigger's <button>, so the close button
+  // is a sibling laid over the trigger's right padding.
+  return (
+    <div className="group/closable relative inline-flex">
+      {trigger}
+      <IconButton
+        icon={X}
+        size="sm"
+        variant="subtle"
+        aria-label="Close tab"
+        onClick={onClose}
+        className="absolute top-1 right-1"
+      />
+    </div>
   );
 }
 

@@ -33,8 +33,22 @@ export function tabIconClassName(active: boolean): string {
   return cn("shrink-0", active ? "text-theme-primary" : "text-shape-secondary");
 }
 
+const sizeConfig = {
+  sm: {
+    trigger: "h-7 px-2.5",
+    closableTrigger: "pr-7",
+    closeButton: "top-0.5 right-0.5",
+  },
+  md: {
+    trigger: "h-8 px-3",
+    closableTrigger: "pr-8",
+    closeButton: "top-1 right-1",
+  },
+} as const;
+
 export function TabsTrigger({
   icon: Icon,
+  size = "md",
   children,
   className,
   onClose,
@@ -42,17 +56,28 @@ export function TabsTrigger({
 }: {
   icon?: LucideIcon;
   children: React.ReactNode;
+  size?: keyof typeof sizeConfig;
   onClose?: () => void;
 } & React.ComponentProps<typeof TabsPrimitive.Trigger>) {
+  const {
+    trigger: triggerSize,
+    closableTrigger,
+    closeButton,
+  } = sizeConfig[size];
+
   const trigger = (
     <TabsPrimitive.Trigger
       {...props}
       className={cn(
         tabShapeClassName,
+        triggerSize,
         "text-label-secondary hover:not-data-[state=active]:bg-state-hover",
         "data-[state=active]:bg-state-selected data-[state=active]:text-label data-[state=active]:control-shadow",
         onClose &&
-          "pr-8 group-hover/closable:not-data-[state=active]:bg-state-hover",
+          cn(
+            closableTrigger,
+            "group-hover/closable:not-data-[state=active]:bg-state-hover",
+          ),
         className,
       )}
     >
@@ -81,7 +106,7 @@ export function TabsTrigger({
         variant="subtle"
         aria-label="Close tab"
         onClick={onClose}
-        className="absolute top-1 right-1"
+        className={cn("absolute", closeButton)}
       />
     </div>
   );

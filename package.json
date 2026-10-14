@@ -12,6 +12,7 @@
     "./avatar": "./src/avatar.tsx",
     "./button": "./src/button.tsx",
     "./chat-input": "./src/chat-input.tsx",
+    "./checkbox": "./src/checkbox.tsx",
     "./combobox": "./src/combobox.tsx",
     "./confirm-dialog": "./src/confirm-dialog.tsx",
     "./copy-button": "./src/copy-button.tsx",

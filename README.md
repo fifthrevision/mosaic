@@ -29,10 +29,21 @@ Components are subpath imports, one per module:
 import { Button } from "@fifthrevision/mosaic/button";
 ```
 
-[USAGE.md](USAGE.md) has the rules for writing UI with Mosaic (type roles,
-text colors, spacing) and how to turn on the lint plugin that enforces them.
-Point the app's agent instructions at
-`node_modules/@fifthrevision/mosaic/USAGE.md`.
+The rules for writing UI with Mosaic ship as an agent skill in
+[`skills/mosaic/`](skills/mosaic/SKILL.md): type roles, text colors, surfaces,
+controls, the component catalog, and the lint setup. It's plain Markdown, so
+it doubles as the usage docs. To give an app's Claude Code sessions the skill,
+commit a link to the installed copy:
+
+```sh
+mkdir -p .claude/skills
+ln -s ../../node_modules/@fifthrevision/mosaic/skills/mosaic .claude/skills/mosaic
+```
+
+The link follows the app's lockfile, so the skill always matches the
+installed Mosaic. It resolves once `pnpm install` has run. For agents that
+don't read skills, point the app's agent instructions at
+`node_modules/@fifthrevision/mosaic/skills/mosaic/SKILL.md`.
 
 Mosaic has no routing dependency. Route-driven navigation (a tab strip
 backed by `NavLink`, say) lives in the app, built on the class recipes

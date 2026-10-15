@@ -64,8 +64,8 @@ function classStringRule({ meta, check }) {
 const typeScale = classStringRule({
   meta: {
     messages: {
-      tailwindSize: `\`{{token}}\` isn't in mosaic's type scale. Use a role: ${ROLES_HINT}. See USAGE.md.`,
-      arbitrarySize: `\`{{token}}\` hard-codes a font size. Use a role: ${ROLES_HINT}. See USAGE.md.`,
+      tailwindSize: `\`{{token}}\` isn't in mosaic's type scale. Use a role: ${ROLES_HINT}. See mosaic's skills/mosaic/SKILL.md.`,
+      arbitrarySize: `\`{{token}}\` hard-codes a font size. Use a role: ${ROLES_HINT}. See mosaic's skills/mosaic/SKILL.md.`,
     },
   },
   check({ base }) {
@@ -79,7 +79,7 @@ const noLineHeight = classStringRule({
   meta: {
     messages: {
       lineHeight:
-        "`{{token}}` overrides the line height. Text inherits a constant line height from body; don't set one per element. See USAGE.md.",
+        "`{{token}}` overrides the line height. Text inherits a constant line height from body; don't set one per element. See mosaic's skills/mosaic/SKILL.md.",
     },
   },
   check({ base, modifier }) {
@@ -93,7 +93,7 @@ const noCaption = classStringRule({
   meta: {
     messages: {
       caption:
-        "`{{token}}` is reserved for mosaic component internals (badges, tooltips, code). App text uses text-subhead or larger. See USAGE.md.",
+        "`{{token}}` is reserved for mosaic component internals (badges, tooltips, code). App text uses text-subhead or larger. See mosaic's skills/mosaic/SKILL.md.",
     },
   },
   check({ base }) {

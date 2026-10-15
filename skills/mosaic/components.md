@@ -189,6 +189,40 @@ trigger element. On `Button` and `IconButton`, use `title` instead.
 Import it from `@fifthrevision/mosaic/toaster`, not `sonner`. For a
 message that should stay on the page, use `Alert`.
 
+## Status and badges
+
+| Need                                                   | Use      |
+| ------------------------------------------------------ | -------- |
+| The current state of a thing (Enabled, Running, Failed) | `Status` |
+| A product annotation beside a name (Beta, New)          | `Badge`  |
+
+**`Status`** (`status`): an indicator followed by a label (the children).
+
+| Prop        | Values                                                                  |
+| ----------- | ----------------------------------------------------------------------- |
+| `tone`      | `neutral` (default), `theme`, `constructive`, `warning`, `destructive` |
+| `indicator` | `"dot"` (default), `"spinner"`, or a Lucide icon                        |
+| `size`      | `md` (body, medium, `text-label`; default), `sm` (subhead, secondary)   |
+| `padded`    | Button height and padding for the size, to line up beside buttons      |
+
+- Mosaic doesn't know your states. Map each one to a tone, an indicator,
+  and a label in app code, in one place:
+  `completed → { tone: "constructive", indicator: CircleCheck }`.
+- Prefer icons when there are several outcomes, so they differ by shape and
+  not only by color. Use `"spinner"` with `tone="theme"` for in progress.
+- Tones follow the shape colors: `constructive` is healthy status,
+  `warning` is "something changed, take a look", `theme` is in progress.
+- Inline (the default) sits in a title row, a list row, or a line of text.
+  Beside buttons in a header, pass `padded` with the buttons' `size`.
+- Don't show state with a disabled button ("✓ Enabled"). That reads as an
+  action you can't take. Show a `Status`, and put the actions in a `Menu`.
+- A setting the user can flip is a `Switch`, not a `Status`.
+
+**`Badge`** (`badge`): a small outlined label beside a name. `tone`
+`neutral` (default) | `theme`. The product picks the words from a short
+fixed set ("Beta", "New", "Deprecated"); it isn't clickable and doesn't
+hold user data or state. State is a `Status`.
+
 ## Layout and feedback
 
 | Component           | Path                 | Use                                                                         |

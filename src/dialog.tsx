@@ -5,8 +5,6 @@ import { cn } from "./cn";
 import { IconButton } from "./icon-button";
 import { TextStack } from "./text-stack";
 
-export const DialogRoot = RadixDialog.Root;
-export const DialogTrigger = RadixDialog.Trigger;
 export const DialogClose = RadixDialog.Close;
 
 const sizeClass = {
@@ -21,7 +19,6 @@ interface DialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onClosed?: () => void;
-  defaultOpen?: boolean;
   children: React.ReactNode;
   className?: string;
   size?: DialogSize;
@@ -89,17 +86,12 @@ const DialogImpl = ({
   open,
   onOpenChange,
   onClosed,
-  defaultOpen,
   children,
   className,
   size = "medium",
 }: DialogProps) => {
   return (
-    <RadixDialog.Root
-      open={open}
-      onOpenChange={onOpenChange}
-      defaultOpen={defaultOpen}
-    >
+    <RadixDialog.Root open={open} onOpenChange={onOpenChange}>
       <RadixDialog.Portal>
         <RadixDialog.Overlay className="fixed inset-0 z-50 bg-black/10 backdrop-blur-sm dark:bg-black/20 data-[state=open]:animate-[dialog-overlay-in_150ms_ease-out] data-[state=closed]:animate-[dialog-overlay-out_100ms_ease-in]" />
         <RadixDialog.Content
@@ -112,7 +104,7 @@ const DialogImpl = ({
             }
           }}
           className={cn(
-            "fixed top-1/2 left-1/2 z-50 flex max-h-[90vh] min-h-80 max-w-[calc(100vw-32px)] -translate-1/2 flex-col overflow-y-auto rounded-lg border border-separator-secondary bg-surface-canvas p-6 dialog-shadow focus:outline-none data-[state=open]:animate-[dialog-content-in_150ms_ease-out] data-[state=closed]:animate-[dialog-content-out_100ms_ease-in]",
+            "fixed top-1/2 left-1/2 z-50 flex max-h-[90vh] min-h-80 max-w-[calc(100vw-32px)] -translate-1/2 flex-col overflow-y-auto rounded-xl border border-separator-secondary bg-surface-canvas p-6 dialog-shadow focus:outline-none data-[state=open]:animate-[dialog-content-in_150ms_ease-out] data-[state=closed]:animate-[dialog-content-out_100ms_ease-in]",
             sizeClass[size],
             className,
           )}

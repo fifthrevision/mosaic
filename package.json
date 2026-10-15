@@ -29,6 +29,7 @@
     "./markdown-editor": "./src/markdown-editor/index.tsx",
     "./menu": "./src/menu.tsx",
     "./popover": "./src/popover.tsx",
+    "./progress": "./src/progress.tsx",
     "./radio": "./src/radio.tsx",
     "./section-header": "./src/section-header.tsx",
     "./segmented-control": "./src/segmented-control.tsx",

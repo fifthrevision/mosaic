@@ -69,10 +69,10 @@ export function EmailInput({
     <div
       onClick={() => inputRef.current?.focus()}
       className={cn(
-        "flex min-h-8 w-full flex-wrap items-center gap-1.5 rounded-md border border-separator-secondary bg-surface-control-sunken px-2 py-1 shadow-[inset_0px_0px_4px_var(--color-shadow-1)] outline-none",
+        "flex min-h-8 w-full flex-wrap items-center gap-1.5 rounded-md border border-separator-secondary bg-surface-input px-2 py-1 input-shadow outline-none",
         disabled
           ? "cursor-not-allowed opacity-50"
-          : "hover:border-separator-control-hover focus-within:border-separator-control-active",
+          : "hover:border-separator-input-hover focus-within:border-separator-input-focus",
         className,
       )}
     >

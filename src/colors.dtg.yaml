@@ -101,14 +101,16 @@ defaults:
 roles:
   surface:
     canvas: [sky(3), night(0), midnight(0)]
-    navigation: [sky(4.5), night(1.5), midnight(3.5)]
-    panel: [sky(4.5), night(1.5), midnight(3.5)]
-    card: [sky(1), night(1), midnight(2)]
-    card-subdued: [sky(3), night(0), midnight(0)]
-    floating: [surface.card, night(0), midnight(0)]
-    control: [sky(6.5), night(8), midnight(8)]
-    control-sunken: [sky(3.5 tint), night(2.5 tint), midnight(2.5 tint)]
-    control-deep: [sky(12), night(12 tint), midnight(15 tint)]
+    shell: [sky(4.5), night(1.5), midnight(3.5)]
+    panel: [surface.shell, surface.shell, surface.shell]
+    card: [sky(1), night(1), midnight(5)]
+    card-subdued: [sky(3), night(0), midnight(2.5)]
+    floating: [surface.card, surface.card, surface.card]
+    elevated: [sky(0), night(12), midnight(15)]
+    button: [sky(6.5), night(8), midnight(10)]
+    input: [sky(1.5 tint), night(2 tint), midnight(4 tint)]
+    toggle: [sky(12 tint), night(12 tint), midnight(15 tint)]
+    track: [surface.toggle, surface.toggle, surface.toggle]
     bubble: [theme(150), theme(700)]
 
   state:
@@ -118,7 +120,7 @@ roles:
     hover: [sky(3 tint), night(4 tint), midnight(6.5 tint)]
     selected: [sky(0), night(6.5), midnight(12)]
     active: [sky(8), night(8), midnight(16)]
-    control-hover: [sky(8), night(12), midnight(12)]
+    button-hover: [sky(8), night(12), midnight(14)]
 
   # Labels draw from the opposite mode's ramp: text on a sky surface is a
   # point on the night ramp, and vice versa.
@@ -148,11 +150,13 @@ roles:
   separator:
     primary: [sky(15), night(16), midnight(16)]
     primary-translucent: [sky(15 tint), night(16 tint), midnight(16 tint)]
-    secondary: [sky(8), night(8), midnight(8)]
-    secondary-translucent: [sky(8 tint), night(8 tint), midnight(8 tint)]
-    control-hover: [sky(20), theme(800), ~]
-    control-active: [theme(400), theme(600)]
-    control-selected: [theme(700), theme(700)]
+    secondary: [sky(8), night(8), midnight(10)]
+    secondary-translucent: [sky(8 tint), night(8 tint), midnight(10 tint)]
+    card-hover: [theme(300), theme(800), ~]
+    input-hover: [theme(200), theme(800), ~]
+    input-focus: [theme(400), theme(600)]
+    toggle-hover: [theme(200), theme(800), ~]
+    toggle-selected: [theme(300), theme(700)]
 
   shadow:
     "1": [shadow(5), shadow(40)]

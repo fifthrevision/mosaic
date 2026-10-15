@@ -25,11 +25,9 @@ const components: Components = {
       {children}
     </ol>
   ),
-  h1: ({ children }) => (
-    <h1 className="text-title font-semibold text-label">{children}</h1>
-  ),
+  h1: ({ children }) => <h1 className="text-title text-label">{children}</h1>,
   h2: ({ children }) => (
-    <h2 className="text-body font-semibold text-label">{children}</h2>
+    <h2 className="text-body font-medium text-label">{children}</h2>
   ),
   h3: ({ children }) => (
     <h3 className="text-body font-medium text-label">{children}</h3>
@@ -38,7 +36,7 @@ const components: Components = {
     <h4 className="text-body font-medium text-label-secondary">{children}</h4>
   ),
   code: ({ children }) => (
-    <code className="rounded bg-surface-card-subdued px-1 py-0.5 font-mono text-caption">
+    <code className="rounded-sm bg-surface-card-subdued px-1 py-0.5 font-mono text-caption">
       {children}
     </code>
   ),

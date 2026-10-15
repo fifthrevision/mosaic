@@ -13,7 +13,7 @@ class ErrorBoundary extends Component<{ children: ReactNode }, State> {
   render() {
     if (this.state.error) {
       return (
-        <div className="rounded border border-ruby-300 bg-ruby-50 p-4 text-caption">
+        <div className="rounded-sm border border-ruby-300 bg-ruby-50 p-4 text-caption">
           <p className="font-mono font-bold text-ruby-600">
             {this.state.error.message}
           </p>

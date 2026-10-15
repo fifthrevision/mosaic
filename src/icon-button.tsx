@@ -10,16 +10,17 @@ const sizeConfig = {
 const variantConfig = {
   default: {
     container:
-      "border border-separator-secondary bg-surface-control control-shadow hover:not-disabled:bg-state-control-hover active:not-disabled:control-shadow-active data-[state=open]:control-shadow-active",
+      "border border-separator-secondary bg-surface-button control-shadow hover:not-disabled:bg-state-button-hover active:not-disabled:control-shadow-active data-[state=open]:control-shadow-active data-[state=open]:bg-state-button-hover",
     icon: "text-shape-secondary",
   },
   primary: {
     container:
-      "border border-separator-secondary bg-surface-control control-shadow hover:not-disabled:bg-state-control-hover active:not-disabled:control-shadow-active data-[state=open]:control-shadow-active",
+      "border border-separator-secondary bg-surface-button control-shadow hover:not-disabled:bg-state-button-hover active:not-disabled:control-shadow-active data-[state=open]:control-shadow-active data-[state=open]:bg-state-button-hover",
     icon: "text-shape-primary",
   },
   subtle: {
-    container: "hover:not-disabled:bg-state-control-hover",
+    container:
+      "hover:not-disabled:bg-state-hover data-[state=open]:bg-state-hover",
     icon: "text-shape-secondary",
   },
 } as const;
@@ -43,7 +44,7 @@ export function IconButton({
     <button
       {...props}
       className={cn(
-        "flex shrink-0 items-center justify-center rounded-md select-none focus-visible:control-focus-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=open]:bg-state-control-hover",
+        "flex shrink-0 items-center justify-center rounded-md select-none focus-visible:control-focus-ring disabled:cursor-not-allowed disabled:opacity-50",
         sizeClass,
         container,
         className,

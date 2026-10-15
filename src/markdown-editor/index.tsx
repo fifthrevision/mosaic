@@ -31,10 +31,10 @@ import {
 import { createVariableHighlight } from "./variable-highlight";
 
 export const markdownHighlightStyle = HighlightStyle.define([
-  { tag: t.heading1, fontSize: "1.5em", fontWeight: "600" },
-  { tag: t.heading2, fontSize: "1.3em", fontWeight: "600" },
-  { tag: t.heading3, fontSize: "1.1em", fontWeight: "600" },
-  { tag: t.heading4, fontWeight: "600" },
+  { tag: t.heading1, fontSize: "1.5em", fontWeight: "500" },
+  { tag: t.heading2, fontSize: "1.3em", fontWeight: "500" },
+  { tag: t.heading3, fontSize: "1.1em", fontWeight: "500" },
+  { tag: t.heading4, fontWeight: "500" },
   { tag: t.strong, fontWeight: "700" },
   { tag: t.emphasis, fontStyle: "italic" },
   { tag: t.strikethrough, textDecoration: "line-through" },

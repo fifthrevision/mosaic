@@ -8,7 +8,7 @@ export const meta = {
 
 function Frame({ children }: { children: React.ReactNode }) {
   return (
-    <div className="h-80 w-96 overflow-hidden rounded-lg border border-separator-secondary bg-surface-card">
+    <div className="h-80 w-96 overflow-hidden rounded-xl border border-separator-secondary bg-surface-card">
       {children}
     </div>
   );

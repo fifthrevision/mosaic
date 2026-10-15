@@ -22,21 +22,22 @@ const sizeConfig = {
 const variantConfig = {
   default: {
     container:
-      "border border-separator-secondary bg-surface-control text-label control-shadow hover:not-disabled:bg-state-control-hover active:not-disabled:control-shadow-active data-[state=open]:control-shadow-active",
+      "border border-separator-secondary bg-surface-button text-label control-shadow hover:not-disabled:bg-state-button-hover active:not-disabled:control-shadow-active data-[state=open]:control-shadow-active data-[state=open]:bg-state-button-hover",
     icon: "text-shape-secondary",
   },
   primary: {
     container:
-      "border border-separator-secondary bg-surface-control text-label-theme control-shadow hover:not-disabled:bg-state-control-hover active:not-disabled:control-shadow-active data-[state=open]:control-shadow-active",
+      "border border-separator-secondary bg-surface-button text-label-theme control-shadow hover:not-disabled:bg-state-button-hover active:not-disabled:control-shadow-active data-[state=open]:control-shadow-active data-[state=open]:bg-state-button-hover",
     icon: "text-shape-primary",
   },
   subtle: {
-    container: "text-label hover:not-disabled:bg-state-hover",
+    container:
+      "text-label hover:not-disabled:bg-state-hover data-[state=open]:bg-state-hover",
     icon: "text-shape-secondary",
   },
   destructive: {
     container:
-      "border border-separator-secondary bg-surface-control text-label-destructive control-shadow hover:not-disabled:bg-state-control-hover active:not-disabled:control-shadow-active data-[state=open]:control-shadow-active",
+      "border border-separator-secondary bg-surface-button text-label-destructive control-shadow hover:not-disabled:bg-state-button-hover active:not-disabled:control-shadow-active data-[state=open]:control-shadow-active data-[state=open]:bg-state-button-hover",
     icon: "text-shape-destructive",
   },
 } as const;
@@ -69,7 +70,7 @@ export function Button({
       {...props}
       disabled={disabled || loading}
       className={cn(
-        "inline-flex w-fit shrink-0 items-center justify-center overflow-hidden rounded-md font-medium focus-visible:control-focus-ring max-w-80 disabled:opacity-50 disabled:cursor-not-allowed select-none data-[state=open]:bg-state-control-hover",
+        "inline-flex w-fit shrink-0 items-center justify-center overflow-hidden rounded-md font-medium focus-visible:control-focus-ring max-w-80 disabled:opacity-50 disabled:cursor-not-allowed select-none",
         height,
         textSize,
         padding,

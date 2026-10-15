@@ -18,7 +18,7 @@ export const Variants = () => {
         <span className="text-subhead text-label-secondary">
           plain — for use inside an already-carded container
         </span>
-        <div className="rounded-lg border border-separator-secondary bg-surface-card">
+        <div className="rounded-xl border border-separator-secondary bg-surface-card">
           <EmptyState variant="plain">No runs yet.</EmptyState>
         </div>
       </div>

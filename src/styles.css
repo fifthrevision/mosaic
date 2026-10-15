@@ -121,9 +121,12 @@
   --width-dialog-large: 52.5rem; /* 840px */
 
   /* Radius */
+  --radius-*: initial;
+  --radius-xs: 0.125rem; /* 2px */
   --radius-sm: 0.25rem; /* 4px */
   --radius-md: 0.5rem; /* 8px */
-  --radius-lg: 1rem; /* 16px */
+  --radius-lg: 0.75rem; /* 12px */
+  --radius-xl: 1rem; /* 16px */
 
   /* Font weights (Inter Variable) */
   --font-weight-regular: 400;
@@ -139,13 +142,48 @@
 }
 
 @utility overlay-shadow {
-  box-shadow:
-    0px 10px 15px -3px var(--color-shadow-1),
-    0px 4px 6px -4px var(--color-shadow-3);
+  box-shadow: 0px 4px 12px var(--color-shadow-1);
+}
+
+@utility card-interactive {
+  transition:
+    border-color 150ms ease-out,
+    box-shadow 150ms ease-out;
+
+  &:hover {
+    border-color: var(--color-separator-card-hover);
+    box-shadow:
+      0px 1px 1px var(--color-shadow-2),
+      0px 4px 12px var(--color-shadow-1);
+  }
+}
+
+@utility input-shadow {
+  box-shadow: inset 0px 0px 4px var(--color-shadow-1);
+}
+
+@utility floating-surface {
+  background-color: color-mix(
+    in srgb,
+    var(--color-surface-floating) 95%,
+    transparent
+  );
+  backdrop-filter: blur(4px);
+
+  @media (prefers-reduced-transparency: reduce) {
+    background-color: var(--color-surface-floating);
+    backdrop-filter: none;
+  }
 }
 
 @utility dialog-shadow {
   box-shadow: 0px 8px 40px var(--color-shadow-1);
+}
+
+@utility panel-shadow {
+  box-shadow:
+    0px 0px 40px var(--color-shadow-1),
+    0px 0px 6px -2px var(--color-shadow-3);
 }
 
 @utility control-shadow-active {
@@ -153,8 +191,8 @@
 }
 
 @utility control-focus-ring {
-  outline: 2px solid var(--color-shape-primary);
-  outline-offset: 2px;
+  outline: 1px solid var(--color-shape-primary);
+  outline-offset: 1px;
 }
 
 /* Single-line overflow that fades out instead of clipping or ellipsing.

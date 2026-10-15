@@ -60,7 +60,7 @@ export function Section({
   return (
     <section className="flex flex-col gap-3">
       <h3 className="text-title text-label">{title}</h3>
-      <div className="rounded-lg border border-separator-secondary bg-surface-card px-4 py-2">
+      <div className="rounded-xl border border-separator-secondary bg-surface-card px-4 py-2">
         {children}
       </div>
     </section>

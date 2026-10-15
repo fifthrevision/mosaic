@@ -161,7 +161,7 @@ function AutocompleteSpecimen({ items }: { items: SpecimenItem[] }) {
             key={item.label}
             aria-selected={item.selected || undefined}
             className={cn(
-              "flex h-8 items-center gap-2.5 rounded px-2 text-body text-label",
+              "flex h-8 items-center gap-2.5 rounded-sm px-2 text-body text-label",
               item.selected && "bg-state-hover",
             )}
           >

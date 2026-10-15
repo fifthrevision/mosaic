@@ -19,7 +19,7 @@ export function Menu({
         <DropdownMenu.Content
           align={align}
           sideOffset={4}
-          className="z-50 min-w-50 rounded-md border border-separator-secondary bg-surface-card p-1 shadow-[0px_4px_12px_var(--color-shadow-1)] origin-top-right data-[state=open]:animate-[menu-in_150ms_ease-out] data-[state=closed]:animate-[menu-out_100ms_ease-in]"
+          className="z-50 min-w-50 rounded-md border border-separator-secondary floating-surface p-1 overlay-shadow origin-top-right data-[state=open]:animate-[menu-in_150ms_ease-out] data-[state=closed]:animate-[menu-out_100ms_ease-in]"
         >
           {children}
         </DropdownMenu.Content>
@@ -47,8 +47,8 @@ export function MenuItem({
       disabled={disabled}
       className={
         isDestructive
-          ? "flex h-8 items-center gap-3 rounded px-2 py-2.5 text-body text-label-destructive outline-none select-none cursor-default data-highlighted:bg-state-hover data-disabled:opacity-50 data-disabled:pointer-events-none"
-          : "flex h-8 items-center gap-3 rounded px-2 py-2.5 text-body text-label outline-none select-none cursor-default data-highlighted:bg-state-hover data-disabled:opacity-50 data-disabled:pointer-events-none"
+          ? "flex h-8 items-center gap-3 rounded-sm px-2 py-2.5 text-body text-label-destructive outline-none select-none cursor-default data-highlighted:bg-state-hover data-disabled:opacity-50 data-disabled:pointer-events-none"
+          : "flex h-8 items-center gap-3 rounded-sm px-2 py-2.5 text-body text-label outline-none select-none cursor-default data-highlighted:bg-state-hover data-disabled:opacity-50 data-disabled:pointer-events-none"
       }
       onSelect={onSelect}
     >
@@ -88,7 +88,7 @@ export function SubMenu({
 }) {
   return (
     <DropdownMenu.Sub>
-      <DropdownMenu.SubTrigger className="flex h-8 items-center gap-3 rounded px-2 py-2.5 text-body text-label outline-none select-none cursor-default data-highlighted:bg-state-hover data-[state=open]:bg-state-hover">
+      <DropdownMenu.SubTrigger className="flex h-8 items-center gap-3 rounded-sm px-2 py-2.5 text-body text-label outline-none select-none cursor-default data-highlighted:bg-state-hover data-[state=open]:bg-state-hover">
         <Icon size={16} className="text-shape-secondary" />
         <span className="flex-1">{label}</span>
         <ChevronRight size={16} className="text-shape-secondary" />
@@ -97,7 +97,7 @@ export function SubMenu({
         <DropdownMenu.SubContent
           sideOffset={4}
           alignOffset={-4}
-          className="z-50 min-w-46 max-w-72 rounded-md border border-separator-secondary bg-surface-card p-1 shadow-[0px_4px_12px_var(--color-shadow-1)] data-[state=open]:animate-[menu-in_150ms_ease-out] data-[state=closed]:animate-[menu-out_100ms_ease-in]"
+          className="z-50 min-w-46 max-w-72 rounded-md border border-separator-secondary floating-surface p-1 overlay-shadow data-[state=open]:animate-[menu-in_150ms_ease-out] data-[state=closed]:animate-[menu-out_100ms_ease-in]"
         >
           {children}
         </DropdownMenu.SubContent>
@@ -117,7 +117,7 @@ export function MenuRadioItem({
 }) {
   return (
     <DropdownMenu.Item
-      className="flex h-8 items-center gap-3 rounded px-2 py-2.5 text-body text-label outline-none select-none cursor-default data-highlighted:bg-state-hover"
+      className="flex h-8 items-center gap-3 rounded-sm px-2 py-2.5 text-body text-label outline-none select-none cursor-default data-highlighted:bg-state-hover"
       onSelect={onSelect}
     >
       <Check

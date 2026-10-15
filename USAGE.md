@@ -128,42 +128,68 @@ is, not by the shade you want.
 
 ### Surfaces
 
-Backgrounds, from the outside in:
+Surfaces are layers. Each sits on the one before it:
 
-| Token                       | Use                                                      |
-| --------------------------- | -------------------------------------------------------- |
-| `bg-surface-canvas`         | Page background (set on `body`); dialog bodies           |
-| `bg-surface-navigation`     | Sidebar                                                  |
-| `bg-surface-panel`          | Docked side panel next to the page                       |
-| `bg-surface-card`           | Cards and list containers; menus, popovers, toasts       |
-| `bg-surface-card-subdued`   | An inset inside a card: code blocks, nested blocks, chips |
-| `bg-surface-floating`       | Floating layers (`Tooltip`)                              |
-| `bg-surface-bubble`         | A theme-tinted chat bubble                               |
-| `bg-surface-control`        | Raised controls (`Button`)                               |
-| `bg-surface-control-sunken` | Input wells (`Input`, `Textarea`, editors)               |
-| `bg-surface-control-deep`   | Checkbox and radio boxes, switch track                   |
+| Token                     | Layer                                                                   |
+| ------------------------- | ----------------------------------------------------------------------- |
+| `bg-surface-shell`        | The app frame: sidebars, top bars                                       |
+| `bg-surface-canvas`       | Page content (set on `body`). Windows that hold content (dialogs, popovers) also sit on canvas, so cards nest inside them |
+| `bg-surface-card`         | Cards and list containers on the canvas                                 |
+| `bg-surface-card-subdued` | A region inside a card: code blocks, nested blocks, chips               |
+
+Above the page:
+
+| Token                 | Layer                                                                                        |
+| --------------------- | -------------------------------------------------------------------------------------------- |
+| `bg-surface-panel`    | The frame of a persistent window (the docked assistant). Its content area is a card. Follows `shell`; pair with `panel-shadow` |
+| `floating-surface`    | Menus and choice lists (`Menu`, `Combobox`, autocomplete): `bg-surface-floating` (card color) at 95% with a 4px backdrop blur, opaque under `prefers-reduced-transparency`. Pair with `overlay-shadow` |
+| `bg-surface-floating` | The opaque floating color, for tooltips                                                      |
+| `bg-surface-elevated` | Toasts: a step lifted from canvas and cards in each mode. Text and icons on it use the normal roles |
+
+`bg-surface-bubble` is a theme-tinted chat bubble, placed on any layer.
+Controls have their own surfaces; see [Controls](#controls).
+
+Pick the surface by layer, not by shade: a box inside page content is a
+card or a card region even if `shell` happens to look right.
 
 - A card is `rounded-md border border-separator-secondary bg-surface-card`,
   plus `card-shadow` when it sits on the canvas.
 - Don't put a card inside a card. Nest with `bg-surface-card-subdued`.
-- A custom input well (e.g. around `MarkdownEditor`) copies `Input`:
-  `border border-separator-secondary`, `bg-surface-control-sunken`,
-  `shadow-[inset_0px_0px_4px_var(--color-shadow-1)]`, with
-  `hover:border-separator-control-hover` and
-  `focus-within:border-separator-control-active`.
 
 ### States
 
 | Token                    | Use                                                             |
 | ------------------------ | --------------------------------------------------------------- |
 | `bg-state-hover`         | Hover on flat things: rows, nav items, subtle buttons, menu items |
-| `bg-state-control-hover` | Hover on raised controls (`bg-surface-control`)                 |
 | `bg-state-active`        | Pressed or open: `active:` and `data-[state=open]:`             |
 | `bg-state-selected`      | The selected item in a set: current tab, segment, nav item      |
 
 - `state-hover` is translucent, so it works over any surface.
 - Selected reads as raised, not tinted: pair it with `control-shadow` and
   `text-label` (unselected siblings use `text-label-secondary`).
+
+### Controls
+
+Controls come in three families. Each has its own tokens, so each can be
+tuned without moving the others. Use a family's tokens together.
+
+| Family | Surface | Hover | Other | Used by |
+| --- | --- | --- | --- | --- |
+| Button (raised) | `bg-surface-button` | `bg-state-button-hover`, also the menu-open color | `control-shadow`, `active:control-shadow-active` | `Button`, `IconButton` |
+| Input (sunken well) | `bg-surface-input` | `border-separator-input-hover` | `focus:border-separator-input-focus`, `input-shadow` | `Input`, `Textarea`, `Select`, `Combobox`, `EmailInput`, `ChatInput`, `FilePicker`, `SegmentedControl` track |
+| Toggle | `bg-surface-toggle` | `border-separator-toggle-hover` | Checked fill `bg-shape-primary`; `border-separator-toggle-selected` for a checked radio | `Checkbox`, `Radio`, `Switch` track |
+
+- `bg-surface-track` is the track behind a fill (`Progress`). It follows
+  `surface-toggle` but is its own name, so a track can diverge later.
+- A hand-built button copies the button family:
+  `border border-separator-secondary bg-surface-button control-shadow
+  hover:bg-state-button-hover`.
+- A custom input well (e.g. around `MarkdownEditor`) copies `Input`:
+  `border border-separator-secondary bg-surface-input input-shadow
+  hover:border-separator-input-hover
+  focus-within:border-separator-input-focus`.
+- Flat triggers with no surface (subtle buttons, text triggers) aren't
+  buttons in this sense: they hover with `bg-state-hover`.
 
 ### Separators
 
@@ -172,9 +198,6 @@ Backgrounds, from the outside in:
 | `border-separator-secondary`                | Default: card, control, and menu borders; row dividers    |
 | `border-separator-primary`                  | Stronger: checkbox/radio/switch outlines, table header rule |
 | `border-separator-*-translucent`            | Borders on content of unknown color (avatars, images)     |
-| `border-separator-control-hover`            | Input border on hover                                     |
-| `border-separator-control-active`           | Input border on focus                                     |
-| `border-separator-control-selected`         | Checked radio border                                      |
 
 Row dividers: `border-b border-separator-secondary last:border-b-0` on the
 rows, or `h-px bg-separator-secondary` for a standalone rule.
@@ -187,13 +210,16 @@ Icons and glyphs take `text-shape-*`, not `text-label-*`:
 | ------------------------- | ------------------------------------------------------- |
 | `text-shape-secondary`    | Default icon color                                      |
 | `text-shape-tertiary`     | De-emphasized icons                                     |
-| `text-shape-primary`      | Accent: primary actions, checked, success               |
+| `text-shape-primary`      | Accent: primary actions, checked, success confirmations |
 | `text-shape-destructive`  | Destructive actions and errors                          |
 | `text-shape-constructive` | Positive status                                         |
 
 They also work as fills: `bg-shape-primary` is the switch's on track.
-`theme-primary` is the theme accent; Mosaic uses `text-theme-primary` for
-the active tab's icon.
+
+"Success" means confirming something the user just did (saved, connected,
+uploaded), so it takes the theme color: `Alert variant="success"` and
+`toast.success`. Green (`shape-constructive`) is for positive *status*: a
+run that passed, a healthy connection.
 
 ### Palette and diff
 
@@ -218,8 +244,10 @@ Mosaic's shadow colors deepen in dark mode.
 | `control-shadow`        | Raised controls; selected tabs, segments, nav items  |
 | `control-shadow-active` | A raised control while pressed (`active:`)           |
 | `card-shadow`           | Cards on the canvas                                  |
-| `overlay-shadow`        | Floating overlays                                    |
-| `dialog-shadow`         | Modal dialogs                                        |
+| `overlay-shadow`        | Menus, tooltips, toasts                              |
+| `dialog-shadow`         | Dialogs and popovers                                 |
+| `panel-shadow`          | Persistent windows (`bg-surface-panel`)              |
+| `input-shadow`     | The inset shadow of input wells                      |
 
 A shadow none of these covers uses the tokens, lightest to darkest:
 `shadow-[0px_4px_12px_var(--color-shadow-1)]` with `shadow-1`, `shadow-2`,
@@ -229,18 +257,21 @@ A shadow none of these covers uses the tokens, lightest to darkest:
 
 | Class        | Size | Use                                             |
 | ------------ | ---- | ----------------------------------------------- |
+| `rounded-xs` | 2px  | Tiny marks                                      |
 | `rounded-sm` | 4px  | Checkboxes, tooltips, segments, small chips     |
 | `rounded-md` | 8px  | Controls, rows, menus, cards, alerts            |
-| `rounded-lg` | 16px | Dialogs, popovers                               |
+| `rounded-lg` | 12px | Larger cards                                    |
+| `rounded-xl` | 16px | Dialogs, popovers, prominent cards              |
 
-These replace Tailwind's values: `rounded-lg` is 16px here, not 8px.
+This replaces Tailwind's radius scale: bare `rounded`, `rounded-2xl` and up
+generate nothing, and `rounded-lg`/`rounded-xl` are 12px/16px.
 
 ### Focus
 
 Every custom interactive element (a clickable row, a link styled as a
 card, a hand-built button) gets `focus-visible:control-focus-ring`. Don't
 hand-roll `ring-*` or `outline-*`. Mosaic components already have it. Text
-fields show focus with `separator-control-active` on the border instead.
+fields show focus with `separator-input-focus` on the border instead.
 
 ### Truncation and loading text
 
@@ -413,8 +444,9 @@ component.
 
 **`Popover`** (`popover`): `Popover`, `PopoverTrigger` (`asChild`),
 `PopoverContent` (Radix content props: `side`, `align`, `sideOffset`). The
-content has a surface, border, and radius but no width or padding: add them
-(`className="w-64 p-3"`).
+content is a small window (canvas surface, `dialog-shadow`) with a border
+and radius but no width or padding: add them (`className="w-64 p-3"`). A
+list of choices is a `Menu` or `Combobox`, not a `Popover`.
 
 **`Tooltip`** (`tooltip`): `<Tooltip content side align>` wrapping one
 trigger element. On `Button` and `IconButton`, use `title` instead.
@@ -431,6 +463,7 @@ message that should stay on the page, use `Alert`.
 | `SectionHeader`     | `section-header`     | Group label above a list or card: `title`, optional `action`                |
 | `Tabs`              | `tabs`               | In-page tabs. See below                                                     |
 | `Alert`             | `alert`              | Inline message: `variant` `info` (default) / `success` / `error`, `onDismiss` |
+| `Progress`          | `progress`           | A fill on a track: `value` 0–1, width from `className`. Give it `aria-label`, or `aria-hidden` when the value is already shown as text |
 | `EmptyState`        | `empty-state`        | "Nothing here" text: `variant` `card` (default) / `plain`                   |
 | `FadingScrollArea`  | `fading-scroll-area` | Scroll region with edge fades, optional sticky `footer`                     |
 | `TruncatedText`     | `truncated-text`     | Clamp to `maxHeight` (px) with a bottom fade                                |

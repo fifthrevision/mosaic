@@ -121,7 +121,7 @@ function Sidebar({
                 <li key={e.path}>
                   <button
                     onClick={() => navigate(e.path)}
-                    className={`w-full rounded-lg px-3 py-1.5 text-left text-body text-label hover:bg-state-hover ${
+                    className={`w-full rounded-xl px-3 py-1.5 text-left text-body text-label hover:bg-state-hover ${
                       activePath === e.path ? "bg-state-selected" : ""
                     }`}
                   >
@@ -141,7 +141,7 @@ function Sidebar({
               applyTheme(option);
               setTheme(option);
             }}
-            className={`flex-1 rounded-lg py-1.5 text-caption capitalize hover:bg-state-hover ${
+            className={`flex-1 rounded-xl py-1.5 text-caption capitalize hover:bg-state-hover ${
               theme === option
                 ? "bg-state-selected text-label"
                 : "text-label-secondary"

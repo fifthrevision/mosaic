@@ -14,14 +14,14 @@ const LONG_TEXT = Array.from(
 export const Variants = () => {
   return (
     <div className="flex w-120 flex-col gap-6">
-      <div className="rounded-lg border border-separator-secondary bg-surface-card p-4">
+      <div className="rounded-xl border border-separator-secondary bg-surface-card p-4">
         <TruncatedText maxHeight={96} fadeClassName="from-surface-card">
           <p className="whitespace-pre-wrap text-body text-label-secondary">
             {LONG_TEXT}
           </p>
         </TruncatedText>
       </div>
-      <div className="rounded-lg border border-separator-secondary bg-surface-card p-4">
+      <div className="rounded-xl border border-separator-secondary bg-surface-card p-4">
         <TruncatedText maxHeight={96} fadeClassName="from-surface-card">
           <p className="text-body text-label-secondary">
             Short content is untouched — no fade, no clamp.

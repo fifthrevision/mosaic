@@ -32,9 +32,9 @@ export interface FadingScrollAreaProps {
  * footer (or at the viewport bottom if there is no footer).
  *
  * Padding inside the scroll viewport is the consumer's responsibility — wrap
- * `children` and `footer` with whatever padding/background you need. Fade
- * gradients use `bg-surface-card` as their solid color, so place this on a
- * `bg-surface-card` background for a clean fade.
+ * `children` and `footer` with whatever padding/background you need. The
+ * fades are solid `fadeClassName` (default `bg-surface-card`); it must match
+ * the background behind the area, or the fade shows as a band.
  */
 
 // Opacity ramps slowly across most of the band, then steeply over the last

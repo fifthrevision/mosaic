@@ -46,8 +46,8 @@ export function Combobox({
           type="button"
           disabled={disabled || loading}
           className={cn(
-            "h-8 w-full appearance-none rounded-md border border-separator-secondary bg-surface-control-sunken py-1.5 pl-3 pr-8 text-left text-body font-medium text-label shadow-[inset_0px_0px_4px_var(--color-shadow-1)] outline-none hover:not-disabled:border-separator-control-hover focus:border-separator-control-active disabled:cursor-not-allowed disabled:opacity-50 relative truncate",
-            !selected && !loading && "text-label-tertiary font-normal",
+            "h-8 w-full appearance-none rounded-md border border-separator-secondary bg-surface-input py-1.5 pl-3 pr-8 text-left text-body font-medium text-label input-shadow outline-none hover:not-disabled:border-separator-input-hover focus:border-separator-input-focus disabled:cursor-not-allowed disabled:opacity-50 relative truncate",
+            !selected && !loading && "text-label-tertiary font-regular",
             className,
           )}
         >
@@ -62,12 +62,12 @@ export function Combobox({
         <Popover.Content
           align="start"
           sideOffset={4}
-          className="z-50 w-[var(--radix-popover-trigger-width)] rounded-md border border-separator-secondary bg-surface-card p-1 shadow-[0px_4px_12px_var(--color-shadow-1)] data-[state=open]:animate-[menu-in_150ms_ease-out] data-[state=closed]:animate-[menu-out_100ms_ease-in]"
+          className="z-50 w-[var(--radix-popover-trigger-width)] rounded-md border border-separator-secondary floating-surface p-1 overlay-shadow data-[state=open]:animate-[menu-in_150ms_ease-out] data-[state=closed]:animate-[menu-out_100ms_ease-in]"
         >
           <Command className="flex flex-col gap-1">
             <Command.Input
               placeholder={searchPlaceholder}
-              className="h-8 w-full rounded border border-separator-secondary bg-surface-control-sunken px-2 text-body font-medium text-label placeholder:text-label-tertiary placeholder:font-normal outline-none focus:border-separator-control-active"
+              className="h-8 w-full rounded-sm border border-separator-secondary bg-surface-input px-2 text-body font-medium text-label placeholder:text-label-tertiary placeholder:font-regular outline-none focus:border-separator-input-focus"
             />
             <Command.List className="max-h-60 overflow-y-auto">
               <Command.Empty className="py-3 text-center text-body text-label-secondary">
@@ -82,7 +82,7 @@ export function Combobox({
                     onValueChange(option.value);
                     setOpen(false);
                   }}
-                  className="flex h-8 items-center gap-2 rounded px-2 text-body text-label outline-none select-none cursor-default data-[selected=true]:bg-state-hover data-[disabled=true]:opacity-50 data-[disabled=true]:pointer-events-none"
+                  className="flex h-8 items-center gap-2 rounded-sm px-2 text-body text-label outline-none select-none cursor-default data-[selected=true]:bg-state-hover data-[disabled=true]:opacity-50 data-[disabled=true]:pointer-events-none"
                 >
                   <Check
                     size={16}

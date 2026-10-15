@@ -83,17 +83,17 @@ export function FilePicker({
       onDragLeave={() => setIsDragging(false)}
       onDrop={handleDrop}
       className={cn(
-        "flex flex-col gap-1 rounded-md border border-separator-secondary bg-surface-control-sunken p-1.5 shadow-[inset_0px_0px_4px_var(--color-shadow-1)] transition-colors hover:border-separator-control-hover",
+        "flex flex-col gap-1 rounded-md border border-separator-secondary bg-surface-input p-1.5 input-shadow transition-colors hover:border-separator-input-hover",
         files.length === 0 && "h-8 justify-center py-0",
         isDragging &&
-          "border-dashed border-separator-control-active hover:border-separator-control-active",
+          "border-dashed border-separator-input-focus hover:border-separator-input-focus",
         className,
       )}
     >
       {files.length > 0 && (
         <FadingScrollArea
           className="max-h-32"
-          fadeClassName="bg-surface-control-sunken"
+          fadeClassName="bg-surface-input"
           pinToBottom
         >
           <ul className="flex flex-wrap gap-1">

@@ -55,19 +55,20 @@ export function Switch({
         disabled={disabled}
         onClick={handleClick}
         className={cn(
-          "relative inline-flex h-5 w-10.5 shrink-0 rounded-2xl border transition-colors duration-150 ease-out select-none",
+          "relative inline-flex h-5 w-10.5 shrink-0 rounded-xl border input-shadow transition-colors duration-150 ease-out select-none",
           "focus-visible:control-focus-ring disabled:cursor-not-allowed",
-          isChecked ? "bg-shape-primary" : "bg-surface-control-deep",
+          isChecked ? "bg-shape-primary" : "bg-surface-toggle",
           disabled
             ? "border-separator-secondary opacity-50"
-            : "border-separator-primary hover:border-separator-control-hover",
+            : "border-separator-primary hover:border-separator-toggle-hover",
           className,
         )}
       >
         <span
           aria-hidden="true"
           className={cn(
-            "absolute top-0.5 left-0.5 h-3.5 w-4.5 rounded-full bg-surface-card control-shadow transition-transform duration-150 ease-out",
+            "absolute top-0.5 left-0.5 h-3.5 w-4.5 rounded-full bg-surface-card transition-transform duration-150 ease-out",
+            !disabled && "control-shadow",
             isChecked && "translate-x-4.5",
           )}
         />

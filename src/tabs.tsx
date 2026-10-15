@@ -30,7 +30,7 @@ export function tabClassName(active: boolean): string {
 }
 
 export function tabIconClassName(active: boolean): string {
-  return cn("shrink-0", active ? "text-theme-primary" : "text-shape-secondary");
+  return cn("shrink-0", active ? "text-shape-primary" : "text-shape-secondary");
 }
 
 const sizeConfig = {
@@ -84,7 +84,7 @@ export function TabsTrigger({
       {Icon && (
         <Icon
           size={16}
-          className="shrink-0 text-shape-secondary group-data-[state=active]:text-theme-primary"
+          className="shrink-0 text-shape-secondary group-data-[state=active]:text-shape-primary"
         />
       )}
       <span className="truncate">{children}</span>

@@ -36,10 +36,10 @@ export function SegmentedControl<T extends string>({
       role="radiogroup"
       aria-label={ariaLabel}
       className={cn(
-        "inline-flex h-8 items-center gap-0.5 rounded-md border border-separator-secondary bg-surface-control-sunken p-0.75 shadow-[inset_0px_0px_4px_var(--color-shadow-1)]",
+        "inline-flex h-8 items-center gap-0.5 rounded-md border border-separator-secondary bg-surface-input p-0.75 input-shadow",
         disabled
           ? "cursor-not-allowed opacity-50"
-          : "hover:border-separator-control-hover focus-within:border-separator-control-active",
+          : "hover:border-separator-input-hover focus-within:border-separator-input-focus",
         className,
       )}
     >

@@ -10,11 +10,11 @@ export function Toaster({ theme = "system" }: { theme?: Theme }) {
       toastOptions={{
         classNames: {
           toast:
-            "rounded-md! border! border-separator-secondary! bg-surface-card! shadow-[0px_4px_12px_var(--color-shadow-1)]! text-label!",
+            "rounded-md! border! border-separator-primary! bg-surface-elevated! overlay-shadow! text-label!",
           title: "text-body! font-medium! text-label!",
           description: "text-body! text-label-secondary!",
           closeButton:
-            "border-separator-secondary! bg-surface-card! text-label!",
+            "border-separator-primary! bg-surface-elevated! text-label-secondary! hover:text-label!",
           success: "[&_[data-icon]]:text-shape-primary!",
           error: "[&_[data-icon]]:text-shape-destructive!",
         },

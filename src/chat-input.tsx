@@ -68,9 +68,9 @@ export function ChatInput({
   return (
     <div
       className={cn(
-        "relative flex flex-col rounded-md border border-separator-secondary bg-surface-control-sunken shadow-[inset_0px_0px_4px_var(--color-shadow-1)]",
+        "relative flex flex-col rounded-md border border-separator-secondary bg-surface-input input-shadow",
         !disabled &&
-          "hover:border-separator-control-hover focus-within:border-separator-control-active",
+          "hover:border-separator-input-hover focus-within:border-separator-input-focus",
         className,
       )}
     >

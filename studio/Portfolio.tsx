@@ -37,7 +37,7 @@ export function Portfolio({
         {variants.map(([exportName, Component]) => (
           <div
             key={exportName}
-            className="rounded-lg border border-separator-primary"
+            className="rounded-xl border border-separator-primary"
           >
             <div className="border-b border-separator-primary bg-surface-card-subdued px-4 py-2">
               <span className="font-mono text-caption text-label-secondary">

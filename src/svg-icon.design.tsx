@@ -12,7 +12,7 @@ export const Sizes = () => {
     <div className="flex items-end gap-6">
       <SVGIcon svg={STAR_SVG} size={16} className="text-shape-secondary" />
       <SVGIcon svg={STAR_SVG} size={24} className="text-shape-primary" />
-      <SVGIcon svg={STAR_SVG} size={40} className="text-theme-primary" />
+      <SVGIcon svg={STAR_SVG} size={40} className="text-shape-primary" />
     </div>
   );
 };

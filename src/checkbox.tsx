@@ -70,8 +70,8 @@ export function Checkbox({
         disabled={disabled}
         onClick={handleClick}
         className={cn(
-          "inline-flex size-4 shrink-0 items-center justify-center rounded-sm border border-separator-primary bg-surface-control-deep text-shape-primary shadow-[inset_0px_0px_4px_var(--color-shadow-1)] select-none",
-          "hover:not-disabled:border-separator-control-hover focus-visible:control-focus-ring disabled:cursor-not-allowed disabled:opacity-50",
+          "inline-flex size-4 shrink-0 items-center justify-center rounded-sm border border-separator-primary bg-surface-toggle text-shape-primary input-shadow select-none",
+          "hover:not-disabled:border-separator-toggle-hover focus-visible:control-focus-ring disabled:cursor-not-allowed disabled:opacity-50",
           className,
         )}
       >

@@ -5,7 +5,7 @@
   --color-light-0: #fafdff;
   --color-light-1: #f8fbfd;
   --color-light-3: #f3f6f9;
-  --color-light-4_5: #eff3f5;
+  --color-light-5: #eef2f4;
   --color-light-6_5: #eaeef1;
   --color-light-8: #e6ebee;
   --color-light-15: #d5dbdf;
@@ -96,7 +96,7 @@
 :root {
   color-scheme: light;
   --surface-canvas: var(--color-light-3);
-  --surface-shell: var(--color-light-4_5);
+  --surface-shell: var(--color-light-5);
   --surface-panel: var(--surface-shell);
   --surface-card: var(--color-light-1);
   --surface-card-subdued: var(--color-light-3);

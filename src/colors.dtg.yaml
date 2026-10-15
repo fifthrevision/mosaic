@@ -101,7 +101,7 @@ defaults:
 roles:
   surface:
     canvas: [sky(3), night(0), midnight(0)]
-    shell: [sky(4.5), night(1.5), midnight(3.5)]
+    shell: [sky(5), night(1.5), midnight(3.5)]
     panel: [surface.shell, surface.shell, surface.shell]
     card: [sky(1), night(1), midnight(5)]
     card-subdued: [sky(3), night(0), midnight(2.5)]

@@ -18,6 +18,26 @@ Read the other files in this folder when the task needs them:
 - [setup.md](setup.md): stylesheet import, root providers, modes, and the
   lint config.
 
+## When Mosaic is missing something
+
+If the UI needs a component, token, or utility that Mosaic doesn't have,
+stop and raise it with the user before building around it. Say what's
+missing, what you'd use it for, and the closest thing Mosaic does have.
+The user decides whether to use that, or to add the missing piece to Mosaic
+so every app gets it.
+
+Don't fill the gap yourself in app code:
+
+- No one-off components that duplicate or reskin a Mosaic one.
+- No new colors, stock palette classes (`bg-gray-100`), arbitrary values
+  (`bg-[#f5f5f5]`, `shadow-[…]`, `text-[13px]`), or local CSS variables
+  standing in for a missing token.
+- No restyling a Mosaic component from the outside to make it something
+  else.
+
+Composing is fine: laying out Mosaic components and tokens to build a
+feature is the normal job. The line is inventing a new visual piece.
+
 ## Type
 
 Mosaic doesn't use Tailwind's size scale. `text-sm`, `text-base`, `text-lg`

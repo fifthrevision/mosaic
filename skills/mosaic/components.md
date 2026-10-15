@@ -253,7 +253,8 @@ hold user data or state. State is a `Status`.
 **`Tabs`** wraps Radix: `Tabs` (`value` / `defaultValue` / `onValueChange`),
 `TabsList`, `TabsTrigger` (`value`, `icon`, `size` `md` | `sm`, `onClose`
 adds a close button), `TabsPanel`. Tabs cap at 240px (override with `className`); a label that
-doesn't fit fades out and shows the full text in a tooltip. For tabs that
+doesn't fit fades out, and scrolls to show the rest on hover or focus (a
+tooltip instead, under reduced motion). For tabs that
 are routes, don't use `Tabs`: put the exported recipes on your links, and
 wrap the label in `TabLabel` so it fades the same way.
 

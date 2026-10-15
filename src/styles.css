@@ -203,8 +203,8 @@
    w-full, a fixed w-*, a grid cell). On a content-sized element the right
    edge is where the text ends, so the fade would eat the last characters of
    text that fits fine. Such a caller needs padding-right >= 1.5rem to push
-   that edge past the fade region -- see WorkspaceControl, where that padding
-   doubles as the chevron's slot. */
+   that edge past the fade region. ScrollingText avoids this by masking only
+   once the text overflows. */
 @utility truncate-fade {
   overflow: hidden;
   white-space: nowrap;

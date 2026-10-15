@@ -1,5 +1,6 @@
 import { ChevronDown } from "lucide-react";
 import { cn } from "./cn";
+import { ScrollingText } from "./scrolling-text";
 
 function workspaceInitials(name: string): string {
   const words = name.trim().split(/\s+/).filter(Boolean);
@@ -20,22 +21,19 @@ export function WorkspaceControl({
       type="button"
       {...props}
       className={cn(
-        "inline-flex h-8 items-center gap-2.5 rounded-md px-2 text-body font-medium text-label select-none hover:bg-state-hover active:bg-state-active data-[state=open]:bg-state-active",
+        "group/scrolling-text inline-flex h-8 w-fit items-center gap-2.5 rounded-md px-2 text-body font-medium text-label select-none hover:bg-state-hover active:bg-state-active data-[state=open]:bg-state-active",
         className,
       )}
     >
       <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-separator-secondary-translucent bg-surface-card-subdued text-caption font-medium text-label-secondary shadow-[0px_1px_1px_var(--color-shadow-3)]">
         {workspaceInitials(name)}
       </span>
-      <span className="relative flex min-w-0 items-center">
-        {/* Content-sized control, so pr-6 pushes the element's right edge past
-            the text -- otherwise the fade would eat a short name's last
-            characters. It doubles as the chevron's slot. */}
-        <span className="truncate-fade pr-6">{name}</span>
-        <ChevronDown
-          size={16}
-          className="absolute right-0 text-shape-secondary"
-        />
+      <span className="flex min-w-0 items-center gap-2">
+        {/* The button's gap-2.5 after the initials; this span's gap-2. */}
+        <ScrollingText leadingGapPx={10} trailingGapPx={8}>
+          {name}
+        </ScrollingText>
+        <ChevronDown size={16} className="shrink-0 text-shape-secondary" />
       </span>
     </button>
   );

@@ -132,7 +132,7 @@ export const Closable = () => (
 
 export const EdgeCases = () => (
   <div className="flex flex-col gap-6">
-    <Example label="long label (grows; no max width)">
+    <Example label="long label (fades at the 240px max width)">
       <Tabs defaultValue="a">
         <TabsList>
           <TabsTrigger value="a" icon={FileText}>
@@ -142,7 +142,7 @@ export const EdgeCases = () => (
         </TabsList>
       </Tabs>
     </Example>
-    <Example label='long label truncated (className="max-w-48")'>
+    <Example label='closable, narrower max width (className="max-w-48")'>
       <Tabs defaultValue="a">
         <TabsList>
           <TabsTrigger

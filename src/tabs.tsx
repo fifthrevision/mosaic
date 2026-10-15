@@ -2,6 +2,7 @@ import * as TabsPrimitive from "@radix-ui/react-tabs";
 import { X, type LucideIcon } from "lucide-react";
 import { cn } from "./cn";
 import { IconButton } from "./icon-button";
+import { ScrollingText } from "./scrolling-text";
 
 export const Tabs = TabsPrimitive.Root;
 
@@ -23,7 +24,7 @@ export function TabsList({
 }
 
 const tabShapeClassName =
-  "group inline-flex h-8 w-fit items-center gap-1.75 rounded-md px-3 text-body font-medium select-none focus-visible:control-focus-ring";
+  "group group/scrolling-text inline-flex h-8 w-fit max-w-60 items-center gap-1.75 rounded-md px-3 text-body font-medium select-none focus-visible:control-focus-ring";
 
 export function tabClassName(active: boolean): string {
   return cn(
@@ -38,15 +39,35 @@ export function tabIconClassName(active: boolean): string {
   return cn("shrink-0", active ? "text-shape-theme" : "text-shape-secondary");
 }
 
+// leadingGapPx is the gap-1.75 after the icon; trailingGapPx defaults to the
+// md trigger's right padding (px-3).
+export function TabLabel({
+  children,
+  trailingGapPx = 12,
+}: {
+  children: React.ReactNode;
+  trailingGapPx?: number;
+}) {
+  return (
+    <ScrollingText leadingGapPx={7} trailingGapPx={trailingGapPx}>
+      {children}
+    </ScrollingText>
+  );
+}
+
 const sizeConfig = {
   sm: {
     trigger: "h-7 px-2.5",
     closableTrigger: "pr-7",
+    labelTrailingPx: 10,
+    closableLabelTrailingPx: 2,
     closeButton: "top-0.5 right-0.5",
   },
   md: {
     trigger: "h-8 px-3",
     closableTrigger: "pr-8",
+    labelTrailingPx: 12,
+    closableLabelTrailingPx: 4,
     closeButton: "top-1 right-1",
   },
 } as const;
@@ -68,6 +89,8 @@ export function TabsTrigger({
     trigger: triggerSize,
     closableTrigger,
     closeButton,
+    labelTrailingPx,
+    closableLabelTrailingPx,
   } = sizeConfig[size];
 
   const trigger = (
@@ -92,7 +115,11 @@ export function TabsTrigger({
           className="shrink-0 text-shape-secondary group-data-[state=active]:text-shape-theme"
         />
       )}
-      <span className="truncate">{children}</span>
+      <TabLabel
+        trailingGapPx={onClose ? closableLabelTrailingPx : labelTrailingPx}
+      >
+        {children}
+      </TabLabel>
     </TabsPrimitive.Trigger>
   );
 

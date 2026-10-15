@@ -153,7 +153,8 @@ Pick the surface by layer, not by shade: a box inside page content is a
 card or a card region even if `shell` happens to look right.
 
 - A card is `rounded-md border border-separator-secondary bg-surface-card`,
-  plus `card-shadow` when it sits on the canvas.
+  plus `card-shadow` when it sits on the canvas. A clickable card adds
+  `card-interactive` and `focus-visible:control-focus-ring`.
 - Don't put a card inside a card. Nest with `bg-surface-card-subdued`.
 
 ### States
@@ -165,6 +166,10 @@ card or a card region even if `shell` happens to look right.
 | `bg-state-selected`      | The selected item in a set: current tab, segment, nav item      |
 
 - `state-hover` is translucent, so it works over any surface.
+- Strips tint, surfaces lift. `state-hover` is for strips: rows, menu
+  items, nav items, subtle buttons. A large clickable surface (a card)
+  doesn't tint, because a tinted card turns darker than the canvas and
+  greys out the controls inside it. Use `card-interactive` instead.
 - Selected reads as raised, not tinted: pair it with `control-shadow` and
   `text-label` (unselected siblings use `text-label-secondary`).
 
@@ -248,6 +253,7 @@ Mosaic's shadow colors deepen in dark mode.
 | `dialog-shadow`         | Dialogs and popovers                                 |
 | `panel-shadow`          | Persistent windows (`bg-surface-panel`)              |
 | `input-shadow`     | The inset shadow of input wells                      |
+| `card-interactive`      | Clickable cards: on hover the border turns `separator-card-hover` and the shadow lifts; the fill doesn't change. Use with `card-shadow` |
 
 A shadow none of these covers uses the tokens, lightest to darkest:
 `shadow-[0px_4px_12px_var(--color-shadow-1)]` with `shadow-1`, `shadow-2`,

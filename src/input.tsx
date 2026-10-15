@@ -7,7 +7,7 @@ export function Input({
   ...props
 }: React.InputHTMLAttributes<HTMLInputElement> & { icon?: LucideIcon }) {
   const inputClasses = cn(
-    "w-full h-8 rounded-md border border-separator-secondary bg-surface-control-sunken py-1.5 text-base font-medium text-label shadow-[inset_0px_0px_4px_var(--color-shadow-1)] placeholder:text-label-tertiary outline-none hover:not-disabled:border-separator-control-hover focus:not-disabled:border-separator-control-active disabled:cursor-not-allowed disabled:opacity-50",
+    "w-full h-8 rounded-md border border-separator-secondary bg-surface-control-sunken py-1.5 text-body font-medium text-label shadow-[inset_0px_0px_4px_var(--color-shadow-1)] placeholder:text-label-tertiary outline-none hover:not-disabled:border-separator-control-hover focus:not-disabled:border-separator-control-active disabled:cursor-not-allowed disabled:opacity-50",
     Icon ? "pl-9 pr-3" : "px-3",
     className,
   );

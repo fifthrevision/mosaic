@@ -2,6 +2,7 @@ import { ArrowUp, Plus, Square } from "lucide-react";
 import { useId, useLayoutEffect, useRef } from "react";
 import { FileChip } from "./file-chip";
 import { IconButton } from "./icon-button";
+import { Label } from "./label";
 import { cn } from "./cn";
 
 interface ChatInputProps {
@@ -87,9 +88,9 @@ export function ChatInput({
           ))}
         </ul>
       )}
-      <label htmlFor={textareaId} className="sr-only">
+      <Label htmlFor={textareaId} visuallyHidden>
         Message
-      </label>
+      </Label>
       <textarea
         ref={textareaRef}
         id={textareaId}
@@ -106,7 +107,7 @@ export function ChatInput({
         disabled={disabled}
         placeholder={placeholder}
         rows={2}
-        className="block max-h-60 w-full resize-none bg-transparent px-3 pt-2 pb-1 text-base font-medium text-label outline-none placeholder:text-label-tertiary disabled:cursor-not-allowed disabled:opacity-50"
+        className="block max-h-60 w-full resize-none bg-transparent px-3 pt-2 pb-1 text-body font-medium text-label outline-none placeholder:text-label-tertiary disabled:cursor-not-allowed disabled:opacity-50"
       />
       <div className="flex items-center gap-1.5 px-2 pb-2">
         {attachments && (

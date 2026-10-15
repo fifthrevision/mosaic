@@ -1,3 +1,4 @@
+import { Label } from "./label";
 import { Radio } from "./radio";
 
 export const meta = {
@@ -21,17 +22,17 @@ export const DisabledSelected = () => (
 
 export const Group = () => (
   <div role="radiogroup" aria-label="Plan" className="flex flex-col gap-2">
-    <label className="inline-flex items-center gap-2 label-header">
+    <Label className="inline-flex items-center gap-2">
       <Radio name="plan" value="free" defaultChecked />
       Free
-    </label>
-    <label className="inline-flex items-center gap-2 label-header">
+    </Label>
+    <Label className="inline-flex items-center gap-2">
       <Radio name="plan" value="pro" />
       Pro
-    </label>
-    <label className="inline-flex items-center gap-2 label-header">
+    </Label>
+    <Label className="inline-flex items-center gap-2">
       <Radio name="plan" value="enterprise" disabled />
       Enterprise
-    </label>
+    </Label>
   </div>
 );

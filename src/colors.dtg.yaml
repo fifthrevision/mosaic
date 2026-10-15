@@ -131,10 +131,9 @@ roles:
     secondary: [night(30), sky(40)]
     tertiary: [night(60), sky(60)]
     shimmer: [theme(400), sky(0)]
-    intent-primary: [theme(700), theme(150)]
-    intent-destructive: [ruby(700), ruby(150)]
-    context-destructive: [ruby(700), ruby(150)]
-    theme: [theme(600), theme(400)]
+    theme: [theme(700), theme(150)]
+    link: [theme(600), theme(400)]
+    destructive: [ruby(700), ruby(150)]
 
   theme:
     primary: [theme(600), theme(400)]

@@ -38,7 +38,11 @@ export const markdownHighlightStyle = HighlightStyle.define([
   { tag: t.strong, fontWeight: "700" },
   { tag: t.emphasis, fontStyle: "italic" },
   { tag: t.strikethrough, textDecoration: "line-through" },
-  { tag: t.link, color: "var(--color-theme-500)", textDecoration: "underline" },
+  {
+    tag: t.link,
+    color: "var(--color-label-link)",
+    textDecoration: "underline",
+  },
   { tag: t.url, color: "var(--color-label-tertiary)" },
   {
     tag: t.monospace,

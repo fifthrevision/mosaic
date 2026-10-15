@@ -26,7 +26,7 @@ export const Dismissible = () => {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="text-base text-label-secondary underline"
+        className="text-body text-label-secondary underline"
       >
         Show alert again
       </button>

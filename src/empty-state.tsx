@@ -19,7 +19,7 @@ export function EmptyState({
         className,
       )}
     >
-      <p className="text-base text-label-tertiary">{children}</p>
+      <p className="text-body text-label-tertiary">{children}</p>
     </div>
   );
 }

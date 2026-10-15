@@ -38,12 +38,14 @@ export function TokenRow({
         {preview}
       </div>
       <div className="flex min-w-0 flex-1 flex-col">
-        <span className="text-base font-medium text-label">{name}</span>
-        <span className="font-mono text-sm text-label-secondary">
+        <span className="text-body font-medium text-label">{name}</span>
+        <span className="font-mono text-caption text-label-secondary">
           {varName}
         </span>
       </div>
-      <span className="font-mono text-sm text-label-secondary">{value}</span>
+      <span className="font-mono text-caption text-label-secondary">
+        {value}
+      </span>
     </div>
   );
 }
@@ -57,7 +59,7 @@ export function Section({
 }) {
   return (
     <section className="flex flex-col gap-3">
-      <h3 className="page-title text-label">{title}</h3>
+      <h3 className="text-title text-label">{title}</h3>
       <div className="rounded-lg border border-separator-secondary bg-surface-card px-4 py-2">
         {children}
       </div>

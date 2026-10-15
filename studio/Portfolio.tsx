@@ -25,11 +25,11 @@ export function Portfolio({
 
   return (
     <div className="mx-auto max-w-4xl p-8">
-      <h1 className="mb-1 text-2xl font-bold text-label">
+      <h1 className="mb-1 text-large-title font-bold text-label">
         {meta.title ?? name}
       </h1>
       {meta.description && (
-        <p className="mb-6 text-base text-label-secondary">
+        <p className="mb-6 text-body text-label-secondary">
           {meta.description}
         </p>
       )}
@@ -40,7 +40,7 @@ export function Portfolio({
             className="rounded-lg border border-separator-primary"
           >
             <div className="border-b border-separator-primary bg-surface-card-subdued px-4 py-2">
-              <span className="font-mono text-sm text-label-secondary">
+              <span className="font-mono text-caption text-label-secondary">
                 {labelFromExportName(exportName)}
               </span>
             </div>

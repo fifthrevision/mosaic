@@ -18,10 +18,10 @@ export const Default = () => (
       </TabsTrigger>
     </TabsList>
     <TabsPanel value="workbench" className="mt-4">
-      <p className="text-base text-label-secondary">Workbench panel content.</p>
+      <p className="text-body text-label-secondary">Workbench panel content.</p>
     </TabsPanel>
     <TabsPanel value="options" className="mt-4">
-      <p className="text-base text-label-secondary">Options panel content.</p>
+      <p className="text-body text-label-secondary">Options panel content.</p>
     </TabsPanel>
   </Tabs>
 );

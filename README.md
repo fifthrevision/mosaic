@@ -29,6 +29,11 @@ Components are subpath imports, one per module:
 import { Button } from "@fifthrevision/mosaic/button";
 ```
 
+[USAGE.md](USAGE.md) has the rules for writing UI with Mosaic (type roles,
+text colors, spacing) and how to turn on the lint plugin that enforces them.
+Point the app's agent instructions at
+`node_modules/@fifthrevision/mosaic/USAGE.md`.
+
 Mosaic has no routing dependency. Route-driven navigation (a tab strip
 backed by `NavLink`, say) lives in the app, built on the class recipes
 `tabs.tsx` exports (`tabClassName`, `tabIconClassName`) so the look stays

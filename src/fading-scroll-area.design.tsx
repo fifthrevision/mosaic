@@ -18,7 +18,7 @@ function ShortContent() {
   return (
     <div className="flex flex-col gap-3 p-4">
       {Array.from({ length: 3 }, (_, i) => (
-        <p key={i} className="text-base text-label">
+        <p key={i} className="text-body text-label">
           Turn {i + 1} — short content fits without scrolling.
         </p>
       ))}
@@ -30,7 +30,7 @@ function LongContent() {
   return (
     <div className="flex flex-col gap-3 p-4">
       {Array.from({ length: 30 }, (_, i) => (
-        <p key={i} className="text-base text-label">
+        <p key={i} className="text-body text-label">
           Turn {i + 1} — long content forces the scroll viewport to overflow, so
           the fades become visible while in the middle of scrolling.
         </p>
@@ -42,7 +42,7 @@ function LongContent() {
 function StatusFooter() {
   return (
     <div className="mt-2 bg-surface-card px-4 pt-3 pb-4">
-      <div className="flex h-6 items-center gap-2.5 px-1 text-base text-label-secondary">
+      <div className="flex h-6 items-center gap-2.5 px-1 text-body text-label-secondary">
         Status · 3.2s
       </div>
     </div>

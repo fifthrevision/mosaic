@@ -1,3 +1,4 @@
+import { Label } from "./label";
 import { useState } from "react";
 import { Input } from "./input";
 import { Button } from "./button";
@@ -21,11 +22,11 @@ export const Default = () => {
         </Dialog.Header>
         <form className="contents">
           <div>
-            <label className="label-header">Test</label>
+            <Label>Test</Label>
             <Input />
           </div>
           <div>
-            <label className="label-header">Test</label>
+            <Label>Test</Label>
             <Input />
           </div>
         </form>
@@ -51,11 +52,11 @@ export const Wide = () => {
         </Dialog.Header>
         <form className="contents">
           <div>
-            <label className="label-header">Test</label>
+            <Label>Test</Label>
             <Input />
           </div>
           <div>
-            <label className="label-header">Test</label>
+            <Label>Test</Label>
             <Input />
           </div>
         </form>
@@ -83,11 +84,11 @@ export const HiddenDescription = () => {
         </Dialog.Header>
         <form className="contents">
           <div>
-            <label className="label-header">Test</label>
+            <Label>Test</Label>
             <Input />
           </div>
           <div>
-            <label className="label-header">Test</label>
+            <Label>Test</Label>
             <Input />
           </div>
         </form>
@@ -113,11 +114,11 @@ export const SecondaryActions = () => {
         </Dialog.Header>
         <form className="contents">
           <div>
-            <label className="label-header">Test</label>
+            <Label>Test</Label>
             <Input />
           </div>
           <div>
-            <label className="label-header">Test</label>
+            <Label>Test</Label>
             <Input />
           </div>
         </form>

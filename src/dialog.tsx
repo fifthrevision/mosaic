@@ -3,6 +3,7 @@ import { X } from "lucide-react";
 import React from "react";
 import { cn } from "./cn";
 import { IconButton } from "./icon-button";
+import { TextStack } from "./text-stack";
 
 export const DialogRoot = RadixDialog.Root;
 export const DialogTrigger = RadixDialog.Trigger;
@@ -30,9 +31,7 @@ function DialogHeader({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
-  return (
-    <div className={cn("mb-6 flex flex-col gap-1", className)} {...props} />
-  );
+  return <TextStack className={cn("mb-6", className)} {...props} />;
 }
 
 function DialogTitle({
@@ -41,7 +40,7 @@ function DialogTitle({
 }: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <RadixDialog.Title asChild>
-      <h2 className={cn("page-title text-label", className)} {...props} />
+      <h2 className={cn("text-title text-label", className)} {...props} />
     </RadixDialog.Title>
   );
 }
@@ -55,7 +54,7 @@ function DialogDescription({
     <RadixDialog.Description asChild>
       <p
         className={cn(
-          "text-base text-label-secondary",
+          "text-body text-label-secondary",
           visuallyHidden && "sr-only",
           className,
         )}

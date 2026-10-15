@@ -19,11 +19,11 @@ export function WorkspaceControl({
     <button
       {...props}
       className={cn(
-        "inline-flex h-8 items-center gap-2.5 rounded-md px-2 text-base font-medium text-label select-none hover:bg-state-hover active:bg-state-active data-[state=open]:bg-state-active",
+        "inline-flex h-8 items-center gap-2.5 rounded-md px-2 text-body font-medium text-label select-none hover:bg-state-hover active:bg-state-active data-[state=open]:bg-state-active",
         className,
       )}
     >
-      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-separator-secondary-translucent bg-surface-card-subdued text-xs font-semibold text-label-secondary shadow-[0px_1px_1px_var(--color-shadow-3)]">
+      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-separator-secondary-translucent bg-surface-card-subdued text-caption font-semibold text-label-secondary shadow-[0px_1px_1px_var(--color-shadow-3)]">
         {workspaceInitials(name)}
       </span>
       <span className="relative flex min-w-0 items-center">

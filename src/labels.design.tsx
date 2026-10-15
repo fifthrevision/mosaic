@@ -9,7 +9,7 @@ export const meta = {
 function TextSwatch({ varName }: { varName: string }) {
   return (
     <span
-      className="text-base font-medium"
+      className="text-body font-medium"
       style={{ color: `var(${varName})` }}
     >
       Aa
@@ -33,6 +33,21 @@ export const Labels = () => (
       name="Label tertiary"
       varName="--label-tertiary"
       preview={<TextSwatch varName="--label-tertiary" />}
+    />
+    <TokenRow
+      name="Label theme"
+      varName="--label-theme"
+      preview={<TextSwatch varName="--label-theme" />}
+    />
+    <TokenRow
+      name="Label link"
+      varName="--label-link"
+      preview={<TextSwatch varName="--label-link" />}
+    />
+    <TokenRow
+      name="Label destructive"
+      varName="--label-destructive"
+      preview={<TextSwatch varName="--label-destructive" />}
     />
   </Section>
 );

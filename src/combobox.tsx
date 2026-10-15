@@ -46,7 +46,7 @@ export function Combobox({
           type="button"
           disabled={disabled || loading}
           className={cn(
-            "h-8 w-full appearance-none rounded-md border border-separator-secondary bg-surface-control-sunken py-1.5 pl-3 pr-8 text-left text-base font-medium text-label shadow-[inset_0px_0px_4px_var(--color-shadow-1)] outline-none hover:not-disabled:border-separator-control-hover focus:border-separator-control-active disabled:cursor-not-allowed disabled:opacity-50 relative truncate",
+            "h-8 w-full appearance-none rounded-md border border-separator-secondary bg-surface-control-sunken py-1.5 pl-3 pr-8 text-left text-body font-medium text-label shadow-[inset_0px_0px_4px_var(--color-shadow-1)] outline-none hover:not-disabled:border-separator-control-hover focus:border-separator-control-active disabled:cursor-not-allowed disabled:opacity-50 relative truncate",
             !selected && !loading && "text-label-tertiary font-normal",
             className,
           )}
@@ -67,10 +67,10 @@ export function Combobox({
           <Command className="flex flex-col gap-1">
             <Command.Input
               placeholder={searchPlaceholder}
-              className="h-8 w-full rounded border border-separator-secondary bg-surface-control-sunken px-2 text-base font-medium text-label placeholder:text-label-tertiary placeholder:font-normal outline-none focus:border-separator-control-active"
+              className="h-8 w-full rounded border border-separator-secondary bg-surface-control-sunken px-2 text-body font-medium text-label placeholder:text-label-tertiary placeholder:font-normal outline-none focus:border-separator-control-active"
             />
             <Command.List className="max-h-60 overflow-y-auto">
-              <Command.Empty className="py-3 text-center text-base text-label-secondary">
+              <Command.Empty className="py-3 text-center text-body text-label-secondary">
                 {emptyMessage}
               </Command.Empty>
               {options.map((option) => (
@@ -82,7 +82,7 @@ export function Combobox({
                     onValueChange(option.value);
                     setOpen(false);
                   }}
-                  className="flex h-8 items-center gap-2 rounded px-2 text-base text-label outline-none select-none cursor-default data-[selected=true]:bg-state-hover data-[disabled=true]:opacity-50 data-[disabled=true]:pointer-events-none"
+                  className="flex h-8 items-center gap-2 rounded px-2 text-body text-label outline-none select-none cursor-default data-[selected=true]:bg-state-hover data-[disabled=true]:opacity-50 data-[disabled=true]:pointer-events-none"
                 >
                   <Check
                     size={16}
@@ -93,7 +93,7 @@ export function Combobox({
                   />
                   <span className="flex-1 truncate">{option.label}</span>
                   {option.description ? (
-                    <span className="text-label-secondary text-sm">
+                    <span className="text-label-secondary text-subhead">
                       {option.description}
                     </span>
                   ) : null}

@@ -8,16 +8,19 @@ const designModules = import.meta.glob<Record<string, unknown>>(
   { eager: false },
 );
 
-const metaModules = import.meta.glob<{ title?: string; group?: string }>(
-  "../src/**/*.design.tsx",
-  { eager: true, import: "meta" },
-);
+const metaModules = import.meta.glob<{
+  title?: string;
+  group?: string;
+  order?: number;
+}>("../src/**/*.design.tsx", { eager: true, import: "meta" });
 
 const DEFAULT_GROUP = "Components";
+const GROUP_ORDER = ["Foundations", "Typography", DEFAULT_GROUP];
 
 type DesignEntry = {
   name: string;
   group: string;
+  order: number;
   path: string;
   load: () => Promise<Record<string, unknown>>;
 };
@@ -33,6 +36,7 @@ function parseEntries(): DesignEntry[] {
     return {
       name,
       group: meta?.group ?? DEFAULT_GROUP,
+      order: meta?.order ?? Infinity,
       path: urlPath,
       load: load as () => Promise<Record<string, unknown>>,
     };
@@ -46,7 +50,17 @@ function groupEntries(entries: DesignEntry[]): [string, DesignEntry[]][] {
     members.push(entry);
     groups.set(entry.group, members);
   }
-  return [...groups.entries()].sort(([a], [b]) => a.localeCompare(b));
+  for (const members of groups.values()) {
+    members.sort((a, b) => a.order - b.order || a.name.localeCompare(b.name));
+  }
+  return [...groups.entries()].sort(
+    ([a], [b]) => groupRank(a) - groupRank(b) || a.localeCompare(b),
+  );
+}
+
+function groupRank(group: string) {
+  const index = GROUP_ORDER.indexOf(group);
+  return index === -1 ? GROUP_ORDER.length : index;
 }
 
 function getPath() {
@@ -93,13 +107,13 @@ function Sidebar({
 
   return (
     <aside className="fixed left-0 top-0 flex h-full w-52 flex-col border-r border-separator-primary bg-surface-card p-4">
-      <h1 className="mb-4 text-sm font-bold text-label-secondary uppercase tracking-wide">
+      <h1 className="mb-4 text-caption font-bold text-label-secondary uppercase tracking-wide">
         Studio
       </h1>
       <nav className="-mx-4 min-h-0 flex-1 space-y-4 overflow-y-auto px-4">
         {groupEntries(entries).map(([group, members]) => (
           <section key={group}>
-            <h2 className="mb-1 px-3 text-sm font-medium text-label-tertiary">
+            <h2 className="mb-1 px-3 text-caption font-medium text-label-tertiary">
               {group}
             </h2>
             <ul className="space-y-0.5">
@@ -107,7 +121,7 @@ function Sidebar({
                 <li key={e.path}>
                   <button
                     onClick={() => navigate(e.path)}
-                    className={`w-full rounded-lg px-3 py-1.5 text-left text-base text-label hover:bg-state-hover ${
+                    className={`w-full rounded-lg px-3 py-1.5 text-left text-body text-label hover:bg-state-hover ${
                       activePath === e.path ? "bg-state-selected" : ""
                     }`}
                   >
@@ -127,7 +141,7 @@ function Sidebar({
               applyTheme(option);
               setTheme(option);
             }}
-            className={`flex-1 rounded-lg py-1.5 text-sm capitalize hover:bg-state-hover ${
+            className={`flex-1 rounded-lg py-1.5 text-caption capitalize hover:bg-state-hover ${
               theme === option
                 ? "bg-state-selected text-label"
                 : "text-label-secondary"

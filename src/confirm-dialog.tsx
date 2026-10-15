@@ -108,11 +108,11 @@ export function ConfirmProvider({ children }: { children: React.ReactNode }) {
         <AlertDialog.Portal>
           <AlertDialog.Overlay className="fixed inset-0 z-50 bg-black/10 backdrop-blur-sm dark:bg-black/20 data-[state=open]:animate-[dialog-overlay-in_150ms_ease-out] data-[state=closed]:animate-[dialog-overlay-out_100ms_ease-in]" />
           <AlertDialog.Content className="fixed top-1/2 left-1/2 z-50 w-105 max-w-[calc(100vw-32px)] -translate-1/2 rounded-lg border border-separator-secondary bg-surface-canvas p-6 dialog-shadow focus:outline-none data-[state=open]:animate-[dialog-content-in_150ms_ease-out] data-[state=closed]:animate-[dialog-content-out_100ms_ease-in]">
-            <AlertDialog.Title className="page-title text-label">
+            <AlertDialog.Title className="text-title text-label">
               {visibleOptions?.title}
             </AlertDialog.Title>
             {visibleOptions?.description ? (
-              <AlertDialog.Description className="mt-2 whitespace-pre-line text-base leading-[1.4] text-label-secondary">
+              <AlertDialog.Description className="mt-2 whitespace-pre-line text-body text-label-secondary">
                 {visibleOptions.description}
               </AlertDialog.Description>
             ) : null}

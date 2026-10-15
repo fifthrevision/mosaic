@@ -7,6 +7,7 @@
 @layer base {
   body {
     font-weight: var(--font-weight-regular);
+    line-height: 1.5;
     /* Subpixel rendering makes Inter read ~50 weight units heavier than Figma;
        grayscale antialiasing lets the token values match the design 1:1. */
     -webkit-font-smoothing: antialiased;
@@ -103,14 +104,16 @@
   /* Typography */
   --font-sans: "Inter Variable", sans-serif;
   --font-mono: "IBM Plex Mono", monospace;
-  --text-xs: 0.6875rem; /* 11px */
-  --text-sm: 0.75rem; /* 12px */
-  --text-md: 0.8125rem; /* 13px */
-  --text-base: 0.875rem; /* 14px */
-  --text-lg: 1rem;
-  --text-xl: 1.125rem;
-  --text-2xl: 1.3125rem;
-  --text-3xl: 1.5rem;
+  /* Role names replace Tailwind's size scale; text-sm/text-base/etc. no
+     longer generate CSS. Line height is inherited from body. */
+  --text-*: initial;
+  --text-caption: 0.75rem; /* 12px — component internals only */
+  --text-subhead: 0.8125rem; /* 13px */
+  --text-body: 0.875rem; /* 14px */
+  --text-title: 1rem; /* 16px */
+  --text-title--font-weight: 500;
+  --text-large-title: 1.125rem; /* 18px */
+  --text-large-title--font-weight: 500;
 
   /* Dialog widths */
   --width-dialog-small: 17.5rem; /* 280px */
@@ -152,22 +155,6 @@
 @utility control-focus-ring {
   outline: 2px solid var(--color-shape-primary);
   outline-offset: 2px;
-}
-
-@utility page-title {
-  @apply text-lg font-medium;
-}
-
-@utility page-header {
-  @apply text-base font-medium text-label;
-}
-
-@utility label-header {
-  @apply text-md font-medium text-label-secondary;
-}
-
-@utility section-title {
-  @apply text-lg font-medium leading-6 text-label;
 }
 
 /* Single-line overflow that fades out instead of clipping or ellipsing.

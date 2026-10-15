@@ -15,7 +15,7 @@ export const Placements = () => {
           <Button icon={Settings2}>Open below</Button>
         </PopoverTrigger>
         <PopoverContent className="w-64 p-3">
-          <p className="text-base text-label-secondary">
+          <p className="text-body text-label-secondary">
             Default placement, dismissed by clicking outside or Escape.
           </p>
         </PopoverContent>
@@ -25,7 +25,7 @@ export const Placements = () => {
           <Button icon={Settings2}>Open left</Button>
         </PopoverTrigger>
         <PopoverContent side="left" sideOffset={8} className="w-64 p-3">
-          <p className="text-base text-label-secondary">
+          <p className="text-body text-label-secondary">
             Side placement for row-anchored settings panels.
           </p>
         </PopoverContent>

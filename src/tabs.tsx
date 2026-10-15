@@ -18,7 +18,7 @@ export function TabsList({
 }
 
 const tabShapeClassName =
-  "group inline-flex h-8 w-fit items-center gap-1.75 rounded-md px-3 text-base font-medium select-none focus-visible:control-focus-ring";
+  "group inline-flex h-8 w-fit items-center gap-1.75 rounded-md px-3 text-body font-medium select-none focus-visible:control-focus-ring";
 
 export function tabClassName(active: boolean): string {
   return cn(

@@ -91,11 +91,11 @@
 .cm-markdown-editor .cm-variable-pill-error {
   background-color: color-mix(
     in srgb,
-    var(--color-label-intent-destructive) 12%,
+    var(--color-label-destructive) 12%,
     transparent
   );
-  color: var(--color-label-intent-destructive);
-  text-decoration: underline wavy var(--color-label-intent-destructive);
+  color: var(--color-label-destructive);
+  text-decoration: underline wavy var(--color-label-destructive);
   text-decoration-skip-ink: none;
   text-underline-offset: 2px;
   cursor: help;

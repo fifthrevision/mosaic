@@ -47,8 +47,8 @@ export function MenuItem({
       disabled={disabled}
       className={
         isDestructive
-          ? "flex h-8 items-center gap-3 rounded px-2 py-2.5 text-base text-label-intent-destructive outline-none select-none cursor-default data-highlighted:bg-state-hover data-disabled:opacity-50 data-disabled:pointer-events-none"
-          : "flex h-8 items-center gap-3 rounded px-2 py-2.5 text-base text-label outline-none select-none cursor-default data-highlighted:bg-state-hover data-disabled:opacity-50 data-disabled:pointer-events-none"
+          ? "flex h-8 items-center gap-3 rounded px-2 py-2.5 text-body text-label-destructive outline-none select-none cursor-default data-highlighted:bg-state-hover data-disabled:opacity-50 data-disabled:pointer-events-none"
+          : "flex h-8 items-center gap-3 rounded px-2 py-2.5 text-body text-label outline-none select-none cursor-default data-highlighted:bg-state-hover data-disabled:opacity-50 data-disabled:pointer-events-none"
       }
       onSelect={onSelect}
     >
@@ -71,7 +71,7 @@ export function MenuSeparator() {
 
 export function MenuLabel({ children }: { children: React.ReactNode }) {
   return (
-    <DropdownMenu.Label className="px-2 pt-1.5 pb-1 text-sm font-medium text-label-secondary select-none">
+    <DropdownMenu.Label className="px-2 pt-1.5 pb-1 text-caption font-medium text-label-secondary select-none">
       {children}
     </DropdownMenu.Label>
   );
@@ -88,7 +88,7 @@ export function SubMenu({
 }) {
   return (
     <DropdownMenu.Sub>
-      <DropdownMenu.SubTrigger className="flex h-8 items-center gap-3 rounded px-2 py-2.5 text-base text-label outline-none select-none cursor-default data-highlighted:bg-state-hover data-[state=open]:bg-state-hover">
+      <DropdownMenu.SubTrigger className="flex h-8 items-center gap-3 rounded px-2 py-2.5 text-body text-label outline-none select-none cursor-default data-highlighted:bg-state-hover data-[state=open]:bg-state-hover">
         <Icon size={16} className="text-shape-secondary" />
         <span className="flex-1">{label}</span>
         <ChevronRight size={16} className="text-shape-secondary" />
@@ -117,7 +117,7 @@ export function MenuRadioItem({
 }) {
   return (
     <DropdownMenu.Item
-      className="flex h-8 items-center gap-3 rounded px-2 py-2.5 text-base text-label outline-none select-none cursor-default data-highlighted:bg-state-hover"
+      className="flex h-8 items-center gap-3 rounded px-2 py-2.5 text-body text-label outline-none select-none cursor-default data-highlighted:bg-state-hover"
       onSelect={onSelect}
     >
       <Check

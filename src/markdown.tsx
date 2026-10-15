@@ -4,7 +4,7 @@ import remarkGfm from "remark-gfm";
 // Inline code and fenced code share the `code` renderer; the fenced case is
 // reset back to a plain block via the `pre` styles below.
 const components: Components = {
-  p: ({ children }) => <p className="text-base text-label">{children}</p>,
+  p: ({ children }) => <p className="text-body text-label">{children}</p>,
   a: ({ children, href }) => (
     <a
       href={href}
@@ -16,34 +16,34 @@ const components: Components = {
     </a>
   ),
   ul: ({ children }) => (
-    <ul className="flex list-disc flex-col gap-1 pl-5 text-base text-label">
+    <ul className="flex list-disc flex-col gap-1 pl-5 text-body text-label">
       {children}
     </ul>
   ),
   ol: ({ children }) => (
-    <ol className="flex list-decimal flex-col gap-1 pl-5 text-base text-label">
+    <ol className="flex list-decimal flex-col gap-1 pl-5 text-body text-label">
       {children}
     </ol>
   ),
   h1: ({ children }) => (
-    <h1 className="text-lg font-semibold text-label">{children}</h1>
+    <h1 className="text-title font-semibold text-label">{children}</h1>
   ),
   h2: ({ children }) => (
-    <h2 className="text-base font-semibold text-label">{children}</h2>
+    <h2 className="text-body font-semibold text-label">{children}</h2>
   ),
   h3: ({ children }) => (
-    <h3 className="text-base font-medium text-label">{children}</h3>
+    <h3 className="text-body font-medium text-label">{children}</h3>
   ),
   h4: ({ children }) => (
-    <h4 className="text-base font-medium text-label-secondary">{children}</h4>
+    <h4 className="text-body font-medium text-label-secondary">{children}</h4>
   ),
   code: ({ children }) => (
-    <code className="rounded bg-surface-card-subdued px-1 py-0.5 font-mono text-sm">
+    <code className="rounded bg-surface-card-subdued px-1 py-0.5 font-mono text-caption">
       {children}
     </code>
   ),
   pre: ({ children }) => (
-    <pre className="overflow-x-auto rounded-md bg-surface-card-subdued p-3 text-sm [&_code]:bg-transparent [&_code]:p-0">
+    <pre className="overflow-x-auto rounded-md bg-surface-card-subdued p-3 text-caption [&_code]:bg-transparent [&_code]:p-0">
       {children}
     </pre>
   ),
@@ -55,7 +55,7 @@ const components: Components = {
   hr: () => <hr className="border-separator-secondary" />,
   table: ({ children }) => (
     <div className="overflow-x-auto">
-      <table className="w-full border-collapse text-base text-label">
+      <table className="w-full border-collapse text-body text-label">
         {children}
       </table>
     </div>

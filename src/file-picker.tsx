@@ -109,13 +109,13 @@ export function FilePicker({
       )}
       {isDragging && files.length === 0 ? (
         <div className="flex h-6 items-center justify-center">
-          <span className="text-md text-label-secondary">{dropLabel}</span>
+          <span className="text-subhead text-label-secondary">{dropLabel}</span>
         </div>
       ) : (
         <button
           type="button"
           onClick={() => inputRef.current?.click()}
-          className="flex h-6 w-full items-center justify-center gap-1.5 rounded-sm text-md font-medium text-label-secondary transition-colors hover:text-label-theme focus-visible:control-focus-ring"
+          className="flex h-6 w-full items-center justify-center gap-1.5 rounded-sm text-subhead font-medium text-label-secondary transition-colors hover:text-label-theme focus-visible:control-focus-ring"
         >
           <ArrowUpFromLine size={12} className="shrink-0" />
           {label}

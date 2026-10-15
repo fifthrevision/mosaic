@@ -6,9 +6,9 @@ function getInitials(name: string): string {
 }
 
 const sizeClasses = {
-  sm: "h-6 w-6 text-xs",
-  md: "h-8 w-8 text-sm",
-  lg: "h-16 w-16 text-xl",
+  sm: "h-6 w-6 text-caption",
+  md: "h-8 w-8 text-caption",
+  lg: "h-16 w-16 text-large-title",
 } as const;
 
 export function Avatar({

@@ -9,7 +9,7 @@ const SAMPLE = new Date(Date.now() - 1000 * 60 * 60 * 3);
 
 export const Formats = () => {
   return (
-    <div className="flex flex-col gap-3 text-base text-label">
+    <div className="flex flex-col gap-3 text-body text-label">
       <div className="flex items-center gap-4">
         <span className="w-20 text-label-secondary">relative</span>
         <Time value={SAMPLE} />

@@ -67,7 +67,7 @@ export function SegmentedControl<T extends string>({
               }
             }}
             className={cn(
-              "h-full rounded-sm px-2.5 text-base font-medium select-none focus-visible:control-focus-ring disabled:cursor-not-allowed",
+              "h-full rounded-sm px-2.5 text-body font-medium select-none focus-visible:control-focus-ring disabled:cursor-not-allowed",
               selected
                 ? "bg-state-selected text-label control-shadow"
                 : "text-label-secondary hover:not-disabled:bg-state-hover",

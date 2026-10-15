@@ -1,3 +1,4 @@
+import { Label } from "./label";
 import { Checkbox } from "./checkbox";
 
 export const meta = {
@@ -36,8 +37,8 @@ export const DisabledIndeterminate = () => (
 );
 
 export const WithLabel = () => (
-  <label className="inline-flex items-center gap-2 label-header">
+  <Label className="inline-flex items-center gap-2">
     <Checkbox />
     Send me product updates
-  </label>
+  </Label>
 );

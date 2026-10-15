@@ -67,17 +67,17 @@ export function FileChip({
           href={href}
           target="_blank"
           rel="noreferrer"
-          className="min-w-0 flex-1 truncate text-md text-label after:absolute after:inset-0 focus-visible:control-focus-ring"
+          className="min-w-0 flex-1 truncate text-subhead text-label after:absolute after:inset-0 focus-visible:control-focus-ring"
         >
           {filename}
         </a>
       ) : (
-        <span className="min-w-0 flex-1 truncate text-md text-label">
+        <span className="min-w-0 flex-1 truncate text-subhead text-label">
           {filename}
         </span>
       )}
       {state === "ready" && sizeText ? (
-        <span className="shrink-0 text-md text-label-secondary">
+        <span className="shrink-0 text-subhead text-label-secondary">
           {sizeText}
         </span>
       ) : null}

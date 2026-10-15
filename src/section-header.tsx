@@ -7,7 +7,7 @@ export function SectionHeader({
 }) {
   return (
     <div className="flex h-8 items-center justify-between px-2">
-      <h3 className="text-md font-medium text-label-secondary">{title}</h3>
+      <h3 className="text-subhead font-medium text-label-secondary">{title}</h3>
       {action}
     </div>
   );

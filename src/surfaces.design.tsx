@@ -15,41 +15,41 @@ function ColorSwatch({ varName }: { varName: string }) {
 export const Surfaces = () => (
   <div className="flex flex-col gap-8">
     <section className="flex flex-col gap-3">
-      <h3 className="page-title text-label">Surface hierarchy</h3>
+      <h3 className="text-title text-label">Surface hierarchy</h3>
       <div className="rounded-lg bg-surface-canvas p-10">
-        <p className="mb-4 text-base text-label-secondary">
+        <p className="mb-4 text-body text-label-secondary">
           surface-canvas (outermost)
         </p>
         <div className="flex gap-6">
           <div className="w-60 shrink-0 rounded-lg bg-surface-navigation p-6">
-            <p className="mb-4 text-base text-label-secondary">
+            <p className="mb-4 text-body text-label-secondary">
               surface-navigation (sidebar)
             </p>
             <div className="flex flex-col gap-1">
-              <div className="rounded-md px-3 py-2 text-base text-label">
+              <div className="rounded-md px-3 py-2 text-body text-label">
                 default nav row
               </div>
-              <div className="rounded-md bg-state-hover px-3 py-2 text-base text-label">
+              <div className="rounded-md bg-state-hover px-3 py-2 text-body text-label">
                 state-hover
               </div>
-              <div className="rounded-md bg-state-selected px-3 py-2 text-base text-label">
+              <div className="rounded-md bg-state-selected px-3 py-2 text-body text-label">
                 state-selected
               </div>
             </div>
           </div>
           <div className="flex-1 rounded-lg border border-separator-secondary bg-surface-card p-8">
-            <p className="mb-5 text-base text-label-secondary">
+            <p className="mb-5 text-body text-label-secondary">
               surface-card (card on surface-canvas)
             </p>
             <div className="rounded-md bg-surface-card-subdued p-6">
-              <p className="mb-4 text-base text-label-secondary">
+              <p className="mb-4 text-body text-label-secondary">
                 surface-card-subdued (inset)
               </p>
               <div className="flex flex-col gap-1">
-                <div className="rounded-md px-3 py-2 text-base text-label">
+                <div className="rounded-md px-3 py-2 text-body text-label">
                   default row
                 </div>
-                <div className="rounded-md bg-state-active px-3 py-2 text-base text-label">
+                <div className="rounded-md bg-state-active px-3 py-2 text-body text-label">
                   state-active
                 </div>
               </div>

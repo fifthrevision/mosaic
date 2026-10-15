@@ -24,6 +24,7 @@
     "./file-picker": "./src/file-picker.tsx",
     "./icon-button": "./src/icon-button.tsx",
     "./input": "./src/input.tsx",
+    "./label": "./src/label.tsx",
     "./markdown": "./src/markdown.tsx",
     "./markdown-editor": "./src/markdown-editor/index.tsx",
     "./menu": "./src/menu.tsx",
@@ -35,12 +36,14 @@
     "./svg-icon": "./src/svg-icon.tsx",
     "./switch": "./src/switch.tsx",
     "./tabs": "./src/tabs.tsx",
+    "./text-stack": "./src/text-stack.tsx",
     "./textarea": "./src/textarea.tsx",
     "./time": "./src/time.tsx",
     "./toaster": "./src/toaster.tsx",
     "./tooltip": "./src/tooltip.tsx",
     "./truncated-text": "./src/truncated-text.tsx",
-    "./workspace-control": "./src/workspace-control.tsx"
+    "./workspace-control": "./src/workspace-control.tsx",
+    "./eslint-plugin": "./eslint-plugin.js"
   },
   "scripts": {
     "studio": "vite dev --config studio/vite.config.ts",
@@ -88,6 +91,7 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "eslint": "^10.12.0",
+    "eslint-plugin-better-tailwindcss": "^4.9.1",
     "prettier": "^3.9.9",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",

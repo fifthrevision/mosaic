@@ -6,14 +6,14 @@ const sizeConfig = {
   sm: {
     height: "h-6",
     iconSize: 12,
-    textSize: "text-md",
+    textSize: "text-subhead",
     padding: "px-2",
     gap: "gap-1.5",
   },
   md: {
     height: "h-8",
     iconSize: 16,
-    textSize: "text-base",
+    textSize: "text-body",
     padding: "px-3",
     gap: "gap-1.75",
   },
@@ -27,7 +27,7 @@ const variantConfig = {
   },
   primary: {
     container:
-      "border border-separator-secondary bg-surface-control text-label-intent-primary control-shadow hover:not-disabled:bg-state-control-hover active:not-disabled:control-shadow-active data-[state=open]:control-shadow-active",
+      "border border-separator-secondary bg-surface-control text-label-theme control-shadow hover:not-disabled:bg-state-control-hover active:not-disabled:control-shadow-active data-[state=open]:control-shadow-active",
     icon: "text-shape-primary",
   },
   subtle: {
@@ -36,7 +36,7 @@ const variantConfig = {
   },
   destructive: {
     container:
-      "border border-separator-secondary bg-surface-control text-label-intent-destructive control-shadow hover:not-disabled:bg-state-control-hover active:not-disabled:control-shadow-active data-[state=open]:control-shadow-active",
+      "border border-separator-secondary bg-surface-control text-label-destructive control-shadow hover:not-disabled:bg-state-control-hover active:not-disabled:control-shadow-active data-[state=open]:control-shadow-active",
     icon: "text-shape-destructive",
   },
 } as const;

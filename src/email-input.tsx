@@ -85,11 +85,13 @@ export function EmailInput({
             className={cn(
               "inline-flex h-6 max-w-full items-center gap-1.5 rounded-md border px-2",
               invalid
-                ? "border-shape-destructive bg-surface-card text-label-intent-destructive"
+                ? "border-shape-destructive bg-surface-card text-label-destructive"
                 : "border-separator-secondary bg-surface-card text-label",
             )}
           >
-            <span className="min-w-0 flex-1 truncate text-md">{email}</span>
+            <span className="min-w-0 flex-1 truncate text-subhead">
+              {email}
+            </span>
             {!disabled && (
               <button
                 type="button"
@@ -124,7 +126,7 @@ export function EmailInput({
           }
         }}
         placeholder={value.length === 0 ? placeholder : ""}
-        className="h-6 min-w-24 flex-1 bg-transparent text-base font-medium text-label placeholder:text-label-tertiary outline-none disabled:cursor-not-allowed"
+        className="h-6 min-w-24 flex-1 bg-transparent text-body font-medium text-label placeholder:text-label-tertiary outline-none disabled:cursor-not-allowed"
       />
     </div>
   );

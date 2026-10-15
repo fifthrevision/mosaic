@@ -21,7 +21,7 @@ export const IconButtonWithTitle = () => (
 
 export const Wrapped = () => (
   <Tooltip content="Wrapped tooltip content">
-    <span className="rounded border border-separator-secondary bg-surface-card px-2 py-1 text-base text-label">
+    <span className="rounded border border-separator-secondary bg-surface-card px-2 py-1 text-body text-label">
       Hover me
     </span>
   </Tooltip>

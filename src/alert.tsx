@@ -41,7 +41,7 @@ export function Alert({
       )}
     >
       <Icon size={18} className={cn("mt-0.5 shrink-0", iconClass)} />
-      <div className="flex-1 text-base text-label">{children}</div>
+      <div className="flex-1 text-body text-label">{children}</div>
       {onDismiss && (
         <IconButton
           icon={X}

@@ -2,8 +2,10 @@ import {
   TriangleAlert,
   Copy,
   Ellipsis,
-  PanelRightClose,
-  PanelRightOpen,
+  PanelLeft,
+  PanelLeftDashed,
+  PanelRight,
+  PanelRightDashed,
   Pencil,
   Plus,
   RefreshCw,
@@ -18,7 +20,8 @@ import { Menu, MenuItem, MenuSeparator } from "./menu";
 
 export const meta = {
   title: "Icon Button",
-  description: "Square icon-only button with size, variant, and toggle options",
+  description:
+    "Square icon-only button for actions. For on/off, use IconToggle.",
 };
 
 const VARIANTS = ["default", "primary", "subtle", "destructive"] as const;
@@ -94,12 +97,39 @@ function Toolbar() {
         aria-label="Wrap lines"
       />
       <IconButton
-        icon={panel ? PanelRightClose : PanelRightOpen}
+        icon={panel ? PanelRight : PanelRightDashed}
         variant="subtle"
         size="sm"
+        aria-pressed={panel}
         onClick={() => setPanel(!panel)}
-        title={panel ? "Hide panel" : "Show panel"}
-        aria-label={panel ? "Hide panel" : "Show panel"}
+        title="Panel"
+        aria-label="Panel"
+      />
+    </div>
+  );
+}
+
+function WindowBar() {
+  const [sidebar, setSidebar] = useState(true);
+  const [inspector, setInspector] = useState(false);
+  return (
+    <div className="flex w-120 items-center justify-between rounded-md bg-surface-shell px-2 py-1">
+      <IconButton
+        icon={sidebar ? PanelLeft : PanelLeftDashed}
+        variant="subtle"
+        aria-pressed={sidebar}
+        onClick={() => setSidebar(!sidebar)}
+        title="Sidebar (⌘B)"
+        aria-label="Sidebar"
+      />
+      <span className="text-body text-label-secondary">review.md</span>
+      <IconButton
+        icon={inspector ? PanelRight : PanelRightDashed}
+        variant="subtle"
+        aria-pressed={inspector}
+        onClick={() => setInspector(!inspector)}
+        title="Relationships (⌥⌘0)"
+        aria-label="Relationships"
       />
     </div>
   );
@@ -107,6 +137,12 @@ function Toolbar() {
 
 export const InContext = () => (
   <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-2">
+      <ColumnLabel>
+        panel buttons in a window bar (solid open, dashed closed)
+      </ColumnLabel>
+      <WindowBar />
+    </div>
     <div className="flex flex-col gap-2">
       <ColumnLabel>toolbar (subtle, sm, with toggles)</ColumnLabel>
       <Toolbar />

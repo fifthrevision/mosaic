@@ -35,17 +35,22 @@ something.
 
 **`IconToggle`** (`icon-toggle`): an icon-only on/off button for view state
 that nothing else on screen shows (wrap lines, line numbers, show
-whitespace). `icon`, `pressed`,
-`onPressedChange(boolean)`, `variant` `default` | `subtle`, `size` `md` |
-`sm`; always pass `aria-label`. It sets `aria-pressed`. On: the icon turns `shape-theme`;
-the default variant also gets a `separator-toggle-selected` border and a
-fill, the subtle variant keeps the hover tint as its fill, with no border. A setting in a form or
-settings list is a `Switch`; picking one of several options is a
-`SegmentedControl`.
+whitespace). `icon`, `pressed`, `onPressedChange(boolean)`, `variant`
+`default` | `subtle`, `size` `md` | `sm`; always pass `aria-label`. It sets
+`aria-pressed`. On: the icon turns `shape-theme`; the default variant also
+gets a `separator-toggle-selected` border and a fill, the subtle variant
+keeps the hover tint as its fill, with no border. Keep its icon and label
+fixed and name the thing ("Wrap lines"), not the action.
 
-Showing or hiding a panel is not a toggle: the panel itself shows the
-state. Use an `IconButton` that swaps its icon and label
-(`PanelRightOpen` "Show panel" / `PanelRightClose` "Hide panel").
+- A setting in a form or settings list is a `Switch`; picking one of several
+  options is a `SegmentedControl`.
+
+**Panel buttons** (sidebar, inspector) are layout chrome and should stay
+quiet: a subtle `IconButton`, not an `IconToggle`. Show the state in the
+glyph: the solid panel icon when open and the dashed one when closed
+(`PanelLeft` / `PanelLeftDashed`, `PanelRight` / `PanelRightDashed`). Keep
+the label fixed ("Sidebar (⌘B)") and pass `aria-pressed`. Don't use the
+chevron icons (`PanelLeftOpen` / `PanelLeftClose`); they're too busy.
 
 **`CopyButton`** (`copy-button`): a `Button` that copies `value` and shows
 "Copied" for 2s. Takes `Button` props except `icon`, `loading`, `onClick`;

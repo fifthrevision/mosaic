@@ -6,7 +6,7 @@ import { IconToggle } from "./icon-toggle";
 export const meta = {
   title: "Icon Toggle",
   description:
-    "Icon-only on/off button for view state, like wrap lines or line numbers (aria-pressed). Panels and actions use IconButton.",
+    "Icon-only on/off button (aria-pressed) for view state, like wrap lines or line numbers. Panels and actions use IconButton.",
 };
 
 const VARIANTS = ["default", "subtle"] as const;

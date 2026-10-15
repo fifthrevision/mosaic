@@ -42,6 +42,7 @@ export function FilePicker({
   accept,
   label = "Choose or drop files",
   dropLabel = "Drop files here",
+  id,
   className,
 }: {
   files: FilePickerFile[];
@@ -51,6 +52,8 @@ export function FilePicker({
   accept?: string;
   label?: string;
   dropLabel?: string;
+  /** Goes on the upload button, so a `Label htmlFor` can point at it. */
+  id?: string;
   className?: string;
 }) {
   const inputId = useId();
@@ -113,6 +116,7 @@ export function FilePicker({
         </div>
       ) : (
         <button
+          id={id}
           type="button"
           onClick={() => inputRef.current?.click()}
           className="flex h-6 w-full items-center justify-center gap-1.5 rounded-sm text-subhead font-medium text-label-secondary transition-colors hover:text-label-theme focus-visible:control-focus-ring"

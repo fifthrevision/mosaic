@@ -29,6 +29,7 @@ Above the page:
 | `floating-surface`    | Menus and choice lists (`Menu`, `Combobox`, autocomplete): `bg-surface-floating` (card color) at 95% with a 4px backdrop blur, opaque under `prefers-reduced-transparency`. Pair with `overlay-shadow` |
 | `bg-surface-floating` | The opaque floating color, for tooltips                                                      |
 | `bg-surface-elevated` | Toasts: a step lifted from canvas and cards in each mode. Text and icons on it use the normal roles |
+| `bg-surface-scrim`    | The backdrop behind a modal: translucent black, darker in dark mode. `Dialog` and `ConfirmDialog` use it |
 
 `bg-surface-bubble` is a theme-tinted chat bubble, placed on any layer.
 Controls have their own surfaces; see [Controls](#controls).

@@ -64,11 +64,13 @@ export function Button({
   const { height, iconSize, textSize, padding, gap } = sizeConfig[size];
   const { container, icon } = variantConfig[variant];
   const LeadingIcon = loading ? Loader2 : Icon;
+  const isDisabled = disabled || loading;
+  const hasDisabledTooltip = Boolean(title) && isDisabled;
 
   const button = (
     <button
       {...props}
-      disabled={disabled || loading}
+      disabled={isDisabled}
       className={cn(
         "inline-flex w-fit shrink-0 items-center justify-center overflow-hidden rounded-md font-medium focus-visible:control-focus-ring max-w-80 disabled:opacity-50 disabled:cursor-not-allowed select-none",
         height,
@@ -76,6 +78,7 @@ export function Button({
         padding,
         gap,
         container,
+        hasDisabledTooltip && "pointer-events-none",
         className,
       )}
     >
@@ -92,5 +95,21 @@ export function Button({
     </button>
   );
 
-  return title ? <Tooltip content={title}>{button}</Tooltip> : button;
+  if (!title) return button;
+  // Disabled buttons fire no pointer events, so the tooltip needs a wrapper
+  // to hover; tabIndex lets keyboard users reach the explanation too.
+  return (
+    <Tooltip content={title}>
+      {hasDisabledTooltip ? (
+        <span
+          tabIndex={0}
+          className="inline-flex w-fit cursor-not-allowed rounded-md focus-visible:control-focus-ring"
+        >
+          {button}
+        </span>
+      ) : (
+        button
+      )}
+    </Tooltip>
+  );
 }

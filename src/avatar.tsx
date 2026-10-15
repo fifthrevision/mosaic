@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 function getInitials(name: string): string {
   const parts = name.trim().split(/\s+/);
   if (parts.length >= 2)
@@ -20,13 +22,15 @@ export function Avatar({
   name?: string | null;
   size?: keyof typeof sizeClasses;
 }) {
+  const [failedSrc, setFailedSrc] = useState<string | null>(null);
   const base = `${sizeClasses[size]} rounded-full border border-separator-secondary-translucent shadow-[0px_1px_1px_var(--color-shadow-3)]`;
 
-  if (src) {
+  if (src && src !== failedSrc) {
     return (
       <img
         src={src}
         alt={name ?? "Avatar"}
+        onError={() => setFailedSrc(src)}
         className={`${base} object-cover`}
       />
     );

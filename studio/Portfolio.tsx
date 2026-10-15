@@ -19,12 +19,19 @@ export function Portfolio({
   name: string;
 }) {
   const meta = (module.meta as DesignMeta) ?? {};
-  const variants = Object.entries(module).filter(
-    ([key, val]) => key !== "meta" && typeof val === "function",
-  ) as [string, ComponentType][];
+  const order = (module.__namedExportsOrder as string[] | undefined) ?? [];
+  const position = (name: string) => {
+    const index = order.indexOf(name);
+    return index === -1 ? order.length : index;
+  };
+  const variants = (
+    Object.entries(module).filter(
+      ([key, val]) => key !== "meta" && typeof val === "function",
+    ) as [string, ComponentType][]
+  ).sort(([a], [b]) => position(a) - position(b));
 
   return (
-    <div className="mx-auto max-w-4xl p-8">
+    <div className="mx-auto max-w-6xl p-8">
       <h1 className="mb-1 text-large-title font-bold text-label">
         {meta.title ?? name}
       </h1>
@@ -39,12 +46,12 @@ export function Portfolio({
             key={exportName}
             className="rounded-xl border border-separator-primary"
           >
-            <div className="border-b border-separator-primary bg-surface-card-subdued px-4 py-2">
+            <div className="rounded-t-xl border-b border-separator-primary bg-surface-card-subdued px-4 py-2">
               <span className="font-mono text-caption text-label-secondary">
                 {labelFromExportName(exportName)}
               </span>
             </div>
-            <div className="p-6">
+            <div className="overflow-x-auto p-6">
               <DesignRenderer Component={Component} />
             </div>
           </div>

@@ -107,6 +107,7 @@ roles:
     card-subdued: [sky(3), night(0), midnight(2.5)]
     floating: [surface.card, surface.card, surface.card]
     elevated: [sky(0), night(12), midnight(15)]
+    scrim: [shadow(10), shadow(20)]
     button: [sky(6.5), night(8), midnight(10)]
     input: [sky(1.5 tint), night(2 tint), midnight(4 tint)]
     toggle: [sky(12 tint), night(12 tint), midnight(15 tint)]

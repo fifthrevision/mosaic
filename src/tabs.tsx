@@ -12,7 +12,12 @@ export function TabsList({
   return (
     <TabsPrimitive.List
       {...props}
-      className={cn("flex items-center gap-2", className)}
+      // The padding/negative margin pair keeps overflow-x from clipping
+      // control-shadow and focus rings on the triggers.
+      className={cn(
+        "-m-1 flex items-center gap-2 overflow-x-auto p-1 [scrollbar-width:none] *:shrink-0",
+        className,
+      )}
     />
   );
 }
@@ -104,7 +109,9 @@ export function TabsTrigger({
         icon={X}
         size="sm"
         variant="subtle"
-        aria-label="Close tab"
+        aria-label={
+          typeof children === "string" ? `Close ${children}` : "Close tab"
+        }
         onClick={onClose}
         className={cn("absolute", closeButton)}
       />

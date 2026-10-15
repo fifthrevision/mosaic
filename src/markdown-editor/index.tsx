@@ -96,8 +96,16 @@ export interface MarkdownEditorProps {
   repoIcon?: CompletionIcon;
   files?: FileForCompletion[];
   placeholder?: string;
+  autoFocus?: boolean;
   className?: string;
 }
+
+// Shared defaults: a fresh `[]` per render would retrigger the reconfigure
+// effects below on every parent render.
+const NO_STRINGS: string[] = [];
+const NO_MAGIC_VARIABLES: readonly MagicVariable[] = [];
+const NO_REPOS: RepoForCompletion[] = [];
+const NO_FILES: FileForCompletion[] = [];
 
 export interface MarkdownEditorHandle {
   insertText: (text: string) => void;
@@ -110,13 +118,14 @@ export const MarkdownEditor = forwardRef<
   {
     value,
     onChange,
-    variables = [],
-    magicVariables = [],
-    reservedVariables = [],
-    repos = [],
+    variables = NO_STRINGS,
+    magicVariables = NO_MAGIC_VARIABLES,
+    reservedVariables = NO_STRINGS,
+    repos = NO_REPOS,
     repoIcon,
-    files = [],
+    files = NO_FILES,
     placeholder,
+    autoFocus = false,
     className,
   },
   ref,
@@ -181,7 +190,7 @@ export const MarkdownEditor = forwardRef<
 
     const view = new EditorView({ state, parent: hostRef.current });
     viewRef.current = view;
-    view.focus();
+    if (autoFocus) view.focus();
 
     return () => {
       view.destroy();

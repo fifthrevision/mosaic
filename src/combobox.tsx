@@ -20,6 +20,8 @@ interface ComboboxProps {
   emptyMessage?: string;
   disabled?: boolean;
   loading?: boolean;
+  /** Goes on the trigger, so a `Label htmlFor` can point at it. */
+  id?: string;
   className?: string;
 }
 
@@ -32,6 +34,7 @@ export function Combobox({
   emptyMessage = "No results",
   disabled = false,
   loading = false,
+  id,
   className,
 }: ComboboxProps) {
   const [open, setOpen] = useState(false);
@@ -43,6 +46,7 @@ export function Combobox({
     <Popover.Root open={open} onOpenChange={setOpen}>
       <Popover.Trigger asChild>
         <button
+          id={id}
           type="button"
           disabled={disabled || loading}
           className={cn(

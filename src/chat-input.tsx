@@ -69,8 +69,9 @@ export function ChatInput({
     <div
       className={cn(
         "relative flex flex-col rounded-md border border-separator-secondary bg-surface-input input-shadow",
-        !disabled &&
-          "hover:border-separator-input-hover focus-within:border-separator-input-focus",
+        disabled
+          ? "opacity-50"
+          : "hover:border-separator-input-hover focus-within:border-separator-input-focus",
         className,
       )}
     >
@@ -88,7 +89,7 @@ export function ChatInput({
           ))}
         </ul>
       )}
-      <Label htmlFor={textareaId} visuallyHidden>
+      <Label htmlFor={textareaId} variant="hidden">
         Message
       </Label>
       <textarea
@@ -107,7 +108,7 @@ export function ChatInput({
         disabled={disabled}
         placeholder={placeholder}
         rows={2}
-        className="block max-h-60 w-full resize-none bg-transparent px-3 pt-2 pb-1 text-body font-medium text-label outline-none placeholder:text-label-tertiary disabled:cursor-not-allowed disabled:opacity-50"
+        className="block max-h-60 w-full resize-none bg-transparent px-3 pt-2 pb-1 text-body font-medium text-label outline-none placeholder:text-label-tertiary disabled:cursor-not-allowed"
       />
       <div className="flex items-center gap-1.5 px-2 pb-2">
         {attachments && (

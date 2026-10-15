@@ -60,28 +60,30 @@ export function Time({
   format?: TimeFormat;
   fallback?: React.ReactNode;
 }) {
+  const date =
+    value == null ? null : typeof value === "string" ? new Date(value) : value;
+  const validDate = date && !Number.isNaN(date.getTime()) ? date : null;
+
   // Initial value must match between SSR and client hydration.
   // - utc: render directly; UTC is identical on both sides
   // - local: render UTC as a fallback, then update to local on mount
   // - relative: render blank, since server "now" != client "now"
   const initial: string | null =
-    value == null
-      ? null
-      : format === "utc" || format === "local"
-        ? formatUtc(typeof value === "string" ? new Date(value) : value)
-        : null;
+    validDate && (format === "utc" || format === "local")
+      ? formatUtc(validDate)
+      : null;
 
   const [text, setText] = useState<string | null>(initial);
 
+  const time = validDate?.getTime();
   useEffect(() => {
-    if (value == null) return;
-    const date = typeof value === "string" ? new Date(value) : value;
-    if (format === "relative") setText(formatRelative(date));
-    else if (format === "local") setText(formatLocal(date));
-  }, [value, format]);
+    if (time === undefined) return;
+    const parsed = new Date(time);
+    if (format === "relative") setText(formatRelative(parsed));
+    else if (format === "local") setText(formatLocal(parsed));
+  }, [time, format]);
 
-  if (value == null) return <>{fallback}</>;
+  if (!validDate) return <>{fallback}</>;
 
-  const iso = typeof value === "string" ? value : value.toISOString();
-  return <time dateTime={iso}>{text ?? " "}</time>;
+  return <time dateTime={validDate.toISOString()}>{text ?? " "}</time>;
 }

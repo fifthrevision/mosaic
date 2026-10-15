@@ -17,6 +17,7 @@ export function WorkspaceControl({
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <button
+      type="button"
       {...props}
       className={cn(
         "inline-flex h-8 items-center gap-2.5 rounded-md px-2 text-body font-medium text-label select-none hover:bg-state-hover active:bg-state-active data-[state=open]:bg-state-active",
@@ -33,7 +34,7 @@ export function WorkspaceControl({
         <span className="truncate-fade pr-6">{name}</span>
         <ChevronDown
           size={16}
-          className="absolute right-0 text-label-secondary"
+          className="absolute right-0 text-shape-secondary"
         />
       </span>
     </button>

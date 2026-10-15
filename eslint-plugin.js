@@ -106,7 +106,7 @@ const formLabel = {
     type: "problem",
     messages: {
       bareLabel:
-        "Use `Label` from @fifthrevision/mosaic/label instead of a bare <label> (`visuallyHidden` for screen-reader-only labels).",
+        "Use `Label` from @fifthrevision/mosaic/label instead of a bare <label> (`variant: hidden` for screen-reader-only labels).",
     },
   },
   create(context) {

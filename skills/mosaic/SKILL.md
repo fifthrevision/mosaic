@@ -89,7 +89,8 @@ want: a small heading can still be an `h2`.
 
 `<label>` is the one element with a component. Use `Label` from
 `@fifthrevision/mosaic/label`, which takes every `<label>` prop plus
-`visuallyHidden` for screen-reader-only labels **(lint)**.
+`variant`: `field` (default, above an input), `inline` (body text beside a
+checkbox, radio, or switch), or `hidden` (screen readers only) **(lint)**.
 
 ## Text color
 

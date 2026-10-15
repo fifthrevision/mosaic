@@ -20,13 +20,18 @@ components passed as `icon={Trash2}`, not elements.
 - `subtle` has no chrome: toolbars, `SectionHeader` actions, low-emphasis
   actions.
 - `destructive` for delete, remove, disconnect.
-- `title` shows a Mosaic `Tooltip`, not the native one.
+- `title` shows a Mosaic `Tooltip`, not the native one. It works on a
+  disabled or loading button too, so use it to say why a button is disabled.
 - It doesn't set `type`, so inside a `<form>` it submits unless you pass
   `type="button"`.
 
 **`IconButton`** (`icon-button`): icon-only button. `icon` (required),
 `variant` `default` | `primary` | `subtle`, `size` `md` | `sm`. Always pass
-`aria-label`; add `title` for a hover tooltip.
+`aria-label`; add `title` for a hover tooltip. `pressed` makes it a toggle
+(sets `aria-pressed`): when on, the icon turns `shape-primary`, the border
+turns `separator-toggle-selected` (like a checked radio), and the button
+keeps a fill. Pass a boolean for toggles and leave it out otherwise; toggle
+the value in `onClick`.
 
 **`CopyButton`** (`copy-button`): a `Button` that copies `value` and shows
 "Copied" for 2s. Takes `Button` props except `icon`, `loading`, `onClick`;
@@ -42,13 +47,13 @@ Pair each with a `Label` (`htmlFor`), stacked with `gap`.
 | `Input`            | `input`             | Native `<input>` props, plus `icon` for a leading icon. Full width                |
 | `Textarea`         | `textarea`          | Native `<textarea>` props. Not resizable; set `rows`                              |
 | `Select`           | `select`            | Native `<select>` with `<option>` children                                        |
-| `Combobox`         | `combobox`          | `options` `{ value, label, description?, disabled? }[]`, `value`, `onValueChange`, `loading` |
+| `Combobox`         | `combobox`          | `options` `{ value, label, description?, disabled? }[]`, `value`, `onValueChange`, `loading`, `id` (for `Label htmlFor`) |
 | `EmailInput`       | `email-input`       | `value: string[]`, `onChange(emails)`. See below                                  |
 | `Checkbox`         | `checkbox`          | `checked` (`true` / `false` / `"indeterminate"`), `onCheckedChange(boolean)`      |
 | `Radio`            | `radio`             | Native `<input type="radio">`; group by `name`, listen with `onChange`            |
 | `Switch`           | `switch`            | `checked`, `onCheckedChange(boolean)`                                             |
 | `SegmentedControl` | `segmented-control` | `options` `{ value, label }[]`, `value`, `onChange(value)`, `aria-label`          |
-| `FilePicker`       | `file-picker`       | Click-or-drop zone. `files`, `onAddFiles(File[])`, `onRemove(id)`, `accept`       |
+| `FilePicker`       | `file-picker`       | Click-or-drop zone. `files`, `onAddFiles(File[])`, `onRemove(id)`, `accept`, `id` (for `Label htmlFor`) |
 | `FileChip`         | `file-chip`         | One file: `filename`, `sizeText`, `state` (`ready` / `loading` / `error`), `href`, `onRemove` |
 | `ChatInput`        | `chat-input`        | Message composer. See below                                                       |
 
@@ -177,7 +182,7 @@ message that should stay on the page, use `Alert`.
 | `EmptyState`        | `empty-state`        | "Nothing here" text: `variant` `card` (default) / `plain`                   |
 | `FadingScrollArea`  | `fading-scroll-area` | Scroll region with edge fades, optional sticky `footer`                     |
 | `TruncatedText`     | `truncated-text`     | Clamp to `maxHeight` (px) with a bottom fade                                |
-| `Avatar`            | `avatar`             | `src`, `name` (initials fallback), `size` `sm` / `md` / `lg`                |
+| `Avatar`            | `avatar`             | `src`, `name` (initials when there's no `src` or it fails to load), `size` `sm` / `md` / `lg` |
 | `WorkspaceControl`  | `workspace-control`  | Sidebar workspace switcher; use as a `Menu` trigger                         |
 
 - `SectionHeader` renders a small secondary `h3`. It labels a group; it
@@ -213,7 +218,8 @@ import { tabClassName, tabIconClassName } from "@fifthrevision/mosaic/tabs";
 ## Content
 
 - **`Time`** (`time`): `value` (`Date`, ISO string, or `null`), `format`
-  `relative` (default) / `local` / `utc`, `fallback` (default "—"). Use it
+  `relative` (default) / `local` / `utc`, `fallback` (default "—", also
+  shown for an invalid date). Use it
   instead of formatting dates yourself; it's hydration-safe (relative time
   renders empty on the server). `formatUtc(date)` is exported for strings.
 - **`Markdown`** (`markdown`): `text` rendered as GFM with Mosaic styles.
@@ -221,7 +227,8 @@ import { tabClassName, tabIconClassName } from "@fifthrevision/mosaic/tabs";
 - **`MarkdownEditor`** (`markdown-editor`): CodeMirror. `value`,
   `onChange`, `placeholder`; autocomplete for `variables` and
   `magicVariables` (`{{`), `repos` and `files` (`@`); `reservedVariables`
-  marks those `{{names}}` as errors. A ref exposes `insertText(text)`. It
+  marks those `{{names}}` as errors. `autoFocus` focuses it on mount (off by
+  default; turn it on in dialogs). A ref exposes `insertText(text)`. It
   fills its container and has no chrome: wrap it in an input well (see
   [tokens.md](tokens.md#controls)). Add `cm-centered-content` to center the text in a
   40rem column.

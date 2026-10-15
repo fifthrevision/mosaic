@@ -19,7 +19,7 @@ export function Menu({
         <DropdownMenu.Content
           align={align}
           sideOffset={4}
-          className="z-50 min-w-50 rounded-md border border-separator-secondary floating-surface p-1 overlay-shadow origin-top-right data-[state=open]:animate-[menu-in_150ms_ease-out] data-[state=closed]:animate-[menu-out_100ms_ease-in]"
+          className="z-50 min-w-50 rounded-md border border-separator-secondary floating-surface p-1 overlay-shadow origin-(--radix-dropdown-menu-content-transform-origin) data-[state=open]:animate-[menu-in_150ms_ease-out] data-[state=closed]:animate-[menu-out_100ms_ease-in]"
         >
           {children}
         </DropdownMenu.Content>

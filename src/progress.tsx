@@ -22,7 +22,7 @@ export function Progress({
       {...props}
     >
       <div
-        className="h-full rounded-full bg-shape-primary"
+        className="h-full rounded-full bg-shape-theme"
         style={{ width: `${clamped * 100}%` }}
       />
     </div>

@@ -15,7 +15,7 @@ export function Toaster({ theme = "system" }: { theme?: Theme }) {
           description: "text-body! text-label-secondary!",
           closeButton:
             "border-separator-primary! bg-surface-elevated! text-label-secondary! hover:text-label!",
-          success: "[&_[data-icon]]:text-shape-primary!",
+          success: "[&_[data-icon]]:text-shape-theme!",
           error: "[&_[data-icon]]:text-shape-destructive!",
         },
       }}

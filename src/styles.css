@@ -191,7 +191,7 @@
 }
 
 @utility control-focus-ring {
-  outline: 1px solid var(--color-shape-primary);
+  outline: 1px solid var(--color-shape-theme);
   outline-offset: 1px;
 }
 

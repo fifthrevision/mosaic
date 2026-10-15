@@ -23,6 +23,7 @@
     "./file-chip": "./src/file-chip.tsx",
     "./file-picker": "./src/file-picker.tsx",
     "./icon-button": "./src/icon-button.tsx",
+    "./icon-toggle": "./src/icon-toggle.tsx",
     "./input": "./src/input.tsx",
     "./label": "./src/label.tsx",
     "./markdown": "./src/markdown.tsx",

@@ -57,7 +57,7 @@ export function Switch({
         className={cn(
           "relative inline-flex h-5 w-10.5 shrink-0 rounded-xl border input-shadow transition-colors duration-150 ease-out select-none",
           "focus-visible:control-focus-ring disabled:cursor-not-allowed",
-          isChecked ? "bg-shape-primary" : "bg-surface-toggle",
+          isChecked ? "bg-shape-theme" : "bg-surface-toggle",
           disabled
             ? "border-separator-secondary opacity-50"
             : "border-separator-primary hover:border-separator-toggle-hover",

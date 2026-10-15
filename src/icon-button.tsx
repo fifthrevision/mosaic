@@ -11,26 +11,27 @@ const variantConfig = {
   default: {
     container:
       "border border-separator-secondary bg-surface-button control-shadow hover:not-disabled:bg-state-button-hover active:not-disabled:control-shadow-active data-[state=open]:control-shadow-active data-[state=open]:bg-state-button-hover",
-    icon: "text-shape-secondary",
+    icon: "text-shape-primary",
   },
   primary: {
     container:
       "border border-separator-secondary bg-surface-button control-shadow hover:not-disabled:bg-state-button-hover active:not-disabled:control-shadow-active data-[state=open]:control-shadow-active data-[state=open]:bg-state-button-hover",
-    icon: "text-shape-primary",
+    icon: "text-shape-theme",
   },
   subtle: {
     container:
       "hover:not-disabled:bg-state-hover data-[state=open]:bg-state-hover",
-    icon: "text-shape-secondary",
+    icon: "text-shape-primary",
+  },
+  destructive: {
+    container:
+      "border border-separator-secondary bg-surface-button control-shadow hover:not-disabled:bg-state-button-hover active:not-disabled:control-shadow-active data-[state=open]:control-shadow-active data-[state=open]:bg-state-button-hover",
+    icon: "text-shape-destructive",
   },
 } as const;
 
-const pressedContainerClass = {
-  default:
-    "border-separator-toggle-selected bg-state-button-hover control-shadow-active",
-  primary:
-    "border-separator-toggle-selected bg-state-button-hover control-shadow-active",
-  subtle: "border border-separator-toggle-selected bg-state-hover",
+const toneIconClass = {
+  warning: "text-shape-warning",
 } as const;
 
 export function IconButton({
@@ -39,14 +40,14 @@ export function IconButton({
   variant = "default",
   className,
   title,
-  pressed,
+  tone,
   ...props
 }: {
   icon: LucideIcon;
   size?: keyof typeof sizeConfig;
   variant?: keyof typeof variantConfig;
-  /** Makes it a toggle button; omit for a plain button. */
-  pressed?: boolean;
+  /** Colors the icon to signal a state, e.g. a clickable "needs a look" mark. */
+  tone?: keyof typeof toneIconClass;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
   const { size: sizeClass, iconSize } = sizeConfig[size];
   const { container, icon } = variantConfig[variant];
@@ -55,17 +56,15 @@ export function IconButton({
   const button = (
     <button
       {...props}
-      aria-pressed={pressed}
       className={cn(
         "flex shrink-0 items-center justify-center rounded-md select-none focus-visible:control-focus-ring disabled:cursor-not-allowed disabled:opacity-50",
         sizeClass,
         container,
-        pressed && pressedContainerClass[variant],
         hasDisabledTooltip && "pointer-events-none",
         className,
       )}
     >
-      <Icon size={iconSize} className={pressed ? "text-shape-primary" : icon} />
+      <Icon size={iconSize} className={tone ? toneIconClass[tone] : icon} />
     </button>
   );
 

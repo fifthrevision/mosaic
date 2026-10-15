@@ -5,7 +5,7 @@ import { IconButton } from "./icon-button";
 const VARIANTS = {
   success: {
     Icon: CircleCheck,
-    iconClass: "text-shape-primary",
+    iconClass: "text-shape-theme",
     role: "status" as const,
   },
   error: {

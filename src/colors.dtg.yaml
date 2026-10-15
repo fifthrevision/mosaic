@@ -142,11 +142,13 @@ roles:
     primary: [theme(600), theme(400)]
 
   shape:
-    primary: [theme(600), theme(400)]
+    primary: [night(20), sky(20)]
     secondary: [night(40), sky(40)]
+    theme: [theme(600), theme(400)]
     tertiary: [night(60), sky(60)]
     destructive: [ruby(600), ruby(400)]
     constructive: [emerald(600), emerald(400)]
+    warning: [yellow(600), yellow(400)]
 
   separator:
     primary: [sky(15), night(16), midnight(16)]

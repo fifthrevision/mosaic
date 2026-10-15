@@ -21,7 +21,7 @@ const HARDCODED_FILL_SVG = `<svg width="100%" height="100%" viewBox="0 0 24 24">
 const COLORS = [
   "text-shape-secondary",
   "text-shape-tertiary",
-  "text-shape-primary",
+  "text-shape-theme",
   "text-shape-destructive",
   "text-shape-constructive",
 ] as const;
@@ -48,7 +48,7 @@ export const Sizes = () => (
         key={size}
         svg={SPARK_SVG}
         size={size}
-        className="text-shape-primary"
+        className="text-shape-theme"
       />
     ))}
   </div>
@@ -73,7 +73,7 @@ export const EdgeCases = () => (
       <SVGIcon
         svg={HARDCODED_FILL_SVG}
         size={24}
-        className="text-shape-primary"
+        className="text-shape-theme"
       />
     </Example>
   </div>
@@ -103,7 +103,7 @@ export const InContext = () => (
     </Example>
     <Example label="model badge in an agent row">
       <div className="flex w-120 items-center gap-3 rounded-md border border-separator-secondary bg-surface-card px-4 py-3 card-shadow">
-        <SVGIcon svg={SPARK_SVG} size={20} className="text-shape-primary" />
+        <SVGIcon svg={SPARK_SVG} size={20} className="text-shape-theme" />
         <div className="flex flex-1 flex-col">
           <span className="text-body font-medium text-label">
             Support Triage

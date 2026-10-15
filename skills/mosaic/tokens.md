@@ -67,7 +67,7 @@ tuned without moving the others. Use a family's tokens together.
 | --- | --- | --- | --- | --- |
 | Button (raised) | `bg-surface-button` | `bg-state-button-hover`, also the menu-open color | `control-shadow`, `active:control-shadow-active` | `Button`, `IconButton` |
 | Input (sunken well) | `bg-surface-input` | `border-separator-input-hover` | `focus:border-separator-input-focus`, `input-shadow` | `Input`, `Textarea`, `Select`, `Combobox`, `EmailInput`, `ChatInput`, `FilePicker`, `SegmentedControl` track |
-| Toggle | `bg-surface-toggle` | `border-separator-toggle-hover` | Checked fill `bg-shape-primary`; `border-separator-toggle-selected` for a checked radio | `Checkbox`, `Radio`, `Switch` track |
+| Toggle | `bg-surface-toggle` | `border-separator-toggle-hover` | Checked fill `bg-shape-theme`; `border-separator-toggle-selected` for a checked radio | `Checkbox`, `Radio`, `Switch` track |
 
 - `bg-surface-track` is the track behind a fill (`Progress`). It follows
   `surface-toggle` but is its own name, so a track can diverge later.
@@ -98,13 +98,15 @@ Icons and glyphs take `text-shape-*`, not `text-label-*`:
 
 | Token                     | Use                                                     |
 | ------------------------- | ------------------------------------------------------- |
-| `text-shape-secondary`    | Default icon color                                      |
+| `text-shape-primary`      | Strong neutral: icons on actions (`Button`, `IconButton`, `IconToggle`), navigation |
+| `text-shape-secondary`    | Default icon color: icons in inputs, rows, menus, and other content |
 | `text-shape-tertiary`     | De-emphasized icons                                     |
-| `text-shape-primary`      | Accent: primary actions, checked, success confirmations |
+| `text-shape-theme`        | The theme accent: primary actions, checked, success confirmations |
 | `text-shape-destructive`  | Destructive actions and errors                          |
 | `text-shape-constructive` | Positive status                                         |
+| `text-shape-warning`      | Needs a look: something changed that the user may want to act on |
 
-They also work as fills: `bg-shape-primary` is the switch's on track.
+They also work as fills: `bg-shape-theme` is the switch's on track.
 
 "Success" means confirming something the user just did (saved, connected,
 uploaded), so it takes the theme color: `Alert variant="success"` and

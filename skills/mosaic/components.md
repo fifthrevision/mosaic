@@ -26,12 +26,26 @@ components passed as `icon={Trash2}`, not elements.
   `type="button"`.
 
 **`IconButton`** (`icon-button`): icon-only button. `icon` (required),
-`variant` `default` | `primary` | `subtle`, `size` `md` | `sm`. Always pass
-`aria-label`; add `title` for a hover tooltip. `pressed` makes it a toggle
-(sets `aria-pressed`): when on, the icon turns `shape-primary`, the border
-turns `separator-toggle-selected` (like a checked radio), and the button
-keeps a fill. Pass a boolean for toggles and leave it out otherwise; toggle
-the value in `onClick`.
+`variant` `default` | `primary` | `subtle` | `destructive` (icon-only delete
+or remove, like `Button`'s), `size` `md` | `sm`. Always pass `aria-label`;
+add `title` for a hover tooltip. `tone="warning"` colors the icon
+`shape-warning` for a clickable status mark ("something shifted, take a
+look"). It's not `destructive`: that would mean the click destroys
+something.
+
+**`IconToggle`** (`icon-toggle`): an icon-only on/off button for view state
+that nothing else on screen shows (wrap lines, line numbers, show
+whitespace). `icon`, `pressed`,
+`onPressedChange(boolean)`, `variant` `default` | `subtle`, `size` `md` |
+`sm`; always pass `aria-label`. It sets `aria-pressed`. On: the icon turns `shape-theme`;
+the default variant also gets a `separator-toggle-selected` border and a
+fill, the subtle variant keeps the hover tint as its fill, with no border. A setting in a form or
+settings list is a `Switch`; picking one of several options is a
+`SegmentedControl`.
+
+Showing or hiding a panel is not a toggle: the panel itself shows the
+state. Use an `IconButton` that swaps its icon and label
+(`PanelRightOpen` "Show panel" / `PanelRightClose` "Hide panel").
 
 **`CopyButton`** (`copy-button`): a `Button` that copies `value` and shows
 "Copied" for 2s. Takes `Button` props except `icon`, `loading`, `onClick`;

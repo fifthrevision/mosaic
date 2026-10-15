@@ -9,6 +9,7 @@
   --color-light-6_5: #eaeef1;
   --color-light-8: #e6ebee;
   --color-light-15: #d5dbdf;
+  --color-light-20: #c8d0d4;
   --color-light-40: #96a2a9;
   --color-light-60: #64757e;
   /* night (tint) */
@@ -19,6 +20,7 @@
   --color-dark-8: #272a31;
   --color-dark-12: #30333a;
   --color-dark-16: #3a3d43;
+  --color-dark-20: #43464c;
   --color-dark-30: #5a5d62;
   --color-dark-40: #717479;
   --color-dark-60: #9ea1a5;
@@ -120,11 +122,13 @@
   --label-link: var(--color-theme-600);
   --label-destructive: var(--color-ruby-700);
   --theme-primary: var(--color-theme-600);
-  --shape-primary: var(--color-theme-600);
+  --shape-primary: var(--color-dark-20);
   --shape-secondary: var(--color-dark-40);
+  --shape-theme: var(--color-theme-600);
   --shape-tertiary: var(--color-dark-60);
   --shape-destructive: var(--color-ruby-600);
   --shape-constructive: var(--color-emerald-600);
+  --shape-warning: var(--color-yellow-600);
   --separator-primary: var(--color-light-15);
   --separator-primary-translucent: rgba(0, 26, 40, 0.15);
   --separator-secondary: var(--color-light-8);
@@ -170,11 +174,13 @@
   --label-link: var(--color-theme-400);
   --label-destructive: var(--color-ruby-150);
   --theme-primary: var(--color-theme-400);
-  --shape-primary: var(--color-theme-400);
+  --shape-primary: var(--color-light-20);
   --shape-secondary: var(--color-light-40);
+  --shape-theme: var(--color-theme-400);
   --shape-tertiary: var(--color-light-60);
   --shape-destructive: var(--color-ruby-400);
   --shape-constructive: var(--color-emerald-400);
+  --shape-warning: var(--color-yellow-400);
   --separator-primary: var(--color-dark-16);
   --separator-primary-translucent: rgba(250, 253, 255, 0.16);
   --separator-secondary: var(--color-dark-8);
@@ -244,9 +250,11 @@
   --color-theme-primary: var(--theme-primary);
   --color-shape-primary: var(--shape-primary);
   --color-shape-secondary: var(--shape-secondary);
+  --color-shape-theme: var(--shape-theme);
   --color-shape-tertiary: var(--shape-tertiary);
   --color-shape-destructive: var(--shape-destructive);
   --color-shape-constructive: var(--shape-constructive);
+  --color-shape-warning: var(--shape-warning);
   --color-separator-primary: var(--separator-primary);
   --color-separator-primary-translucent: var(--separator-primary-translucent);
   --color-separator-secondary: var(--separator-secondary);

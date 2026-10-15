@@ -1,7 +1,9 @@
 import {
+  TriangleAlert,
   Copy,
   Ellipsis,
-  PanelRight,
+  PanelRightClose,
+  PanelRightOpen,
   Pencil,
   Plus,
   RefreshCw,
@@ -11,6 +13,7 @@ import {
 import { useState } from "react";
 import { ColumnLabel } from "../studio/DesignHelpers";
 import { IconButton } from "./icon-button";
+import { IconToggle } from "./icon-toggle";
 import { Menu, MenuItem, MenuSeparator } from "./menu";
 
 export const meta = {
@@ -18,19 +21,12 @@ export const meta = {
   description: "Square icon-only button with size, variant, and toggle options",
 };
 
-const VARIANTS = ["default", "primary", "subtle"] as const;
+const VARIANTS = ["default", "primary", "subtle", "destructive"] as const;
 
-const COLUMNS = [
-  "md",
-  "sm",
-  "disabled",
-  "menu open",
-  "toggle off",
-  "toggle on",
-] as const;
+const COLUMNS = ["md", "sm", "disabled", "menu open", "warning tone"] as const;
 
 export const States = () => (
-  <div className="grid grid-cols-[6rem_repeat(6,5rem)] items-center gap-y-4">
+  <div className="grid grid-cols-[6rem_repeat(5,5rem)] items-center gap-y-4">
     <span />
     {COLUMNS.map((column) => (
       <ColumnLabel key={column}>{column}</ColumnLabel>
@@ -58,70 +54,12 @@ export const States = () => (
           aria-label="More"
         />
         <IconButton
-          icon={WrapText}
+          icon={TriangleAlert}
           variant={variant}
-          pressed={false}
-          aria-label="Wrap lines"
-        />
-        <IconButton
-          icon={WrapText}
-          variant={variant}
-          pressed
-          aria-label="Wrap lines"
+          tone="warning"
+          aria-label="Needs a look"
         />
       </div>
-    ))}
-  </div>
-);
-
-function ToggleRow({ variant }: { variant: (typeof VARIANTS)[number] }) {
-  const [panel, setPanel] = useState(true);
-  const [wrap, setWrap] = useState(false);
-  return (
-    <div className="flex items-center gap-2">
-      <span className="w-24">
-        <ColumnLabel>{variant}</ColumnLabel>
-      </span>
-      <IconButton
-        icon={PanelRight}
-        variant={variant}
-        pressed={panel}
-        onClick={() => setPanel(!panel)}
-        title="Show panel"
-        aria-label="Show panel"
-      />
-      <IconButton
-        icon={WrapText}
-        variant={variant}
-        pressed={wrap}
-        onClick={() => setWrap(!wrap)}
-        title="Wrap lines"
-        aria-label="Wrap lines"
-      />
-      <IconButton
-        icon={PanelRight}
-        variant={variant}
-        size="sm"
-        pressed={panel}
-        onClick={() => setPanel(!panel)}
-        aria-label="Show panel"
-      />
-      <IconButton
-        icon={WrapText}
-        variant={variant}
-        size="sm"
-        pressed={wrap}
-        onClick={() => setWrap(!wrap)}
-        aria-label="Wrap lines"
-      />
-    </div>
-  );
-}
-
-export const Toggle = () => (
-  <div className="flex flex-col gap-4">
-    {VARIANTS.map((variant) => (
-      <ToggleRow key={variant} variant={variant} />
     ))}
   </div>
 );
@@ -146,23 +84,22 @@ function Toolbar() {
         aria-label="Refresh"
       />
       <div className="mx-1 h-4 w-px bg-separator-secondary" />
-      <IconButton
+      <IconToggle
         icon={WrapText}
         variant="subtle"
         size="sm"
         pressed={wrap}
-        onClick={() => setWrap(!wrap)}
+        onPressedChange={setWrap}
         title="Wrap lines"
         aria-label="Wrap lines"
       />
       <IconButton
-        icon={PanelRight}
+        icon={panel ? PanelRightClose : PanelRightOpen}
         variant="subtle"
         size="sm"
-        pressed={panel}
         onClick={() => setPanel(!panel)}
-        title="Show panel"
-        aria-label="Show panel"
+        title={panel ? "Hide panel" : "Show panel"}
+        aria-label={panel ? "Hide panel" : "Show panel"}
       />
     </div>
   );

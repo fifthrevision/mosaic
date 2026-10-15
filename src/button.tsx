@@ -23,17 +23,17 @@ const variantConfig = {
   default: {
     container:
       "border border-separator-secondary bg-surface-button text-label control-shadow hover:not-disabled:bg-state-button-hover active:not-disabled:control-shadow-active data-[state=open]:control-shadow-active data-[state=open]:bg-state-button-hover",
-    icon: "text-shape-secondary",
+    icon: "text-shape-primary",
   },
   primary: {
     container:
       "border border-separator-secondary bg-surface-button text-label-theme control-shadow hover:not-disabled:bg-state-button-hover active:not-disabled:control-shadow-active data-[state=open]:control-shadow-active data-[state=open]:bg-state-button-hover",
-    icon: "text-shape-primary",
+    icon: "text-shape-theme",
   },
   subtle: {
     container:
       "text-label hover:not-disabled:bg-state-hover data-[state=open]:bg-state-hover",
-    icon: "text-shape-secondary",
+    icon: "text-shape-primary",
   },
   destructive: {
     container:

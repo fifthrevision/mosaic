@@ -4,7 +4,7 @@ import mosaic from "./eslint-plugin.js";
 
 export default [
   {
-    ignores: ["node_modules/**"],
+    ignores: ["node_modules/**", "studio/dist/**"],
   },
   ...tseslint.configs.recommended,
   mosaic.configs.recommended,

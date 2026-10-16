@@ -12,7 +12,11 @@ const metaModules = import.meta.glob<{
   title?: string;
   group?: string;
   order?: number;
-}>("../src/**/*.design.tsx", { eager: true, import: "meta" });
+}>("../src/**/*.design.tsx", {
+  eager: true,
+  query: "?meta",
+  import: "default",
+});
 
 const DEFAULT_GROUP = "Components";
 const GROUP_ORDER = ["Foundations", "Typography", DEFAULT_GROUP];
@@ -58,25 +62,26 @@ function groupEntries(entries: DesignEntry[]): [string, DesignEntry[]][] {
   );
 }
 
+const COLORS_PATH = "colors";
+
 function groupRank(group: string) {
   const index = GROUP_ORDER.indexOf(group);
   return index === -1 ? GROUP_ORDER.length : index;
 }
 
 function getPath() {
-  return window.location.pathname.replace(/^\//, "");
+  return window.location.hash.replace(/^#\/?/, "");
 }
 
 function usePath() {
   return useSyncExternalStore((cb) => {
-    window.addEventListener("popstate", cb);
-    return () => window.removeEventListener("popstate", cb);
+    window.addEventListener("hashchange", cb);
+    return () => window.removeEventListener("hashchange", cb);
   }, getPath);
 }
 
 function navigate(path: string) {
-  window.history.pushState(null, "", `/${path}`);
-  window.dispatchEvent(new PopStateEvent("popstate"));
+  window.location.hash = `/${path}`;
 }
 
 const STUDIO_THEMES = ["light", "dark", "black"] as const;
@@ -111,6 +116,16 @@ function Sidebar({
         Studio
       </h1>
       <nav className="-mx-4 min-h-0 flex-1 space-y-4 overflow-y-auto px-4">
+        {import.meta.env.VITE_DTG_URL && (
+          <button
+            onClick={() => navigate(COLORS_PATH)}
+            className={`w-full rounded-xl px-3 py-1.5 text-left text-body text-label hover:bg-state-hover ${
+              activePath === COLORS_PATH ? "bg-state-selected" : ""
+            }`}
+          >
+            Colors
+          </button>
+        )}
         {groupEntries(entries).map(([group, members]) => (
           <section key={group}>
             <h2 className="mb-1 px-3 text-caption font-medium text-label-tertiary">
@@ -167,6 +182,16 @@ function DesignPage({ entry }: { entry: DesignEntry }) {
   return <Portfolio module={mod} name={entry.name} />;
 }
 
+function ColorsPage() {
+  return (
+    <iframe
+      title="Colors"
+      src={import.meta.env.VITE_DTG_URL}
+      className="block h-screen w-full border-0"
+    />
+  );
+}
+
 export function StudioApp() {
   const path = usePath();
   const entries = parseEntries();
@@ -183,7 +208,10 @@ export function StudioApp() {
                 Select a component from the sidebar.
               </div>
             )}
-            {path && !entry && (
+            {path === COLORS_PATH && import.meta.env.VITE_DTG_URL && (
+              <ColorsPage />
+            )}
+            {path && path !== COLORS_PATH && !entry && (
               <div className="p-8 text-label-secondary">Not found.</div>
             )}
             {entry && <DesignPage entry={entry} />}

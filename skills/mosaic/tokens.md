@@ -178,5 +178,5 @@ fields show focus with `separator-input-focus` on the border instead.
 
 ### Widths
 
-`w-dialog-small` (280px), `w-dialog-medium` (560px), `w-dialog-large`
-(840px). `Dialog`'s `size` prop applies them.
+`w-dialog-small` (440px), `w-dialog-medium` (640px), `w-dialog-large`
+(960px). `Dialog`'s `size` prop applies them.

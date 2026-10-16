@@ -56,7 +56,7 @@ export function FadingScrollArea({
   const { ref, canScrollUp, canScrollDown } = useScrollEdges(pinToBottom);
 
   return (
-    <div className={cn("relative", className)}>
+    <div className={cn("relative flex flex-col", className)}>
       <div
         className={cn(
           "pointer-events-none absolute inset-x-0 top-0 z-10 h-8 transition-opacity",
@@ -67,7 +67,7 @@ export function FadingScrollArea({
       />
       <div
         ref={ref}
-        className="h-full max-h-[inherit] overflow-auto overscroll-none"
+        className="h-full max-h-[inherit] min-h-0 flex-auto overflow-auto overscroll-none"
       >
         <div className="flex flex-col">
           {children}

@@ -107,7 +107,7 @@ export function ConfirmProvider({ children }: { children: React.ReactNode }) {
       >
         <AlertDialog.Portal>
           <AlertDialog.Overlay className="fixed inset-0 z-50 bg-surface-scrim backdrop-blur-sm data-[state=open]:animate-[dialog-overlay-in_150ms_ease-out] data-[state=closed]:animate-[dialog-overlay-out_100ms_ease-in]" />
-          <AlertDialog.Content className="fixed top-1/2 left-1/2 z-50 w-dialog-medium max-w-[calc(100vw-32px)] -translate-1/2 rounded-xl border border-separator-secondary bg-surface-canvas p-6 dialog-shadow focus:outline-none data-[state=open]:animate-[dialog-content-in_150ms_ease-out] data-[state=closed]:animate-[dialog-content-out_100ms_ease-in]">
+          <AlertDialog.Content className="fixed top-1/2 left-1/2 z-50 w-dialog-small max-w-[calc(100vw-32px)] -translate-1/2 rounded-xl border border-separator-secondary bg-surface-canvas p-6 dialog-shadow focus:outline-none data-[state=open]:animate-[dialog-content-in_150ms_ease-out] data-[state=closed]:animate-[dialog-content-out_100ms_ease-in]">
             <AlertDialog.Title className="text-title text-label">
               {visibleOptions?.title}
             </AlertDialog.Title>

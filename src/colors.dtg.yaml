@@ -30,6 +30,18 @@ modes:
   black:
     extends: dark
 
+palette:
+  white: "#ffffff"
+  black: "#000000"
+  # The hues the chromatic scales are built from, judged together. Inputs:
+  # the scales publish them as their 500 stops, so they don't emit again.
+  hues:
+    emit: false
+    theme: "#03a2e8"
+    yellow: "#fead3c"
+    emerald: "#0e9d51"
+    ruby: "#c50101"
+
 systems:
   # Neutral ramps: tint composited over base; a step is the tint's alpha %.
   # No declared steps — the steps that exist are the ones refs demand.
@@ -53,20 +65,24 @@ systems:
       base: "#010206"
       tint: "#fafdff"
   # Chromatic scales: OKLCH blend from the 500 base toward the sky base
-  # (50–400) and the sky tint (600–950). Declared stops: these are a public
-  # palette, usable directly as utilities, not just via refs.
+  # (50–400) and the sky tint (600–950). Every stop is listed under emit:
+  # these are public utilities, not just there for refs.
   theme:
     algorithm: scale
-    params: { base: "#03a2e8" }
+    params: { base: hues.theme }
+    emit: [50, 100, 150, 200, 300, 400, 500, 600, 700, 800, 850, 900, 950]
   yellow:
     algorithm: scale
-    params: { base: "#fead3c" }
+    params: { base: hues.yellow }
+    emit: [50, 100, 150, 200, 300, 400, 500, 600, 700, 800, 850, 900, 950]
   emerald:
     algorithm: scale
-    params: { base: "#0e9d51" }
+    params: { base: hues.emerald }
+    emit: [50, 100, 150, 200, 300, 400, 500, 600, 700, 800, 850, 900, 950]
   ruby:
     algorithm: scale
-    params: { base: "#c50101" }
+    params: { base: hues.ruby }
+    emit: [50, 100, 150, 200, 300, 400, 500, 600, 700, 800, 850, 900, 950]
 
   # Pure overlay: color at selector % opacity. Never flattens — that's the
   # algorithm's nature, which is why shadows aren't a tint.
@@ -74,29 +90,14 @@ systems:
     algorithm: overlay
     params: { color: "#000000" }
 
-  white: "#ffffff"
-  black: "#000000"
-
 defaults:
   scale:
     toward: ["#fafdff", "#001a28"]
     # 0 locks every stop to the base hue; 100 follows the natural OKLCH
     # path toward the blend target.
     hueShift: 15
-    stops:
-      "50": 0.05
-      "100": 0.1
-      "150": 0.2
-      "200": 0.3
-      "300": 0.5
-      "400": 0.75
-      "500": 1
-      "600": 0.75
-      "700": 0.5
-      "800": 0.3
-      "850": 0.2
-      "900": 0.1
-      "950": 0.05
+    # How much of the base shows at 250 and 750; 0.5 would be an even line.
+    midpoint: 0.4
 
 roles:
   surface:

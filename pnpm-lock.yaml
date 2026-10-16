@@ -228,8 +228,8 @@ importers:
         version: 3.7.0
     devDependencies:
       '@fifthrevision/dtg':
-        specifier: ^0.2.0
-        version: 0.2.0
+        specifier: ^0.3.0
+        version: 0.3.0
       '@fontsource-variable/inter':
         specifier: ^5.3.0
         version: 5.3.0
@@ -354,8 +354,8 @@ packages:
     resolution: {integrity: sha512-IkO+/KEUvwbVpiURZg+P7zF74z5Jxe0UgJxVni+RtoHQ6IZieXaO02kmadomap/q+l6bc/jdPGGqTjhuZnuz1Q==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
 
-  '@fifthrevision/dtg@0.2.0':
-    resolution: {integrity: sha512-czX3ZftFReqNg/AUsLJWFMMT6aNqnnVeJWHce7mbrgkqti8wi0mf2t3xKcFQoAr9iedi8GR+Xqcaa2Yk7IdkcQ==}
+  '@fifthrevision/dtg@0.3.0':
+    resolution: {integrity: sha512-GYsEZ16cXf3X6IvCV0xuQ4J043zxSfcmGIHJQkT4ggIYHFCyYEB+MWJmMd4F598b6sTB6Tl9oLQ2yHuTYHIGWg==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -2238,7 +2238,7 @@ snapshots:
       '@eslint/core': 1.2.1
       levn: 0.4.1
 
-  '@fifthrevision/dtg@0.2.0':
+  '@fifthrevision/dtg@0.3.0':
     dependencies:
       yaml: 2.9.1
 

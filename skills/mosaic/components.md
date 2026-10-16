@@ -115,9 +115,9 @@ Gotchas:
 | Transient feedback after something happens  | `toast`                   |
 
 **`Dialog`** (`dialog`) is controlled only: `open` and `onOpenChange` are
-required. `size` is `small` | `medium` (default) | `large`. `onClosed` fires
-after the close animation, the place to reset form state. Build it from its
-parts:
+required. `size` is `small` (confirms, single fields) | `medium` (default,
+forms) | `large` (multi-column settings). `onClosed` fires after the close
+animation, the place to reset form state. Build it from its parts:
 
 ```tsx
 <Dialog open={open} onOpenChange={setOpen}>
@@ -125,7 +125,7 @@ parts:
     <Dialog.Title>Rename agent</Dialog.Title>
     <Dialog.Description>Shown in the sidebar.</Dialog.Description>
   </Dialog.Header>
-  {/* body */}
+  <Dialog.Body>{/* fields */}</Dialog.Body>
   <Dialog.Actions>
     <Button variant="primary">Save</Button>
     <Dialog.Actions.Secondary>
@@ -137,6 +137,12 @@ parts:
 
 - `Dialog.Title` is required for accessibility. If the description would be
   redundant, keep it with `visuallyHidden`.
+- Always put everything between the header and actions in `Dialog.Body`,
+  even short content. It scrolls with edge fades while the header, close
+  button, and actions stay in view. Without it, tall content scrolls the
+  whole dialog and the title and actions scroll away. Its `className` lands
+  on the inner content, so layout classes (`flex flex-col gap-4`, `grid`) go
+  there.
 - `Dialog.Actions` is `flex-row-reverse`: the first child sits rightmost, so
   the primary action goes first. `Dialog.Actions.Secondary` pins its
   buttons to the left.

@@ -116,9 +116,9 @@
   --text-large-title--font-weight: 500;
 
   /* Dialog widths */
-  --width-dialog-small: 17.5rem; /* 280px */
-  --width-dialog-medium: 35rem; /* 560px */
-  --width-dialog-large: 52.5rem; /* 840px */
+  --width-dialog-small: 27.5rem; /* 440px */
+  --width-dialog-medium: 40rem; /* 640px */
+  --width-dialog-large: 60rem; /* 960px */
 
   /* Radius */
   --radius-*: initial;

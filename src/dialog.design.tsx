@@ -40,21 +40,26 @@ function SampleDialog({ size, column }: { size: DialogSize; column: Column }) {
             The name shows in the sidebar and in run history.
           </Dialog.Description>
         </Dialog.Header>
-        {column === "long content" ? (
-          <div className="flex flex-col gap-3">
-            {Array.from({ length: 30 }, (_, index) => (
-              <p key={index} className="text-body text-label-secondary">
-                Step {index + 1}: read the open pull requests, summarize each
-                diff, and post the summary to the review channel.
-              </p>
-            ))}
-          </div>
-        ) : (
-          <div className="flex flex-col gap-2">
-            <Label htmlFor={`name-${size}-${column}`}>Name</Label>
-            <Input id={`name-${size}-${column}`} defaultValue="PR Summarizer" />
-          </div>
-        )}
+        <Dialog.Body>
+          {column === "long content" ? (
+            <div className="flex flex-col gap-3">
+              {Array.from({ length: 30 }, (_, index) => (
+                <p key={index} className="text-body text-label-secondary">
+                  Step {index + 1}: read the open pull requests, summarize each
+                  diff, and post the summary to the review channel.
+                </p>
+              ))}
+            </div>
+          ) : (
+            <div className="flex flex-col gap-2">
+              <Label htmlFor={`name-${size}-${column}`}>Name</Label>
+              <Input
+                id={`name-${size}-${column}`}
+                defaultValue="PR Summarizer"
+              />
+            </div>
+          )}
+        </Dialog.Body>
         <Dialog.Actions>
           <Button variant="primary" onClick={() => setOpen(false)}>
             Save
@@ -120,22 +125,24 @@ export const Form = () => {
             Change the agent&apos;s display name.
           </Dialog.Description>
         </Dialog.Header>
-        <form
-          id="rename-agent"
-          className="flex flex-col gap-2"
-          onSubmit={(event) => {
-            event.preventDefault();
-            setSavedName(draft.trim() || savedName);
-            setOpen(false);
-          }}
-        >
-          <Label htmlFor="rename-agent-name">Name</Label>
-          <Input
-            id="rename-agent-name"
-            value={draft}
-            onChange={(event) => setDraft(event.target.value)}
-          />
-        </form>
+        <Dialog.Body>
+          <form
+            id="rename-agent"
+            className="flex flex-col gap-2"
+            onSubmit={(event) => {
+              event.preventDefault();
+              setSavedName(draft.trim() || savedName);
+              setOpen(false);
+            }}
+          >
+            <Label htmlFor="rename-agent-name">Name</Label>
+            <Input
+              id="rename-agent-name"
+              value={draft}
+              onChange={(event) => setDraft(event.target.value)}
+            />
+          </form>
+        </Dialog.Body>
         <Dialog.Actions>
           <Button type="submit" form="rename-agent" variant="primary">
             Save
@@ -159,7 +166,7 @@ function AgentSettingsDialog() {
             Applies to every future run of PR Summarizer.
           </Dialog.Description>
         </Dialog.Header>
-        <div className="grid grid-cols-2 gap-6">
+        <Dialog.Body className="grid grid-cols-2 gap-6">
           <div className="flex flex-col gap-2">
             <Label htmlFor="settings-name">Name</Label>
             <Input id="settings-name" defaultValue="PR Summarizer" />
@@ -188,7 +195,7 @@ function AgentSettingsDialog() {
               onCheckedChange={setScheduled}
             />
           </div>
-        </div>
+        </Dialog.Body>
         <Dialog.Actions>
           <Button variant="primary" onClick={() => setOpen(false)}>
             Save
@@ -218,7 +225,7 @@ function RunWithInputsDialog() {
             Fill in the inputs this run needs.
           </Dialog.Description>
         </Dialog.Header>
-        <div className="flex flex-col gap-4">
+        <Dialog.Body className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
             <Label htmlFor="run-repo">Repository</Label>
             <Input id="run-repo" defaultValue="sunnyday/agents" />
@@ -230,7 +237,7 @@ function RunWithInputsDialog() {
               <option value="7d">Last 7 days</option>
             </Select>
           </div>
-        </div>
+        </Dialog.Body>
         <Dialog.Actions>
           <DialogClose asChild>
             <Button variant="primary" icon={Play}>

@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { X } from "lucide-react";
 import { cn } from "./cn";
+import { ScrollingText } from "./scrolling-text";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -83,15 +84,19 @@ export function EmailInput({
             key={`${email}-${i}`}
             title={invalid ? "Invalid email address" : undefined}
             className={cn(
-              "inline-flex h-6 max-w-full items-center gap-1.5 rounded-md border px-2",
+              "group/scrolling-text inline-flex h-6 max-w-full items-center gap-1.5 rounded-md border px-2",
               invalid
                 ? "border-shape-destructive bg-surface-card text-label-destructive"
                 : "border-separator-secondary bg-surface-card text-label",
             )}
           >
-            <span className="min-w-0 flex-1 truncate text-subhead">
+            <ScrollingText
+              leadingGapPx={8}
+              trailingGapPx={disabled ? 8 : 6}
+              className="flex-1 text-subhead"
+            >
               {email}
-            </span>
+            </ScrollingText>
             {!disabled && (
               <button
                 type="button"

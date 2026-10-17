@@ -1,5 +1,6 @@
 import { ChevronDown, Loader2, type LucideIcon } from "lucide-react";
 import { cn } from "./cn";
+import { ScrollingText } from "./scrolling-text";
 import { Tooltip } from "./tooltip";
 
 const sizeConfig = {
@@ -8,14 +9,18 @@ const sizeConfig = {
     iconSize: 12,
     textSize: "text-subhead",
     padding: "px-2",
+    paddingPx: 8,
     gap: "gap-1.5",
+    gapPx: 6,
   },
   md: {
     height: "h-8",
     iconSize: 16,
     textSize: "text-body",
     padding: "px-3",
+    paddingPx: 12,
     gap: "gap-1.75",
+    gapPx: 7,
   },
 } as const;
 
@@ -61,7 +66,8 @@ export function Button({
   loading?: boolean;
   children: React.ReactNode;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
-  const { height, iconSize, textSize, padding, gap } = sizeConfig[size];
+  const { height, iconSize, textSize, padding, paddingPx, gap, gapPx } =
+    sizeConfig[size];
   const { container, icon } = variantConfig[variant];
   const LeadingIcon = loading ? Loader2 : Icon;
   const isDisabled = disabled || loading;
@@ -72,7 +78,7 @@ export function Button({
       {...props}
       disabled={isDisabled}
       className={cn(
-        "inline-flex w-fit shrink-0 items-center justify-center overflow-hidden rounded-md font-medium focus-visible:control-focus-ring max-w-80 disabled:opacity-50 disabled:cursor-not-allowed select-none",
+        "group/scrolling-text inline-flex w-fit shrink-0 items-center justify-center overflow-hidden rounded-md font-medium focus-visible:control-focus-ring max-w-80 disabled:opacity-50 disabled:cursor-not-allowed select-none",
         height,
         textSize,
         padding,
@@ -88,7 +94,12 @@ export function Button({
           className={cn("shrink-0", icon, loading && "animate-spin")}
         />
       )}
-      <span className="min-w-0 truncate">{children}</span>
+      <ScrollingText
+        leadingGapPx={LeadingIcon ? gapPx : paddingPx}
+        trailingGapPx={dropdown ? gapPx : paddingPx}
+      >
+        {children}
+      </ScrollingText>
       {dropdown && (
         <ChevronDown size={iconSize} className={cn("shrink-0", icon)} />
       )}

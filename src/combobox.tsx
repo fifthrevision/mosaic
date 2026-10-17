@@ -3,6 +3,7 @@ import { Command } from "cmdk";
 import { Check, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { cn } from "./cn";
+import { ScrollingText } from "./scrolling-text";
 
 export type ComboboxOption = {
   value: string;
@@ -50,12 +51,15 @@ export function Combobox({
           type="button"
           disabled={disabled || loading}
           className={cn(
-            "h-8 w-full appearance-none rounded-md border border-separator-secondary bg-surface-input py-1.5 pl-3 pr-8 text-left text-body font-medium text-label input-shadow outline-none hover:not-disabled:border-separator-input-hover focus:border-separator-input-focus disabled:cursor-not-allowed disabled:opacity-50 relative truncate",
+            "group/scrolling-text flex h-8 w-full items-center appearance-none rounded-md border border-separator-secondary bg-surface-input py-1.5 pl-3 pr-8 text-left text-body font-medium text-label input-shadow outline-none hover:not-disabled:border-separator-input-hover focus:border-separator-input-focus disabled:cursor-not-allowed disabled:opacity-50 relative",
             !selected && !loading && "text-label-tertiary font-regular",
             className,
           )}
         >
-          {triggerLabel}
+          {/* pr-8 holds the absolute chevron; only its last 8px is open space. */}
+          <ScrollingText leadingGapPx={12} trailingGapPx={8}>
+            {triggerLabel}
+          </ScrollingText>
           <ChevronDown
             size={16}
             className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-shape-secondary"

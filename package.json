@@ -33,6 +33,7 @@
     "./popover": "./src/popover.tsx",
     "./progress": "./src/progress.tsx",
     "./radio": "./src/radio.tsx",
+    "./search-menu": "./src/search-menu.tsx",
     "./section-header": "./src/section-header.tsx",
     "./segmented-control": "./src/segmented-control.tsx",
     "./select": "./src/select.tsx",

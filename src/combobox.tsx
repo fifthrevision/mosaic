@@ -1,9 +1,13 @@
-import * as Popover from "@radix-ui/react-popover";
-import { Command } from "cmdk";
 import { Check, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { cn } from "./cn";
 import { ScrollingText } from "./scrolling-text";
+import {
+  rankBySearch,
+  SearchMenu,
+  SearchMenuItem,
+  SearchMenuMessage,
+} from "./search-menu";
 
 export type ComboboxOption = {
   value: string;
@@ -44,8 +48,12 @@ export function Combobox({
   const triggerLabel = loading ? "Loading…" : (selected?.label ?? placeholder);
 
   return (
-    <Popover.Root open={open} onOpenChange={setOpen}>
-      <Popover.Trigger asChild>
+    <SearchMenu
+      open={open}
+      onOpenChange={setOpen}
+      placeholder={searchPlaceholder}
+      className="w-(--radix-popover-trigger-width)"
+      trigger={
         <button
           id={id}
           type="button"
@@ -65,52 +73,39 @@ export function Combobox({
             className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-shape-secondary"
           />
         </button>
-      </Popover.Trigger>
-      <Popover.Portal>
-        <Popover.Content
-          align="start"
-          sideOffset={4}
-          className="z-50 w-[var(--radix-popover-trigger-width)] rounded-md border border-separator-secondary floating-surface p-1 overlay-shadow data-[state=open]:animate-[menu-in_150ms_ease-out] data-[state=closed]:animate-[menu-out_100ms_ease-in]"
-        >
-          <Command className="flex flex-col gap-1">
-            <Command.Input
-              placeholder={searchPlaceholder}
-              className="h-8 w-full rounded-sm border border-separator-secondary bg-surface-input px-2 text-body font-medium text-label placeholder:text-label-tertiary placeholder:font-regular outline-none focus:border-separator-input-focus"
+      }
+    >
+      {(search) => {
+        const visible = rankBySearch(
+          options,
+          search,
+          (option) => `${option.label} ${option.value}`,
+        );
+        if (visible.length === 0)
+          return <SearchMenuMessage>{emptyMessage}</SearchMenuMessage>;
+        return visible.map((option) => (
+          <SearchMenuItem
+            key={option.value}
+            value={option.value}
+            disabled={option.disabled}
+            onSelect={() => onValueChange(option.value)}
+          >
+            <Check
+              size={16}
+              className={cn(
+                "shrink-0 text-shape-secondary",
+                option.value === value ? "opacity-100" : "opacity-0",
+              )}
             />
-            <Command.List className="max-h-60 overflow-y-auto">
-              <Command.Empty className="py-3 text-center text-body text-label-secondary">
-                {emptyMessage}
-              </Command.Empty>
-              {options.map((option) => (
-                <Command.Item
-                  key={option.value}
-                  value={`${option.label} ${option.value}`}
-                  disabled={option.disabled}
-                  onSelect={() => {
-                    onValueChange(option.value);
-                    setOpen(false);
-                  }}
-                  className="flex h-8 items-center gap-2 rounded-sm px-2 text-body text-label outline-none select-none cursor-default data-[selected=true]:bg-state-hover data-[disabled=true]:opacity-50 data-[disabled=true]:pointer-events-none"
-                >
-                  <Check
-                    size={16}
-                    className={cn(
-                      "shrink-0 text-shape-secondary",
-                      option.value === value ? "opacity-100" : "opacity-0",
-                    )}
-                  />
-                  <span className="flex-1 truncate">{option.label}</span>
-                  {option.description ? (
-                    <span className="text-label-secondary text-subhead">
-                      {option.description}
-                    </span>
-                  ) : null}
-                </Command.Item>
-              ))}
-            </Command.List>
-          </Command>
-        </Popover.Content>
-      </Popover.Portal>
-    </Popover.Root>
+            <span className="flex-1 truncate">{option.label}</span>
+            {option.description ? (
+              <span className="text-label-secondary text-subhead">
+                {option.description}
+              </span>
+            ) : null}
+          </SearchMenuItem>
+        ));
+      }}
+    </SearchMenu>
   );
 }

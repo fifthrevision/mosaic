@@ -104,7 +104,7 @@ export const EdgeCases = () => (
         />
       </div>
     </Example>
-    <Example label="long selected label (w-48, truncates)">
+    <Example label="long selected label (w-48, scrolls on hover)">
       <div className="w-48">
         <ControlledCombobox
           options={[

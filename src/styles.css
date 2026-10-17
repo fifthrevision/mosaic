@@ -165,10 +165,10 @@
 @utility floating-surface {
   background-color: color-mix(
     in srgb,
-    var(--color-surface-floating) 95%,
+    var(--color-surface-floating) 80%,
     transparent
   );
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px) saturate(150%);
 
   @media (prefers-reduced-transparency: reduce) {
     background-color: var(--color-surface-floating);

@@ -1,4 +1,10 @@
-import { useEffect, useState, useSyncExternalStore } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type RefObject,
+} from "react";
 import { ConfirmProvider } from "../src/confirm-dialog";
 import { TooltipProvider } from "../src/tooltip";
 import { Portfolio } from "./Portfolio";
@@ -104,9 +110,13 @@ function applyTheme(theme: StudioTheme) {
 function Sidebar({
   entries,
   activePath,
+  docked,
+  onToggleDocked,
 }: {
   entries: DesignEntry[];
   activePath: string;
+  docked: boolean;
+  onToggleDocked: () => void;
 }) {
   const [theme, setTheme] = useState(currentTheme);
 
@@ -148,6 +158,16 @@ function Sidebar({
           </section>
         ))}
       </nav>
+      {import.meta.env.VITE_DTG_URL && activePath !== COLORS_PATH && (
+        <button
+          onClick={onToggleDocked}
+          className={`mb-2 w-full rounded-xl px-3 py-1.5 text-left text-body text-label hover:bg-state-hover ${
+            docked ? "bg-state-selected" : ""
+          }`}
+        >
+          Edit colors
+        </button>
+      )}
       <div className="flex gap-0.5">
         {STUDIO_THEMES.map((option) => (
           <button
@@ -182,40 +202,94 @@ function DesignPage({ entry }: { entry: DesignEntry }) {
   return <Portfolio module={mod} name={entry.name} />;
 }
 
-function ColorsPage() {
+type FramePlacement = "page" | "panel" | "hidden";
+
+const FRAME_PLACEMENT_CLASS: Record<FramePlacement, string> = {
+  page: "fixed inset-y-0 right-0 left-52",
+  panel: "fixed inset-y-0 right-0 w-[480px] border-l border-separator-primary",
+  hidden: "hidden",
+};
+
+// One frame for the whole session, only ever restyled: moving an iframe to
+// another place in the document reloads it, and the editor keeps its
+// visitors' edits in the page.
+function DtgFrame({
+  placement,
+  frameRef,
+}: {
+  placement: FramePlacement;
+  frameRef: RefObject<HTMLIFrameElement | null>;
+}) {
   return (
-    <iframe
-      title="Colors"
-      src={import.meta.env.VITE_DTG_URL}
-      className="block h-screen w-full border-0"
-    />
+    <div className={FRAME_PLACEMENT_CLASS[placement]}>
+      <iframe
+        ref={frameRef}
+        title="Colors"
+        src={import.meta.env.VITE_DTG_URL}
+        className="block h-full w-full border-0"
+      />
+    </div>
   );
+}
+
+// The dtg editor posts the CSS for whatever it shows, edits being tried
+// included; laid over the built colors, it re-skins every component live.
+function useLiveColors(frameRef: RefObject<HTMLIFrameElement | null>) {
+  useEffect(() => {
+    const style = document.head.appendChild(document.createElement("style"));
+    style.id = "dtg-live";
+    const onMessage = (event: MessageEvent) => {
+      if (event.source !== frameRef.current?.contentWindow) return;
+      const data = event.data as { type?: unknown; css?: unknown } | null;
+      if (data?.type === "dtg:css" && typeof data.css === "string") {
+        style.textContent = data.css;
+      }
+    };
+    addEventListener("message", onMessage);
+    frameRef.current?.contentWindow?.postMessage({ type: "dtg:css?" }, "*");
+    return () => {
+      removeEventListener("message", onMessage);
+      style.remove();
+    };
+  }, [frameRef]);
 }
 
 export function StudioApp() {
   const path = usePath();
   const entries = parseEntries();
   const entry = path ? entries.find((e) => e.path === path) : null;
+  const [docked, setDocked] = useState(false);
+  const frameRef = useRef<HTMLIFrameElement>(null);
+  useLiveColors(frameRef);
+  const placement: FramePlacement =
+    path === COLORS_PATH ? "page" : docked ? "panel" : "hidden";
 
   return (
     <TooltipProvider>
       <ConfirmProvider>
         <div className="flex min-h-screen">
-          <Sidebar entries={entries} activePath={path} />
-          <main className="ml-52 flex-1">
+          <Sidebar
+            entries={entries}
+            activePath={path}
+            docked={docked}
+            onToggleDocked={() => setDocked((open) => !open)}
+          />
+          <main
+            className={`ml-52 flex-1 ${placement === "panel" ? "mr-[480px]" : ""}`}
+          >
             {!path && (
               <div className="p-8 text-label-secondary">
                 Select a component from the sidebar.
               </div>
-            )}
-            {path === COLORS_PATH && import.meta.env.VITE_DTG_URL && (
-              <ColorsPage />
             )}
             {path && path !== COLORS_PATH && !entry && (
               <div className="p-8 text-label-secondary">Not found.</div>
             )}
             {entry && <DesignPage entry={entry} />}
           </main>
+          {import.meta.env.VITE_DTG_URL && (
+            <DtgFrame placement={placement} frameRef={frameRef} />
+          )}
         </div>
       </ConfirmProvider>
     </TooltipProvider>

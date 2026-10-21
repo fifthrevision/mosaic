@@ -162,7 +162,7 @@ function dtgDocs(): Plugin {
     closeBundle() {
       const docs = spawnSync(
         process.execPath,
-        [dtgCli(), "docs", "--out", resolve(outDir, "dtg")],
+        [dtgCli(), "docs", "--editable", "--out", resolve(outDir, "dtg")],
         { cwd: resolve(import.meta.dirname, ".."), stdio: "inherit" },
       );
       if (docs.status !== 0) throw new Error("dtg docs failed");

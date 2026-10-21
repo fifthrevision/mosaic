@@ -35,7 +35,7 @@ export function MenuItem({
   disabled,
   variant = "default",
 }: {
-  icon: UIIcon;
+  icon?: UIIcon;
   children: React.ReactNode;
   onSelect?: () => void;
   disabled?: boolean;
@@ -52,12 +52,14 @@ export function MenuItem({
       }
       onSelect={onSelect}
     >
-      <Icon
-        size={16}
-        className={
-          isDestructive ? "text-shape-destructive" : "text-shape-secondary"
-        }
-      />
+      {Icon && (
+        <Icon
+          size={16}
+          className={
+            isDestructive ? "text-shape-destructive" : "text-shape-secondary"
+          }
+        />
+      )}
       {children}
     </DropdownMenu.Item>
   );
@@ -82,14 +84,14 @@ export function SubMenu({
   label,
   children,
 }: {
-  icon: UIIcon;
+  icon?: UIIcon;
   label: string;
   children: React.ReactNode;
 }) {
   return (
     <DropdownMenu.Sub>
       <DropdownMenu.SubTrigger className="flex h-8 items-center gap-3 rounded-sm px-2 py-2.5 text-body text-label outline-none select-none cursor-default data-highlighted:bg-state-hover data-[state=open]:bg-state-hover">
-        <Icon size={16} className="text-shape-secondary" />
+        {Icon && <Icon size={16} className="text-shape-secondary" />}
         <span className="flex-1">{label}</span>
         <ChevronRight size={16} className="text-shape-secondary" />
       </DropdownMenu.SubTrigger>
@@ -128,6 +130,51 @@ export function MenuRadioItem({
         )}
       />
       <span className="min-w-0 truncate">{children}</span>
+    </DropdownMenu.Item>
+  );
+}
+
+export function MenuGrid({
+  columns,
+  children,
+}: {
+  columns: number;
+  children: React.ReactNode;
+}) {
+  return (
+    <DropdownMenu.Group
+      className="grid gap-0.5 px-1 py-0.5"
+      style={{ gridTemplateColumns: `repeat(${columns}, minmax(2rem, 1fr))` }}
+    >
+      {children}
+    </DropdownMenu.Group>
+  );
+}
+
+export function MenuGridItem({
+  label,
+  selected = false,
+  children,
+  onSelect,
+  disabled,
+}: {
+  label: string;
+  selected?: boolean;
+  children: React.ReactNode;
+  onSelect?: () => void;
+  disabled?: boolean;
+}) {
+  return (
+    <DropdownMenu.Item
+      aria-label={label}
+      disabled={disabled}
+      className={cn(
+        "flex h-8 items-center justify-center rounded-sm text-body text-label outline-none select-none cursor-default data-highlighted:bg-state-hover data-disabled:opacity-50 data-disabled:pointer-events-none",
+        selected && "ring-1 ring-shape-theme ring-inset",
+      )}
+      onSelect={onSelect}
+    >
+      {children}
     </DropdownMenu.Item>
   );
 }

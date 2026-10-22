@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 export function ColumnLabel({ children }: { children: ReactNode }) {
   return (
-    <span className="font-mono text-caption text-label-tertiary">
+    <span className="font-mono text-caption text-label-secondary">
       {children}
     </span>
   );

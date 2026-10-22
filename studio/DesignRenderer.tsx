@@ -1,3 +1,5 @@
+import { Alert } from "@fifthrevision/mosaic/alert";
+import { Button } from "@fifthrevision/mosaic/button";
 import { Component, type ComponentType, type ReactNode } from "react";
 
 type Props = { Component: ComponentType };
@@ -13,19 +15,16 @@ class ErrorBoundary extends Component<{ children: ReactNode }, State> {
   render() {
     if (this.state.error) {
       return (
-        <div className="rounded-sm border border-ruby-300 bg-ruby-50 p-4 text-caption">
-          <p className="font-mono font-bold text-ruby-600">
-            {this.state.error.message}
-          </p>
-          <pre className="mt-2 max-h-32 overflow-auto text-caption text-ruby-500">
+        <div className="flex flex-col gap-3">
+          <Alert variant="error">
+            <span className="font-mono">{this.state.error.message}</span>
+          </Alert>
+          <pre className="max-h-32 overflow-auto rounded-md bg-surface-card-subdued p-3 font-mono text-caption text-label-secondary">
             {this.state.error.stack}
           </pre>
-          <button
-            className="mt-3 text-caption text-label-link underline"
-            onClick={() => this.setState({ error: null })}
-          >
+          <Button size="sm" onClick={() => this.setState({ error: null })}>
             Retry
-          </button>
+          </Button>
         </div>
       );
     }

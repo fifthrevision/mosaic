@@ -1,3 +1,4 @@
+import { TextStack } from "@fifthrevision/mosaic/text-stack";
 import type { ComponentType } from "react";
 import { DesignRenderer } from "./DesignRenderer";
 
@@ -31,32 +32,28 @@ export function Portfolio({
   ).sort(([a], [b]) => position(a) - position(b));
 
   return (
-    <div className="mx-auto max-w-6xl p-8">
-      <h1 className="mb-1 text-large-title font-bold text-label">
-        {meta.title ?? name}
-      </h1>
-      {meta.description && (
-        <p className="mb-6 text-body text-label-secondary">
-          {meta.description}
-        </p>
-      )}
-      <div className="space-y-6">
-        {variants.map(([exportName, Component]) => (
-          <div
-            key={exportName}
-            className="rounded-xl border border-separator-primary"
-          >
-            <div className="rounded-t-xl border-b border-separator-primary bg-surface-card-subdued px-4 py-2">
-              <span className="font-mono text-caption text-label-secondary">
-                {labelFromExportName(exportName)}
-              </span>
-            </div>
-            <div className="overflow-x-auto p-6">
-              <DesignRenderer Component={Component} />
-            </div>
+    <div className="mx-auto flex max-w-6xl flex-col gap-6 p-8">
+      <TextStack>
+        <h1 className="text-large-title text-label">{meta.title ?? name}</h1>
+        {meta.description && (
+          <p className="text-body text-label-secondary">{meta.description}</p>
+        )}
+      </TextStack>
+      {variants.map(([exportName, Component]) => (
+        <div
+          key={exportName}
+          className="rounded-md border border-separator-secondary bg-surface-card card-shadow"
+        >
+          <div className="rounded-t-md border-b border-separator-secondary bg-surface-card-subdued px-4 py-2">
+            <span className="font-mono text-caption text-label-secondary">
+              {labelFromExportName(exportName)}
+            </span>
           </div>
-        ))}
-      </div>
+          <div className="overflow-x-auto p-6">
+            <DesignRenderer Component={Component} />
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

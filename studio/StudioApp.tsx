@@ -5,8 +5,14 @@ import {
   useSyncExternalStore,
   type RefObject,
 } from "react";
-import { ConfirmProvider } from "../src/confirm-dialog";
-import { TooltipProvider } from "../src/tooltip";
+import { ConfirmProvider } from "@fifthrevision/mosaic/confirm-dialog";
+import { NavItem } from "@fifthrevision/mosaic/nav-item";
+import { SectionHeader } from "@fifthrevision/mosaic/section-header";
+import {
+  SegmentedControl,
+  type SegmentedOption,
+} from "@fifthrevision/mosaic/segmented-control";
+import { TooltipProvider } from "@fifthrevision/mosaic/tooltip";
 import { Portfolio } from "./Portfolio";
 
 const designModules = import.meta.glob<Record<string, unknown>>(
@@ -90,8 +96,12 @@ function navigate(path: string) {
   window.location.hash = `/${path}`;
 }
 
-const STUDIO_THEMES = ["light", "dark", "black"] as const;
-type StudioTheme = (typeof STUDIO_THEMES)[number];
+type StudioTheme = "light" | "dark" | "black";
+const THEME_OPTIONS: readonly SegmentedOption<StudioTheme>[] = [
+  { value: "light", label: "Light" },
+  { value: "dark", label: "Dark" },
+  { value: "black", label: "Black" },
+];
 
 function currentTheme(): StudioTheme {
   const classes = document.documentElement.classList;
@@ -121,71 +131,49 @@ function Sidebar({
   const [theme, setTheme] = useState(currentTheme);
 
   return (
-    <aside className="fixed left-0 top-0 flex h-full w-52 flex-col border-r border-separator-primary bg-surface-card p-4">
-      <h1 className="mb-4 text-caption font-bold text-label-secondary uppercase tracking-wide">
-        Studio
-      </h1>
-      <nav className="-mx-4 min-h-0 flex-1 space-y-4 overflow-y-auto px-4">
+    <aside className="fixed top-0 left-0 flex h-full w-52 flex-col gap-4 border-r border-separator-primary bg-surface-shell p-4">
+      <h1 className="px-2 text-body font-medium text-label">Studio</h1>
+      <nav className="-mx-4 flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4">
         {import.meta.env.VITE_DTG_URL && (
-          <button
-            onClick={() => navigate(COLORS_PATH)}
-            className={`w-full rounded-xl px-3 py-1.5 text-left text-body text-label hover:bg-state-hover ${
-              activePath === COLORS_PATH ? "bg-state-selected" : ""
-            }`}
-          >
-            Colors
-          </button>
+          <NavItem variant="tinted" active={activePath === COLORS_PATH}>
+            <button type="button" onClick={() => navigate(COLORS_PATH)}>
+              Colors
+            </button>
+          </NavItem>
         )}
         {groupEntries(entries).map(([group, members]) => (
-          <section key={group}>
-            <h2 className="mb-1 px-3 text-caption font-medium text-label-tertiary">
-              {group}
-            </h2>
-            <ul className="space-y-0.5">
-              {members.map((e) => (
-                <li key={e.path}>
-                  <button
-                    onClick={() => navigate(e.path)}
-                    className={`w-full rounded-xl px-3 py-1.5 text-left text-body text-label hover:bg-state-hover ${
-                      activePath === e.path ? "bg-state-selected" : ""
-                    }`}
-                  >
-                    {e.name}
-                  </button>
-                </li>
-              ))}
-            </ul>
+          <section key={group} className="flex flex-col gap-0.5">
+            <SectionHeader title={group} />
+            {members.map((e) => (
+              <NavItem
+                key={e.path}
+                variant="tinted"
+                active={activePath === e.path}
+              >
+                <button type="button" onClick={() => navigate(e.path)}>
+                  {e.name}
+                </button>
+              </NavItem>
+            ))}
           </section>
         ))}
       </nav>
       {import.meta.env.VITE_DTG_URL && activePath !== COLORS_PATH && (
-        <button
-          onClick={onToggleDocked}
-          className={`mb-2 w-full rounded-xl px-3 py-1.5 text-left text-body text-label hover:bg-state-hover ${
-            docked ? "bg-state-selected" : ""
-          }`}
-        >
-          Edit colors
-        </button>
-      )}
-      <div className="flex gap-0.5">
-        {STUDIO_THEMES.map((option) => (
-          <button
-            key={option}
-            onClick={() => {
-              applyTheme(option);
-              setTheme(option);
-            }}
-            className={`flex-1 rounded-xl py-1.5 text-caption capitalize hover:bg-state-hover ${
-              theme === option
-                ? "bg-state-selected text-label"
-                : "text-label-secondary"
-            }`}
-          >
-            {option}
+        <NavItem variant="tinted" active={docked}>
+          <button type="button" onClick={onToggleDocked}>
+            Edit colors
           </button>
-        ))}
-      </div>
+        </NavItem>
+      )}
+      <SegmentedControl
+        aria-label="Theme"
+        options={THEME_OPTIONS}
+        value={theme}
+        onChange={(option) => {
+          applyTheme(option);
+          setTheme(option);
+        }}
+      />
     </aside>
   );
 }

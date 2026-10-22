@@ -234,20 +234,39 @@ function DtgFrame({
 
 // The dtg editor posts the CSS for whatever it shows, edits being tried
 // included; laid over the built colors, it re-skins every component live.
+// The page's canvas color goes back to the editor whenever it changes, from
+// an edit or a theme switch, so the docked panel is drawn on the same
+// background as the page beside it.
 function useLiveColors(frameRef: RefObject<HTMLIFrameElement | null>) {
   useEffect(() => {
     const style = document.head.appendChild(document.createElement("style"));
     style.id = "dtg-live";
+    const postBackground = () => {
+      const canvas = getComputedStyle(document.body)
+        .getPropertyValue("--surface-canvas")
+        .trim();
+      frameRef.current?.contentWindow?.postMessage(
+        { type: "dtg:background", color: canvas },
+        "*",
+      );
+    };
     const onMessage = (event: MessageEvent) => {
       if (event.source !== frameRef.current?.contentWindow) return;
       const data = event.data as { type?: unknown; css?: unknown } | null;
       if (data?.type === "dtg:css" && typeof data.css === "string") {
         style.textContent = data.css;
+        postBackground();
       }
     };
+    const themeObserver = new MutationObserver(postBackground);
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
     addEventListener("message", onMessage);
     frameRef.current?.contentWindow?.postMessage({ type: "dtg:css?" }, "*");
     return () => {
+      themeObserver.disconnect();
       removeEventListener("message", onMessage);
       style.remove();
     };

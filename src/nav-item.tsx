@@ -1,6 +1,12 @@
 import { Slot, Slottable } from "@radix-ui/react-slot";
-import type { LucideIcon } from "lucide-react";
-import type { AnchorHTMLAttributes, ReactNode } from "react";
+import {
+  cloneElement,
+  isValidElement,
+  type AnchorHTMLAttributes,
+  type ComponentType,
+  type ReactElement,
+  type ReactNode,
+} from "react";
 import { cn } from "./cn";
 import { ScrollingText } from "./scrolling-text";
 
@@ -32,22 +38,32 @@ export function NavItem({
 }: Element & {
   active?: boolean;
   variant?: keyof typeof activeClass;
-  icon?: LucideIcon;
+  icon?: ComponentType<{ width?: number; height?: number; className?: string }>;
   className?: string;
   children: ReactNode;
 }) {
   const Row = asChild ? Slot : "a";
+  // With asChild the label lives inside the child element, so that is where
+  // the text is read from and put back.
+  const child =
+    asChild && isValidElement<{ children?: ReactNode }>(children)
+      ? children
+      : null;
+  const content = child ? child.props.children : children;
   const label =
-    typeof children === "string" ? (
+    typeof content === "string" ? (
       <ScrollingText
         leadingGapPx={Icon ? GAP_PX : PADDING_PX}
         trailingGapPx={PADDING_PX}
       >
-        {children}
+        {content}
       </ScrollingText>
     ) : (
-      children
+      content
     );
+  const body: ReactNode = child
+    ? cloneElement(child as ReactElement, undefined, label)
+    : label;
   return (
     <Row
       aria-current={active ? "page" : undefined}
@@ -60,14 +76,15 @@ export function NavItem({
     >
       {Icon && (
         <Icon
-          size={16}
+          width={16}
+          height={16}
           className={cn(
             "shrink-0",
             active ? "text-theme-primary" : "text-shape-secondary",
           )}
         />
       )}
-      <Slottable>{label}</Slottable>
+      <Slottable>{body}</Slottable>
     </Row>
   );
 }

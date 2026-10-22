@@ -251,7 +251,7 @@ hold user data or state. State is a `Status`.
   router, pass `asChild` and its link as the one child; the child has to
   pass through `className` and `aria-current`. A sidebar action that goes
   nowhere, a toggle say, is `asChild` around a `<button>`. `active` comes
-  from your router. `default`
+  from your router. `icon` takes any SVG icon component, Lucide or not. `default`
   lifts the active row to a lighter surface, for a sidebar on the shell;
   `tinted` colors it with the theme instead, for a sidebar on the canvas. Rows are
   full width for a sidebar column; in a horizontal bar give them `w-auto`.

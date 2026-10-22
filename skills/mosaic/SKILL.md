@@ -98,7 +98,7 @@ checkbox, radio, or switch), or `hidden` (screen readers only) **(lint)**.
 | ------------------------ | --------------------------------------------------- |
 | `text-label`             | Primary text: content, titles, values               |
 | `text-label-secondary`   | Supporting text people read                         |
-| `text-label-tertiary`    | Text people skim past                               |
+| `text-label-tertiary`    | Placeholders and empty states, rarely               |
 | `text-label-theme`       | Theme-tinted text: primary button labels, accents   |
 | `text-label-link`        | Links (the saturated theme color)                   |
 | `text-label-destructive` | Destructive actions and error text                  |
@@ -106,12 +106,14 @@ checkbox, radio, or switch), or `hidden` (screen readers only) **(lint)**.
 
 Secondary vs. tertiary is the choice that goes wrong most:
 
-- **Secondary** is text someone reads to understand the page: descriptions
-  under a heading, help text under a field, metadata in a row, group labels.
-- **Tertiary** is text that only has to be findable: placeholders, empty
-  states, separators like "·", timestamps in a dense list.
+- **Secondary** is every kind of supporting text: descriptions under a
+  heading, help text under a field, metadata in a row, group labels, table
+  headers, captions, numbers beside a value, timestamps.
+- **Tertiary** is for placeholders and empty states at most, and often not
+  even those. It is never the color of something a person has to read.
 
-When in doubt, use secondary. Tertiary on a sentence makes it hard to read.
+Use secondary. Reach for tertiary only when the text's job is to be absent
+until someone looks for it.
 
 ## Spacing
 

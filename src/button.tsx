@@ -3,46 +3,19 @@ import { cn } from "./cn";
 import { ScrollingText } from "./scrolling-text";
 import { Tooltip } from "./tooltip";
 
+// The pixel values repeat what the mosaic-button-* utilities set; ScrollingText
+// needs them as numbers.
 const sizeConfig = {
-  sm: {
-    height: "h-6",
-    iconSize: 12,
-    textSize: "text-subhead",
-    padding: "px-2",
-    paddingPx: 8,
-    gap: "gap-1.5",
-    gapPx: 6,
-  },
-  md: {
-    height: "h-8",
-    iconSize: 16,
-    textSize: "text-body",
-    padding: "px-3",
-    paddingPx: 12,
-    gap: "gap-1.75",
-    gapPx: 7,
-  },
+  sm: { classes: "mosaic-button-sm", iconSize: 12, paddingPx: 8, gapPx: 6 },
+  md: { classes: "mosaic-button-md", iconSize: 16, paddingPx: 12, gapPx: 7 },
 } as const;
 
 const variantConfig = {
-  default: {
-    container:
-      "border border-separator-secondary bg-surface-button text-label control-shadow hover:not-disabled:bg-state-button-hover active:not-disabled:control-shadow-active data-[state=open]:control-shadow-active data-[state=open]:bg-state-button-hover",
-    icon: "text-shape-primary",
-  },
-  primary: {
-    container:
-      "border border-separator-secondary bg-surface-button text-label-theme control-shadow hover:not-disabled:bg-state-button-hover active:not-disabled:control-shadow-active data-[state=open]:control-shadow-active data-[state=open]:bg-state-button-hover",
-    icon: "text-shape-theme",
-  },
-  subtle: {
-    container:
-      "text-label hover:not-disabled:bg-state-hover data-[state=open]:bg-state-hover",
-    icon: "text-shape-primary",
-  },
+  default: { container: "mosaic-button-default", icon: "text-shape-primary" },
+  primary: { container: "mosaic-button-primary", icon: "text-shape-theme" },
+  subtle: { container: "mosaic-button-subtle", icon: "text-shape-primary" },
   destructive: {
-    container:
-      "border border-separator-secondary bg-surface-button text-label-destructive control-shadow hover:not-disabled:bg-state-button-hover active:not-disabled:control-shadow-active data-[state=open]:control-shadow-active data-[state=open]:bg-state-button-hover",
+    container: "mosaic-button-destructive",
     icon: "text-shape-destructive",
   },
 } as const;
@@ -66,8 +39,7 @@ export function Button({
   loading?: boolean;
   children: React.ReactNode;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
-  const { height, iconSize, textSize, padding, paddingPx, gap, gapPx } =
-    sizeConfig[size];
+  const { classes, iconSize, paddingPx, gapPx } = sizeConfig[size];
   const { container, icon } = variantConfig[variant];
   const LeadingIcon = loading ? Loader2 : Icon;
   const isDisabled = disabled || loading;
@@ -78,11 +50,8 @@ export function Button({
       {...props}
       disabled={isDisabled}
       className={cn(
-        "group/scrolling-text inline-flex w-fit shrink-0 items-center justify-center overflow-hidden rounded-md font-medium focus-visible:control-focus-ring max-w-80 disabled:opacity-50 disabled:cursor-not-allowed select-none",
-        height,
-        textSize,
-        padding,
-        gap,
+        "group/scrolling-text mosaic-button",
+        classes,
         container,
         hasDisabledTooltip && "pointer-events-none",
         className,

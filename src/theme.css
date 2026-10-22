@@ -1,0 +1,208 @@
+/* Tokens and recipes, nothing that emits a rule on its own. styles.css
+   imports this for the React components; base.css imports it for the
+   classless stylesheet. */
+@import "./colors.generated.css";
+
+@custom-variant dark (&:where(.dark, .dark *, .black, .black *));
+
+/* -------------------------------------------------- */
+/* Semantic tokens (light/dark)                       */
+/* Generated into ./colors.generated.css from design-tokens/colors.dtg.yaml
+   via `pnpm dtg emit` (@fifthrevision/dtg; output path set in dtg.yaml). */
+/* -------------------------------------------------- */
+
+/* -------------------------------------------------- */
+/* Theme                                              */
+/* -------------------------------------------------- */
+
+@theme {
+  /* Typography */
+  --font-sans: "Inter Variable", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  /* Role names replace Tailwind's size scale; text-sm/text-base/etc. no
+     longer generate CSS. Line height is inherited from body. */
+  --text-*: initial;
+  --text-caption: 0.75rem; /* 12px — component internals only */
+  --text-subhead: 0.8125rem; /* 13px */
+  --text-body: 0.875rem; /* 14px */
+  --text-title: 1rem; /* 16px */
+  --text-title--font-weight: 500;
+  --text-large-title: 1.125rem; /* 18px */
+  --text-large-title--font-weight: 500;
+
+  /* Dialog widths */
+  --width-dialog-small: 27.5rem; /* 440px */
+  --width-dialog-medium: 40rem; /* 640px */
+  --width-dialog-large: 60rem; /* 960px */
+
+  /* Radius */
+  --radius-*: initial;
+  --radius-xs: 0.125rem; /* 2px */
+  --radius-sm: 0.25rem; /* 4px */
+  --radius-md: 0.5rem; /* 8px */
+  --radius-lg: 0.75rem; /* 12px */
+  --radius-xl: 1rem; /* 16px */
+
+  /* Font weights (Inter Variable) */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+}
+
+@utility control-shadow {
+  box-shadow: 0px 1px 1px var(--color-shadow-3);
+}
+
+@utility card-shadow {
+  box-shadow: 0px 1px 1px var(--color-shadow-2);
+}
+
+@utility overlay-shadow {
+  box-shadow: 0px 4px 12px var(--color-shadow-1);
+}
+
+@utility card-interactive {
+  transition:
+    border-color 150ms ease-out,
+    box-shadow 150ms ease-out;
+
+  &:hover {
+    border-color: var(--color-separator-card-hover);
+    box-shadow:
+      0px 1px 1px var(--color-shadow-2),
+      0px 4px 12px var(--color-shadow-1);
+  }
+}
+
+@utility input-shadow {
+  box-shadow: inset 0px 0px 4px var(--color-shadow-1);
+}
+
+@utility floating-surface {
+  background-color: color-mix(
+    in srgb,
+    var(--color-surface-floating) 80%,
+    transparent
+  );
+  backdrop-filter: blur(4px) saturate(150%);
+
+  @media (prefers-reduced-transparency: reduce) {
+    background-color: var(--color-surface-floating);
+    backdrop-filter: none;
+  }
+}
+
+@utility dialog-shadow {
+  box-shadow: 0px 8px 40px var(--color-shadow-1);
+}
+
+@utility panel-shadow {
+  box-shadow:
+    0px 0px 40px var(--color-shadow-1),
+    0px 0px 6px -2px var(--color-shadow-3);
+}
+
+@utility control-shadow-active {
+  box-shadow: 0px 0px 1px var(--color-shadow-3);
+}
+
+@utility control-focus-ring {
+  outline: 1px solid var(--color-shape-theme);
+  outline-offset: 1px;
+}
+
+/* Single-line overflow that fades out instead of clipping or ellipsing.
+   The mid stop sits 25% into the band, making an ease-out: alpha drops fast,
+   then trails off.
+
+   Apply only to elements whose width comes from their container (flex-1,
+   w-full, a fixed w-*, a grid cell). On a content-sized element the right
+   edge is where the text ends, so the fade would eat the last characters of
+   text that fits fine. Such a caller needs padding-right >= 1.5rem to push
+   that edge past the fade region. ScrollingText avoids this by masking only
+   once the text overflows. */
+@utility truncate-fade {
+  overflow: hidden;
+  white-space: nowrap;
+  mask-image: linear-gradient(
+    to right,
+    black calc(100% - 1.5rem),
+    calc(100% - 1.25rem),
+    transparent calc(100% - 0.4rem)
+  );
+}
+
+@utility shimmer-text {
+  background: linear-gradient(
+    90deg,
+    var(--color-label-secondary) 0%,
+    var(--color-label-shimmer) 50%,
+    var(--color-label-secondary) 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 1.6s linear infinite;
+}
+
+
+/* -------------------------------------------------- */
+/* Recipes                                            */
+/* One definition per element look, used by the React components and by the
+   classless base stylesheet (src/base.css), so the two cannot drift.      */
+/* -------------------------------------------------- */
+
+@utility mosaic-body {
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  /* Subpixel rendering makes Inter read ~50 weight units heavier than Figma;
+     grayscale antialiasing lets the token values match the design 1:1. */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@utility mosaic-field {
+  @apply rounded-md border border-separator-secondary bg-surface-input text-body font-medium text-label input-shadow placeholder:text-label-tertiary outline-none hover:not-disabled:border-separator-input-hover focus:not-disabled:border-separator-input-focus disabled:cursor-not-allowed disabled:opacity-50;
+}
+@utility mosaic-input {
+  @apply mosaic-field h-8 w-full px-3 py-1.5;
+}
+@utility mosaic-select {
+  @apply mosaic-field h-8 w-full appearance-none py-1.5 pl-3 pr-8;
+}
+@utility mosaic-textarea {
+  @apply mosaic-field block w-full resize-none px-3 py-2;
+}
+
+@utility mosaic-button {
+  @apply inline-flex w-fit shrink-0 items-center justify-center overflow-hidden rounded-md font-medium select-none max-w-80 focus-visible:control-focus-ring disabled:opacity-50 disabled:cursor-not-allowed;
+}
+@utility mosaic-button-sm {
+  @apply h-6 gap-1.5 px-2 text-subhead;
+}
+@utility mosaic-button-md {
+  @apply h-8 gap-1.75 px-3 text-body;
+}
+@utility mosaic-button-default {
+  @apply border border-separator-secondary bg-surface-button text-label control-shadow hover:not-disabled:bg-state-button-hover active:not-disabled:control-shadow-active data-[state=open]:control-shadow-active data-[state=open]:bg-state-button-hover;
+}
+@utility mosaic-button-primary {
+  @apply mosaic-button-default text-label-theme;
+}
+@utility mosaic-button-destructive {
+  @apply mosaic-button-default text-label-destructive;
+}
+@utility mosaic-button-subtle {
+  @apply text-label hover:not-disabled:bg-state-hover data-[state=open]:bg-state-hover;
+}
+
+@utility mosaic-label {
+  @apply text-subhead font-medium text-label-secondary;
+}
+@utility mosaic-th {
+  @apply border-b border-separator-primary px-2 py-1.5 text-left font-medium;
+}
+@utility mosaic-td {
+  @apply border-b border-separator-secondary px-2 py-1.5 align-top;
+}

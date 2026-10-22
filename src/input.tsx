@@ -6,11 +6,7 @@ export function Input({
   className,
   ...props
 }: React.InputHTMLAttributes<HTMLInputElement> & { icon?: LucideIcon }) {
-  const inputClasses = cn(
-    "w-full h-8 rounded-md border border-separator-secondary bg-surface-input py-1.5 text-body font-medium text-label input-shadow placeholder:text-label-tertiary outline-none hover:not-disabled:border-separator-input-hover focus:not-disabled:border-separator-input-focus disabled:cursor-not-allowed disabled:opacity-50",
-    Icon ? "pl-9 pr-3" : "px-3",
-    className,
-  );
+  const inputClasses = cn("mosaic-input", Icon && "pl-9", className);
 
   if (Icon) {
     return (

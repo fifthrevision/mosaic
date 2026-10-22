@@ -10,10 +10,7 @@ export function Select({
     <div className="relative w-full">
       <select
         {...props}
-        className={cn(
-          "h-8 w-full appearance-none rounded-md border border-separator-secondary bg-surface-input py-1.5 pl-3 pr-8 text-body font-medium text-label input-shadow outline-none placeholder:text-label-tertiary hover:not-disabled:border-separator-input-hover focus:not-disabled:border-separator-input-focus disabled:cursor-not-allowed disabled:opacity-50",
-          className,
-        )}
+        className={cn("mosaic-select", className)}
       >
         {children}
       </select>

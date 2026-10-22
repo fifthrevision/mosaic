@@ -59,12 +59,12 @@ const components: Components = {
     </div>
   ),
   th: ({ children }) => (
-    <th className="border-b border-separator-primary px-2 py-1.5 text-left font-medium">
+    <th className="mosaic-th">
       {children}
     </th>
   ),
   td: ({ children }) => (
-    <td className="border-b border-separator-secondary px-2 py-1.5 align-top">
+    <td className="mosaic-td">
       {children}
     </td>
   ),

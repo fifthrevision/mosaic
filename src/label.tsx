@@ -1,7 +1,7 @@
 import { cn } from "./cn";
 
 const variantClass = {
-  field: "text-subhead font-medium text-label-secondary",
+  field: "mosaic-label",
   inline: "text-body text-label",
   hidden: "sr-only",
 } as const;

@@ -7,39 +7,37 @@ import { SectionHeader } from "./section-header";
 export const meta = {
   title: "NavItem",
   description:
-    "Sidebar row that styles the link or button it is given, with an optional icon and an active state",
+    "Sidebar row with an optional icon and an active state: a link, or asChild around a router link or a button",
 };
 
 export const Variants = () => (
   <div className="flex w-56 flex-col gap-6">
-    <Example label="anchor">
-      <NavItem>
-        <a href="#">Agents</a>
-      </NavItem>
+    <Example label="link (default)">
+      <NavItem href="#">Agents</NavItem>
     </Example>
-    <Example label="button">
-      <NavItem>
+    <Example label="asChild (a router link, or a button for an action)">
+      <NavItem asChild>
         <button type="button">Agents</button>
       </NavItem>
     </Example>
     <Example label="icon">
-      <NavItem icon={Bot}>
-        <a href="#">Agents</a>
+      <NavItem href="#" icon={Bot}>
+        Agents
       </NavItem>
     </Example>
     <Example label="active">
-      <NavItem icon={Bot} active>
-        <a href="#">Agents</a>
+      <NavItem href="#" icon={Bot} active>
+        Agents
       </NavItem>
     </Example>
     <Example label="active, tinted">
-      <NavItem icon={Bot} active variant="tinted">
-        <a href="#">Agents</a>
+      <NavItem href="#" icon={Bot} active variant="tinted">
+        Agents
       </NavItem>
     </Example>
     <Example label="long label (fades, scrolls on hover)">
-      <NavItem icon={Bot}>
-        <a href="#">CFO Financial Intelligence Briefing Bot</a>
+      <NavItem href="#" icon={Bot}>
+        CFO Financial Intelligence Briefing Bot
       </NavItem>
     </Example>
   </div>
@@ -59,13 +57,16 @@ function Sidebar({ variant }: { variant: "default" | "tinted" }) {
       {ITEMS.map((item) => (
         <NavItem
           key={item.key}
+          href="#"
           icon={item.icon}
           variant={variant}
           active={current === item.key}
+          onClick={(event) => {
+            event.preventDefault();
+            setCurrent(item.key);
+          }}
         >
-          <button type="button" onClick={() => setCurrent(item.key)}>
-            {item.label}
-          </button>
+          {item.label}
         </NavItem>
       ))}
     </nav>

@@ -92,10 +92,6 @@ function usePath() {
   }, getPath);
 }
 
-function navigate(path: string) {
-  window.location.hash = `/${path}`;
-}
-
 type StudioTheme = "light" | "dark" | "black";
 const THEME_OPTIONS: readonly SegmentedOption<StudioTheme>[] = [
   { value: "light", label: "Light" },
@@ -135,10 +131,12 @@ function Sidebar({
       <h1 className="px-2 text-body font-medium text-label">Studio</h1>
       <nav className="-mx-4 flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4">
         {import.meta.env.VITE_DTG_URL && (
-          <NavItem variant="tinted" active={activePath === COLORS_PATH}>
-            <button type="button" onClick={() => navigate(COLORS_PATH)}>
-              Colors
-            </button>
+          <NavItem
+            variant="tinted"
+            active={activePath === COLORS_PATH}
+            href={`#/${COLORS_PATH}`}
+          >
+            Colors
           </NavItem>
         )}
         {groupEntries(entries).map(([group, members]) => (
@@ -149,17 +147,16 @@ function Sidebar({
                 key={e.path}
                 variant="tinted"
                 active={activePath === e.path}
+                href={`#/${e.path}`}
               >
-                <button type="button" onClick={() => navigate(e.path)}>
-                  {e.name}
-                </button>
+                {e.name}
               </NavItem>
             ))}
           </section>
         ))}
       </nav>
       {import.meta.env.VITE_DTG_URL && activePath !== COLORS_PATH && (
-        <NavItem variant="tinted" active={docked}>
+        <NavItem variant="tinted" active={docked} asChild>
           <button type="button" onClick={onToggleDocked}>
             Edit colors
           </button>

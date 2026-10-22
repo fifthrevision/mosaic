@@ -70,12 +70,12 @@
   --color-emerald-300: #90cea9;
   --color-emerald-400: #5db781;
   --color-emerald-500: #0e9d51;
-  --color-emerald-600: #007a43;
-  --color-emerald-700: #005b35;
-  --color-emerald-800: #004027;
-  --color-emerald-850: #003520;
-  --color-emerald-900: #002b1a;
-  --color-emerald-950: #002315;
+  --color-emerald-600: #007944;
+  --color-emerald-700: #005a36;
+  --color-emerald-800: #003f28;
+  --color-emerald-850: #003421;
+  --color-emerald-900: #002a1b;
+  --color-emerald-950: #002215;
   /* ruby (scale) */
   --color-ruby-50: #fef1f3;
   --color-ruby-100: #fce2e6;
@@ -112,6 +112,7 @@
   --surface-bubble: var(--color-theme-150);
   --state-hover: rgba(0, 26, 40, 0.03);
   --state-selected: var(--color-light-0);
+  --state-selected-tint: var(--color-theme-200);
   --state-active: var(--color-light-8);
   --state-button-hover: var(--color-light-8);
   --label: var(--color-dark-0);
@@ -164,6 +165,7 @@
   --surface-bubble: var(--color-theme-700);
   --state-hover: rgba(250, 253, 255, 0.04);
   --state-selected: var(--color-dark-6_5);
+  --state-selected-tint: var(--color-theme-800);
   --state-active: var(--color-dark-8);
   --state-button-hover: var(--color-dark-12);
   --label: var(--color-light-0);
@@ -213,12 +215,26 @@
   --surface-track: var(--surface-toggle);
   --state-hover: rgba(250, 253, 255, 0.065);
   --state-selected: var(--color-midnight-12);
+  --state-selected-tint: var(--color-theme-900);
   --state-active: var(--color-midnight-16);
   --state-button-hover: var(--color-midnight-14);
   --separator-primary: var(--color-midnight-16);
   --separator-primary-translucent: rgba(250, 253, 255, 0.16);
   --separator-secondary: var(--color-midnight-10);
   --separator-secondary-translucent: rgba(250, 253, 255, 0.1);
+}
+
+/* Wider than sRGB — shown at full strength where supported */
+@supports (color: color(display-p3 1 1 1)) {
+  :root {
+    --color-yellow-950: color(display-p3 0.1415 0.1154 0.0143);
+    --color-emerald-600: color(display-p3 0.1958 0.4703 0.284);
+    --color-emerald-700: color(display-p3 0.1308 0.3497 0.22);
+    --color-emerald-800: color(display-p3 0.0823 0.2467 0.16);
+    --color-emerald-850: color(display-p3 0.0635 0.2027 0.1327);
+    --color-emerald-900: color(display-p3 0.048 0.1644 0.1081);
+    --color-emerald-950: color(display-p3 0.0358 0.1329 0.0873);
+  }
 }
 
 /* Semantic tokens wired into Tailwind utilities */
@@ -238,6 +254,7 @@
   --color-surface-bubble: var(--surface-bubble);
   --color-state-hover: var(--state-hover);
   --color-state-selected: var(--state-selected);
+  --color-state-selected-tint: var(--state-selected-tint);
   --color-state-active: var(--state-active);
   --color-state-button-hover: var(--state-button-hover);
   --color-label: var(--label);

@@ -206,3 +206,13 @@
 @utility mosaic-td {
   @apply border-b border-separator-secondary px-2 py-1.5 align-top;
 }
+
+@utility mosaic-nav-item {
+  @apply flex h-8 w-full min-w-0 shrink-0 items-center gap-3 overflow-hidden rounded-sm px-2 text-left text-body font-medium text-label-secondary no-underline hover:bg-state-hover focus-visible:control-focus-ring;
+}
+@utility mosaic-nav-item-active {
+  @apply bg-state-selected text-label control-shadow hover:bg-state-selected;
+}
+@utility mosaic-nav-item-active-tinted {
+  @apply bg-state-selected-tint text-label hover:bg-state-selected-tint;
+}

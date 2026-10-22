@@ -121,6 +121,7 @@ roles:
     # larger step to read the same.
     hover: [sky(3 tint), night(4 tint), midnight(6.5 tint)]
     selected: [sky(0), night(6.5), midnight(12)]
+    selected-tint: [theme(200), theme(800), theme(900)]
     active: [sky(8), night(8), midnight(16)]
     button-hover: [sky(8), night(12), midnight(14)]
 

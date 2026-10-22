@@ -14,6 +14,8 @@
 :where(.mosaic-base h3, .mosaic-base label) { @apply mosaic-label; }
 :where(.mosaic-base a) { color: var(--label-link); text-decoration: none; }
 :where(.mosaic-base a:hover) { text-decoration: underline; }
+:where(.mosaic-base nav a) { @apply mosaic-nav-item; }
+:where(.mosaic-base nav a[aria-current]) { @apply mosaic-nav-item-active-tinted; }
 :where(.mosaic-base code, .mosaic-base kbd, .mosaic-base samp, .mosaic-base pre) { font-family: var(--font-mono); font-size: var(--text-subhead); }
 :where(.mosaic-base small) { font-size: var(--text-caption); color: var(--label-secondary); }
 :where(.mosaic-base hr) { border: 0; border-top: 1px solid var(--separator-primary); }

@@ -235,6 +235,7 @@ hold user data or state. State is a `Status`.
 | ------------------- | -------------------- | --------------------------------------------------------------------------- |
 | `TextStack`         | `text-stack`         | Heading plus description (see [SKILL.md](SKILL.md#spacing))                          |
 | `SectionHeader`     | `section-header`     | Group label above a list or card: `title`, optional `action`                |
+| `NavItem`           | `nav-item`           | Sidebar row around the link or button you give it: `active`, optional `icon`, `variant` `default` / `tinted` |
 | `Tabs`              | `tabs`               | In-page tabs. See below                                                     |
 | `Alert`             | `alert`              | Inline message: `variant` `info` (default) / `success` / `error`, `onDismiss` |
 | `Progress`          | `progress`           | A fill on a track: `value` 0–1, width from `className`. Give it `aria-label`, or `aria-hidden` when the value is already shown as text |
@@ -246,6 +247,12 @@ hold user data or state. State is a `Status`.
 
 - `SectionHeader` renders a small secondary `h3`. It labels a group; it
   isn't a page or card title.
+- `NavItem` renders no element of its own. Give it one child, a router link,
+  an anchor, or a button, and it styles that; the child has to pass through
+  `className` and `aria-current`. `active` comes from your router. `default`
+  lifts the active row to a lighter surface, for a sidebar on the shell;
+  `tinted` colors it with the theme instead, for a sidebar on the canvas. Rows are
+  full width for a sidebar column; in a horizontal bar give them `w-auto`.
 - `EmptyState` puts its children in a `<p>`: pass text, not blocks. Use
   `plain` inside a container that already has a card border.
 - `FadingScrollArea` needs a bounded height (`min-h-0 flex-1` in a flex

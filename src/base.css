@@ -1,0 +1,33 @@
+/* Mosaic base: tokens and one default look per plain HTML element,
+   with no classes and no framework. `pnpm build:base` compiles it to
+   dist/base.css for consumers that are not React-on-Tailwind. Every rule
+   sits in :where(), including the scope class, so it has zero specificity:
+   a consumer's own stylesheet always wins. Opt in with class "mosaic-base"
+   on <body>; the theme is "dark" or "black" on <html>, as in styles.css. */
+/* Tailwind's own scale is inlined (h-8 becomes 2rem) so nothing of it ships. */
+@import "tailwindcss/theme.css" theme(reference inline);
+@import "./theme.css" theme(static);
+
+:where(.mosaic-base) { @apply mosaic-body; font-family: var(--font-sans); font-size: var(--text-body); color: var(--label); background: var(--surface-canvas); }
+:where(.mosaic-base h1) { font-size: var(--text-large-title); font-weight: var(--font-weight-medium); }
+:where(.mosaic-base h2) { font-size: var(--text-title); font-weight: var(--font-weight-medium); }
+:where(.mosaic-base h3, .mosaic-base label) { @apply mosaic-label; }
+:where(.mosaic-base a) { color: var(--label-link); text-decoration: none; }
+:where(.mosaic-base a:hover) { text-decoration: underline; }
+:where(.mosaic-base code, .mosaic-base kbd, .mosaic-base samp, .mosaic-base pre) { font-family: var(--font-mono); font-size: var(--text-subhead); }
+:where(.mosaic-base small) { font-size: var(--text-caption); color: var(--label-secondary); }
+:where(.mosaic-base hr) { border: 0; border-top: 1px solid var(--separator-primary); }
+
+/* Form controls take the page's font; browsers give them their own. */
+:where(.mosaic-base button, .mosaic-base input, .mosaic-base select, .mosaic-base textarea) { font: inherit; letter-spacing: inherit; color: inherit; }
+:where(.mosaic-base input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"], [type="file"])) { @apply mosaic-input; }
+/* The chevron is a fixed mid-gray: a data URL cannot read a variable. */
+:where(.mosaic-base select) { @apply mosaic-select; background: var(--surface-input) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 8px center; }
+:where(.mosaic-base textarea) { @apply mosaic-textarea; }
+:where(.mosaic-base input[type="checkbox"], .mosaic-base input[type="radio"], .mosaic-base input[type="range"]) { accent-color: var(--theme-primary); }
+:where(.mosaic-base button) { @apply mosaic-button mosaic-button-md mosaic-button-default; }
+:where(.mosaic-base :focus-visible) { outline: 1px solid var(--shape-theme); outline-offset: 1px; }
+
+:where(.mosaic-base table) { border-collapse: collapse; width: 100%; }
+:where(.mosaic-base th) { @apply mosaic-th text-subhead text-label-secondary; }
+:where(.mosaic-base td) { @apply mosaic-td; }

@@ -1,2 +1,4 @@
 minimumReleaseAgeExclude:
   - "@fifthrevision/*"
+allowBuilds:
+  "@parcel/watcher": false

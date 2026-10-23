@@ -105,7 +105,7 @@ function designMeta(): Plugin {
 
 function dtgCli() {
   return createRequire(import.meta.url).resolve(
-    "@fifthrevision/dtg/dist/cli.js",
+    "@fifthrevision/dtg/cli",
   );
 }
 

@@ -138,7 +138,7 @@ function dtgDevServer(): Plugin {
     configureServer(server) {
       const dtg = spawn(
         process.execPath,
-        [dtgCli(), "dev", "--build", "--port", String(port)],
+        [dtgCli(), "edit", "--build", "--port", String(port)],
         { cwd: resolve(import.meta.dirname, ".."), stdio: "inherit" },
       );
       const stop = () => dtg.kill();

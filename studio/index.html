@@ -8,7 +8,7 @@
     <script>
       (function () {
         var t = localStorage.getItem("studio-theme");
-        if (t === "dark" || t === "black") {
+        if (t && t !== "light") {
           document.documentElement.classList.add(t);
         } else if (!t && matchMedia("(prefers-color-scheme: dark)").matches) {
           document.documentElement.classList.add("dark");

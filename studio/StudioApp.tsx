@@ -13,6 +13,7 @@ import {
   type SegmentedOption,
 } from "@fifthrevision/mosaic/segmented-control";
 import { TooltipProvider } from "@fifthrevision/mosaic/tooltip";
+import generatedColorsCss from "../src/colors.generated.css?raw";
 import { Portfolio } from "./Portfolio";
 
 const designModules = import.meta.glob<Record<string, unknown>>(
@@ -92,24 +93,37 @@ function usePath() {
   }, getPath);
 }
 
-type StudioTheme = "light" | "dark" | "black";
-const THEME_OPTIONS: readonly SegmentedOption<StudioTheme>[] = [
-  { value: "light", label: "Light" },
-  { value: "dark", label: "Dark" },
-  { value: "black", label: "Black" },
+const DEFAULT_THEME = "light";
+
+// The default mode is `:root` in the generated CSS, so only the other modes
+// are discoverable: they're the unindented rules made solely of classes.
+const MODE_CLASSES = [
+  ...new Set(
+    [...generatedColorsCss.matchAll(/^(\.[\w-]+(?:,\s*\.[\w-]+)*)\s*\{/gm)]
+      .flatMap((match) => match[1].split(","))
+      .map((selector) => selector.trim().slice(1)),
+  ),
 ];
 
-function currentTheme(): StudioTheme {
+const THEME_OPTIONS: readonly SegmentedOption<string>[] = [
+  DEFAULT_THEME,
+  ...MODE_CLASSES,
+].map((mode) => ({
+  value: mode,
+  label: mode[0].toUpperCase() + mode.slice(1),
+}));
+
+function currentTheme(): string {
   const classes = document.documentElement.classList;
-  if (classes.contains("black")) return "black";
-  if (classes.contains("dark")) return "dark";
-  return "light";
+  return (
+    MODE_CLASSES.findLast((mode) => classes.contains(mode)) ?? DEFAULT_THEME
+  );
 }
 
-function applyTheme(theme: StudioTheme) {
+function applyTheme(theme: string) {
   const classes = document.documentElement.classList;
-  classes.remove("dark", "black");
-  if (theme !== "light") classes.add(theme);
+  classes.remove(...MODE_CLASSES);
+  if (theme !== DEFAULT_THEME) classes.add(theme);
   localStorage.setItem("studio-theme", theme);
 }
 

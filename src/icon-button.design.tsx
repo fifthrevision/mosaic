@@ -26,10 +26,17 @@ export const meta = {
 
 const VARIANTS = ["default", "primary", "subtle", "destructive"] as const;
 
-const COLUMNS = ["md", "sm", "disabled", "menu open", "warning tone"] as const;
+const COLUMNS = [
+  "md",
+  "sm",
+  "disabled",
+  "loading",
+  "menu open",
+  "warning tone",
+] as const;
 
 export const States = () => (
-  <div className="grid grid-cols-[6rem_repeat(5,5rem)] items-center gap-y-4">
+  <div className="grid grid-cols-[6rem_repeat(6,5rem)] items-center gap-y-4">
     <span />
     {COLUMNS.map((column) => (
       <ColumnLabel key={column}>{column}</ColumnLabel>
@@ -50,6 +57,7 @@ export const States = () => (
           disabled
           aria-label="Edit"
         />
+        <IconButton icon={Pencil} variant={variant} loading aria-label="Edit" />
         <IconButton
           icon={Ellipsis}
           variant={variant}

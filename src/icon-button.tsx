@@ -1,4 +1,4 @@
-import type { LucideIcon } from "lucide-react";
+import { Loader2, type LucideIcon } from "lucide-react";
 import { cn } from "./cn";
 import { Tooltip } from "./tooltip";
 
@@ -41,6 +41,8 @@ export function IconButton({
   className,
   title,
   tone,
+  loading = false,
+  disabled,
   ...props
 }: {
   icon: LucideIcon;
@@ -48,14 +50,19 @@ export function IconButton({
   variant?: keyof typeof variantConfig;
   /** Colors the icon to signal a state, e.g. a clickable "needs a look" mark. */
   tone?: keyof typeof toneIconClass;
+  /** Swaps the icon for a spinner and disables, like Button's. */
+  loading?: boolean;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
   const { size: sizeClass, iconSize } = sizeConfig[size];
   const { container, icon } = variantConfig[variant];
-  const hasDisabledTooltip = Boolean(title) && Boolean(props.disabled);
+  const ShownIcon = loading ? Loader2 : Icon;
+  const isDisabled = disabled || loading;
+  const hasDisabledTooltip = Boolean(title) && isDisabled;
 
   const button = (
     <button
       {...props}
+      disabled={isDisabled}
       className={cn(
         "flex shrink-0 items-center justify-center rounded-md select-none focus-visible:control-focus-ring disabled:cursor-not-allowed disabled:opacity-50",
         sizeClass,
@@ -64,7 +71,13 @@ export function IconButton({
         className,
       )}
     >
-      <Icon size={iconSize} className={tone ? toneIconClass[tone] : icon} />
+      <ShownIcon
+        size={iconSize}
+        className={cn(
+          tone ? toneIconClass[tone] : icon,
+          loading && "animate-spin",
+        )}
+      />
     </button>
   );
 

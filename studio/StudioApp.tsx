@@ -96,12 +96,19 @@ function usePath() {
 const DEFAULT_THEME = "light";
 
 // The default mode is `:root` in the generated CSS, so only the other modes
-// are discoverable: they're the unindented rules made solely of classes.
+// are discoverable: they're the classes in unindented rules made of `:root`
+// and classes. A mode with no values of its own shares `:root`'s rule.
 const MODE_CLASSES = [
   ...new Set(
-    [...generatedColorsCss.matchAll(/^(\.[\w-]+(?:,\s*\.[\w-]+)*)\s*\{/gm)]
+    [
+      ...generatedColorsCss.matchAll(
+        /^((?::root|\.[\w-]+)(?:,\s*(?::root|\.[\w-]+))*)\s*\{/gm,
+      ),
+    ]
       .flatMap((match) => match[1].split(","))
-      .map((selector) => selector.trim().slice(1)),
+      .map((selector) => selector.trim())
+      .filter((selector) => selector.startsWith("."))
+      .map((selector) => selector.slice(1)),
   ),
 ];
 

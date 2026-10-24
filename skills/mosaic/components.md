@@ -31,7 +31,8 @@ or remove, like `Button`'s), `size` `md` | `sm`. Always pass `aria-label`;
 add `title` for a hover tooltip. `tone="warning"` colors the icon
 `shape-warning` for a clickable status mark ("something shifted, take a
 look"). It's not `destructive`: that would mean the click destroys
-something.
+something. `loading` swaps the icon for a spinner and disables, like
+`Button`'s; it keeps the tone.
 
 **`IconToggle`** (`icon-toggle`): an icon-only on/off button for view state
 that nothing else on screen shows (wrap lines, line numbers, show

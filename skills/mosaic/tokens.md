@@ -144,7 +144,7 @@ Mosaic's shadow colors deepen in dark mode.
 
 A shadow none of these covers uses the tokens, lightest to darkest:
 `shadow-[0px_4px_12px_var(--color-shadow-1)]` with `shadow-1`, `shadow-2`,
-`shadow-3`. Never a literal `rgba(0,0,0,…)`.
+`shadow-3`, `shadow-4`. Never a literal `rgba(0,0,0,…)`.
 
 ### Radius
 

@@ -123,7 +123,7 @@ roles:
     selected: [sky(0), night(6.5), midnight(12)]
     selected-tint: [theme(200), theme(800), theme(900)]
     active: [sky(8), night(8), midnight(16)]
-    button-hover: [sky(8), night(12), midnight(14)]
+    button-hover: [sky(8.5), night(12), midnight(14)]
 
   # Labels draw from the opposite mode's ramp: text on a sky surface is a
   # point on the night ramp, and vice versa.
@@ -167,6 +167,7 @@ roles:
     "1": [shadow(5), shadow(40)]
     "2": [shadow(10), shadow(50)]
     "3": [shadow(15), shadow(60)]
+    "4": [shadow(20), shadow(70)]
 
   diff:
     added-line: [emerald(100), emerald(950)]

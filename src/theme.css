@@ -7,8 +7,8 @@
 
 /* -------------------------------------------------- */
 /* Semantic tokens (light/dark)                       */
-/* Generated into ./colors.generated.css from design-tokens/colors.dtg.yaml
-   via `pnpm dtg emit` (@fifthrevision/dtg; output path set in dtg.yaml). */
+/* Generated into ./colors.generated.css from ./colors.dtg.yaml via
+   `pnpm dtg build` (@fifthrevision/dtg; output path set in dtg.config.yaml). */
 /* -------------------------------------------------- */
 
 /* -------------------------------------------------- */
@@ -49,7 +49,7 @@
 }
 
 @utility control-shadow {
-  box-shadow: 0px 1px 1px var(--color-shadow-3);
+  box-shadow: 0px 1px 1px var(--color-shadow-4);
 }
 
 @utility card-shadow {
@@ -101,8 +101,16 @@
     0px 0px 6px -2px var(--color-shadow-3);
 }
 
+/* control-shadow only falls below the button; the halves of a split button
+   meet at a 1px gap, so they also need a faint edge on the sides. */
+@utility control-shadow-split {
+  box-shadow:
+    0px 1px 1px var(--color-shadow-4),
+    0px 0px 1px var(--color-shadow-4);
+}
+
 @utility control-shadow-active {
-  box-shadow: 0px 0px 1px var(--color-shadow-3);
+  box-shadow: 0px 0px 1px var(--color-shadow-4);
 }
 
 @utility control-focus-ring {
@@ -185,13 +193,22 @@
   @apply h-8 gap-1.75 px-3 text-body;
 }
 @utility mosaic-button-default {
-  @apply border border-separator-secondary bg-surface-button text-label control-shadow hover:not-disabled:bg-state-button-hover active:not-disabled:control-shadow-active data-[state=open]:control-shadow-active data-[state=open]:bg-state-button-hover;
+  @apply border border-separator-secondary bg-surface-button text-label control-shadow hover:not-disabled:bg-state-button-hover active:not-disabled:control-shadow-active active:not-disabled:translate-y-px data-[state=open]:control-shadow-active data-[state=open]:translate-y-px data-[state=open]:bg-state-button-hover;
 }
 @utility mosaic-button-primary {
   @apply mosaic-button-default text-label-theme;
 }
 @utility mosaic-button-destructive {
   @apply mosaic-button-default text-label-destructive;
+}
+@utility mosaic-split-half-default {
+  @apply border border-separator-secondary bg-surface-button text-label control-shadow-split hover:not-disabled:bg-state-button-hover active:not-disabled:control-shadow-active active:not-disabled:translate-y-px data-[state=open]:control-shadow-active data-[state=open]:translate-y-px data-[state=open]:bg-state-button-hover;
+}
+@utility mosaic-split-half-primary {
+  @apply mosaic-split-half-default text-label-theme;
+}
+@utility mosaic-split-half-destructive {
+  @apply mosaic-split-half-default text-label-destructive;
 }
 @utility mosaic-button-subtle {
   @apply text-label hover:not-disabled:bg-state-hover data-[state=open]:bg-state-hover;

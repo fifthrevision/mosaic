@@ -9,7 +9,7 @@ const sizeConfig = {
 
 const variantConfig = {
   default: {
-    off: "border border-separator-secondary bg-surface-button control-shadow hover:not-disabled:bg-state-button-hover active:not-disabled:control-shadow-active",
+    off: "border border-separator-secondary bg-surface-button control-shadow hover:not-disabled:bg-state-button-hover active:not-disabled:control-shadow-active active:not-disabled:translate-y-px",
     on: "border border-separator-toggle-selected bg-state-button-hover control-shadow-active",
   },
   subtle: {

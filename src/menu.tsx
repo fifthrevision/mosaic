@@ -6,15 +6,20 @@ import type { UIIcon } from "./ui-icon";
 export function Menu({
   trigger,
   align = "end",
+  disabled = false,
   children,
 }: {
   trigger: React.ReactNode;
   align?: "start" | "center" | "end";
+  /** Radix opens the menu from its own pointer handler, so a disabled trigger element alone still opens it. */
+  disabled?: boolean;
   children: React.ReactNode;
 }) {
   return (
     <DropdownMenu.Root>
-      <DropdownMenu.Trigger asChild>{trigger}</DropdownMenu.Trigger>
+      <DropdownMenu.Trigger asChild disabled={disabled}>
+        {trigger}
+      </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
         <DropdownMenu.Content
           align={align}

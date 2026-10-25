@@ -8,6 +8,7 @@
   --color-light-5: #eef2f4;
   --color-light-6_5: #eaeef1;
   --color-light-8: #e6ebee;
+  --color-light-8_5: #e5eaed;
   --color-light-15: #d5dbdf;
   --color-light-20: #c8d0d4;
   --color-light-40: #96a2a9;
@@ -114,7 +115,7 @@
   --state-selected: var(--color-light-0);
   --state-selected-tint: var(--color-theme-200);
   --state-active: var(--color-light-8);
-  --state-button-hover: var(--color-light-8);
+  --state-button-hover: var(--color-light-8_5);
   --label: var(--color-dark-0);
   --label-secondary: var(--color-dark-30);
   --label-tertiary: var(--color-dark-60);
@@ -142,6 +143,7 @@
   --shadow-1: rgba(0, 0, 0, 0.05);
   --shadow-2: rgba(0, 0, 0, 0.1);
   --shadow-3: rgba(0, 0, 0, 0.15);
+  --shadow-4: rgba(0, 0, 0, 0.2);
   --diff-added-line: var(--color-emerald-100);
   --diff-added-text: var(--color-emerald-200);
   --diff-removed-line: var(--color-ruby-100);
@@ -195,6 +197,7 @@
   --shadow-1: rgba(0, 0, 0, 0.4);
   --shadow-2: rgba(0, 0, 0, 0.5);
   --shadow-3: rgba(0, 0, 0, 0.6);
+  --shadow-4: rgba(0, 0, 0, 0.7);
   --diff-added-line: var(--color-emerald-950);
   --diff-added-text: var(--color-emerald-700);
   --diff-removed-line: var(--color-ruby-950);
@@ -284,6 +287,7 @@
   --color-shadow-1: var(--shadow-1);
   --color-shadow-2: var(--shadow-2);
   --color-shadow-3: var(--shadow-3);
+  --color-shadow-4: var(--shadow-4);
   --color-diff-added-line: var(--diff-added-line);
   --color-diff-added-text: var(--diff-added-text);
   --color-diff-removed-line: var(--diff-removed-line);

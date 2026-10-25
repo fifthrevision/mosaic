@@ -77,9 +77,7 @@ Revert `package.json` and the lockfile before committing.
 
 - `pnpm studio` browses every `*.design.tsx` at <http://localhost:4400>.
   Each component ships one, and that is how changes get verified.
-- `pnpm dtg emit` regenerates `src/colors.generated.css` from
+- `pnpm dtg build` regenerates `src/colors.generated.css` from
   `src/colors.dtg.yaml` (configured in `dtg.config.yaml`). Never hand-edit
-  the generated file. The definition uses dtg 0.3's format, which the
-  installed 0.2.0 can't read; until 0.3 is published, run a local build:
-  `node ../dtg/dist/cli.js emit`.
+  the generated file.
 - `pnpm typecheck`, `pnpm lint`, `pnpm format`.

@@ -95,7 +95,7 @@ next. Two adjacent levels never share a size.
 | Level       | Look                                  | Use                                                    |
 | ----------- | ------------------------------------- | ------------------------------------------------------ |
 | Page title  | `text-large-title text-label`         | One per view: the page, or the pane of a settings dialog |
-| Heading     | `text-title text-label`               | A section with prose or controls under it; card and dialog titles |
+| Heading     | `text-title text-label`               | A section with prose or controls under it, its description in a `TextStack`; card and dialog titles |
 | Group label | `SectionHeader`                       | Labels a list, table, or card below it; optional action |
 
 Most pages need two: a page title over group labels, or a page title over
@@ -166,6 +166,14 @@ a direct child:
   </p>
 </TextStack>
 ```
+
+A heading and its description are one item in a `gap` list: wrap them in a
+`TextStack`. As separate items, the list's gap pushes the description as far
+from its heading as from the controls below.
+
+A section with controls under its `TextStack` steps the gaps: `gap-6`
+(24px) between the `TextStack` and the controls, `gap-4` (16px) between
+controls. Equal gaps make the description read as one more row.
 
 ## Surfaces and states, in brief
 

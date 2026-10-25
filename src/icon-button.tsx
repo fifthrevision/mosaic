@@ -14,12 +14,12 @@ const sizeConfig = {
 const variantConfig = {
   default: {
     container:
-      "border border-separator-secondary bg-surface-button control-shadow hover:not-disabled:bg-state-button-hover active:not-disabled:control-shadow-active data-[state=open]:control-shadow-active data-[state=open]:bg-state-button-hover",
+      "border border-separator-secondary bg-surface-button control-shadow hover:not-disabled:bg-state-button-hover active:not-disabled:control-shadow-active active:not-disabled:translate-y-px data-[state=open]:control-shadow-active data-[state=open]:translate-y-px data-[state=open]:bg-state-button-hover",
     icon: "text-shape-primary",
   },
   primary: {
     container:
-      "border border-separator-secondary bg-surface-button control-shadow hover:not-disabled:bg-state-button-hover active:not-disabled:control-shadow-active data-[state=open]:control-shadow-active data-[state=open]:bg-state-button-hover",
+      "border border-separator-secondary bg-surface-button control-shadow hover:not-disabled:bg-state-button-hover active:not-disabled:control-shadow-active active:not-disabled:translate-y-px data-[state=open]:control-shadow-active data-[state=open]:translate-y-px data-[state=open]:bg-state-button-hover",
     icon: "text-shape-theme",
   },
   subtle: {
@@ -29,7 +29,7 @@ const variantConfig = {
   },
   destructive: {
     container:
-      "border border-separator-secondary bg-surface-button control-shadow hover:not-disabled:bg-state-button-hover active:not-disabled:control-shadow-active data-[state=open]:control-shadow-active data-[state=open]:bg-state-button-hover",
+      "border border-separator-secondary bg-surface-button control-shadow hover:not-disabled:bg-state-button-hover active:not-disabled:control-shadow-active active:not-disabled:translate-y-px data-[state=open]:control-shadow-active data-[state=open]:translate-y-px data-[state=open]:bg-state-button-hover",
     icon: "text-shape-destructive",
   },
 } as const;

@@ -39,6 +39,7 @@
     "./section-header": "./src/section-header.tsx",
     "./segmented-control": "./src/segmented-control.tsx",
     "./select": "./src/select.tsx",
+    "./split-button": "./src/split-button.tsx",
     "./status": "./src/status.tsx",
     "./svg-icon": "./src/svg-icon.tsx",
     "./switch": "./src/switch.tsx",

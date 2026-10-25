@@ -1,6 +1,7 @@
 import { Plus } from "lucide-react";
 import { Example } from "../studio/DesignHelpers";
 import { Button } from "./button";
+import { Card } from "./card";
 import { EmptyState } from "./empty-state";
 import { SectionHeader } from "./section-header";
 
@@ -16,9 +17,9 @@ export const Variants = () => (
       <EmptyState>No agents yet. Create one to get started.</EmptyState>
     </Example>
     <Example label="plain, inside a card">
-      <div className="rounded-md border border-separator-secondary bg-surface-card">
+      <Card>
         <EmptyState variant="plain">No runs yet.</EmptyState>
-      </div>
+      </Card>
     </Example>
   </div>
 );
@@ -26,10 +27,12 @@ export const Variants = () => (
 export const EdgeCases = () => (
   <div className="flex w-120 flex-col gap-6">
     <Example label="long text in a narrow card">
-      <EmptyState className="w-64">
-        No files match &ldquo;quarterly-report-final-v3.pdf&rdquo; in this
-        agent&rsquo;s inputs.
-      </EmptyState>
+      <div className="w-64">
+        <EmptyState>
+          No files match &ldquo;quarterly-report-final-v3.pdf&rdquo; in this
+          agent&rsquo;s inputs.
+        </EmptyState>
+      </div>
     </Example>
     <Example label='className="min-h-24" overrides the card height'>
       <EmptyState className="min-h-24">No secrets.</EmptyState>

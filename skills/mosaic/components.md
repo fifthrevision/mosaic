@@ -279,7 +279,9 @@ hold user data or state. State is a `Status`.
   `SectionHeader` above them; the sidebar needs at least 8px of padding
   beyond its column (`px-4` works). In a horizontal bar give them `mx-0`.
 - `EmptyState` puts its children in a `<p>`: pass text, not blocks. Use
-  `plain` inside a container that already has a card border.
+  `plain` inside a container that already has a card border. The default
+  `card` is a `Card`, so it overhangs like the list it stands in for; don't
+  give it a width.
 - `FadingScrollArea` needs a bounded height (`min-h-0 flex-1` in a flex
   column, or `max-h-*`). `fadeClassName` is a **`bg-*`** class matching
   what's behind it (default `bg-surface-card`). Padding goes on children.

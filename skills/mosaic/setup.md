@@ -6,6 +6,10 @@
 @import "@fifthrevision/mosaic/styles.css";
 ```
 
+- Load Inter from its optical-size build,
+  `import "@fontsource-variable/inter/opsz.css"`. `text-large-title` uses the
+  Display cut; the default build has no such axis and falls back to the text
+  cut without an error.
 - Every component is a subpath import, `@fifthrevision/mosaic/<name>`. There
   is no root index.
 - Mount `TooltipProvider` (`/tooltip`) and `ConfirmProvider`

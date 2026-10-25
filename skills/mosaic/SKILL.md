@@ -47,18 +47,20 @@ come out one or two steps too small.
 
 Use a role:
 
-| Role               | Size | Weight | Use                                              |
-| ------------------ | ---- | ------ | ------------------------------------------------ |
-| `text-large-title` | 18px | medium | Page headings                                    |
-| `text-title`       | 16px | medium | Card, section, and dialog titles; stat values    |
-| `text-body`        | 14px | —      | Default text                                     |
-| `text-subhead`     | 13px | —      | Dense rows; group labels with `font-medium`      |
-| `text-caption`     | 12px | —      | Mosaic component internals only **(lint)**       |
+| Role               | Size | Weight | Use                                                 |
+| ------------------ | ---- | ------ | --------------------------------------------------- |
+| `text-large-title` | 18px | 600    | Page titles                                         |
+| `text-title`       | 16px | medium | Headings in a page; card and dialog titles; stat values |
+| `text-body`        | 14px | —      | Default text                                        |
+| `text-subhead`     | 13px | —      | Dense rows; group labels with `font-medium`         |
+| `text-caption`     | 12px | —      | Mosaic component internals only **(lint)**          |
 
 - Nothing in an app goes below `text-subhead`. Error messages and help text
   are sentences people need to read: use `text-body`.
-- Weights are `font-regular` and `font-medium`. Title roles carry medium;
-  an explicit `font-*` class still overrides it.
+- Weights are `font-regular` and `font-medium`. `text-title` carries
+  medium; `text-large-title` carries 600 and Inter's Display cut, which
+  needs the optical-size build (see [setup.md](setup.md)). An explicit
+  `font-*` class still overrides the weight.
 - Sizes are in `rem`, so browser zoom and the user's default font size scale
   the whole ramp. Don't write sizes in `px` **(lint)**.
 
@@ -84,6 +86,39 @@ independently:
 
 Pick the heading level from the document outline, not from the size you
 want: a small heading can still be an `h2`.
+
+### Heading levels
+
+A page uses at most three looks, and each one is a step away from the
+next. Two adjacent levels never share a size.
+
+| Level       | Look                                  | Use                                                    |
+| ----------- | ------------------------------------- | ------------------------------------------------------ |
+| Page title  | `text-large-title text-label`         | One per view: the page, or the pane of a settings dialog |
+| Heading     | `text-title text-label`               | A section with prose or controls under it; card and dialog titles |
+| Group label | `SectionHeader`                       | Labels a list, table, or card below it; optional action |
+
+Most pages need two: a page title over group labels, or a page title over
+headings. The page title is what makes the steps read, so a view with
+headings always has one above them.
+
+### Alignment
+
+Text sits flush on the column edge: page titles, headings, prose, and
+`SectionHeader`. Anything with a box or a hover background hangs outside
+the column by its padding, so its text lands 8px in from the text around
+it. Mosaic builds the overhang in; app code doesn't write negative margins.
+
+- `Card` hangs 8px each side; rows inside it take `px-4`.
+- `NavItem` hangs 8px each side, so its label lines up with the
+  `SectionHeader` above it.
+- A `subtle` `Button` or `IconButton` at the start or end of a line of text
+  takes `bleed`, which pulls it out by its own padding.
+- Controls with chrome (inputs, selects, `default` and `primary` buttons)
+  keep their box on the column edge.
+
+The overhang needs room: the parent leaves at least 8px beyond the column
+on each side (see `Card` in [components.md](components.md)).
 
 ### Form labels
 

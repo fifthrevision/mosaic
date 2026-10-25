@@ -28,7 +28,7 @@
   --text-title: 1rem; /* 16px */
   --text-title--font-weight: 500;
   --text-large-title: 1.125rem; /* 18px */
-  --text-large-title--font-weight: 500;
+  --text-large-title--font-weight: 600;
 
   /* Dialog widths */
   --width-dialog-small: 27.5rem; /* 440px */
@@ -197,6 +197,11 @@
   @apply text-label hover:not-disabled:bg-state-hover data-[state=open]:bg-state-hover;
 }
 
+/* "opsz" needs Inter's optical-size build (@fontsource-variable/inter/opsz.css);
+   the default build has no such axis and silently renders the text cut. */
+@utility text-large-title {
+  font-variation-settings: "opsz" 32;
+}
 @utility mosaic-label {
   @apply text-subhead font-medium text-label-secondary;
 }
@@ -207,8 +212,9 @@
   @apply border-b border-separator-secondary px-2 py-1.5 align-top;
 }
 
+/* No w-full: the -mx-2 overhang only widens a row whose width is auto. */
 @utility mosaic-nav-item {
-  @apply flex h-8 w-full min-w-0 shrink-0 items-center gap-3 overflow-hidden rounded-sm px-2 text-left text-body font-medium text-label-secondary no-underline hover:bg-state-hover focus-visible:control-focus-ring;
+  @apply -mx-2 flex h-8 min-w-0 shrink-0 items-center gap-3 overflow-hidden rounded-sm px-2 text-left text-body font-medium text-label-secondary no-underline hover:bg-state-hover focus-visible:control-focus-ring;
 }
 @utility mosaic-nav-item-active {
   @apply bg-state-selected text-label control-shadow hover:bg-state-selected;

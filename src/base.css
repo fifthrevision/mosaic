@@ -9,7 +9,7 @@
 @import "./theme.css" theme(static);
 
 :where(.mosaic-base) { @apply mosaic-body; font-family: var(--font-sans); font-size: var(--text-body); color: var(--label); background: var(--surface-canvas); }
-:where(.mosaic-base h1) { font-size: var(--text-large-title); font-weight: var(--font-weight-medium); }
+:where(.mosaic-base h1) { @apply text-large-title; }
 :where(.mosaic-base h2) { font-size: var(--text-title); font-weight: var(--font-weight-medium); }
 :where(.mosaic-base h3, .mosaic-base label) { @apply mosaic-label; }
 :where(.mosaic-base a) { color: var(--label-link); text-decoration: none; }

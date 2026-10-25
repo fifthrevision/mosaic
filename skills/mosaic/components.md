@@ -14,12 +14,18 @@ components passed as `icon={Trash2}`, not elements.
 | `icon`     | Leading Lucide icon                                     |
 | `dropdown` | Trailing chevron, for a `Menu` trigger                  |
 | `loading`  | Swaps the icon for a spinner and disables               |
+| `bleed`    | `start` / `end`: pulls a `subtle` button out by its padding |
 
 - `primary` isn't a filled button. It's the same raised surface with a
   theme-colored label: use it for the action the view or dialog exists for.
 - `subtle` has no chrome: toolbars, `SectionHeader` actions, low-emphasis
   actions.
 - `destructive` for delete, remove, disconnect.
+- `bleed` is for a `subtle` button at the start or end of a line of text
+  ("Add member" under a list, a menu trigger at the end of a heading row):
+  the button pulls out by its own padding so its icon or label sits on the
+  text edge. Leave it off in toolbars, button groups, and `SectionHeader`
+  actions, and on buttons with chrome: their box is what lines up.
 - `title` shows a Mosaic `Tooltip`, not the native one. It works on a
   disabled or loading button too, so use it to say why a button is disabled.
 - It doesn't set `type`, so inside a `<form>` it submits unless you pass
@@ -32,7 +38,7 @@ add `title` for a hover tooltip. `tone="warning"` colors the icon
 `shape-warning` for a clickable status mark ("something shifted, take a
 look"). It's not `destructive`: that would mean the click destroys
 something. `loading` swaps the icon for a spinner and disables, like
-`Button`'s; it keeps the tone.
+`Button`'s; it keeps the tone. `bleed` `start` | `end`, like `Button`'s.
 
 **`IconToggle`** (`icon-toggle`): an icon-only on/off button for view state
 that nothing else on screen shows (wrap lines, line numbers, show
@@ -138,6 +144,9 @@ animation, the place to reset form state. Build it from its parts:
 
 - `Dialog.Title` is required for accessibility. If the description would be
   redundant, keep it with `visuallyHidden`.
+- A dialog with sidebar navigation, such as settings, shows a page in each
+  pane. Its title is a page title: `<Dialog.Title className="text-large-title">`,
+  with the pane's sections under `text-title` headings.
 - Always put everything between the header and actions in `Dialog.Body`,
   even short content. It scrolls with edge fades while the header, close
   button, and actions stay in view. Without it, tall content scrolls the
@@ -235,6 +244,7 @@ hold user data or state. State is a `Status`.
 | Component           | Path                 | Use                                                                         |
 | ------------------- | -------------------- | --------------------------------------------------------------------------- |
 | `TextStack`         | `text-stack`         | Heading plus description (see [SKILL.md](SKILL.md#spacing))                          |
+| `Card`              | `card`               | Bordered container for a list, table, or panel in a page's text column      |
 | `SectionHeader`     | `section-header`     | Group label above a list or card: `title`, optional `action`                |
 | `NavItem`           | `nav-item`           | Sidebar row: `href`, `active`, optional `icon`, `variant` `default` / `tinted`; `asChild` around your router link |
 | `Tabs`              | `tabs`               | In-page tabs. See below                                                     |
@@ -246,16 +256,28 @@ hold user data or state. State is a `Status`.
 | `Avatar`            | `avatar`             | `src`, `name` (initials when there's no `src` or it fails to load), `size` `sm` / `md` / `lg` |
 | `WorkspaceControl`  | `workspace-control`  | Sidebar workspace switcher; use as a `Menu` trigger                         |
 
+- `Card` hangs 8px past the text column on each side, so content padded
+  `px-4` inside it lines up 8px in from the text around it. It has no
+  padding of its own: rows bring `px-4`, a panel takes `p-4`. Don't give it
+  a width (`w-full`, `w-96`): with a fixed width the overhang becomes an
+  8px shift. Its parent needs at least 8px of room on each side; a
+  `FadingScrollArea` clips anything past its edge, so pad the content
+  inside it by at least `px-2`. `Dialog.Body` already leaves room. Tiles
+  in a grid (a card per agent, say) aren't `Card`s: the overhang would only
+  show at the ends of each row.
 - `SectionHeader` renders a small secondary `h3`. It labels a group; it
-  isn't a page or card title.
+  isn't a page or card title. It has no inset: its text sits on the column
+  edge, with the page text, and the `Card` or `NavItem`s below hang outside it.
 - `NavItem` is a link: it renders an `<a>` and takes `href`. With a
   router, pass `asChild` and its link as the one child; the child has to
   pass through `className` and `aria-current`. A sidebar action that goes
   nowhere, a toggle say, is `asChild` around a `<button>`. `active` comes
   from your router. `icon` takes any SVG icon component, Lucide or not. `default`
   lifts the active row to a lighter surface, for a sidebar on the shell;
-  `tinted` colors it with the theme instead, for a sidebar on the canvas. Rows are
-  full width for a sidebar column; in a horizontal bar give them `w-auto`.
+  `tinted` colors it with the theme instead, for a sidebar on the canvas. Rows hang
+  8px past the sidebar column on each side, so the label lines up with a
+  `SectionHeader` above them; the sidebar needs at least 8px of padding
+  beyond its column (`px-4` works). In a horizontal bar give them `mx-0`.
 - `EmptyState` puts its children in a `<p>`: pass text, not blocks. Use
   `plain` inside a container that already has a card border.
 - `FadingScrollArea` needs a bounded height (`min-h-0 flex-1` in a flex

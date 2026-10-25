@@ -52,7 +52,7 @@ const ITEMS = [
 function Sidebar({ variant }: { variant: "default" | "tinted" }) {
   const [current, setCurrent] = useState("agents");
   return (
-    <nav className="flex w-56 flex-col gap-0.5 rounded-md bg-surface-shell p-2">
+    <nav className="flex w-56 flex-col gap-0.5 rounded-md bg-surface-shell px-4 py-2">
       <SectionHeader title="Workspace" />
       {ITEMS.map((item) => (
         <NavItem

@@ -3,8 +3,12 @@ import { cn } from "./cn";
 import { Tooltip } from "./tooltip";
 
 const sizeConfig = {
-  sm: { size: "size-6", iconSize: 14 },
-  md: { size: "size-8", iconSize: 16 },
+  sm: {
+    size: "size-6",
+    iconSize: 14,
+    bleed: { start: "-ml-1.25", end: "-mr-1.25" },
+  },
+  md: { size: "size-8", iconSize: 16, bleed: { start: "-ml-2", end: "-mr-2" } },
 } as const;
 
 const variantConfig = {
@@ -42,6 +46,7 @@ export function IconButton({
   title,
   tone,
   loading = false,
+  bleed,
   disabled,
   ...props
 }: {
@@ -52,8 +57,11 @@ export function IconButton({
   tone?: keyof typeof toneIconClass;
   /** Swaps the icon for a spinner and disables, like Button's. */
   loading?: boolean;
+  /** Pulls a subtle button out by its inset so the icon lines up with the text at that edge. */
+  bleed?: "start" | "end";
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
   const { size: sizeClass, iconSize } = sizeConfig[size];
+  const bleedClass = bleed && sizeConfig[size].bleed[bleed];
   const { container, icon } = variantConfig[variant];
   const ShownIcon = loading ? Loader2 : Icon;
   const isDisabled = disabled || loading;
@@ -67,7 +75,7 @@ export function IconButton({
         "flex shrink-0 items-center justify-center rounded-md select-none focus-visible:control-focus-ring disabled:cursor-not-allowed disabled:opacity-50",
         sizeClass,
         container,
-        hasDisabledTooltip && "pointer-events-none",
+        hasDisabledTooltip ? "pointer-events-none" : bleedClass,
         className,
       )}
     >
@@ -89,7 +97,10 @@ export function IconButton({
       {hasDisabledTooltip ? (
         <span
           tabIndex={0}
-          className="inline-flex cursor-not-allowed rounded-md focus-visible:control-focus-ring"
+          className={cn(
+            "inline-flex cursor-not-allowed rounded-md focus-visible:control-focus-ring",
+            bleedClass,
+          )}
         >
           {button}
         </span>

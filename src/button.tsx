@@ -6,8 +6,20 @@ import { Tooltip } from "./tooltip";
 // The pixel values repeat what the mosaic-button-* utilities set; ScrollingText
 // needs them as numbers.
 const sizeConfig = {
-  sm: { classes: "mosaic-button-sm", iconSize: 12, paddingPx: 8, gapPx: 6 },
-  md: { classes: "mosaic-button-md", iconSize: 16, paddingPx: 12, gapPx: 7 },
+  sm: {
+    classes: "mosaic-button-sm",
+    iconSize: 12,
+    paddingPx: 8,
+    gapPx: 6,
+    bleed: { start: "-ml-2", end: "-mr-2" },
+  },
+  md: {
+    classes: "mosaic-button-md",
+    iconSize: 16,
+    paddingPx: 12,
+    gapPx: 7,
+    bleed: { start: "-ml-3", end: "-mr-3" },
+  },
 } as const;
 
 const variantConfig = {
@@ -26,6 +38,7 @@ export function Button({
   variant = "default",
   dropdown = false,
   loading = false,
+  bleed,
   disabled,
   children,
   className,
@@ -37,6 +50,7 @@ export function Button({
   variant?: keyof typeof variantConfig;
   dropdown?: boolean;
   loading?: boolean;
+  bleed?: "start" | "end";
   children: React.ReactNode;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
   const { classes, iconSize, paddingPx, gapPx } = sizeConfig[size];
@@ -44,6 +58,7 @@ export function Button({
   const LeadingIcon = loading ? Loader2 : Icon;
   const isDisabled = disabled || loading;
   const hasDisabledTooltip = Boolean(title) && isDisabled;
+  const bleedClass = bleed && sizeConfig[size].bleed[bleed];
 
   const button = (
     <button
@@ -53,7 +68,7 @@ export function Button({
         "group/scrolling-text mosaic-button",
         classes,
         container,
-        hasDisabledTooltip && "pointer-events-none",
+        hasDisabledTooltip ? "pointer-events-none" : bleedClass,
         className,
       )}
     >
@@ -83,7 +98,10 @@ export function Button({
       {hasDisabledTooltip ? (
         <span
           tabIndex={0}
-          className="inline-flex w-fit cursor-not-allowed rounded-md focus-visible:control-focus-ring"
+          className={cn(
+            "inline-flex w-fit cursor-not-allowed rounded-md focus-visible:control-focus-ring",
+            bleedClass,
+          )}
         >
           {button}
         </span>

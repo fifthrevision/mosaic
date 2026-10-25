@@ -2,6 +2,7 @@ import { Copy, Pencil, Play, Plus, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { ColumnLabel } from "../studio/DesignHelpers";
 import { Button } from "./button";
+import { Card } from "./card";
 import { Menu, MenuItem, MenuSeparator } from "./menu";
 
 export const meta = {
@@ -123,6 +124,37 @@ function SaveButton() {
     </Button>
   );
 }
+
+function BleedColumn({ bleed }: { bleed?: "start" }) {
+  return (
+    <div className="flex w-120 flex-col gap-2 px-4">
+      <p className="text-body text-label-secondary">
+        Members can run agents and review their output.
+      </p>
+      <Card>
+        <div className="px-4 py-2 text-body text-label">Ada Lovelace</div>
+      </Card>
+      <div>
+        <Button variant="subtle" size="sm" icon={Plus} bleed={bleed}>
+          Add member
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+export const Bleed = () => (
+  <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-2">
+      <ColumnLabel>bleed="start": icon on the text edge</ColumnLabel>
+      <BleedColumn bleed="start" />
+    </div>
+    <div className="flex flex-col gap-2">
+      <ColumnLabel>no bleed: icon 8px in</ColumnLabel>
+      <BleedColumn />
+    </div>
+  </div>
+);
 
 export const InContext = () => (
   <div className="flex flex-col gap-6">

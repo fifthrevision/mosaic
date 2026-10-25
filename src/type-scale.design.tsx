@@ -1,5 +1,9 @@
+import { Plus } from "lucide-react";
 import { useLayoutEffect, useRef, useState } from "react";
 import { Section } from "../studio/TokenRow";
+import { Button } from "./button";
+import { Card } from "./card";
+import { SectionHeader } from "./section-header";
 
 export const meta = {
   title: "Type Scale",
@@ -56,7 +60,7 @@ function SpecimenRow({
 }
 
 const ROLES = [
-  { name: "text-large-title", usage: "Page headings" },
+  { name: "text-large-title", usage: "Page titles" },
   { name: "text-title", usage: "Card, section, and dialog titles" },
   { name: "text-body", usage: "Default text" },
   { name: "text-subhead", usage: "Dense rows; group labels with medium" },
@@ -146,6 +150,140 @@ export const Wrapping = () => (
           Weekly digest of repository changes
         </h3>
       </WrappingSample>
+    </div>
+  </Section>
+);
+
+function SampleCard({ rows }: { rows: [string, string][] }) {
+  return (
+    <Card>
+      {rows.map(([name, value]) => (
+        <div
+          key={name}
+          className="flex justify-between border-b border-separator-secondary px-4 py-2 text-body last:border-b-0"
+        >
+          <span className="font-medium text-label">{name}</span>
+          <span className="text-label-secondary">{value}</span>
+        </div>
+      ))}
+    </Card>
+  );
+}
+
+function HierarchySample({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <WrappingSample label={label}>
+      <div className="flex flex-col gap-6 rounded-lg border border-separator-secondary p-6">
+        {children}
+      </div>
+    </WrappingSample>
+  );
+}
+
+export const Hierarchy = () => (
+  <Section title="Hierarchy">
+    <div className="grid grid-cols-2 gap-8 py-3">
+      <HierarchySample label="page title → heading">
+        <h1 className="text-large-title text-label">AI</h1>
+        <div className="flex flex-col gap-2">
+          <h2 className="text-title text-label">R5V0 Go</h2>
+          <p className="text-body text-label-secondary">
+            R5V0 Go runs Readview's AI features for you, with no API key to set
+            up. Sign in with GitHub or Google to get a free account.
+          </p>
+        </div>
+        <hr className="border-separator-primary" />
+        <div className="flex flex-col gap-2">
+          <h2 className="text-title text-label">Model</h2>
+          <p className="text-body text-label-secondary">
+            The model that writes walkthroughs and commit messages.
+          </p>
+        </div>
+      </HierarchySample>
+      <HierarchySample label="page title → SectionHeader → Card">
+        <h1 className="text-large-title text-label">Run 28d9620e</h1>
+        <div className="flex flex-col gap-1">
+          <SectionHeader
+            title="Evaluations"
+            action={
+              <Button variant="subtle" size="sm">
+                View all
+              </Button>
+            }
+          />
+          <SampleCard
+            rows={[
+              ["instruction.quality", "0.38"],
+              ["plan.adherence", "0.52"],
+            ]}
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+          <SectionHeader title="Details" />
+          <SampleCard
+            rows={[
+              ["Model", "Claude Sonnet 4.6"],
+              ["Duration", "37.5s"],
+            ]}
+          />
+        </div>
+      </HierarchySample>
+      <div className="col-span-2">
+        <HierarchySample label="page title → heading → SectionHeader → Card, subtle button with bleed">
+          <h1 className="text-large-title text-label">Workspace</h1>
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
+              <h2 className="text-title text-label">Members</h2>
+              <p className="text-body text-label-secondary">
+                Members can run agents and review their output. Admins also
+                manage billing and connectors.
+              </p>
+            </div>
+            <div className="flex flex-col gap-1">
+              <SectionHeader title="Active" />
+              <SampleCard
+                rows={[
+                  ["Chong Han Chua", "Admin"],
+                  ["Ada Lovelace", "Member"],
+                ]}
+              />
+            </div>
+            <div className="flex flex-col gap-1">
+              <SectionHeader title="Pending invites" />
+              <SampleCard rows={[["grace@example.com", "Sent 2d ago"]]} />
+            </div>
+            <div>
+              <Button variant="subtle" size="sm" icon={Plus} bleed="start">
+                Invite member
+              </Button>
+            </div>
+          </div>
+          <hr className="border-separator-primary" />
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
+              <h2 className="text-title text-label">Connectors</h2>
+              <p className="text-body text-label-secondary">
+                Services every agent in this workspace can reach.
+              </p>
+            </div>
+            <div className="flex flex-col gap-1">
+              <SectionHeader title="Installed" />
+              <SampleCard
+                rows={[
+                  ["GitHub", "3 repositories"],
+                  ["Linear", "1 team"],
+                ]}
+              />
+            </div>
+          </div>
+        </HierarchySample>
+      </div>
     </div>
   </Section>
 );

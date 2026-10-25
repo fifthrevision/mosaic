@@ -143,6 +143,39 @@ function WindowBar() {
   );
 }
 
+function BleedRow({ bleed }: { bleed?: "end" }) {
+  return (
+    <div className="flex w-96 items-center justify-between">
+      <h2 className="text-title text-label">Instructions</h2>
+      <IconButton
+        icon={Ellipsis}
+        variant="subtle"
+        aria-label="More"
+        bleed={bleed}
+      />
+    </div>
+  );
+}
+
+export const Bleed = () => (
+  <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-2">
+      <ColumnLabel>bleed="end": icon on the text edge</ColumnLabel>
+      <BleedRow bleed="end" />
+      <p className="w-96 text-right text-body text-label-secondary">
+        Right edge of the text column
+      </p>
+    </div>
+    <div className="flex flex-col gap-2">
+      <ColumnLabel>no bleed: icon 8px in</ColumnLabel>
+      <BleedRow />
+      <p className="w-96 text-right text-body text-label-secondary">
+        Right edge of the text column
+      </p>
+    </div>
+  </div>
+);
+
 export const InContext = () => (
   <div className="flex flex-col gap-6">
     <div className="flex flex-col gap-2">

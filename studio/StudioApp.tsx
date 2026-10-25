@@ -137,20 +137,16 @@ function applyTheme(theme: string) {
 function Sidebar({
   entries,
   activePath,
-  docked,
-  onToggleDocked,
 }: {
   entries: DesignEntry[];
   activePath: string;
-  docked: boolean;
-  onToggleDocked: () => void;
 }) {
   const [theme, setTheme] = useState(currentTheme);
 
   return (
-    <aside className="fixed top-0 left-0 flex h-full w-52 flex-col gap-4 border-r border-separator-primary bg-surface-shell p-4">
-      <h1 className="px-2 text-body font-medium text-label">Studio</h1>
-      <nav className="-mx-4 flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4">
+    <aside className="fixed top-0 left-0 flex h-full w-56 flex-col gap-4 border-r border-separator-primary bg-surface-shell px-6 py-4">
+      <h1 className="text-body font-medium text-label">Studio</h1>
+      <nav className="-mx-6 flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-6">
         {import.meta.env.VITE_DTG_URL && (
           <NavItem
             variant="tinted"
@@ -176,14 +172,8 @@ function Sidebar({
           </section>
         ))}
       </nav>
-      {import.meta.env.VITE_DTG_URL && activePath !== COLORS_PATH && (
-        <NavItem variant="tinted" active={docked} asChild>
-          <button type="button" onClick={onToggleDocked}>
-            Edit colors
-          </button>
-        </NavItem>
-      )}
       <SegmentedControl
+        className="-mx-2"
         aria-label="Theme"
         options={THEME_OPTIONS}
         value={theme}
@@ -208,11 +198,10 @@ function DesignPage({ entry }: { entry: DesignEntry }) {
   return <Portfolio module={mod} name={entry.name} />;
 }
 
-type FramePlacement = "page" | "panel" | "hidden";
+type FramePlacement = "page" | "hidden";
 
 const FRAME_PLACEMENT_CLASS: Record<FramePlacement, string> = {
-  page: "fixed inset-y-0 right-0 left-52",
-  panel: "fixed inset-y-0 right-0 w-[480px] border-l border-separator-primary",
+  page: "fixed inset-y-0 right-0 left-56",
   hidden: "hidden",
 };
 
@@ -241,8 +230,7 @@ function DtgFrame({
 // The dtg editor posts the CSS for whatever it shows, edits being tried
 // included; laid over the built colors, it re-skins every component live.
 // The page's canvas color goes back to the editor whenever it changes, from
-// an edit or a theme switch, so the docked panel is drawn on the same
-// background as the page beside it.
+// an edit or a theme switch, so the editor is drawn on the page's canvas.
 function useLiveColors(frameRef: RefObject<HTMLIFrameElement | null>) {
   useEffect(() => {
     const style = document.head.appendChild(document.createElement("style"));
@@ -283,25 +271,16 @@ export function StudioApp() {
   const path = usePath();
   const entries = parseEntries();
   const entry = path ? entries.find((e) => e.path === path) : null;
-  const [docked, setDocked] = useState(false);
   const frameRef = useRef<HTMLIFrameElement>(null);
   useLiveColors(frameRef);
-  const placement: FramePlacement =
-    path === COLORS_PATH ? "page" : docked ? "panel" : "hidden";
+  const placement: FramePlacement = path === COLORS_PATH ? "page" : "hidden";
 
   return (
     <TooltipProvider>
       <ConfirmProvider>
         <div className="flex min-h-screen">
-          <Sidebar
-            entries={entries}
-            activePath={path}
-            docked={docked}
-            onToggleDocked={() => setDocked((open) => !open)}
-          />
-          <main
-            className={`ml-52 flex-1 ${placement === "panel" ? "mr-[480px]" : ""}`}
-          >
+          <Sidebar entries={entries} activePath={path} />
+          <main className="ml-56 flex-1">
             {!path && (
               <div className="p-8 text-label-secondary">
                 Select a component from the sidebar.

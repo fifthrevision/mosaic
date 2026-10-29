@@ -123,7 +123,8 @@ Gotchas:
 
 **`Dialog`** (`dialog`) is controlled only: `open` and `onOpenChange` are
 required. `size` is `small` (confirms, single fields) | `medium` (default,
-forms) | `large` (multi-column settings). `onClosed` fires after the close
+forms) | `large` (multi-column settings) | `xlarge` (settings with sidebar
+navigation; capped at 80vw × 80vh). `onClosed` fires after the close
 animation, the place to reset form state. Build it from its parts:
 
 ```tsx

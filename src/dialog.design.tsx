@@ -15,7 +15,7 @@ export const meta = {
     "Controlled modal built from Header, Title, Description, and Actions. No Cancel button: the close button, overlay click, and Escape all dismiss.",
 };
 
-const SIZES: DialogSize[] = ["small", "medium", "large"];
+const SIZES: DialogSize[] = ["small", "medium", "large", "xlarge"];
 
 const COLUMNS = [
   "default",

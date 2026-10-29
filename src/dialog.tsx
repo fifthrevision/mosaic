@@ -12,6 +12,7 @@ const sizeClass = {
   small: "w-dialog-small",
   medium: "w-dialog-medium",
   large: "w-dialog-large",
+  xlarge: "w-dialog-xlarge max-w-[80vw] max-h-[80vh]",
 } as const;
 
 export type DialogSize = keyof typeof sizeClass;

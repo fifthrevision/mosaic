@@ -34,6 +34,7 @@
   --width-dialog-small: 27.5rem; /* 440px */
   --width-dialog-medium: 40rem; /* 640px */
   --width-dialog-large: 60rem; /* 960px */
+  --width-dialog-xlarge: 72rem; /* 1152px */
 
   /* Radius */
   --radius-*: initial;

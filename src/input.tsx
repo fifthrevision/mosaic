@@ -5,7 +5,7 @@ export function Input({
   icon: Icon,
   className,
   ...props
-}: React.InputHTMLAttributes<HTMLInputElement> & { icon?: LucideIcon }) {
+}: React.ComponentProps<"input"> & { icon?: LucideIcon }) {
   const inputClasses = cn("mosaic-input", Icon && "pl-9", className);
 
   if (Icon) {

@@ -184,6 +184,20 @@ animation, the place to reset form state. Build it from its parts:
   buttons to the left.
 - The close button, overlay click, and Escape all dismiss, so no Cancel
   button is needed. `DialogClose` (`asChild`) makes another button close it.
+- `autoFocus` on a child is lost when the dialog opens from a `MenuItem`: the
+  menu's focus trap rejects it, and focus lands on the close button. Use
+  `onOpenAutoFocus` instead, with a ref to the element:
+
+  ```tsx
+  <Dialog
+    open={open}
+    onOpenChange={setOpen}
+    onOpenAutoFocus={(event) => {
+      event.preventDefault();
+      textareaRef.current?.focus();
+    }}
+  >
+  ```
 
 **`useConfirm` / `useAlert`** (`confirm-dialog`) need `ConfirmProvider`.
 Don't build a `Dialog` for a confirmation:

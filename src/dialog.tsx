@@ -21,6 +21,7 @@ interface DialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onClosed?: () => void;
+  onOpenAutoFocus?: (event: Event) => void;
   children: React.ReactNode;
   className?: string;
   size?: DialogSize;
@@ -105,6 +106,7 @@ const DialogImpl = ({
   open,
   onOpenChange,
   onClosed,
+  onOpenAutoFocus,
   children,
   className,
   size = "medium",
@@ -114,6 +116,7 @@ const DialogImpl = ({
       <RadixDialog.Portal>
         <RadixDialog.Overlay className="fixed inset-0 z-50 bg-surface-scrim backdrop-blur-sm data-[state=open]:animate-[dialog-overlay-in_150ms_ease-out] data-[state=closed]:animate-[dialog-overlay-out_100ms_ease-in]" />
         <RadixDialog.Content
+          onOpenAutoFocus={onOpenAutoFocus}
           onAnimationEnd={(e) => {
             if (
               e.target === e.currentTarget &&

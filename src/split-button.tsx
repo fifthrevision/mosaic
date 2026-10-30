@@ -41,8 +41,9 @@ const variantConfig = {
 type Size = keyof typeof sizeConfig;
 type Variant = keyof typeof variantConfig;
 
-// Each half is a raised button of its own, 1px apart. The frame fades when
-// disabled rather than each half, so the gap between them fades too.
+// Each half is a raised button of its own, 1px apart. With both disabled the
+// frame fades rather than each half, so the gap between them fades too. With
+// one disabled, that half fades by itself.
 function Frame({
   disabled,
   children,
@@ -65,10 +66,18 @@ function Frame({
 const halfClassName =
   "inline-flex min-w-0 items-center justify-center font-medium select-none focus-visible:control-focus-ring disabled:cursor-not-allowed";
 
+// Opacity makes the faded half a stacking context, which paints over the other
+// half's focus ring where it reaches past the 1px gap, so that half lifts.
+function oneHalfDisabledClassName(disabled: boolean, otherDisabled: boolean) {
+  if (disabled === otherDisabled) return undefined;
+  return disabled ? "opacity-50" : "focus-visible:relative focus-visible:z-10";
+}
+
 function MenuHalf({
   size,
   variant,
   disabled,
+  mainDisabled,
   menu,
   align,
   menuLabel,
@@ -76,6 +85,7 @@ function MenuHalf({
   size: Size;
   variant: Variant;
   disabled: boolean;
+  mainDisabled: boolean;
   menu: React.ReactNode;
   align: "start" | "center" | "end";
   menuLabel: string;
@@ -96,6 +106,7 @@ function MenuHalf({
             height,
             square,
             variantConfig[variant].container,
+            oneHalfDisabledClassName(disabled, mainDisabled),
           )}
         >
           <ChevronDown
@@ -115,6 +126,8 @@ type SplitProps = {
   size?: Size;
   variant?: Variant;
   loading?: boolean;
+  /** Disables the chevron half. Follows `disabled` unless set; `loading` disables it regardless. */
+  menuDisabled?: boolean;
   /** The menu's items: MenuItem, MenuSeparator, MenuLabel. */
   menu: React.ReactNode;
   align?: "start" | "center" | "end";
@@ -127,6 +140,7 @@ export function SplitButton({
   size = "md",
   variant = "default",
   loading = false,
+  menuDisabled,
   menu,
   align = "end",
   menuLabel = "More options",
@@ -141,9 +155,10 @@ export function SplitButton({
   const { container, icon } = variantConfig[variant];
   const LeadingIcon = loading ? Loader2 : Icon;
   const isDisabled = Boolean(disabled) || loading;
+  const isMenuDisabled = Boolean(menuDisabled ?? disabled) || loading;
 
   return (
-    <Frame disabled={isDisabled}>
+    <Frame disabled={isDisabled && isMenuDisabled}>
       <button
         {...props}
         disabled={isDisabled}
@@ -154,6 +169,7 @@ export function SplitButton({
           height,
           label,
           container,
+          oneHalfDisabledClassName(isDisabled, isMenuDisabled),
           className,
         )}
       >
@@ -173,7 +189,8 @@ export function SplitButton({
       <MenuHalf
         size={size}
         variant={variant}
-        disabled={isDisabled}
+        disabled={isMenuDisabled}
+        mainDisabled={isDisabled}
         menu={menu}
         align={align}
         menuLabel={menuLabel}
@@ -187,6 +204,7 @@ export function SplitIconButton({
   size = "md",
   variant = "default",
   loading = false,
+  menuDisabled,
   menu,
   align = "end",
   menuLabel = "More options",
@@ -199,9 +217,10 @@ export function SplitIconButton({
   const { height, square, iconOnlySize } = sizeConfig[size];
   const ShownIcon = loading ? Loader2 : Icon;
   const isDisabled = Boolean(disabled) || loading;
+  const isMenuDisabled = Boolean(menuDisabled ?? disabled) || loading;
 
   return (
-    <Frame disabled={isDisabled}>
+    <Frame disabled={isDisabled && isMenuDisabled}>
       <button
         {...props}
         disabled={isDisabled}
@@ -211,6 +230,7 @@ export function SplitIconButton({
           height,
           square,
           variantConfig[variant].container,
+          oneHalfDisabledClassName(isDisabled, isMenuDisabled),
           className,
         )}
       >
@@ -222,7 +242,8 @@ export function SplitIconButton({
       <MenuHalf
         size={size}
         variant={variant}
-        disabled={isDisabled}
+        disabled={isMenuDisabled}
+        mainDisabled={isDisabled}
         menu={menu}
         align={align}
         menuLabel={menuLabel}

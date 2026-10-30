@@ -2,6 +2,7 @@ import {
   Clock,
   Copy,
   FlaskConical,
+  GitCommitHorizontal,
   Pencil,
   Play,
   Plus,
@@ -41,6 +42,12 @@ const NEW_MENU = (
       From template…
     </MenuItem>
   </>
+);
+
+const COMMIT_MENU = (
+  <MenuItem icon={Pencil} onSelect={() => {}}>
+    Amend last commit
+  </MenuItem>
 );
 
 export const Variants = () => (
@@ -95,6 +102,41 @@ export const States = () => (
           icon={Plus}
           aria-label="New"
           disabled
+          menu={NEW_MENU}
+        />
+      </div>
+    </div>
+    <div className="flex flex-col gap-2">
+      <ColumnLabel>main half disabled, menu usable</ColumnLabel>
+      <div className="flex items-center gap-3">
+        <SplitButton
+          variant="primary"
+          icon={GitCommitHorizontal}
+          disabled
+          menuDisabled={false}
+          menu={COMMIT_MENU}
+        >
+          Commit
+        </SplitButton>
+        <SplitIconButton
+          icon={GitCommitHorizontal}
+          aria-label="Commit"
+          disabled
+          menuDisabled={false}
+          menu={COMMIT_MENU}
+        />
+      </div>
+    </div>
+    <div className="flex flex-col gap-2">
+      <ColumnLabel>menu disabled, main half usable</ColumnLabel>
+      <div className="flex items-center gap-3">
+        <SplitButton icon={Play} menuDisabled menu={RUN_MENU}>
+          Run
+        </SplitButton>
+        <SplitIconButton
+          icon={Plus}
+          aria-label="New"
+          menuDisabled
           menu={NEW_MENU}
         />
       </div>

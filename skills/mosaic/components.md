@@ -40,6 +40,31 @@ look"). It's not `destructive`: that would mean the click destroys
 something. `loading` swaps the icon for a spinner and disables, like
 `Button`'s; it keeps the tone. `bleed` `start` | `end`, like `Button`'s.
 
+**`SplitButton`** / **`SplitIconButton`** (`split-button`): a button with a
+menu of alternatives on an attached chevron. The main half runs the common
+action. For a menu with no common action, use a `Button` with `dropdown` as
+a `Menu` trigger.
+
+| Prop           | Values                                                      |
+| -------------- | ----------------------------------------------------------- |
+| `menu`         | The menu's items: `MenuItem`, `MenuSeparator`, `MenuLabel`  |
+| `variant`      | `default`, `primary`, `destructive`                         |
+| `size`         | `md` (32px, default), `sm` (24px)                           |
+| `icon`         | Lucide icon; required on `SplitIconButton`                  |
+| `loading`      | Swaps the icon for a spinner and disables both halves       |
+| `disabled`     | Disables both halves, unless `menuDisabled` says otherwise  |
+| `menuDisabled` | Disables the chevron on its own; follows `disabled` if unset |
+| `align`        | Menu alignment: `start`, `center`, `end` (default)          |
+| `menuLabel`    | Accessible name for the chevron (default "More options")    |
+
+- When a menu item still works while the main action can't run, pass both:
+  a Commit button with no message, whose menu still offers "Amend last
+  commit", is `disabled={!canCommit} menuDisabled={false}`.
+- Other props go to the main half, so `SplitIconButton` needs `aria-label`.
+  `title` is the native one here, not a Mosaic `Tooltip`.
+- It doesn't set `type` on the main half, so inside a `<form>` it submits
+  unless you pass `type="button"`.
+
 **`IconToggle`** (`icon-toggle`): an icon-only on/off button for view state
 that nothing else on screen shows (wrap lines, line numbers, show
 whitespace). `icon`, `pressed`, `onPressedChange(boolean)`, `variant`

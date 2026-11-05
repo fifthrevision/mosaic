@@ -1,5 +1,5 @@
 import { Braces } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Example } from "../studio/DesignHelpers";
 import { Button } from "./button";
 import {
@@ -127,3 +127,66 @@ export const Messages = () => (
     <MessageMenu label="Unavailable" message="Language server not running" />
   </div>
 );
+
+type SymbolResults =
+  { status: "searching" } | { status: "loaded"; symbols: CodeSymbol[] };
+
+// Earlier results stay up until the next ones arrive, so the list doesn't
+// blank on every keystroke.
+function AsyncSymbols({
+  search,
+  onPick,
+}: {
+  search: string;
+  onPick: (name: string) => void;
+}) {
+  const [results, setResults] = useState<SymbolResults>({
+    status: "searching",
+  });
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setResults({ status: "loaded", symbols: byFuzzyRank(SYMBOLS, search) });
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [search]);
+  if (results.status === "searching")
+    return <SearchMenuMessage>Searching…</SearchMenuMessage>;
+  if (results.symbols.length === 0)
+    return <SearchMenuMessage>No matches</SearchMenuMessage>;
+  return results.symbols.map((symbol) => (
+    <SearchMenuItem
+      key={symbol.name}
+      value={symbol.name}
+      onSelect={() => onPick(symbol.name)}
+    >
+      <SymbolRow symbol={symbol} />
+    </SearchMenuItem>
+  ));
+}
+
+export const AsyncResults = () => {
+  const [open, setOpen] = useState(false);
+  const [picked, setPicked] = useState("");
+  return (
+    <Example label="results arrive 300 ms after typing; Enter picks the first new row">
+      <div className="flex flex-col items-start gap-2">
+        <SearchMenu
+          open={open}
+          onOpenChange={setOpen}
+          placeholder="Go to symbol…"
+          className="w-80"
+          trigger={
+            <Button icon={Braces} variant="subtle" size="sm" dropdown>
+              Symbols
+            </Button>
+          }
+        >
+          {(search) => <AsyncSymbols search={search} onPick={setPicked} />}
+        </SearchMenu>
+        <span className="text-subhead text-label-secondary">
+          picked: {picked || "—"}
+        </span>
+      </div>
+    </Example>
+  );
+};

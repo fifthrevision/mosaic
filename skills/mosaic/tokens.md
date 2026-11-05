@@ -27,6 +27,7 @@ Above the page:
 | --------------------- | -------------------------------------------------------------------------------------------- |
 | `bg-surface-panel`    | The frame of a persistent window (the docked assistant). Its content area is a card. Follows `shell`; pair with `panel-shadow` |
 | `floating-surface`    | Menus and choice lists (`Menu`, `Combobox`, autocomplete): `bg-surface-floating` (card color) at 95% with a 4px backdrop blur, opaque under `prefers-reduced-transparency`. Pair with `overlay-shadow` |
+| `glass-surface`       | `CommandMenu`: the floating color at 50% with a 12px backdrop blur, glassier than `floating-surface`, opaque under `prefers-reduced-transparency`. Pair with `command-shadow` and a `separator-primary-translucent` border, so it stays apart from busy content behind it |
 | `bg-surface-floating` | The opaque floating color, for tooltips                                                      |
 | `bg-surface-elevated` | Toasts: a step lifted from canvas and cards in each mode. Text and icons on it use the normal roles |
 | `bg-surface-scrim`    | The backdrop behind a modal: translucent black, darker in dark mode. `Dialog` and `ConfirmDialog` use it |
@@ -138,6 +139,7 @@ Mosaic's shadow colors deepen in dark mode.
 | `card-shadow`           | Cards on the canvas                                  |
 | `overlay-shadow`        | Menus, tooltips, toasts                              |
 | `dialog-shadow`         | Dialogs and popovers                                 |
+| `command-shadow`        | `CommandMenu`: deeper than `dialog-shadow`, to lift a glass surface off the page |
 | `panel-shadow`          | Persistent windows (`bg-surface-panel`)              |
 | `input-shadow`     | The inset shadow of input wells                      |
 | `card-interactive`      | Clickable cards: on hover the border turns `separator-card-hover` and the shadow lifts; the fill doesn't change. Use with `card-shadow` |

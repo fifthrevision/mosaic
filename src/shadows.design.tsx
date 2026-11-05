@@ -12,6 +12,7 @@ export const Shadows = () => (
         { name: "control-shadow", cls: "control-shadow" },
         { name: "overlay-shadow", cls: "overlay-shadow" },
         { name: "dialog-shadow", cls: "dialog-shadow" },
+        { name: "command-shadow", cls: "command-shadow" },
       ].map(({ name, cls }) => (
         <div key={name} className="flex flex-col items-center gap-3">
           <div

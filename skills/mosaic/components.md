@@ -142,6 +142,7 @@ Gotchas:
 | Yes/no before an action, or a one-off notice | `useConfirm` / `useAlert` |
 | A task with its own form or content         | `Dialog`                  |
 | A list of actions from a trigger            | `Menu`                    |
+| A searchable list opened by a shortcut      | `CommandMenu`             |
 | A small anchored panel with controls        | `Popover`                 |
 | A hint on hover                             | `Tooltip` (or `title`)    |
 | Transient feedback after something happens  | `toast`                   |
@@ -231,6 +232,24 @@ newlines are kept. Opening a second dialog resolves the first as `false`.
 
 Menu icons take `UIIcon` (`/ui-icon`): a Lucide icon or an `SVGIcon`-based
 component.
+
+**`CommandMenu`** (`command-menu`): a search field over a list, floating at
+the top of the window with no backdrop. It has no trigger: the app opens it
+from a shortcut through `open` and `onOpenChange`. `label` names it for
+screen readers. The search starts empty each time it opens. The caller
+filters and renders the rows from `children(search)` (`rankBySearch` from
+`search-menu` sorts by fuzzy match); `onHighlightChange` reports the
+highlighted row's `value`.
+
+- `CommandMenuItem`: `value`, `onSelect` (selecting closes the menu),
+  `disabled`, and the row's parts, all but `title` optional: `icon`
+  (`UIIcon`), `title`, `subtitle` (a second line), `detail` (trailing
+  secondary text, such as a path), `shortcut` (keys for `Shortcut`). Pass
+  only the parts the row has; one or two lines follows from `subtitle`.
+- `CommandMenuMessage`: loading, empty, and error lines in place of rows.
+
+**`Shortcut`** (`shortcut`): `keys` (`["⌘", "K"]`), one keycap each. The app
+passes the glyphs for its platform.
 
 **`Popover`** (`popover`): `Popover`, `PopoverTrigger` (`asChild`),
 `PopoverContent` (Radix content props: `side`, `align`, `sideOffset`). The

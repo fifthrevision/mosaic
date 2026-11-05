@@ -18,7 +18,8 @@
 @theme {
   /* Typography */
   --font-sans: "Inter Variable", system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-mono:
+    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   /* Role names replace Tailwind's size scale; text-sm/text-base/etc. no
      longer generate CSS. Line height is inherited from body. */
   --text-*: initial;
@@ -96,6 +97,12 @@
   box-shadow: 0px 8px 40px var(--color-shadow-1);
 }
 
+@utility command-shadow {
+  box-shadow:
+    0px 16px 48px var(--color-shadow-3),
+    0px 2px 6px var(--color-shadow-2);
+}
+
 @utility panel-shadow {
   box-shadow:
     0px 0px 40px var(--color-shadow-1),
@@ -154,7 +161,6 @@
   -webkit-text-fill-color: transparent;
   animation: shimmer 1.6s linear infinite;
 }
-
 
 /* -------------------------------------------------- */
 /* Recipes                                            */
@@ -239,4 +245,18 @@
 }
 @utility mosaic-nav-item-active-tinted {
   @apply bg-state-selected-tint text-label hover:bg-state-selected-tint;
+}
+
+@utility glass-surface {
+  background-color: color-mix(
+    in srgb,
+    var(--color-surface-floating) 50%,
+    transparent
+  );
+  backdrop-filter: blur(12px) saturate(180%);
+
+  @media (prefers-reduced-transparency: reduce) {
+    background-color: var(--color-surface-floating);
+    backdrop-filter: none;
+  }
 }

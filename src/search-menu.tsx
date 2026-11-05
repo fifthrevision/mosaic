@@ -2,6 +2,11 @@ import * as Popover from "@radix-ui/react-popover";
 import { Command, defaultFilter } from "cmdk";
 import { createContext, useContext, useState } from "react";
 import { cn } from "./cn";
+import {
+  RowRegistryProvider,
+  useCommandHighlight,
+  useRegisteredRow,
+} from "./command-highlight";
 
 const CloseSearchMenuContext = createContext<() => void>(() => {});
 
@@ -63,20 +68,15 @@ function SearchMenuCommand({
   children: (search: string) => React.ReactNode;
 }) {
   const [search, setSearch] = useState("");
-  // cmdk only reports highlight changes when `value` is controlled. It also
-  // highlights the first row on open and on every search change, and reports
-  // those too.
-  const [highlighted, setHighlighted] = useState("");
+  const { highlighted, highlight, registerRow } =
+    useCommandHighlight(onHighlightChange);
 
   return (
     <Command
       label={placeholder}
       shouldFilter={false}
       value={highlighted}
-      onValueChange={(value) => {
-        setHighlighted(value);
-        onHighlightChange?.(value);
-      }}
+      onValueChange={highlight}
       className="flex flex-col gap-1"
     >
       <Command.Input
@@ -86,7 +86,9 @@ function SearchMenuCommand({
         className="h-8 w-full rounded-sm border border-separator-secondary bg-surface-input px-2 text-body font-medium text-label placeholder:text-label-tertiary placeholder:font-regular outline-none focus:border-separator-input-focus"
       />
       <Command.List className="max-h-80 overflow-y-auto">
-        {children(search)}
+        <RowRegistryProvider value={registerRow}>
+          {children(search)}
+        </RowRegistryProvider>
       </Command.List>
     </Command>
   );
@@ -104,8 +106,10 @@ export function SearchMenuItem({
   children: React.ReactNode;
 }) {
   const close = useContext(CloseSearchMenuContext);
+  const rowRef = useRegisteredRow(value, disabled ?? false);
   return (
     <Command.Item
+      ref={rowRef}
       value={value}
       disabled={disabled}
       onSelect={() => {

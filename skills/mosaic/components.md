@@ -236,7 +236,9 @@ component.
 **`CommandMenu`** (`command-menu`): a search field over a list, floating at
 the top of the window with no backdrop. It has no trigger: the app opens it
 from a shortcut through `open` and `onOpenChange`. `label` names it for
-screen readers. The search starts empty each time it opens. The caller
+screen readers. The search starts as `initialSearch` (empty by default)
+each time it opens, so one menu can open in a mode its search prefix picks,
+such as `>` for commands. The caller
 filters and renders the rows from `children(search)` (`rankBySearch` from
 `search-menu` sorts by fuzzy match); `onHighlightChange` reports the
 highlighted row's `value`.

@@ -279,6 +279,57 @@ export const AsyncSearch = () => {
   );
 };
 
+const COMMANDS = MIXED.filter((entry) => entry.shortcut !== undefined);
+const FILES = MIXED.filter(
+  (entry) => entry.shortcut === undefined && entry.detail === undefined,
+);
+
+// The menu's mode follows the search text's prefix, so typing or deleting
+// ">" switches between files and commands without reopening.
+export const OpenedWithPrefix = () => {
+  const [open, setOpen] = useState(false);
+  const [initialSearch, setInitialSearch] = useState("");
+  const [picked, setPicked] = useState("");
+  function openWith(search: string) {
+    setInitialSearch(search);
+    setOpen(true);
+  }
+  return (
+    <div className="flex flex-col items-start gap-2">
+      <div className="flex gap-2">
+        <Button variant="default" size="sm" onClick={() => openWith("")}>
+          Go to file
+        </Button>
+        <Button variant="default" size="sm" onClick={() => openWith(">")}>
+          Show commands
+        </Button>
+      </div>
+      <CommandMenu
+        open={open}
+        onOpenChange={setOpen}
+        label="Command palette"
+        placeholder="Go to file (> for commands)…"
+        initialSearch={initialSearch}
+      >
+        {(search) => {
+          const isCommand = search.startsWith(">");
+          const visible = rankBySearch(
+            isCommand ? COMMANDS : FILES,
+            isCommand ? search.slice(1) : search,
+            (entry) => entry.title,
+          );
+          if (visible.length === 0)
+            return <CommandMenuMessage>No matches</CommandMenuMessage>;
+          return visible.map((entry) => (
+            <EntryRow key={entry.value} entry={entry} onPick={setPicked} />
+          ));
+        }}
+      </CommandMenu>
+      <Picked value={picked} />
+    </div>
+  );
+};
+
 function MessageMenu({ label, message }: { label: string; message: string }) {
   const [open, setOpen] = useState(false);
   return (

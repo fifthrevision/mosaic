@@ -241,7 +241,10 @@ each time it opens, so one menu can open in a mode its search prefix picks,
 such as `>` for commands. The caller
 filters and renders the rows from `children(search)` (`rankBySearch` from
 `search-menu` sorts by fuzzy match); `onHighlightChange` reports the
-highlighted row's `value`.
+highlighted row's `value`. `onClosed` runs once the menu has closed and
+focus has returned, so a row that starts something taking focus (a find bar,
+another dialog) should defer it to `onClosed` rather than doing it in
+`onSelect`.
 
 - `CommandMenuItem`: `value`, `onSelect` (selecting closes the menu),
   `disabled`, and the row's parts, all but `title` optional: `icon`

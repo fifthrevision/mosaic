@@ -19,6 +19,7 @@ export function CommandMenu({
   placeholder = "Search…",
   initialSearch = "",
   onHighlightChange,
+  onClosed,
   className,
   children,
 }: {
@@ -28,6 +29,7 @@ export function CommandMenu({
   placeholder?: string;
   initialSearch?: string;
   onHighlightChange?: (value: string) => void;
+  onClosed?: () => void;
   className?: string;
   children: (search: string) => React.ReactNode;
 }) {
@@ -45,6 +47,11 @@ export function CommandMenu({
             if (input === null) return;
             input.focus();
             input.setSelectionRange(input.value.length, input.value.length);
+          }}
+          // Radix returns focus right after this event, so a later task is
+          // the first moment work started here can take focus and keep it.
+          onCloseAutoFocus={() => {
+            if (onClosed !== undefined) setTimeout(onClosed, 0);
           }}
           className={cn(
             "fixed top-20 left-1/2 z-50 w-dialog-medium max-w-[calc(100vw-32px)] -translate-x-1/2 overflow-hidden rounded-xl border border-separator-primary-translucent glass-surface command-shadow origin-top focus:outline-none data-[state=open]:animate-[menu-in_150ms_ease-out] data-[state=closed]:animate-[menu-out_100ms_ease-in]",

@@ -51,7 +51,9 @@
 }
 
 @utility control-shadow {
-  box-shadow: 0px 1px 1px var(--color-shadow-4);
+  box-shadow:
+    0px 1px 1px var(--color-shadow-4),
+    0px 1px 4px -0.5px var(--color-shadow-3);
 }
 
 @utility card-shadow {
@@ -107,14 +109,6 @@
   box-shadow:
     0px 0px 40px var(--color-shadow-1),
     0px 0px 6px -2px var(--color-shadow-3);
-}
-
-/* control-shadow only falls below the button; the halves of a split button
-   meet at a 1px gap, so they also need a faint edge on the sides. */
-@utility control-shadow-split {
-  box-shadow:
-    0px 1px 1px var(--color-shadow-4),
-    0px 0px 1px var(--color-shadow-4);
 }
 
 @utility control-shadow-active {
@@ -208,8 +202,11 @@
 @utility mosaic-button-destructive {
   @apply mosaic-button-default text-label-destructive;
 }
+@utility mosaic-split-frame {
+  @apply rounded-md border border-separator-secondary bg-surface-button control-shadow;
+}
 @utility mosaic-split-half-default {
-  @apply border border-separator-secondary bg-surface-button text-label control-shadow-split hover:not-disabled:bg-state-button-hover active:not-disabled:control-shadow-active active:not-disabled:translate-y-px data-[state=open]:control-shadow-active data-[state=open]:translate-y-px data-[state=open]:bg-state-button-hover;
+  @apply text-label hover:not-disabled:bg-state-button-hover active:not-disabled:bg-state-button-hover data-[state=open]:bg-state-button-hover;
 }
 @utility mosaic-split-half-primary {
   @apply mosaic-split-half-default text-label-theme;

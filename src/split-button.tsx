@@ -41,33 +41,42 @@ const variantConfig = {
 type Size = keyof typeof sizeConfig;
 type Variant = keyof typeof variantConfig;
 
-// Each half is a raised button of its own, 1px apart. With both disabled the
-// frame fades rather than each half, so the gap between them fades too. With
-// one disabled, that half fades by itself.
+// One raised shell holds both halves, so a single shadow runs under the whole
+// shape. With both disabled the shell fades rather than each half, so the
+// divider fades too. With one disabled, that half fades by itself.
 function Frame({
+  size,
   disabled,
-  children,
+  main,
+  menu,
 }: {
+  size: Size;
   disabled: boolean;
-  children: React.ReactNode;
+  main: React.ReactNode;
+  menu: React.ReactNode;
 }) {
   return (
     <div
       className={cn(
-        "inline-flex w-fit max-w-80 shrink-0 gap-px",
+        "mosaic-split-frame inline-flex w-fit max-w-80 shrink-0",
+        sizeConfig[size].height,
         disabled && "opacity-50",
       )}
     >
-      {children}
+      {main}
+      <span aria-hidden className="-my-px w-px shrink-0 bg-separator-primary" />
+      {menu}
     </div>
   );
 }
 
+// The halves reach over the shell's border on their outer sides, so a darker
+// hover or pressed fill covers it instead of leaving a pale ring around one half.
 const halfClassName =
-  "inline-flex min-w-0 items-center justify-center font-medium select-none focus-visible:control-focus-ring disabled:cursor-not-allowed";
+  "-my-px inline-flex min-w-0 self-stretch items-center justify-center font-medium select-none focus-visible:control-focus-ring disabled:cursor-not-allowed";
 
 // Opacity makes the faded half a stacking context, which paints over the other
-// half's focus ring where it reaches past the 1px gap, so that half lifts.
+// half's focus ring where it reaches past the divider, so that half lifts.
 function oneHalfDisabledClassName(disabled: boolean, otherDisabled: boolean) {
   if (disabled === otherDisabled) return undefined;
   return disabled ? "opacity-50" : "focus-visible:relative focus-visible:z-10";
@@ -90,7 +99,7 @@ function MenuHalf({
   align: "start" | "center" | "end";
   menuLabel: string;
 }) {
-  const { height, square, iconSize } = sizeConfig[size];
+  const { square, iconSize } = sizeConfig[size];
   return (
     <Menu
       align={align}
@@ -102,8 +111,7 @@ function MenuHalf({
           aria-label={menuLabel}
           className={cn(
             halfClassName,
-            "shrink-0 rounded-r-md",
-            height,
+            "-mr-px shrink-0 rounded-r-md",
             square,
             variantConfig[variant].container,
             oneHalfDisabledClassName(disabled, mainDisabled),
@@ -151,51 +159,56 @@ export function SplitButton({
 }: SplitProps & {
   children: React.ReactNode;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
-  const { height, label, iconSize, paddingPx, gapPx } = sizeConfig[size];
+  const { label, iconSize, paddingPx, gapPx } = sizeConfig[size];
   const { container, icon } = variantConfig[variant];
   const LeadingIcon = loading ? Loader2 : Icon;
   const isDisabled = Boolean(disabled) || loading;
   const isMenuDisabled = Boolean(menuDisabled ?? disabled) || loading;
 
   return (
-    <Frame disabled={isDisabled && isMenuDisabled}>
-      <button
-        {...props}
-        disabled={isDisabled}
-        className={cn(
-          "group/scrolling-text",
-          halfClassName,
-          "rounded-l-md",
-          height,
-          label,
-          container,
-          oneHalfDisabledClassName(isDisabled, isMenuDisabled),
-          className,
-        )}
-      >
-        {LeadingIcon && (
-          <LeadingIcon
-            size={iconSize}
-            className={cn("shrink-0", icon, loading && "animate-spin")}
-          />
-        )}
-        <ScrollingText
-          leadingGapPx={LeadingIcon ? gapPx : paddingPx}
-          trailingGapPx={paddingPx}
+    <Frame
+      size={size}
+      disabled={isDisabled && isMenuDisabled}
+      main={
+        <button
+          {...props}
+          disabled={isDisabled}
+          className={cn(
+            "group/scrolling-text",
+            halfClassName,
+            "-ml-px rounded-l-md",
+            label,
+            container,
+            oneHalfDisabledClassName(isDisabled, isMenuDisabled),
+            className,
+          )}
         >
-          {children}
-        </ScrollingText>
-      </button>
-      <MenuHalf
-        size={size}
-        variant={variant}
-        disabled={isMenuDisabled}
-        mainDisabled={isDisabled}
-        menu={menu}
-        align={align}
-        menuLabel={menuLabel}
-      />
-    </Frame>
+          {LeadingIcon && (
+            <LeadingIcon
+              size={iconSize}
+              className={cn("shrink-0", icon, loading && "animate-spin")}
+            />
+          )}
+          <ScrollingText
+            leadingGapPx={LeadingIcon ? gapPx : paddingPx}
+            trailingGapPx={paddingPx}
+          >
+            {children}
+          </ScrollingText>
+        </button>
+      }
+      menu={
+        <MenuHalf
+          size={size}
+          variant={variant}
+          disabled={isMenuDisabled}
+          mainDisabled={isDisabled}
+          menu={menu}
+          align={align}
+          menuLabel={menuLabel}
+        />
+      }
+    />
   );
 }
 
@@ -214,40 +227,48 @@ export function SplitIconButton({
 }: SplitProps & {
   icon: LucideIcon;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
-  const { height, square, iconOnlySize } = sizeConfig[size];
+  const { square, iconOnlySize } = sizeConfig[size];
   const ShownIcon = loading ? Loader2 : Icon;
   const isDisabled = Boolean(disabled) || loading;
   const isMenuDisabled = Boolean(menuDisabled ?? disabled) || loading;
 
   return (
-    <Frame disabled={isDisabled && isMenuDisabled}>
-      <button
-        {...props}
-        disabled={isDisabled}
-        className={cn(
-          halfClassName,
-          "shrink-0 rounded-l-md",
-          height,
-          square,
-          variantConfig[variant].container,
-          oneHalfDisabledClassName(isDisabled, isMenuDisabled),
-          className,
-        )}
-      >
-        <ShownIcon
-          size={iconOnlySize}
-          className={cn(variantConfig[variant].icon, loading && "animate-spin")}
+    <Frame
+      size={size}
+      disabled={isDisabled && isMenuDisabled}
+      main={
+        <button
+          {...props}
+          disabled={isDisabled}
+          className={cn(
+            halfClassName,
+            "-ml-px shrink-0 rounded-l-md",
+            square,
+            variantConfig[variant].container,
+            oneHalfDisabledClassName(isDisabled, isMenuDisabled),
+            className,
+          )}
+        >
+          <ShownIcon
+            size={iconOnlySize}
+            className={cn(
+              variantConfig[variant].icon,
+              loading && "animate-spin",
+            )}
+          />
+        </button>
+      }
+      menu={
+        <MenuHalf
+          size={size}
+          variant={variant}
+          disabled={isMenuDisabled}
+          mainDisabled={isDisabled}
+          menu={menu}
+          align={align}
+          menuLabel={menuLabel}
         />
-      </button>
-      <MenuHalf
-        size={size}
-        variant={variant}
-        disabled={isMenuDisabled}
-        mainDisabled={isDisabled}
-        menu={menu}
-        align={align}
-        menuLabel={menuLabel}
-      />
-    </Frame>
+      }
+    />
   );
 }

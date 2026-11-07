@@ -45,7 +45,7 @@ export function Tooltip({
           align={align}
           sideOffset={6}
           collisionPadding={collisionPadding}
-          className="z-50 max-w-64 rounded-sm border border-separator-secondary bg-surface-floating px-2 py-1 text-caption text-label select-none overlay-shadow data-[state=delayed-open]:animate-[menu-in_150ms_ease-out] data-[state=closed]:animate-[menu-out_100ms_ease-in]"
+          className="z-50 max-w-64 rounded-sm border border-separator-primary-translucent glass-surface px-2 py-1 text-caption text-label select-none overlay-shadow data-[state=delayed-open]:animate-[menu-in_150ms_ease-out] data-[state=closed]:animate-[menu-out_100ms_ease-in]"
         >
           {content}
         </TooltipPrimitive.Content>

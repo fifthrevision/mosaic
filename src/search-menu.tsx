@@ -38,7 +38,7 @@ export function SearchMenu({
           sideOffset={4}
           collisionPadding={8}
           className={cn(
-            "z-50 min-w-50 rounded-md border border-separator-secondary floating-surface p-1 overlay-shadow origin-(--radix-popover-content-transform-origin) data-[state=open]:animate-[menu-in_150ms_ease-out] data-[state=closed]:animate-[menu-out_100ms_ease-in]",
+            "z-50 min-w-50 rounded-md border border-separator-secondary menu-surface p-1 overlay-shadow origin-(--radix-popover-content-transform-origin) data-[state=open]:animate-[menu-in_150ms_ease-out] data-[state=closed]:animate-[menu-out_100ms_ease-in]",
             className,
           )}
         >

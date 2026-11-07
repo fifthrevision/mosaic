@@ -17,7 +17,7 @@ Surfaces are layers. Each sits on the one before it:
 | Token                     | Layer                                                                   |
 | ------------------------- | ----------------------------------------------------------------------- |
 | `bg-surface-shell`        | The app frame: sidebars, top bars                                       |
-| `bg-surface-canvas`       | Page content (set on `body`). Windows that hold content (dialogs, popovers) also sit on canvas, so cards nest inside them |
+| `bg-surface-canvas`       | Page content (set on `body`). Cards nest inside it                      |
 | `bg-surface-card`         | Cards and list containers on the canvas                                 |
 | `bg-surface-card-subdued` | A region inside a card: code blocks, nested blocks, chips               |
 
@@ -26,10 +26,9 @@ Above the page:
 | Token                 | Layer                                                                                        |
 | --------------------- | -------------------------------------------------------------------------------------------- |
 | `bg-surface-panel`    | The frame of a persistent window (the docked assistant). Its content area is a card. Follows `shell`; pair with `panel-shadow` |
-| `floating-surface`    | Menus and choice lists (`Menu`, `Combobox`, autocomplete): `bg-surface-floating` (card color) at 95% with a 4px backdrop blur, opaque under `prefers-reduced-transparency`. Pair with `overlay-shadow` |
-| `glass-surface`       | `CommandMenu`: the floating color at 50% with a 12px backdrop blur, glassier than `floating-surface`, opaque under `prefers-reduced-transparency`. Pair with `command-shadow` and a `separator-primary-translucent` border, so it stays apart from busy content behind it |
-| `bg-surface-floating` | The opaque floating color, for tooltips                                                      |
-| `bg-surface-elevated` | Toasts: a step lifted from canvas and cards in each mode. Text and icons on it use the normal roles |
+| `bg-surface-dialog`   | Windows that hold content: `Dialog`, `ConfirmDialog`, `Popover`. Follows `canvas`, so cards nest inside them; pair with `dialog-shadow` |
+| `menu-surface`        | Menus and choice lists (`Menu`, `SearchMenu`, `Combobox`, autocomplete): `bg-surface-floating` (card color) at 80% with a 4px backdrop blur, opaque under `prefers-reduced-transparency`. Pair with `overlay-shadow` |
+| `glass-surface`       | Glanceable and launcher overlays (`Tooltip`, toasts, `CommandMenu`): the floating color at 50% with a 12px backdrop blur, opaque under `prefers-reduced-transparency`. Pair with a `separator-primary-translucent` border, so it stays apart from busy content behind it, and `overlay-shadow` (`command-shadow` for `CommandMenu`) |
 | `bg-surface-scrim`    | The backdrop behind a modal: translucent black, darker in dark mode. `Dialog` and `ConfirmDialog` use it |
 
 `bg-surface-bubble` is a theme-tinted chat bubble, placed on any layer.

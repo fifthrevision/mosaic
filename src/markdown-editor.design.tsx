@@ -139,7 +139,7 @@ type SpecimenItem = {
  */
 function AutocompleteSpecimen({ items }: { items: SpecimenItem[] }) {
   return (
-    <div className="min-w-80 rounded-md border border-separator-secondary p-1 floating-surface overlay-shadow">
+    <div className="min-w-80 rounded-md border border-separator-secondary p-1 menu-surface overlay-shadow">
       <ul className="flex flex-col gap-px">
         {items.map((item) => (
           <li

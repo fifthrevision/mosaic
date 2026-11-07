@@ -74,7 +74,7 @@ function DialogBody({
   return (
     <FadingScrollArea
       className="-mx-6 -my-1 min-h-0 flex-1"
-      fadeClassName="bg-surface-canvas"
+      fadeClassName="bg-surface-dialog"
     >
       <div className={cn("px-6 py-1", className)}>{children}</div>
     </FadingScrollArea>
@@ -126,7 +126,7 @@ const DialogImpl = ({
             }
           }}
           className={cn(
-            "fixed top-1/2 left-1/2 z-50 flex max-h-[90vh] max-w-[calc(100vw-32px)] -translate-1/2 flex-col overflow-y-auto rounded-xl border border-separator-secondary bg-surface-canvas p-6 dialog-shadow focus:outline-none data-[state=open]:animate-[dialog-content-in_150ms_ease-out] data-[state=closed]:animate-[dialog-content-out_100ms_ease-in]",
+            "fixed top-1/2 left-1/2 z-50 flex max-h-[90vh] max-w-[calc(100vw-32px)] -translate-1/2 flex-col overflow-y-auto rounded-xl border border-separator-secondary bg-surface-dialog p-6 dialog-shadow focus:outline-none data-[state=open]:animate-[dialog-content-in_150ms_ease-out] data-[state=closed]:animate-[dialog-content-out_100ms_ease-in]",
             sizeClass[size],
             className,
           )}

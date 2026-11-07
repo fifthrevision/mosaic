@@ -17,7 +17,7 @@ export function PopoverContent({
         collisionPadding={collisionPadding}
         {...props}
         className={cn(
-          "z-50 max-h-[var(--radix-popover-content-available-height)] overflow-y-auto rounded-xl border border-separator-secondary bg-surface-canvas dialog-shadow",
+          "z-50 max-h-[var(--radix-popover-content-available-height)] overflow-y-auto rounded-xl border border-separator-secondary bg-surface-dialog dialog-shadow",
           className,
         )}
       />

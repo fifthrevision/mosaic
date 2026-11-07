@@ -79,6 +79,11 @@ export const Surfaces = () => (
         preview={<ColorSwatch varName="--surface-panel" />}
       />
       <TokenRow
+        name="Dialog (dialogs, popovers)"
+        varName="--surface-dialog"
+        preview={<ColorSwatch varName="--surface-dialog" />}
+      />
+      <TokenRow
         name="Card"
         varName="--surface-card"
         preview={<ColorSwatch varName="--surface-card" />}
@@ -89,14 +94,9 @@ export const Surfaces = () => (
         preview={<ColorSwatch varName="--surface-card-subdued" />}
       />
       <TokenRow
-        name="Floating (menus; floating-surface adds translucency)"
+        name="Floating (base for menu-surface and glass-surface)"
         varName="--surface-floating"
         preview={<ColorSwatch varName="--surface-floating" />}
-      />
-      <TokenRow
-        name="Elevated (toasts)"
-        varName="--surface-elevated"
-        preview={<ColorSwatch varName="--surface-elevated" />}
       />
     </Section>
 

@@ -104,7 +104,7 @@
   --surface-card: var(--color-light-1);
   --surface-card-subdued: var(--color-light-3);
   --surface-floating: var(--surface-card);
-  --surface-scrim: rgba(0, 0, 0, 0.1);
+  --surface-scrim: rgba(0, 0, 0, 0.07);
   --surface-button: var(--color-light-6_5);
   --surface-input: rgba(0, 26, 40, 0.015);
   --surface-toggle: rgba(0, 26, 40, 0.12);
@@ -158,7 +158,7 @@
   --surface-card: var(--color-dark-1);
   --surface-card-subdued: var(--color-dark-0);
   --surface-floating: var(--surface-card);
-  --surface-scrim: rgba(0, 0, 0, 0.2);
+  --surface-scrim: rgba(0, 0, 0, 0.1);
   --surface-button: var(--color-dark-8);
   --surface-input: rgba(250, 253, 255, 0.02);
   --surface-toggle: rgba(250, 253, 255, 0.12);

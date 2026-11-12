@@ -390,7 +390,9 @@ import {
   `relative` (default) / `local` / `utc`, `fallback` (default "—", also
   shown for an invalid date). Use it
   instead of formatting dates yourself; it's hydration-safe (relative time
-  renders empty on the server). `formatUtc(date)` is exported for strings.
+  renders empty on the server). Relative text keeps itself current: it
+  updates when its wording would change and when the page becomes visible
+  again. `formatUtc(date)` is exported for strings.
 - **`Markdown`** (`markdown`): `text` rendered as GFM with Mosaic styles.
   Read-only.
 - **`MarkdownEditor`** (`markdown-editor`): CodeMirror. `value`,

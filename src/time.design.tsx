@@ -1,12 +1,32 @@
 import { CheckCircle2, XCircle } from "lucide-react";
+import { useState } from "react";
 import { ColumnLabel, Example } from "../studio/DesignHelpers";
 import { Time, type TimeFormat } from "./time";
 
 export const meta = {
   title: "Time",
   description:
-    "Hydration-safe timestamp in relative, local, or UTC format, with a fallback for missing values",
+    "Hydration-safe timestamp in relative, local, or UTC format, with a fallback for missing values; relative text keeps itself current",
 };
+
+function SinceMount({ offset }: { offset: number }) {
+  const [mountedAt] = useState(() => new Date(Date.now() - offset));
+  return <Time value={mountedAt} />;
+}
+
+export const Live = () => (
+  <div className="flex flex-col gap-6 text-body text-label">
+    <Example label="mounted just now (ticks every second, then every minute)">
+      <SinceMount offset={0} />
+    </Example>
+    <Example label="50s old at mount (becomes 1 min. ago)">
+      <SinceMount offset={50 * 1000} />
+    </Example>
+    <Example label="59m 40s old at mount (becomes 1 hr. ago)">
+      <SinceMount offset={59 * 60 * 1000 + 40 * 1000} />
+    </Example>
+  </div>
+);
 
 const SECOND = 1000;
 const MINUTE = 60 * SECOND;

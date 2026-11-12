@@ -36,6 +36,35 @@ function formatRelative(date: Date): string {
   return rtf.format(0, "second");
 }
 
+// setTimeout fires at once for a delay past 2^31 - 1 ms.
+const LONGEST_TIMEOUT_MS = 2 ** 31 - 1;
+
+// The relative text changes when the rounded count flips, halfway through a
+// unit, or when the age crosses into another unit.
+function millisecondsUntilRelativeTextChanges(date: Date): number {
+  const ageSeconds = (Date.now() - date.getTime()) / 1000;
+  const absAge = Math.abs(ageSeconds);
+  const unitIndex = UNITS.findIndex(
+    ([unit, secondsInUnit]) => absAge >= secondsInUnit || unit === "second",
+  );
+  const secondsInUnit = UNITS[unitIndex][1];
+  const fraction = (absAge / secondsInUnit) % 1;
+  const isGrowing = ageSeconds >= 0;
+  const secondsToFlip = isGrowing
+    ? (fraction < 0.5 ? 0.5 - fraction : 1.5 - fraction) * secondsInUnit
+    : (fraction > 0.5 ? fraction - 0.5 : fraction + 0.5) * secondsInUnit;
+  const largerUnit = UNITS[unitIndex - 1];
+  const secondsToUnitChange = isGrowing
+    ? largerUnit === undefined
+      ? Infinity
+      : largerUnit[1] - absAge
+    : absAge >= secondsInUnit
+      ? absAge - secondsInUnit
+      : Infinity;
+  const seconds = Math.min(secondsToFlip, secondsToUnitChange);
+  return Math.min(seconds * 1000 + 50, LONGEST_TIMEOUT_MS);
+}
+
 function formatLocal(date: Date): string {
   const pad = (n: number) => String(n).padStart(2, "0");
   const tz =
@@ -79,8 +108,28 @@ export function Time({
   useEffect(() => {
     if (time === undefined) return;
     const parsed = new Date(time);
-    if (format === "relative") setText(formatRelative(parsed));
-    else if (format === "local") setText(formatLocal(parsed));
+    if (format === "local") setText(formatLocal(parsed));
+    if (format !== "relative") return;
+
+    let timeout: ReturnType<typeof setTimeout>;
+    const refresh = () => {
+      setText(formatRelative(parsed));
+      clearTimeout(timeout);
+      timeout = setTimeout(
+        refresh,
+        millisecondsUntilRelativeTextChanges(parsed),
+      );
+    };
+    // Timers are throttled or paused while the page is hidden.
+    const refreshWhenVisible = () => {
+      if (document.visibilityState === "visible") refresh();
+    };
+    refresh();
+    document.addEventListener("visibilitychange", refreshWhenVisible);
+    return () => {
+      clearTimeout(timeout);
+      document.removeEventListener("visibilitychange", refreshWhenVisible);
+    };
   }, [time, format]);
 
   if (!validDate) return <>{fallback}</>;

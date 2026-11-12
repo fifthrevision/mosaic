@@ -69,6 +69,28 @@ Use a role:
 Every role inherits one line height (1.5) from `body`. Don't set
 `leading-*` or a `text-body/5` modifier on individual elements **(lint)**.
 
+### Reading surfaces
+
+A surface made to be read at length (a generated review, an article, a
+long document) takes `reading-area` on its container. The roles keep their
+names and step up inside it, and the line height loosens to 1.6:
+
+| Role               | Interface | Inside `reading-area` |
+| ------------------ | --------- | --------------------- |
+| `text-large-title` | 18px      | 24px                  |
+| `text-title`       | 16px      | 20px                  |
+| `text-body`        | 14px      | 16px                  |
+| `text-subhead`     | 13px      | 13px                  |
+
+- Put it on the element that holds the prose, not the page. Controls and
+  metadata beside the prose stay outside it.
+- A region inside the prose that is interface, not reading (a card, a file
+  list), takes `interface-area` to go back to the interface sizes.
+- Cap the prose column near `max-w-[44rem]`; the larger text needs a
+  shorter line.
+- Menus, popovers, and tooltips opened from inside it render outside the
+  scope and stay at interface size.
+
 ### Write the element, add the look
 
 Use the native element that says what the text is, and put the role and
@@ -170,6 +192,16 @@ a direct child:
 A heading and its description are one item in a `gap` list: wrap them in a
 `TextStack`. As separate items, the list's gap pushes the description as far
 from its heading as from the controls below.
+
+Inside `reading-area`, gaps come in four steps of the 16px body size. Pick
+by how the two things relate, not by what they are:
+
+| Gap             | Between                                                    |
+| --------------- | ---------------------------------------------------------- |
+| `gap-2` (8px)   | Parts of one heading: an eyebrow and its title             |
+| `gap-4` (16px)  | A heading and its text; one paragraph and the next         |
+| `gap-6` (24px)  | Prose and a block of another kind: a list of rows, a card  |
+| `gap-8` (32px)  | One section of the document and the next                   |
 
 A section with controls under its `TextStack` steps the gaps: `gap-6`
 (24px) between the `TextStack` and the controls, `gap-4` (16px) between

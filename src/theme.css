@@ -223,6 +223,23 @@
 @utility text-large-title {
   font-variation-settings: "opsz" 32;
 }
+/* The type roles read these variables, so every role inside the scope steps
+   up together: body takes the title size, and each heading sits 4px above
+   the level below it. Subhead and caption keep their size. */
+@utility reading-area {
+  --text-body: 1rem; /* 16px */
+  --text-title: 1.25rem; /* 20px */
+  --text-large-title: 1.5rem; /* 24px */
+  line-height: 1.6;
+}
+/* Puts a region inside reading-area back on the interface sizes. The values
+   repeat the ones in @theme and must change with them. */
+@utility interface-area {
+  --text-body: 0.875rem;
+  --text-title: 1rem;
+  --text-large-title: 1.125rem;
+  line-height: 1.5;
+}
 @utility mosaic-label {
   @apply text-subhead font-medium text-label-secondary;
 }

@@ -83,6 +83,59 @@ export const Roles = () => (
   </Section>
 );
 
+const READING_ROLES = [
+  { name: "text-large-title", usage: "The document's title" },
+  { name: "text-title", usage: "Headings in the document" },
+  { name: "text-body", usage: "Paragraphs" },
+  { name: "text-subhead", usage: "Eyebrows and source lines; unchanged" },
+];
+
+export const Reading = () => (
+  <Section title="Reading">
+    <div className="reading-area">
+      {READING_ROLES.map(({ name, usage }) => (
+        <SpecimenRow
+          key={name}
+          name={name}
+          usage={usage}
+          className={`${name} text-label`}
+        />
+      ))}
+    </div>
+    <div className="py-6">
+      <HierarchySample label="reading-area article, with a interface-area card">
+        <article className="reading-area flex max-w-[44rem] flex-col gap-8">
+          <div className="flex flex-col gap-4">
+            <h1 className="text-large-title text-label">
+              Weekly digest of repository changes
+            </h1>
+            <p className="text-body text-label">{PARAGRAPH}</p>
+          </div>
+          <section className="flex flex-col gap-6">
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-2">
+                <p className="text-subhead text-label-secondary">Change 1</p>
+                <h2 className="text-title text-label">
+                  Runs keep their logs when they fail
+                </h2>
+              </div>
+              <p className="text-body text-label">{PARAGRAPH}</p>
+            </div>
+            <div className="interface-area">
+              <SampleCard
+                rows={[
+                  ["Model", "Claude Sonnet 4.6"],
+                  ["Duration", "37.5s"],
+                ]}
+              />
+            </div>
+          </section>
+        </article>
+      </HierarchySample>
+    </div>
+  </Section>
+);
+
 export const Families = () => (
   <Section title="Families">
     <SpecimenRow

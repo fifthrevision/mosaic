@@ -1,4 +1,5 @@
 import { Ellipsis, Plus } from "lucide-react";
+import { useState } from "react";
 import { Example } from "../studio/DesignHelpers";
 import { Button } from "./button";
 import { IconButton } from "./icon-button";
@@ -7,8 +8,29 @@ import { SectionHeader } from "./section-header";
 export const meta = {
   title: "SectionHeader",
   description:
-    "Small secondary h3 that labels a group above a list or card, with an optional trailing action",
+    "Small secondary h3 that labels a group above a list or card, with an optional trailing action; collapsible when given open and onOpenChange",
 };
+
+function CollapsibleSample({
+  title,
+  action,
+}: {
+  title: string;
+  action?: React.ReactNode;
+}) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="flex flex-col">
+      <SectionHeader
+        title={title}
+        action={action}
+        open={open}
+        onOpenChange={setOpen}
+      />
+      {open && <p className="text-body text-label">The group's content.</p>}
+    </div>
+  );
+}
 
 export const Variants = () => (
   <div className="flex w-120 flex-col gap-6">
@@ -35,6 +57,17 @@ export const Variants = () => (
             size="sm"
             aria-label="More"
           />
+        }
+      />
+    </Example>
+    <Example label="collapsible (open, onOpenChange)">
+      <CollapsibleSample title="Finished (4)" />
+    </Example>
+    <Example label="collapsible with an action">
+      <CollapsibleSample
+        title="Inputs"
+        action={
+          <IconButton icon={Plus} variant="subtle" size="sm" aria-label="Add" />
         }
       />
     </Example>

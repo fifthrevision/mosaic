@@ -309,7 +309,7 @@ hold user data or state. State is a `Status`.
 | ------------------- | -------------------- | --------------------------------------------------------------------------- |
 | `TextStack`         | `text-stack`         | Heading plus description (see [SKILL.md](SKILL.md#spacing))                          |
 | `Card`              | `card`               | Bordered container for a list, table, or panel in a page's text column      |
-| `SectionHeader`     | `section-header`     | Group label above a list or card: `title`, optional `action`                |
+| `SectionHeader`     | `section-header`     | Group label above a list or card: `title`, optional `action`; collapsible with `open` / `onOpenChange` |
 | `NavItem`           | `nav-item`           | Sidebar row: `href`, `active`, optional `icon`, `variant` `default` / `tinted`; `asChild` around your router link |
 | `Tabs`              | `tabs`               | In-page tabs. See below                                                     |
 | `Alert`             | `alert`              | Inline message: `variant` `info` (default) / `success` / `error`, `onDismiss` |
@@ -332,6 +332,11 @@ hold user data or state. State is a `Status`.
 - `SectionHeader` renders a small secondary `h3`. It labels a group; it
   isn't a page or card title. It has no inset: its text sits on the column
   edge, with the page text, and the `Card` or `NavItem`s below hang outside it.
+  With `open` and `onOpenChange` the title becomes a button with a filled
+  triangle after it (a trailing chevron means a dropdown). The header only
+  reports the toggle, so render the group's content yourself when `open`
+  is true. Use it for any collapsible group instead of hand-building a
+  chevron row.
 - `NavItem` is a link: it renders an `<a>` and takes `href`. With a
   router, pass `asChild` and its link as the one child; the child has to
   pass through `className` and `aria-current`. A sidebar action that goes

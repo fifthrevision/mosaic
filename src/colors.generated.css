@@ -4,6 +4,7 @@
   /* sky (tint) */
   --color-light-0: #fafdff;
   --color-light-1: #f8fbfd;
+  --color-light-2_5: #f4f7fa;
   --color-light-3: #f3f6f9;
   --color-light-5: #eef2f4;
   --color-light-6_5: #eaeef1;
@@ -97,7 +98,7 @@
 
 :root {
   color-scheme: light;
-  --surface-canvas: var(--color-light-3);
+  --surface-canvas: var(--color-light-2_5);
   --surface-shell: var(--color-light-5);
   --surface-panel: var(--surface-shell);
   --surface-dialog: var(--surface-canvas);

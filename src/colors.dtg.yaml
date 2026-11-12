@@ -101,7 +101,7 @@ defaults:
 
 roles:
   surface:
-    canvas: [sky(3), night(0), midnight(0)]
+    canvas: [sky(2.5), night(0), midnight(0)]
     shell: [sky(5), night(1.5), midnight(3.5)]
     panel: [surface.shell, surface.shell, surface.shell]
     dialog: [surface.canvas, surface.canvas, surface.canvas]

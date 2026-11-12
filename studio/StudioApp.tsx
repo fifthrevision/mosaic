@@ -5,7 +5,11 @@ import {
   useSyncExternalStore,
   type RefObject,
 } from "react";
+import { Palette, X } from "lucide-react";
+import { Button } from "@fifthrevision/mosaic/button";
+import { cn } from "@fifthrevision/mosaic/cn";
 import { ConfirmProvider } from "@fifthrevision/mosaic/confirm-dialog";
+import { IconButton } from "@fifthrevision/mosaic/icon-button";
 import { NavItem } from "@fifthrevision/mosaic/nav-item";
 import { SectionHeader } from "@fifthrevision/mosaic/section-header";
 import {
@@ -198,10 +202,11 @@ function DesignPage({ entry }: { entry: DesignEntry }) {
   return <Portfolio module={mod} name={entry.name} />;
 }
 
-type FramePlacement = "page" | "hidden";
+type FramePlacement = "page" | "panel" | "hidden";
 
 const FRAME_PLACEMENT_CLASS: Record<FramePlacement, string> = {
   page: "fixed inset-y-0 right-0 left-56",
+  panel: "fixed inset-y-0 right-0 w-120 border-l border-separator-primary",
   hidden: "hidden",
 };
 
@@ -230,7 +235,8 @@ function DtgFrame({
 // The dtg editor posts the CSS for whatever it shows, edits being tried
 // included; laid over the built colors, it re-skins every component live.
 // The page's canvas color goes back to the editor whenever it changes, from
-// an edit or a theme switch, so the editor is drawn on the page's canvas.
+// an edit or a theme switch, so the docked panel is drawn on the same
+// background as the page beside it.
 function useLiveColors(frameRef: RefObject<HTMLIFrameElement | null>) {
   useEffect(() => {
     const style = document.head.appendChild(document.createElement("style"));
@@ -273,14 +279,18 @@ export function StudioApp() {
   const entry = path ? entries.find((e) => e.path === path) : null;
   const frameRef = useRef<HTMLIFrameElement>(null);
   useLiveColors(frameRef);
-  const placement: FramePlacement = path === COLORS_PATH ? "page" : "hidden";
+  const [docked, setDocked] = useState(false);
+  const placement: FramePlacement =
+    path === COLORS_PATH ? "page" : docked ? "panel" : "hidden";
 
   return (
     <TooltipProvider>
       <ConfirmProvider>
         <div className="flex min-h-screen">
           <Sidebar entries={entries} activePath={path} />
-          <main className="ml-56 flex-1">
+          <main
+            className={cn("ml-56 flex-1", placement === "panel" && "mr-120")}
+          >
             {!path && (
               <div className="p-8 text-label-secondary">
                 Select a component from the sidebar.
@@ -293,6 +303,23 @@ export function StudioApp() {
           </main>
           {import.meta.env.VITE_DTG_URL && (
             <DtgFrame placement={placement} frameRef={frameRef} />
+          )}
+          {placement === "hidden" && import.meta.env.VITE_DTG_URL && (
+            <div className="fixed right-4 bottom-4">
+              <Button icon={Palette} onClick={() => setDocked(true)}>
+                Edit colors
+              </Button>
+            </div>
+          )}
+          {placement === "panel" && (
+            <div className="fixed top-4 right-4">
+              <IconButton
+                icon={X}
+                aria-label="Close colors"
+                title="Close colors"
+                onClick={() => setDocked(false)}
+              />
+            </div>
           )}
         </div>
       </ConfirmProvider>

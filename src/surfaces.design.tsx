@@ -19,28 +19,28 @@ export const Surfaces = () => (
   <div className="flex flex-col gap-8">
     <section className="flex flex-col gap-3">
       <h3 className="text-title text-label">Surface hierarchy</h3>
-      <div className="rounded-xl bg-surface-canvas p-10">
-        <p className="mb-4 text-body text-label-secondary">
-          surface-canvas (outermost)
-        </p>
-        <div className="flex gap-6">
-          <div className="w-60 shrink-0 rounded-xl bg-surface-shell p-6">
-            <p className="mb-4 text-body text-label-secondary">
-              surface-shell (app frame)
-            </p>
-            <div className="flex flex-col gap-1">
-              <div className="rounded-md px-3 py-2 text-body text-label">
-                default nav row
-              </div>
-              <div className="rounded-md bg-state-hover px-3 py-2 text-body text-label">
-                state-hover
-              </div>
-              <div className="rounded-md bg-state-selected px-3 py-2 text-body text-label">
-                state-selected
-              </div>
+      <div className="flex gap-6 rounded-xl bg-surface-shell p-6">
+        <div className="w-52 shrink-0">
+          <p className="mb-4 text-body text-label-secondary">
+            surface-shell (app frame, outermost)
+          </p>
+          <div className="flex flex-col gap-1">
+            <div className="rounded-md px-3 py-2 text-body text-label">
+              default nav row
+            </div>
+            <div className="rounded-md bg-state-hover px-3 py-2 text-body text-label">
+              state-hover
+            </div>
+            <div className="rounded-md bg-state-selected px-3 py-2 text-body text-label">
+              state-selected
             </div>
           </div>
-          <div className="flex-1 rounded-xl border border-separator-secondary bg-surface-card p-8">
+        </div>
+        <div className="flex-1 rounded-xl bg-surface-canvas p-8">
+          <p className="mb-4 text-body text-label-secondary">
+            surface-canvas (page content)
+          </p>
+          <div className="rounded-xl border border-separator-secondary bg-surface-card p-8">
             <p className="mb-5 text-body text-label-secondary">
               surface-card (card on surface-canvas)
             </p>

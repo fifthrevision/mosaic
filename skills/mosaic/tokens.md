@@ -152,10 +152,15 @@ A shadow none of these covers uses the tokens, lightest to darkest:
 | Class        | Size | Use                                             |
 | ------------ | ---- | ----------------------------------------------- |
 | `rounded-xs` | 2px  | Tiny marks                                      |
-| `rounded-sm` | 4px  | Checkboxes, tooltips, segments, small chips     |
+| `rounded-sm` | 4px  | Checkboxes, tooltips, segments                  |
 | `rounded-md` | 8px  | Controls, rows, menus, cards, alerts            |
 | `rounded-lg` | 12px | Larger cards                                    |
 | `rounded-xl` | 16px | Dialogs, popovers, prominent cards              |
+| `rounded-h6` | 6px  | Anything 24px tall: `sm` buttons, chips, badges |
+
+`rounded-h6` is tied to height, not a step on the scale: use it on any
+24px-tall box with chrome, and `rounded-md` at 32px. Components already
+apply it at `size="sm"`.
 
 This replaces Tailwind's radius scale: bare `rounded`, `rounded-2xl` and up
 generate nothing, and `rounded-lg`/`rounded-xl` are 12px/16px.

@@ -15,6 +15,8 @@ import { SplitButton, SplitIconButton } from "./split-button";
 
 export const meta = {
   title: "Split Button",
+  group: "Buttons",
+  order: 3,
   description:
     "A button with a menu of related actions on an attached chevron. The main half runs the common action; the chevron offers alternatives to it.",
 };

@@ -8,6 +8,7 @@ import { ScrollingText } from "./scrolling-text";
 const sizeConfig = {
   sm: {
     height: "h-6",
+    radius: { frame: "rounded-h6", start: "rounded-l-h6", end: "rounded-r-h6" },
     label: "gap-1.5 px-2 text-subhead",
     square: "w-6",
     iconSize: 12,
@@ -17,6 +18,7 @@ const sizeConfig = {
   },
   md: {
     height: "h-8",
+    radius: { frame: "rounded-md", start: "rounded-l-md", end: "rounded-r-md" },
     label: "gap-1.75 px-3 text-body",
     square: "w-8",
     iconSize: 16,
@@ -60,6 +62,7 @@ function Frame({
       className={cn(
         "mosaic-split-frame inline-flex w-fit max-w-80 shrink-0",
         sizeConfig[size].height,
+        sizeConfig[size].radius.frame,
         disabled && "opacity-50",
       )}
     >
@@ -99,7 +102,7 @@ function MenuHalf({
   align: "start" | "center" | "end";
   menuLabel: string;
 }) {
-  const { square, iconSize } = sizeConfig[size];
+  const { square, iconSize, radius } = sizeConfig[size];
   return (
     <Menu
       align={align}
@@ -111,7 +114,8 @@ function MenuHalf({
           aria-label={menuLabel}
           className={cn(
             halfClassName,
-            "-mr-px shrink-0 rounded-r-md",
+            "-mr-px shrink-0",
+            radius.end,
             square,
             variantConfig[variant].container,
             oneHalfDisabledClassName(disabled, mainDisabled),
@@ -159,7 +163,7 @@ export function SplitButton({
 }: SplitProps & {
   children: React.ReactNode;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
-  const { label, iconSize, paddingPx, gapPx } = sizeConfig[size];
+  const { label, iconSize, paddingPx, gapPx, radius } = sizeConfig[size];
   const { container, icon } = variantConfig[variant];
   const LeadingIcon = loading ? Loader2 : Icon;
   const isDisabled = Boolean(disabled) || loading;
@@ -176,7 +180,8 @@ export function SplitButton({
           className={cn(
             "group/scrolling-text",
             halfClassName,
-            "-ml-px rounded-l-md",
+            "-ml-px",
+            radius.start,
             label,
             container,
             oneHalfDisabledClassName(isDisabled, isMenuDisabled),
@@ -227,7 +232,7 @@ export function SplitIconButton({
 }: SplitProps & {
   icon: LucideIcon;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
-  const { square, iconOnlySize } = sizeConfig[size];
+  const { square, iconOnlySize, radius } = sizeConfig[size];
   const ShownIcon = loading ? Loader2 : Icon;
   const isDisabled = Boolean(disabled) || loading;
   const isMenuDisabled = Boolean(menuDisabled ?? disabled) || loading;
@@ -242,7 +247,8 @@ export function SplitIconButton({
           disabled={isDisabled}
           className={cn(
             halfClassName,
-            "-ml-px shrink-0 rounded-l-md",
+            "-ml-px shrink-0",
+            radius.start,
             square,
             variantConfig[variant].container,
             oneHalfDisabledClassName(isDisabled, isMenuDisabled),

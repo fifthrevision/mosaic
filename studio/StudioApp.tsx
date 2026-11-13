@@ -36,7 +36,13 @@ const metaModules = import.meta.glob<{
 });
 
 const DEFAULT_GROUP = "Components";
-const GROUP_ORDER = ["Foundations", "Typography", DEFAULT_GROUP];
+const GROUP_ORDER = [
+  "Foundations",
+  "Typography",
+  "Buttons",
+  DEFAULT_GROUP,
+  "Hooks",
+];
 
 type DesignEntry = {
   name: string;

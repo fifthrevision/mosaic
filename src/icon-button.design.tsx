@@ -20,8 +20,10 @@ import { Menu, MenuItem, MenuSeparator } from "./menu";
 
 export const meta = {
   title: "Icon Button",
+  group: "Buttons",
+  order: 2,
   description:
-    "Square icon-only button for actions. For on/off, use IconToggle.",
+    "Icon-only button for actions, square unless it has a dropdown chevron. For on/off, use IconToggle.",
 };
 
 const VARIANTS = ["default", "primary", "subtle", "destructive"] as const;
@@ -33,10 +35,12 @@ const COLUMNS = [
   "loading",
   "menu open",
   "warning tone",
+  "dropdown",
+  "dropdown sm",
 ] as const;
 
 export const States = () => (
-  <div className="grid grid-cols-[6rem_repeat(6,5rem)] items-center gap-y-4">
+  <div className="grid grid-cols-[6rem_repeat(8,5rem)] items-center gap-y-4">
     <span />
     {COLUMNS.map((column) => (
       <ColumnLabel key={column}>{column}</ColumnLabel>
@@ -69,6 +73,14 @@ export const States = () => (
           variant={variant}
           tone="warning"
           aria-label="Needs a look"
+        />
+        <IconButton icon={Plus} variant={variant} dropdown aria-label="Add" />
+        <IconButton
+          icon={Plus}
+          variant={variant}
+          size="sm"
+          dropdown
+          aria-label="Add"
         />
       </div>
     ))}

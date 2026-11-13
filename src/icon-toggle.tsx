@@ -3,8 +3,8 @@ import { cn } from "./cn";
 import { Tooltip } from "./tooltip";
 
 const sizeConfig = {
-  sm: { size: "size-6", iconSize: 14 },
-  md: { size: "size-8", iconSize: 16 },
+  sm: { size: "size-6", radius: "rounded-h6", iconSize: 14 },
+  md: { size: "size-8", radius: "rounded-md", iconSize: 16 },
 } as const;
 
 const variantConfig = {
@@ -35,7 +35,7 @@ export function IconToggle({
   size?: keyof typeof sizeConfig;
   variant?: keyof typeof variantConfig;
 } & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type">) {
-  const { size: sizeClass, iconSize } = sizeConfig[size];
+  const { size: sizeClass, radius, iconSize } = sizeConfig[size];
   const hasDisabledTooltip = Boolean(title) && Boolean(props.disabled);
 
   const button = (
@@ -48,7 +48,8 @@ export function IconToggle({
         if (!event.defaultPrevented) onPressedChange(!pressed);
       }}
       className={cn(
-        "flex shrink-0 items-center justify-center rounded-md select-none focus-visible:control-focus-ring disabled:cursor-not-allowed disabled:opacity-50",
+        "flex shrink-0 items-center justify-center select-none focus-visible:control-focus-ring disabled:cursor-not-allowed disabled:opacity-50",
+        radius,
         sizeClass,
         pressed ? variantConfig[variant].on : variantConfig[variant].off,
         hasDisabledTooltip && "pointer-events-none",
@@ -70,7 +71,10 @@ export function IconToggle({
       {hasDisabledTooltip ? (
         <span
           tabIndex={0}
-          className="inline-flex cursor-not-allowed rounded-md focus-visible:control-focus-ring"
+          className={cn(
+            "inline-flex cursor-not-allowed focus-visible:control-focus-ring",
+            radius,
+          )}
         >
           {button}
         </span>

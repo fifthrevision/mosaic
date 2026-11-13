@@ -14,8 +14,11 @@
   is no root index.
 - Mount `TooltipProvider` (`/tooltip`) and `ConfirmProvider`
   (`/confirm-dialog`) once at the root, and render one `<Toaster />`
-  (`/toaster`). `Button` and `IconButton` render a `Tooltip` for `title`, so
-  they need the provider too.
+  (`/toaster`). `Button` and `IconButton` render a `Tooltip` for `title` and
+  `confirmation`, so they need the provider too. Under it, every button
+  keeps its tooltip wrapper mounted, so a tooltip that appears later doesn't
+  remount the button and drop focus; it also hosts the live region that
+  announces confirmations.
 - Modes are a class on an ancestor (usually `<html>`): none for light,
   `.dark`, or `.black` (a darker dark). The `dark:` variant matches both.
   `Theme` (`/theme`) is `"system" | "light" | "dark" | "black"`; the app

@@ -9,6 +9,7 @@ const twMerge = extendTailwindMerge({
     theme: {
       text: ["caption", "subhead", "body", "title", "large-title"],
       "font-weight": ["regular"],
+      radius: ["h6"],
     },
   },
 });

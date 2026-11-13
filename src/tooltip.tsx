@@ -1,10 +1,13 @@
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 
 type CollisionPadding =
   number | Partial<Record<"top" | "right" | "bottom" | "left", number>>;
 
 const CollisionPaddingContext = createContext<CollisionPadding>(8);
+
+// Null outside Mosaic's TooltipProvider, so it doubles as the presence check.
+const AnnounceContext = createContext<((text: string) => void) | null>(null);
 
 export function TooltipProvider({
   children,
@@ -15,29 +18,43 @@ export function TooltipProvider({
   delayDuration?: number;
   collisionPadding?: CollisionPadding;
 }) {
+  const [announcement, setAnnouncement] = useState("");
   return (
     <TooltipPrimitive.Provider delayDuration={delayDuration}>
       <CollisionPaddingContext.Provider value={collisionPadding}>
-        {children}
+        <AnnounceContext.Provider value={setAnnouncement}>
+          {children}
+          <span className="sr-only" aria-live="polite">
+            {announcement}
+          </span>
+        </AnnounceContext.Provider>
       </CollisionPaddingContext.Provider>
     </TooltipPrimitive.Provider>
   );
+}
+
+/** Announces to screen readers through the provider's live region; null without a Mosaic TooltipProvider. */
+export function useTooltipAnnouncer() {
+  return useContext(AnnounceContext);
 }
 
 export function Tooltip({
   content,
   side = "top",
   align = "center",
+  open,
   children,
 }: {
   content: React.ReactNode;
   side?: "top" | "bottom" | "left" | "right";
   align?: "start" | "center" | "end";
+  /** `true` holds it open, `false` keeps it shut, `undefined` opens on hover. */
+  open?: boolean;
   children: React.ReactNode;
 }) {
   const collisionPadding = useContext(CollisionPaddingContext);
   return (
-    <TooltipPrimitive.Root>
+    <TooltipPrimitive.Root open={open}>
       <TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
       <TooltipPrimitive.Portal>
         <TooltipPrimitive.Content

@@ -39,6 +39,10 @@ add `title` for a hover tooltip. `tone="warning"` colors the icon
 look"). It's not `destructive`: that would mean the click destroys
 something. `loading` swaps the icon for a spinner and disables, like
 `Button`'s; it keeps the tone. `bleed` `start` | `end`, like `Button`'s.
+`dropdown` adds a small trailing chevron for a `Menu` trigger whose items
+are variants of the icon's action (a `Plus` that opens "New agent / New
+workflow"); the button widens to 40px (`md`) or 32px (`sm`). A bare
+`Ellipsis` "more" menu needs no chevron.
 
 **`SplitButton`** / **`SplitIconButton`** (`split-button`): a button with a
 menu of alternatives on an attached chevron. The main half runs the common
@@ -84,10 +88,83 @@ glyph: the solid panel icon when open and the dashed one when closed
 the label fixed ("Sidebar (⌘B)") and pass `aria-pressed`. Don't use the
 chevron icons (`PanelLeftOpen` / `PanelLeftClose`); they're too busy.
 
-**`CopyButton`** (`copy-button`): a `Button` that copies `value` and shows
-"Copied" for 2s. Takes `Button` props except `icon`, `loading`, `onClick`;
-`onCopy` fires after a copy. It stops click propagation, so it's safe inside
-a clickable row.
+**Confirmation** (`confirmation`, on `Button` and `IconButton`): says an
+action whose result isn't visible worked, or didn't: copied, sent, saved,
+connected, up to date. It takes `{ icon?, title }`, or `undefined` while
+idle. While set, a tooltip with `title` is held open and announced to screen
+readers. `icon` replaces the button's own icon; a `Button` with no `icon`
+shows the tooltip only, so its label never moves. Leave `icon` out to keep
+the button's glyph.
+
+```tsx
+<Button
+  icon={Plug}
+  loading={testing}
+  confirmation={result}
+  onClick={testConnection}
+>
+  Test connection
+</Button>
+// result: { icon: Check, title: "Connected" }
+//      or { icon: X, title: "Couldn't reach the server" }, then undefined after 2s
+```
+
+- The caller owns the timing: set it, then clear it after about 2s. Mosaic
+  doesn't clear it for you.
+- It needs `TooltipProvider` at the root (see [setup.md](setup.md)), which
+  also hosts the screen-reader announcement.
+- Skip it when the result is visible (a star fills, a row disappears, the
+  new item appears). Use it next to `loading`: `loading` while the action
+  runs, `confirmation` once it finishes.
+- The button's `title` is the resting tooltip; `confirmation.title`
+  replaces it while set, as `confirmation.icon` replaces `icon`.
+  `tooltipOpen` holds the `title` tooltip open for other cases.
+
+**Copy buttons**: `useCopyToClipboard` (see [Hooks](#hooks)) with
+`confirmation`. Stop propagation so a copy inside a clickable row doesn't
+open the row.
+
+```tsx
+const { copied, copy } = useCopyToClipboard();
+<IconButton
+  icon={Copy}
+  title="Copy"
+  aria-label="Copy run ID"
+  confirmation={copied ? { icon: Check, title: "Copied" } : undefined}
+  onClick={(event) => {
+    event.stopPropagation();
+    void copy(runId);
+  }}
+/>;
+```
+
+### Entity
+
+A clickable object: a commit, an issue, a status, a person. A Button is a
+verb ("Save"); an Entity is a noun, showing what the thing is. Clicking
+opens it (`href`, rendered as a link) or changes it (`onClick`, or as a
+`Menu` trigger for picking a value). Styled like a subtle Button, but
+left-aligned, with any element in `leading`.
+
+```tsx
+<Entity
+  leading={<span className="font-mono text-label-secondary">{commit.shortHash}</span>}
+  onClick={() => openCommit(commit.sha)}
+>
+  {commit.subject}
+</Entity>
+<Entity href={issue.url} leading={<CircleCheck size={16} />} secondary="#56">
+  {issue.title}
+</Entity>
+```
+
+- `leading` brings its own size: 16px at md, 14px at sm, matching Button's
+  icons.
+- `secondary` is muted text after the title; both truncate together.
+- Rows you choose from inside a list (with a selected state) are list
+  items or `NavItem`, not Entities. An Entity points at something elsewhere.
+- Wrap it per object in the app (`CommitEntity`, `UserEntity`); Mosaic only
+  ships the container.
 
 ## Form controls
 
@@ -406,3 +483,14 @@ import {
 - **`SVGIcon`** (`svg-icon`): renders a raw SVG string at `size`. The SVG
   should use `width="100%" height="100%"` and `currentColor`, so color comes
   from a `text-*` class.
+
+## Hooks
+
+**`useCopyToClipboard`** (`use-copy-to-clipboard`): returns
+`{ copied, copy }`. `copy(value)` writes to the clipboard and resolves
+`true`, or `false` if the browser refused; `copied` stays `true` for 2s after
+a copy. On a `Button` or `IconButton`, feed `copied` into `confirmation`
+(see [Copy buttons](#buttons)). Elsewhere (a link, a menu item), confirm
+without changing the element's size: swap an icon, don't swap the label.
+
+- One hook per element: two sharing one `copied` both confirm.

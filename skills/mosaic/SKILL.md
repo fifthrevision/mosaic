@@ -10,9 +10,9 @@ Rules for writing UI with Mosaic's tokens and components. The lint plugin
 
 Read the other files in this folder when the task needs them:
 
-- [components.md](components.md): every component, its props, and which to
-  pick. Check it before hand-building a control, overlay, or row; it
-  probably exists.
+- [components.md](components.md): every component and hook, its props, and
+  which to pick. Check it before hand-building a control, overlay, or row;
+  it probably exists.
 - [tokens.md](tokens.md): the full color tokens (surfaces, states, controls,
   separators, shapes, palette), shadows, radius, focus, and utilities.
 - [setup.md](setup.md): stylesheet import, root providers, modes, and the

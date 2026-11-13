@@ -119,7 +119,7 @@ export function FilePicker({
           id={id}
           type="button"
           onClick={() => inputRef.current?.click()}
-          className="flex h-6 w-full items-center justify-center gap-1.5 rounded-sm text-subhead font-medium text-label-secondary transition-colors hover:text-label-theme focus-visible:control-focus-ring"
+          className="flex h-6 w-full items-center justify-center gap-1.5 rounded-h6 text-subhead font-medium text-label-secondary transition-colors hover:text-label-theme focus-visible:control-focus-ring"
         >
           <ArrowUpFromLine size={12} className="shrink-0" />
           {label}

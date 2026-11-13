@@ -25,7 +25,7 @@ export function WorkspaceControl({
         className,
       )}
     >
-      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-separator-secondary-translucent bg-surface-card-subdued text-caption font-medium text-label-secondary shadow-[0px_1px_1px_var(--color-shadow-3)]">
+      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-h6 border border-separator-secondary-translucent bg-surface-card-subdued text-caption font-medium text-label-secondary shadow-[0px_1px_1px_var(--color-shadow-3)]">
         {workspaceInitials(name)}
       </span>
       <span className="flex min-w-0 items-center gap-2">

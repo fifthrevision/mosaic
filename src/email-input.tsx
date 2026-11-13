@@ -84,7 +84,7 @@ export function EmailInput({
             key={`${email}-${i}`}
             title={invalid ? "Invalid email address" : undefined}
             className={cn(
-              "group/scrolling-text inline-flex h-6 max-w-full items-center gap-1.5 rounded-md border px-2",
+              "group/scrolling-text inline-flex h-6 max-w-full items-center gap-1.5 rounded-h6 border px-2",
               invalid
                 ? "border-shape-destructive bg-surface-card text-label-destructive"
                 : "border-separator-secondary bg-surface-card text-label",

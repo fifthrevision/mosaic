@@ -36,7 +36,7 @@ export function FileChip({
   return (
     <span
       className={cn(
-        "group group/scrolling-text relative inline-flex h-6 max-w-59 items-center gap-1.5 rounded-md border border-separator-secondary bg-surface-card px-2 transition-colors",
+        "group group/scrolling-text relative inline-flex h-6 max-w-59 items-center gap-1.5 rounded-h6 border border-separator-secondary bg-surface-card px-2 transition-colors",
         href && "hover:bg-state-hover",
         className,
       )}

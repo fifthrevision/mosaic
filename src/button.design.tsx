@@ -7,6 +7,8 @@ import { Menu, MenuItem, MenuSeparator } from "./menu";
 
 export const meta = {
   title: "Button",
+  group: "Buttons",
+  order: 1,
   description: "Action button with size and variant options",
 };
 

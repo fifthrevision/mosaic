@@ -2,8 +2,8 @@ import { Play } from "lucide-react";
 import { useState } from "react";
 import { ColumnLabel, Example } from "../studio/DesignHelpers";
 import { Button } from "./button";
-import { Label } from "./label";
 import { Select } from "./select";
+import { SettingsRow, SettingsSection } from "./settings";
 
 export const meta = {
   title: "Select",
@@ -88,22 +88,25 @@ export const EdgeCases = () => (
 
 export const InContext = () => (
   <div className="flex flex-col gap-6">
-    <Example label="agent settings">
-      <div className="flex w-120 flex-col gap-4 rounded-md border border-separator-secondary bg-surface-card p-4 card-shadow">
-        <div className="flex flex-col gap-1.5">
-          <Label htmlFor="select-context-model">Model</Label>
-          <Select id="select-context-model" defaultValue="sonnet">
-            {MODEL_OPTIONS}
-          </Select>
-        </div>
-        <div className="flex flex-col gap-1.5">
-          <Label htmlFor="select-context-retention">Keep run logs for</Label>
-          <Select id="select-context-retention" defaultValue="30">
-            <option value="7">7 days</option>
-            <option value="30">30 days</option>
-            <option value="90">90 days</option>
-          </Select>
-        </div>
+    <Example label="agent settings (SettingsSection, SettingsRow)">
+      <div className="w-150 px-4">
+        <SettingsSection title="Agent">
+          <SettingsRow label="Model" htmlFor="select-context-model">
+            <Select id="select-context-model" defaultValue="sonnet">
+              {MODEL_OPTIONS}
+            </Select>
+          </SettingsRow>
+          <SettingsRow
+            label="Keep run logs for"
+            htmlFor="select-context-retention"
+          >
+            <Select id="select-context-retention" defaultValue="30">
+              <option value="7">7 days</option>
+              <option value="30">30 days</option>
+              <option value="90">90 days</option>
+            </Select>
+          </SettingsRow>
+        </SettingsSection>
       </div>
     </Example>
     <Example label="inline in a toolbar">

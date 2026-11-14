@@ -38,6 +38,7 @@
     "./radio": "./src/radio.tsx",
     "./search-menu": "./src/search-menu.tsx",
     "./section-header": "./src/section-header.tsx",
+    "./settings": "./src/settings.tsx",
     "./segmented-control": "./src/segmented-control.tsx",
     "./shortcut": "./src/shortcut.tsx",
     "./select": "./src/select.tsx",

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ColumnLabel, Example } from "../studio/DesignHelpers";
 import { Label } from "./label";
+import { SettingsRow, SettingsSection } from "./settings";
 import { Switch } from "./switch";
 
 export const meta = {
@@ -83,28 +84,20 @@ const SETTINGS = [
 
 export const InContext = () => (
   <div className="flex flex-col gap-6">
-    <Example label="settings card rows">
-      <div className="flex w-120 flex-col rounded-md border border-separator-secondary bg-surface-card card-shadow">
-        {SETTINGS.map((setting) => (
-          <div
-            key={setting.id}
-            className="flex items-start justify-between gap-4 border-b border-separator-secondary px-4 py-3 last:border-b-0"
-          >
-            <div className="flex flex-col">
-              <Label htmlFor={setting.id} className="text-body text-label">
-                {setting.label}
-              </Label>
-              <p className="text-body text-label-secondary">
-                {setting.description}
-              </p>
-            </div>
-            <Switch
-              id={setting.id}
-              className="mt-0.5"
-              defaultChecked={setting.defaultChecked}
-            />
-          </div>
-        ))}
+    <Example label="settings rows (SettingsSection, SettingsRow)">
+      <div className="w-150 px-4">
+        <SettingsSection title="Runs">
+          {SETTINGS.map((setting) => (
+            <SettingsRow
+              key={setting.id}
+              label={setting.label}
+              description={setting.description}
+              htmlFor={setting.id}
+            >
+              <Switch id={setting.id} defaultChecked={setting.defaultChecked} />
+            </SettingsRow>
+          ))}
+        </SettingsSection>
       </div>
     </Example>
     <Example label="agent list row (disabled while the agent is running)">

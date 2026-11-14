@@ -387,6 +387,8 @@ hold user data or state. State is a `Status`.
 | `TextStack`         | `text-stack`         | Heading plus description (see [SKILL.md](SKILL.md#spacing))                          |
 | `Card`              | `card`               | Bordered container for a list, table, or panel in a page's text column      |
 | `SectionHeader`     | `section-header`     | Group label above a list or card: `title`, optional `action`; collapsible with `open` / `onOpenChange` |
+| `SettingsSection`   | `settings`           | A group of settings: `title` (a `SectionHeader`), optional `description`, rows in a `Card`. See below |
+| `SettingsRow`       | `settings`           | One setting: `label`, `description`, `htmlFor`, `layout` `inline` / `stacked`, control or value as children |
 | `NavItem`           | `nav-item`           | Sidebar row: `href`, `active`, optional `icon`, `variant` `default` / `tinted`; `asChild` around your router link |
 | `Tabs`              | `tabs`               | In-page tabs. See below                                                     |
 | `Alert`             | `alert`              | Inline message: `variant` `info` (default) / `success` / `error`, `onDismiss` |
@@ -414,6 +416,25 @@ hold user data or state. State is a `Status`.
   reports the toggle, so render the group's content yourself when `open`
   is true. Use it for any collapsible group instead of hand-building a
   chevron row.
+- `SettingsSection` and `SettingsRow` lay out label and control side by
+  side. They don't decide when a value is saved: a control can save on
+  change, a row can hold a Save button, or sections can sit in a `<form>`.
+  - The section caps itself at 720px, so the gap between a label and
+    its control never opens up. Don't widen it; put sections in a column
+    of their own and let them be narrower than the page if they have to.
+  - `inline` (default) puts the label and description on the left and the
+    control on the right. In an inline row, text inputs and selects are
+    240px and number inputs 96px, whatever width you give them, so fields
+    in a card share one left edge. Switches and segmented controls keep
+    their own size. Anything that needs width (a textarea, a list) is
+    `stacked`: the control goes below the label at full width.
+  - Pass the control's id as `htmlFor`. When the child is that control
+    (its `id` matches), the row also sets its `aria-describedby` to the
+    description. A wrapper around the control breaks the match, so pass
+    the control itself. Leave `htmlFor` out for a control with its own
+    `aria-label` (`SegmentedControl`) or a read-only value.
+  - Text as children is a read-only value and renders secondary. Put a
+    copy `IconButton` (`subtle`, `sm`) after an ID people paste elsewhere.
 - `NavItem` is a link: it renders an `<a>` and takes `href`. With a
   router, pass `asChild` and its link as the one child; the child has to
   pass through `className` and `aria-current`. A sidebar action that goes

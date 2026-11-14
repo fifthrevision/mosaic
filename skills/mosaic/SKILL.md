@@ -207,6 +207,38 @@ A section with controls under its `TextStack` steps the gaps: `gap-6`
 (24px) between the `TextStack` and the controls, `gap-4` (16px) between
 controls. Equal gaps make the description read as one more row.
 
+## Settings pages
+
+Build settings pages from `SettingsSection` and `SettingsRow`
+(`@fifthrevision/mosaic/settings`), not hand-built rows in a `Card`:
+
+```tsx
+<h1 className="text-large-title text-label">Appearance</h1>
+<SettingsSection title="Editor" description="Applies to every file.">
+  <SettingsRow label="Theme" htmlFor="theme">
+    <Select id="theme">…</Select>
+  </SettingsRow>
+  <SettingsRow
+    label="Wrap long lines"
+    description="Soft-wrap at the window edge."
+    htmlFor="wrap"
+  >
+    <Switch id="wrap" />
+  </SettingsRow>
+</SettingsSection>
+```
+
+- The page is a page title over sections, `gap-8` apart. Section titles
+  are group labels (`SectionHeader`), so the page needs no `h2` level.
+- Labels on the left, controls on the right, as on macOS and iOS. The
+  row fixes field widths and the section caps its width at 720px; don't
+  override either to fill a wider page.
+- Write the label as the setting and the description as what it does.
+  Longer labels and descriptions are fine: they fill the left side.
+- Read-only details (an email, an ID) are rows with text as the value.
+
+See [components.md](components.md#layout-and-feedback) for the props.
+
 ## Surfaces and states, in brief
 
 Surfaces are layers: `bg-surface-shell` (app frame) → `bg-surface-canvas`

@@ -2,10 +2,10 @@ import { FileText, ImageIcon, Plus, Sheet } from "lucide-react";
 import { useState } from "react";
 import { ColumnLabel, Example } from "../studio/DesignHelpers";
 import { Button } from "./button";
-import { FileChip } from "./file-chip";
+import { Attachment } from "./attachment";
 
 export const meta = {
-  title: "File Chip",
+  title: "Attachment",
   description:
     "Compact file reference with upload state, optional download link, and hover-to-remove",
 };
@@ -14,7 +14,7 @@ const ROWS = ["static", "removable", "link"] as const;
 
 const COLUMNS = ["ready", "no size", "icon", "loading", "error"] as const;
 
-function chipProps(row: (typeof ROWS)[number]) {
+function attachmentProps(row: (typeof ROWS)[number]) {
   if (row === "removable") return { onRemove: () => {} };
   if (row === "link") return { href: "#" };
   return {};
@@ -29,25 +29,29 @@ export const States = () => (
     {ROWS.map((row) => (
       <div key={row} className="contents">
         <ColumnLabel>{row}</ColumnLabel>
-        <FileChip filename="rubric.md" sizeText="4.1 KB" {...chipProps(row)} />
-        <FileChip filename="rubric.md" {...chipProps(row)} />
-        <FileChip
+        <Attachment
+          filename="rubric.md"
+          sizeText="4.1 KB"
+          {...attachmentProps(row)}
+        />
+        <Attachment filename="rubric.md" {...attachmentProps(row)} />
+        <Attachment
           icon={ImageIcon}
           filename="diagram.png"
           sizeText="1.2 MB"
-          {...chipProps(row)}
+          {...attachmentProps(row)}
         />
-        <FileChip
+        <Attachment
           filename="transcript.pdf"
           sizeText="88 KB"
           state="loading"
-          {...chipProps(row)}
+          {...attachmentProps(row)}
         />
-        <FileChip
+        <Attachment
           filename="transcript.pdf"
           sizeText="88 KB"
           state="error"
-          {...chipProps(row)}
+          {...attachmentProps(row)}
         />
       </div>
     ))}
@@ -102,11 +106,11 @@ export const Remove = () => {
   return (
     <div className="flex w-120 flex-col gap-3">
       <ColumnLabel>
-        hover a chip and click × to remove; added files upload for 1.5s
+        hover an attachment and click × to remove; added files upload for 1.5s
       </ColumnLabel>
       <div className="flex flex-wrap gap-1">
         {files.map((file) => (
-          <FileChip
+          <Attachment
             key={file.id}
             filename={file.filename}
             sizeText={file.sizeText}
@@ -129,13 +133,13 @@ export const Remove = () => {
 export const EdgeCases = () => (
   <div className="flex flex-col gap-6">
     <Example label="long name (truncates at max-w-59)">
-      <FileChip
+      <Attachment
         filename="quarterly_support_ticket_export_with_agent_annotations.csv"
         sizeText="12 MB"
       />
     </Example>
     <Example label="long name, removable">
-      <FileChip
+      <Attachment
         filename="quarterly_support_ticket_export_with_agent_annotations.csv"
         sizeText="12 MB"
         onRemove={() => {}}
@@ -143,7 +147,7 @@ export const EdgeCases = () => (
     </Example>
     <Example label='narrow container (className="max-w-full")'>
       <div className="w-32 rounded-md border border-separator-secondary p-1">
-        <FileChip
+        <Attachment
           className="max-w-full"
           filename="evaluation-results.json"
           sizeText="64 KB"
@@ -152,9 +156,13 @@ export const EdgeCases = () => (
     </Example>
     <Example label="loading and error hide sizeText">
       <div className="flex gap-2">
-        <FileChip filename="dataset.parquet" sizeText="40 MB" />
-        <FileChip filename="dataset.parquet" sizeText="40 MB" state="loading" />
-        <FileChip filename="dataset.parquet" sizeText="40 MB" state="error" />
+        <Attachment filename="dataset.parquet" sizeText="40 MB" />
+        <Attachment
+          filename="dataset.parquet"
+          sizeText="40 MB"
+          state="loading"
+        />
+        <Attachment filename="dataset.parquet" sizeText="40 MB" state="error" />
       </div>
     </Example>
   </div>
@@ -171,19 +179,19 @@ export const InContext = () => (
           </span>
         </div>
         <div className="flex flex-wrap gap-1">
-          <FileChip
+          <Attachment
             icon={FileText}
             filename="weekly-summary.md"
             sizeText="6.2 KB"
             href="#"
           />
-          <FileChip
+          <Attachment
             icon={Sheet}
             filename="ticket-breakdown.csv"
             sizeText="48 KB"
             href="#"
           />
-          <FileChip
+          <Attachment
             icon={ImageIcon}
             filename="volume-chart.png"
             sizeText="210 KB"
@@ -195,12 +203,12 @@ export const InContext = () => (
     <Example label="chat message attachments">
       <div className="flex w-120 flex-col items-end gap-2">
         <div className="flex flex-wrap justify-end gap-1">
-          <FileChip
+          <Attachment
             filename="contract-v3.pdf"
             sizeText="1.1 MB"
             onRemove={() => {}}
           />
-          <FileChip
+          <Attachment
             filename="redlines.docx"
             state="loading"
             onRemove={() => {}}
@@ -219,7 +227,7 @@ export const InContext = () => (
             Attached to every run
           </span>
         </div>
-        <FileChip filename="house-style.md" sizeText="9 KB" href="#" />
+        <Attachment filename="house-style.md" sizeText="9 KB" href="#" />
       </div>
     </Example>
   </div>

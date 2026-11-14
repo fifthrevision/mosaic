@@ -182,7 +182,7 @@ Pair each with a `Label` (`htmlFor`), stacked with `gap`.
 | `Switch`           | `switch`            | `checked`, `onCheckedChange(boolean)`                                             |
 | `SegmentedControl` | `segmented-control` | `options` `{ value, label }[]`, `value`, `onChange(value)`, `aria-label`          |
 | `FilePicker`       | `file-picker`       | Click-or-drop zone. `files`, `onAddFiles(File[])`, `onRemove(id)`, `accept`, `id` (for `Label htmlFor`) |
-| `FileChip`         | `file-chip`         | One file: `filename`, `sizeText`, `state` (`ready` / `loading` / `error`), `href`, `onRemove` |
+| `Attachment`       | `attachment`        | One file: `filename`, `sizeText`, `state` (`ready` / `loading` / `error`), `href`, `onRemove` |
 | `ChatInput`        | `chat-input`        | Message composer. See below                                                       |
 
 Picking one-of-many:
@@ -204,7 +204,7 @@ Gotchas:
 - `EmailInput` commits on Enter, comma, semicolon, Tab, blur, and paste.
   Invalid addresses show in red but stay in `value`; check them with the
   exported `isValidEmail` before submitting.
-- `FilePicker` and `FileChip` hold no files. You own the list and its
+- `FilePicker` and `Attachment` hold no files. You own the list and its
   `state`; they render it.
 - `ChatInput`: `value`, `onChange(text)`, `onSubmit`; Enter sends,
   Shift+Enter breaks a line. `isStreaming` + `onStop` show a stop button;

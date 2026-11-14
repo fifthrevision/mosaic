@@ -3,7 +3,7 @@ import { AlertCircle, FileIcon, Loader2, X } from "lucide-react";
 import { cn } from "./cn";
 import { ScrollingText } from "./scrolling-text";
 
-export function FileChip({
+export function Attachment({
   filename,
   sizeText,
   icon: Icon = FileIcon,
@@ -30,7 +30,7 @@ export function FileChip({
         : "text-shape-secondary";
 
   const showsSize = state === "ready" && Boolean(sizeText);
-  // The gap-1.5 before the size, or the chip's px-2 when nothing follows.
+  // The gap-1.5 before the size, or the px-2 when nothing follows.
   const labelTrailingPx = showsSize ? 6 : 8;
 
   return (

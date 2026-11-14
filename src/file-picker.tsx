@@ -3,9 +3,9 @@ import { ArrowUpFromLine } from "lucide-react";
 import { useId, useRef, useState } from "react";
 import { cn } from "./cn";
 import { FadingScrollArea } from "./fading-scroll-area";
-import { FileChip } from "./file-chip";
+import { Attachment } from "./attachment";
 
-function FileChipItem({
+function AttachmentItem({
   file,
   onRemove,
 }: {
@@ -14,7 +14,7 @@ function FileChipItem({
 }) {
   return (
     <li className="flex min-w-0">
-      <FileChip
+      <Attachment
         className="max-w-full"
         filename={file.filename}
         sizeText={file.sizeText}
@@ -101,7 +101,7 @@ export function FilePicker({
         >
           <ul className="flex flex-wrap gap-1">
             {files.map((file) => (
-              <FileChipItem
+              <AttachmentItem
                 key={file.id}
                 file={file}
                 onRemove={onRemove ? () => onRemove(file.id) : undefined}

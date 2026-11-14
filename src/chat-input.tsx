@@ -1,6 +1,6 @@
 import { ArrowUp, Plus, Square } from "lucide-react";
 import { useId, useLayoutEffect, useRef } from "react";
-import { FileChip } from "./file-chip";
+import { Attachment } from "./attachment";
 import { IconButton } from "./icon-button";
 import { Label } from "./label";
 import { cn } from "./cn";
@@ -79,7 +79,7 @@ export function ChatInput({
         <ul className="flex flex-wrap gap-1 px-2 pt-2">
           {attached.map((item) => (
             <li key={item.id} className="flex min-w-0">
-              <FileChip
+              <Attachment
                 className="max-w-full"
                 filename={item.filename}
                 state={item.state}

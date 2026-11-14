@@ -23,7 +23,7 @@
     "./empty-state": "./src/empty-state.tsx",
     "./entity": "./src/entity.tsx",
     "./fading-scroll-area": "./src/fading-scroll-area.tsx",
-    "./file-chip": "./src/file-chip.tsx",
+    "./attachment": "./src/attachment.tsx",
     "./file-picker": "./src/file-picker.tsx",
     "./icon-button": "./src/icon-button.tsx",
     "./icon-toggle": "./src/icon-toggle.tsx",

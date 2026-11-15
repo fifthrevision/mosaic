@@ -51,6 +51,24 @@
   --font-weight-medium: 500;
 }
 
+/* Inline so the mix resolves where it's used: .dark can sit on a nested
+   element, and a value computed on :root would keep the light color. */
+@theme inline {
+  --color-surface-floating-translucent: color-mix(
+    in srgb,
+    var(--surface-floating) var(--floating-opacity),
+    transparent
+  );
+}
+
+:root {
+  --floating-opacity: 80%;
+
+  @media (prefers-reduced-transparency: reduce) {
+    --floating-opacity: 100%;
+  }
+}
+
 @utility control-shadow {
   box-shadow:
     0px 1px 1px var(--color-shadow-4),
@@ -83,15 +101,10 @@
 }
 
 @utility menu-surface {
-  background-color: color-mix(
-    in srgb,
-    var(--color-surface-floating) 80%,
-    transparent
-  );
+  @apply bg-surface-floating-translucent;
   backdrop-filter: blur(4px) saturate(150%);
 
   @media (prefers-reduced-transparency: reduce) {
-    background-color: var(--color-surface-floating);
     backdrop-filter: none;
   }
 }

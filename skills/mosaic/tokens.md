@@ -27,8 +27,9 @@ Above the page:
 | --------------------- | -------------------------------------------------------------------------------------------- |
 | `bg-surface-panel`    | The frame of a persistent window (the docked assistant). Its content area is a card. Follows `shell`; pair with `panel-shadow` |
 | `bg-surface-dialog`   | Windows that hold content: `Dialog`, `ConfirmDialog`, `Popover`. Follows `canvas`, so cards nest inside them; pair with `dialog-shadow` |
-| `menu-surface`        | Menus and choice lists (`Menu`, `SearchMenu`, `Combobox`, autocomplete): `bg-surface-floating` (card color) at 80% with a 4px backdrop blur, opaque under `prefers-reduced-transparency`. Pair with `overlay-shadow` |
-| `glass-surface`       | Glanceable and launcher overlays (`Tooltip`, toasts, `CommandMenu`): the floating color at 50% with a 12px backdrop blur, opaque under `prefers-reduced-transparency`. Pair with a `separator-primary-translucent` border, so it stays apart from busy content behind it, and `overlay-shadow` (`command-shadow` for `CommandMenu`) |
+| `menu-surface`        | Menus and choice lists (`Menu`, `SearchMenu`, `Combobox`, autocomplete): `bg-surface-floating-translucent` with a 4px backdrop blur. Pair with `overlay-shadow` |
+| `bg-surface-floating-translucent` | The floating color (card color) at 80%, opaque under `prefers-reduced-transparency`. On its own, without a blur, for small markers that let the surface behind show through: `Chip` |
+| `glass-surface`       | Glanceable and launcher overlays (`Tooltip`, toasts, `CommandMenu`): the floating color at 40% with a 12px backdrop blur, opaque under `prefers-reduced-transparency`. Pair with a `separator-primary-translucent` border, so it stays apart from busy content behind it, and `overlay-shadow` (`command-shadow` for `CommandMenu`) |
 | `bg-surface-scrim`    | The backdrop behind a modal: translucent black, darker in dark mode. `Dialog` and `ConfirmDialog` use it |
 
 `bg-surface-bubble` is a theme-tinted chat bubble, placed on any layer.

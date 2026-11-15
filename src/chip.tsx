@@ -44,7 +44,7 @@ export function Chip({
     <span
       {...props}
       className={cn(
-        "group/scrolling-text inline-flex h-6 w-fit max-w-80 shrink-0 items-center gap-1.5 rounded-h6 border bg-surface-card px-2 text-subhead font-regular control-shadow-subtle",
+        "group/scrolling-text inline-flex h-6 w-fit max-w-80 shrink-0 items-center gap-1.5 rounded-h6 border bg-surface-floating-translucent px-2 text-subhead font-regular control-shadow-subtle",
         container,
         onRemove && "pr-1",
         className,

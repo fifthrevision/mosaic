@@ -346,12 +346,13 @@ trigger element. On `Button` and `IconButton`, use `title` instead.
 Import it from `@fifthrevision/mosaic/toaster`, not `sonner`. For a
 message that should stay on the page, use `Alert`.
 
-## Status and badges
+## Status, chips, and badges
 
-| Need                                                   | Use      |
-| ------------------------------------------------------ | -------- |
-| The current state of a thing (Enabled, Running, Failed) | `Status` |
-| A product annotation beside a name (Beta, New)          | `Badge`  |
+| Need                                                                  | Use      |
+| --------------------------------------------------------------------- | -------- |
+| The current state of a thing (Enabled, Running, Failed)               | `Status` |
+| A state the view is in that the reader can leave (review copy, filter) | `Chip`   |
+| A product annotation beside a name (Beta, New)                        | `Badge`  |
 
 **`Status`** (`status`): an indicator followed by a label (the children).
 
@@ -379,6 +380,27 @@ message that should stay on the page, use `Alert`.
 `neutral` (default) | `theme`. The product picks the words from a short
 fixed set ("Beta", "New", "Deprecated"); it isn't clickable and doesn't
 hold user data or state. State is a `Status`.
+
+**`Chip`** (`chip`): a 24px marker for a state the view is in. The label
+(the children) can hold user data: a date, a commit, a filter value.
+
+| Prop       | Values                                                       |
+| ---------- | ------------------------------------------------------------ |
+| `tone`     | `neutral` (default), `warning`, `destructive`                |
+| `icon`     | Optional leading Lucide icon                                 |
+| `onRemove` | Puts a × at the trailing edge; removing it leaves the state  |
+
+- The chip itself does nothing when clicked; the × is its only control.
+  It isn't a toggle: for a row of options to switch on and off, use
+  `SegmentedControl` or `IconToggle`.
+- One size. In a row of 32px controls it sits centered, smaller than the
+  buttons around it, so it doesn't read as one of them.
+- A file is an `Attachment`, not a Chip: files are first-class objects
+  with a size, an upload state, and a link.
+- Map each state to a tone and icon in app code, in one place, like
+  `Status`. `warning` is "this isn't what you'd normally see".
+  `destructive` marks an entry that's wrong, like an invalid address in
+  `EmailInput` (which renders its addresses as Chips).
 
 ## Layout and feedback
 

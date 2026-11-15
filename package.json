@@ -15,6 +15,7 @@
     "./card": "./src/card.tsx",
     "./chat-input": "./src/chat-input.tsx",
     "./checkbox": "./src/checkbox.tsx",
+    "./chip": "./src/chip.tsx",
     "./combobox": "./src/combobox.tsx",
     "./command-menu": "./src/command-menu.tsx",
     "./confirm-dialog": "./src/confirm-dialog.tsx",

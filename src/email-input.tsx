@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
-import { X } from "lucide-react";
+import { Chip } from "./chip";
 import { cn } from "./cn";
-import { ScrollingText } from "./scrolling-text";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -80,37 +79,15 @@ export function EmailInput({
       {value.map((email, i) => {
         const invalid = !isValidEmail(email);
         return (
-          <span
+          <Chip
             key={`${email}-${i}`}
+            tone={invalid ? "destructive" : "neutral"}
             title={invalid ? "Invalid email address" : undefined}
-            className={cn(
-              "group/scrolling-text inline-flex h-6 max-w-full items-center gap-1.5 rounded-h6 border px-2",
-              invalid
-                ? "border-shape-destructive bg-surface-card text-label-destructive"
-                : "border-separator-secondary bg-surface-card text-label",
-            )}
+            onRemove={disabled ? undefined : () => removeAt(i)}
+            className="max-w-full"
           >
-            <ScrollingText
-              leadingGapPx={8}
-              trailingGapPx={disabled ? 8 : 6}
-              className="flex-1 text-subhead"
-            >
-              {email}
-            </ScrollingText>
-            {!disabled && (
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  removeAt(i);
-                }}
-                aria-label={`Remove ${email}`}
-                className="flex size-4 shrink-0 items-center justify-center rounded-xs text-shape-secondary hover:text-label focus-visible:control-focus-ring"
-              >
-                <X size={12} />
-              </button>
-            )}
-          </span>
+            {email}
+          </Chip>
         );
       })}
       <input

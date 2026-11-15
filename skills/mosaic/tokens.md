@@ -88,6 +88,8 @@ tuned without moving the others. Use a family's tokens together.
 | `border-separator-secondary`                | Default: card, control, and menu borders; row dividers    |
 | `border-separator-primary`                  | Stronger: checkbox/radio/switch outlines, table header rule |
 | `border-separator-*-translucent`            | Borders on content of unknown color (avatars, images)     |
+| `border-separator-warning`                  | A warning-toned outline: `Chip`'s `warning` tone           |
+| `border-separator-destructive`              | A destructive-toned outline: `Chip`'s `destructive` tone   |
 
 Row dividers: `border-b border-separator-secondary last:border-b-0` on the
 rows, or `h-px bg-separator-secondary` for a standalone rule.
@@ -135,6 +137,7 @@ Mosaic's shadow colors deepen in dark mode.
 | ----------------------- | ---------------------------------------------------- |
 | `control-shadow`        | Raised controls; selected tabs, segments, nav items  |
 | `control-shadow-active` | A raised control while pressed (`active:`)           |
+| `control-shadow-subtle` | Barely raised markers that aren't controls: `Chip`, `Attachment` |
 | `card-shadow`           | Cards on the canvas                                  |
 | `overlay-shadow`        | Menus, tooltips, toasts                              |
 | `dialog-shadow`         | Dialogs and popovers                                 |

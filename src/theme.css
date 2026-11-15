@@ -116,6 +116,12 @@
   box-shadow: 0px 0px 1px var(--color-shadow-4);
 }
 
+@utility control-shadow-subtle {
+  box-shadow:
+    0px 1px 1px var(--color-shadow-2),
+    0px 1px 4px -1px var(--color-shadow-1);
+}
+
 @utility control-focus-ring {
   outline: 1px solid var(--color-shape-theme);
   outline-offset: 1px;

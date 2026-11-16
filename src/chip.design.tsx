@@ -3,6 +3,7 @@ import {
   FileCode,
   Folder,
   History,
+  MessageSquareText,
   MoreHorizontal,
   Search,
 } from "lucide-react";
@@ -14,6 +15,7 @@ import { Chip } from "./chip";
 import { cn } from "./cn";
 import { IconButton } from "./icon-button";
 import { Input } from "./input";
+import { Menu, MenuRadioItem } from "./menu";
 import { SegmentedControl } from "./segmented-control";
 import { Status } from "./status";
 
@@ -267,5 +269,86 @@ export const ComposerScope = () => {
         />
       </div>
     </Example>
+  );
+};
+
+const STATUS_OPTIONS = ["Open", "Merged", "Closed"] as const;
+
+function StatusFilterChip({ onRemove }: { onRemove: () => void }) {
+  const [status, setStatus] = useState<(typeof STATUS_OPTIONS)[number]>("Open");
+  return (
+    <Menu
+      align="start"
+      trigger={<Chip onRemove={onRemove}>Status: {status}</Chip>}
+    >
+      {STATUS_OPTIONS.map((option) => (
+        <MenuRadioItem
+          key={option}
+          active={option === status}
+          onSelect={() => setStatus(option)}
+        >
+          {option}
+        </MenuRadioItem>
+      ))}
+    </Menu>
+  );
+}
+
+export const Clickable = () => {
+  const [opened, setOpened] = useState<string | null>(null);
+  const [onReview, setOnReview] = useState(true);
+  const [statusFilter, setStatusFilter] = useState(true);
+  return (
+    <div className="flex flex-col gap-6">
+      <Example label="body opens the review, × leaves it">
+        <div className="flex w-180 items-center gap-2 rounded-md bg-surface-shell px-3 py-2">
+          <span className="truncate text-body font-medium text-label">
+            <span className="text-label-secondary">src / review / </span>
+            generate.ts
+          </span>
+          {onReview && (
+            <Chip
+              icon={MessageSquareText}
+              onClick={() => setOpened("Opened the review tab")}
+              onRemove={() => setOnReview(false)}
+            >
+              Changing models for review generation
+            </Chip>
+          )}
+          <span className="flex-1" />
+          <Button variant="subtle">Open in editor</Button>
+        </div>
+      </Example>
+      <Example label="body opens a menu to edit the filter">
+        <div className="flex w-160 flex-wrap items-center gap-1.5">
+          {statusFilter && (
+            <StatusFilterChip onRemove={() => setStatusFilter(false)} />
+          )}
+          <Chip onClick={() => setOpened("Edit author filter")}>
+            Author: chong
+          </Chip>
+          <Chip tone="warning" icon={History} onClick={() => {}} onRemove={() => {}}>
+            Review copy, Nov 13
+          </Chip>
+          <Chip tone="destructive" onClick={() => {}} onRemove={() => {}}>
+            not-an-email
+          </Chip>
+        </div>
+      </Example>
+      <div className="flex items-center gap-2 text-subhead text-label-secondary">
+        <span>Last action: {opened ?? "none"}</span>
+        <Button
+          variant="subtle"
+          size="sm"
+          onClick={() => {
+            setOpened(null);
+            setOnReview(true);
+            setStatusFilter(true);
+          }}
+        >
+          Reset
+        </Button>
+      </div>
+    </div>
   );
 };

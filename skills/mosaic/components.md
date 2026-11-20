@@ -377,9 +377,10 @@ message that should stay on the page, use `Alert`.
 - A setting the user can flip is a `Switch`, not a `Status`.
 
 **`Badge`** (`badge`): a small outlined label beside a name. `tone`
-`neutral` (default) | `theme`. The product picks the words from a short
-fixed set ("Beta", "New", "Deprecated"); it isn't clickable and doesn't
-hold user data or state. State is a `Status`.
+`neutral` (default) | `theme` | `ruby` | `mandarin` | `yellow` | `lime` |
+`emerald` | `teal` | `purple` | `magenta`. The product picks the words
+from a short fixed set ("Beta", "New", "Deprecated"); it isn't clickable
+and doesn't hold user data or state. State is a `Status`.
 
 **`Chip`** (`chip`): a 24px marker for a state the view is in. The label
 (the children) can hold user data: a date, a commit, a filter value.
@@ -418,7 +419,7 @@ hold user data or state. State is a `Status`.
 | `EmptyState`        | `empty-state`        | "Nothing here" text: `variant` `card` (default) / `plain`                   |
 | `FadingScrollArea`  | `fading-scroll-area` | Scroll region with edge fades, optional sticky `footer`                     |
 | `TruncatedText`     | `truncated-text`     | Clamp to `maxHeight` (px) with a bottom fade                                |
-| `Avatar`            | `avatar`             | `src`, `name` (initials when there's no `src` or it fails to load), `size` `sm` / `md` / `lg` |
+| `Avatar`            | `avatar`             | `src`, `name` (initials when there's no `src` or it fails to load, in a hue derived from the name), `size` `sm` / `md` / `lg`, `shape` `circle` (default; a person) / `square` (a workspace) |
 | `WorkspaceControl`  | `workspace-control`  | Sidebar workspace switcher; use as a `Menu` trigger                         |
 
 - `Card` hangs 8px past the text column on each side, so content padded

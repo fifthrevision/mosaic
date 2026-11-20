@@ -1,13 +1,7 @@
 import { ChevronDown } from "lucide-react";
+import { Avatar } from "./avatar";
 import { cn } from "./cn";
 import { ScrollingText } from "./scrolling-text";
-
-function workspaceInitials(name: string): string {
-  const words = name.trim().split(/\s+/).filter(Boolean);
-  if (words.length === 0) return "";
-  if (words.length === 1) return words[0].slice(0, 2).toUpperCase();
-  return (words[0][0] + words[1][0]).toUpperCase();
-}
 
 export function WorkspaceControl({
   name,
@@ -25,11 +19,9 @@ export function WorkspaceControl({
         className,
       )}
     >
-      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-h6 border border-separator-secondary-translucent bg-surface-card-subdued text-caption font-medium text-label-secondary shadow-[0px_1px_1px_var(--color-shadow-3)]">
-        {workspaceInitials(name)}
-      </span>
+      <Avatar name={name} size="sm" shape="square" />
       <span className="flex min-w-0 items-center gap-2">
-        {/* The button's gap-2.5 after the initials; this span's gap-2. */}
+        {/* The button's gap-2.5 after the avatar; this span's gap-2. */}
         <ScrollingText leadingGapPx={10} trailingGapPx={8}>
           {name}
         </ScrollingText>

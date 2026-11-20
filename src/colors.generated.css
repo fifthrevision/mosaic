@@ -6,6 +6,7 @@
   --color-light-1: #f8fbfd;
   --color-light-2_5: #f4f7fa;
   --color-light-3: #f3f6f9;
+  --color-light-4_5: #eff3f5;
   --color-light-5: #eef2f4;
   --color-light-6_5: #eaeef1;
   --color-light-8: #e6ebee;
@@ -63,6 +64,20 @@
   --color-yellow-850: #423301;
   --color-yellow-900: #322700;
   --color-yellow-950: #251d00;
+  /* lime (scale) */
+  --color-lime-50: #f5faf2;
+  --color-lime-100: #ebf6e6;
+  --color-lime-150: #e0f1d7;
+  --color-lime-200: #d5ebc6;
+  --color-lime-300: #bfdd9c;
+  --color-lime-400: #abcc68;
+  --color-lime-500: #9bb700;
+  --color-lime-600: #6d8d14;
+  --color-lime-700: #496717;
+  --color-lime-800: #2d4613;
+  --color-lime-850: #223810;
+  --color-lime-900: #192c0c;
+  --color-lime-950: #112209;
   /* emerald (scale) */
   --color-emerald-50: #f0f9f5;
   --color-emerald-100: #e0f2eb;
@@ -160,6 +175,7 @@
   --surface-dialog: var(--surface-canvas);
   --surface-card: var(--color-light-1);
   --surface-card-subdued: var(--color-light-3);
+  --surface-figure: var(--color-light-4_5);
   --surface-floating: var(--surface-card);
   --surface-scrim: rgba(0, 0, 0, 0.07);
   --surface-button: var(--color-light-6_5);
@@ -216,6 +232,7 @@
   --surface-dialog: var(--surface-canvas);
   --surface-card: var(--color-dark-1);
   --surface-card-subdued: var(--color-dark-0);
+  --surface-figure: var(--color-dark-1_5);
   --surface-floating: var(--surface-card);
   --surface-scrim: rgba(0, 0, 0, 0.1);
   --surface-button: var(--color-dark-8);
@@ -271,6 +288,7 @@
   --surface-dialog: var(--surface-canvas);
   --surface-card: var(--color-midnight-5);
   --surface-card-subdued: var(--color-midnight-2_5);
+  --surface-figure: var(--color-midnight-3_5);
   --surface-floating: var(--surface-card);
   --surface-button: var(--color-midnight-10);
   --surface-input: rgba(250, 253, 255, 0.04);
@@ -295,6 +313,7 @@
 @supports (color: color(display-p3 1 1 1)) {
   :root {
     --color-yellow-950: color(display-p3 0.1415 0.1154 0.0143);
+    --color-lime-500: color(display-p3 0.6281 0.7131 0.2094);
     --color-emerald-500: color(display-p3 0.2426 0.6083 0.3975);
     --color-emerald-600: color(display-p3 0.1684 0.4712 0.3197);
     --color-emerald-700: color(display-p3 0.111 0.3501 0.2451);
@@ -326,6 +345,7 @@
   --color-surface-dialog: var(--surface-dialog);
   --color-surface-card: var(--surface-card);
   --color-surface-card-subdued: var(--surface-card-subdued);
+  --color-surface-figure: var(--surface-figure);
   --color-surface-floating: var(--surface-floating);
   --color-surface-scrim: var(--surface-scrim);
   --color-surface-button: var(--surface-button);

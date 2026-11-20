@@ -3,7 +3,8 @@ import { Avatar } from "./avatar";
 
 export const meta = {
   title: "Avatar",
-  description: "User avatar with an image or an initials fallback",
+  description:
+    "User avatar with an image or an initials fallback in a hue derived from the name",
 };
 
 const IMAGE = "https://api.dicebear.com/9.x/thumbs/svg?seed=Aneka";
@@ -28,6 +29,41 @@ export const States = () => (
       </div>
     ))}
   </div>
+);
+
+const NAMES = [
+  "Maya Okafor",
+  "Theo Park",
+  "Ada Lovelace",
+  "Jun Sato",
+  "Priya Nair",
+  "Luca Moretti",
+  "Noor Haddad",
+  "Sam Rivera",
+  "Ines Costa",
+  "Kofi Mensah",
+  "Elif Demir",
+  "Wren Hale",
+];
+
+export const Hues = () => (
+  <Example label="hue derived from the name">
+    <div className="flex flex-wrap gap-2">
+      {NAMES.map((name) => (
+        <Avatar key={name} name={name} />
+      ))}
+    </div>
+  </Example>
+);
+
+export const Square = () => (
+  <Example label="square, for a workspace">
+    <div className="flex items-center gap-2">
+      {SIZES.map((size) => (
+        <Avatar key={size} name="Sunnyday Labs" size={size} shape="square" />
+      ))}
+    </div>
+  </Example>
 );
 
 export const EdgeCases = () => (

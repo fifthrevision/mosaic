@@ -37,11 +37,12 @@ palette:
   # the scales publish them as their 500 stops, so they don't emit again.
   hues:
     emit: false
-    theme: "#03a2e8"
-    yellow: "#fead3c"
-    emerald: "oklch(0.6109 0.1514 158.6)"
     ruby: "#c52e36"
     mandarin: "oklch(0.6834 0.1896 48.97)"
+    yellow: "#fead3c"
+    lime: "oklch(0.731 0.176 120)"
+    emerald: "oklch(0.6109 0.1514 158.6)"
+    theme: "#03a2e8"
     teal: "oklch(0.6745 0.139 191.75)"
     purple: "#897ad7"
     magenta: "#b9529c"
@@ -78,6 +79,10 @@ systems:
   yellow:
     algorithm: scale
     params: { base: hues.yellow }
+    emit: [50, 100, 150, 200, 300, 400, 500, 600, 700, 800, 850, 900, 950]
+  lime:
+    algorithm: scale
+    params: { base: hues.lime }
     emit: [50, 100, 150, 200, 300, 400, 500, 600, 700, 800, 850, 900, 950]
   emerald:
     algorithm: scale
@@ -127,6 +132,7 @@ roles:
     dialog: [surface.canvas, surface.canvas, surface.canvas]
     card: [sky(1), night(1), midnight(5)]
     card-subdued: [sky(3), night(0), midnight(2.5)]
+    figure: [sky(4.5), night(1.5), midnight(3.5)]
     floating: [surface.card, surface.card, surface.card]
     scrim: [shadow(7), shadow(10)]
     button: [sky(6.5), night(8), midnight(10)]

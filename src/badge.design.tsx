@@ -9,7 +9,18 @@ export const meta = {
     "A product annotation beside a name: Beta, New, Deprecated. For the state of a thing, use Status.",
 };
 
-const TONES = ["neutral", "theme"] as const;
+const TONES = [
+  "neutral",
+  "theme",
+  "ruby",
+  "mandarin",
+  "yellow",
+  "lime",
+  "emerald",
+  "teal",
+  "purple",
+  "magenta",
+] as const;
 
 export const States = () => (
   <div className="grid grid-cols-[6rem_repeat(2,max-content)] items-center gap-x-6 gap-y-4">
@@ -19,10 +30,12 @@ export const States = () => (
     {TONES.map((tone) => (
       <div key={tone} className="contents">
         <ColumnLabel>{tone}</ColumnLabel>
-        <Badge tone={tone}>{tone === "theme" ? "Beta" : "Deprecated"}</Badge>
+        <Badge tone={tone}>{tone === "neutral" ? "Deprecated" : "Beta"}</Badge>
         <span className="flex items-center gap-2">
           <span className="text-title text-label">Assistant</span>
-          <Badge tone={tone}>{tone === "theme" ? "Beta" : "Deprecated"}</Badge>
+          <Badge tone={tone}>
+            {tone === "neutral" ? "Deprecated" : "Beta"}
+          </Badge>
         </span>
       </div>
     ))}

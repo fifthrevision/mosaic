@@ -1,12 +1,12 @@
 import * as RadixDialog from "@radix-ui/react-dialog";
 import { Command } from "cmdk";
 import { createContext, useContext, useRef, useState } from "react";
+import { cn } from "./cn";
 import {
   RowRegistryProvider,
   useCommandHighlight,
   useRegisteredRow,
 } from "./command-highlight";
-import { cn } from "./cn";
 import { Shortcut } from "./shortcut";
 import type { UIIcon } from "./ui-icon";
 
@@ -58,6 +58,10 @@ export function CommandMenu({
             className,
           )}
         >
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-[radial-gradient(ellipse_50%_100%_at_50%_0,white,transparent)] dark:opacity-60"
+          />
           <RadixDialog.Title className="sr-only">{label}</RadixDialog.Title>
           <CloseCommandMenuContext.Provider value={() => onOpenChange(false)}>
             <CommandMenuCommand

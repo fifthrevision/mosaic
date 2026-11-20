@@ -11,7 +11,10 @@ const toneConfig = {
   lime: "border-lime-600/40 text-lime-700 dark:border-lime-400/40 dark:text-lime-150",
   emerald:
     "border-emerald-600/40 text-emerald-700 dark:border-emerald-400/40 dark:text-emerald-150",
+  blue: "border-blue-600/40 text-blue-700 dark:border-blue-400/40 dark:text-blue-150",
   teal: "border-teal-600/40 text-teal-700 dark:border-teal-400/40 dark:text-teal-150",
+  indigo:
+    "border-indigo-600/40 text-indigo-700 dark:border-indigo-400/40 dark:text-indigo-150",
   purple:
     "border-purple-600/40 text-purple-700 dark:border-purple-400/40 dark:text-purple-150",
   magenta:

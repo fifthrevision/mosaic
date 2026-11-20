@@ -378,9 +378,9 @@ message that should stay on the page, use `Alert`.
 
 **`Badge`** (`badge`): a small outlined label beside a name. `tone`
 `neutral` (default) | `theme` | `ruby` | `mandarin` | `yellow` | `lime` |
-`emerald` | `teal` | `purple` | `magenta`. The product picks the words
-from a short fixed set ("Beta", "New", "Deprecated"); it isn't clickable
-and doesn't hold user data or state. State is a `Status`.
+`emerald` | `blue` | `teal` | `indigo` | `purple` | `magenta`. The product
+picks the words from a short fixed set ("Beta", "New", "Deprecated"); it
+isn't clickable and doesn't hold user data or state. State is a `Status`.
 
 **`Chip`** (`chip`): a 24px marker for a state the view is in. The label
 (the children) can hold user data: a date, a commit, a filter value.

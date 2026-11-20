@@ -144,6 +144,35 @@ function applyTheme(theme: string) {
   localStorage.setItem("studio-theme", theme);
 }
 
+const DEFAULT_THEME_COLOR = "blue";
+
+const THEME_COLOR_SWATCHES = [
+  { color: "mandarin", swatchClass: "bg-mandarin-500" },
+  { color: "yellow", swatchClass: "bg-yellow-500" },
+  { color: "lime", swatchClass: "bg-lime-500" },
+  { color: "emerald", swatchClass: "bg-emerald-500" },
+  { color: "blue", swatchClass: "bg-blue-500" },
+  { color: "teal", swatchClass: "bg-teal-500" },
+  { color: "indigo", swatchClass: "bg-indigo-500" },
+  { color: "purple", swatchClass: "bg-purple-500" },
+  { color: "magenta", swatchClass: "bg-magenta-500" },
+] as const;
+
+function currentThemeColor(): string {
+  const classes = document.documentElement.classList;
+  return (
+    THEME_COLOR_SWATCHES.find(({ color }) => classes.contains(`theme-${color}`))
+      ?.color ?? DEFAULT_THEME_COLOR
+  );
+}
+
+function applyThemeColor(themeColor: string) {
+  const classes = document.documentElement.classList;
+  classes.remove(...THEME_COLOR_SWATCHES.map(({ color }) => `theme-${color}`));
+  if (themeColor !== DEFAULT_THEME_COLOR) classes.add(`theme-${themeColor}`);
+  localStorage.setItem("studio-theme-color", themeColor);
+}
+
 function Sidebar({
   entries,
   activePath,
@@ -152,6 +181,7 @@ function Sidebar({
   activePath: string;
 }) {
   const [theme, setTheme] = useState(currentTheme);
+  const [themeColor, setThemeColor] = useState(currentThemeColor);
 
   return (
     <aside className="fixed top-0 left-0 flex h-full w-56 flex-col gap-4 border-r border-separator-primary bg-surface-shell px-6 py-4">
@@ -182,6 +212,31 @@ function Sidebar({
           </section>
         ))}
       </nav>
+      <div
+        role="radiogroup"
+        aria-label="Theme color"
+        className="flex justify-between"
+      >
+        {THEME_COLOR_SWATCHES.map(({ color, swatchClass }) => (
+          <button
+            key={color}
+            type="button"
+            role="radio"
+            aria-checked={themeColor === color}
+            aria-label={color}
+            title={color}
+            onClick={() => {
+              applyThemeColor(color);
+              setThemeColor(color);
+            }}
+            className={cn(
+              "h-4 w-4 rounded-full outline-offset-2 outline-shape-primary",
+              swatchClass,
+              themeColor === color && "outline-2",
+            )}
+          />
+        ))}
+      </div>
       <SegmentedControl
         className="-mx-2"
         aria-label="Theme"

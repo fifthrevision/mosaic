@@ -69,6 +69,138 @@
   }
 }
 
+/* Theme color. Blue is the default; one of these classes swaps it for
+   another hue. The class has to sit on the root element: the roles are
+   declared on :root and take their theme stops from there, so a class
+   further down would recolor theme-* utilities and leave the roles blue. */
+:root.theme-mandarin {
+  --color-theme-50: var(--color-mandarin-50);
+  --color-theme-100: var(--color-mandarin-100);
+  --color-theme-150: var(--color-mandarin-150);
+  --color-theme-200: var(--color-mandarin-200);
+  --color-theme-300: var(--color-mandarin-300);
+  --color-theme-400: var(--color-mandarin-400);
+  --color-theme-500: var(--color-mandarin-500);
+  --color-theme-600: var(--color-mandarin-600);
+  --color-theme-700: var(--color-mandarin-700);
+  --color-theme-800: var(--color-mandarin-800);
+  --color-theme-850: var(--color-mandarin-850);
+  --color-theme-900: var(--color-mandarin-900);
+  --color-theme-950: var(--color-mandarin-950);
+}
+
+:root.theme-yellow {
+  --color-theme-50: var(--color-yellow-50);
+  --color-theme-100: var(--color-yellow-100);
+  --color-theme-150: var(--color-yellow-150);
+  --color-theme-200: var(--color-yellow-200);
+  --color-theme-300: var(--color-yellow-300);
+  --color-theme-400: var(--color-yellow-400);
+  --color-theme-500: var(--color-yellow-500);
+  --color-theme-600: var(--color-yellow-600);
+  --color-theme-700: var(--color-yellow-700);
+  --color-theme-800: var(--color-yellow-800);
+  --color-theme-850: var(--color-yellow-850);
+  --color-theme-900: var(--color-yellow-900);
+  --color-theme-950: var(--color-yellow-950);
+}
+
+:root.theme-lime {
+  --color-theme-50: var(--color-lime-50);
+  --color-theme-100: var(--color-lime-100);
+  --color-theme-150: var(--color-lime-150);
+  --color-theme-200: var(--color-lime-200);
+  --color-theme-300: var(--color-lime-300);
+  --color-theme-400: var(--color-lime-400);
+  --color-theme-500: var(--color-lime-500);
+  --color-theme-600: var(--color-lime-600);
+  --color-theme-700: var(--color-lime-700);
+  --color-theme-800: var(--color-lime-800);
+  --color-theme-850: var(--color-lime-850);
+  --color-theme-900: var(--color-lime-900);
+  --color-theme-950: var(--color-lime-950);
+}
+
+:root.theme-emerald {
+  --color-theme-50: var(--color-emerald-50);
+  --color-theme-100: var(--color-emerald-100);
+  --color-theme-150: var(--color-emerald-150);
+  --color-theme-200: var(--color-emerald-200);
+  --color-theme-300: var(--color-emerald-300);
+  --color-theme-400: var(--color-emerald-400);
+  --color-theme-500: var(--color-emerald-500);
+  --color-theme-600: var(--color-emerald-600);
+  --color-theme-700: var(--color-emerald-700);
+  --color-theme-800: var(--color-emerald-800);
+  --color-theme-850: var(--color-emerald-850);
+  --color-theme-900: var(--color-emerald-900);
+  --color-theme-950: var(--color-emerald-950);
+}
+
+:root.theme-teal {
+  --color-theme-50: var(--color-teal-50);
+  --color-theme-100: var(--color-teal-100);
+  --color-theme-150: var(--color-teal-150);
+  --color-theme-200: var(--color-teal-200);
+  --color-theme-300: var(--color-teal-300);
+  --color-theme-400: var(--color-teal-400);
+  --color-theme-500: var(--color-teal-500);
+  --color-theme-600: var(--color-teal-600);
+  --color-theme-700: var(--color-teal-700);
+  --color-theme-800: var(--color-teal-800);
+  --color-theme-850: var(--color-teal-850);
+  --color-theme-900: var(--color-teal-900);
+  --color-theme-950: var(--color-teal-950);
+}
+
+:root.theme-indigo {
+  --color-theme-50: var(--color-indigo-50);
+  --color-theme-100: var(--color-indigo-100);
+  --color-theme-150: var(--color-indigo-150);
+  --color-theme-200: var(--color-indigo-200);
+  --color-theme-300: var(--color-indigo-300);
+  --color-theme-400: var(--color-indigo-400);
+  --color-theme-500: var(--color-indigo-500);
+  --color-theme-600: var(--color-indigo-600);
+  --color-theme-700: var(--color-indigo-700);
+  --color-theme-800: var(--color-indigo-800);
+  --color-theme-850: var(--color-indigo-850);
+  --color-theme-900: var(--color-indigo-900);
+  --color-theme-950: var(--color-indigo-950);
+}
+
+:root.theme-purple {
+  --color-theme-50: var(--color-purple-50);
+  --color-theme-100: var(--color-purple-100);
+  --color-theme-150: var(--color-purple-150);
+  --color-theme-200: var(--color-purple-200);
+  --color-theme-300: var(--color-purple-300);
+  --color-theme-400: var(--color-purple-400);
+  --color-theme-500: var(--color-purple-500);
+  --color-theme-600: var(--color-purple-600);
+  --color-theme-700: var(--color-purple-700);
+  --color-theme-800: var(--color-purple-800);
+  --color-theme-850: var(--color-purple-850);
+  --color-theme-900: var(--color-purple-900);
+  --color-theme-950: var(--color-purple-950);
+}
+
+:root.theme-magenta {
+  --color-theme-50: var(--color-magenta-50);
+  --color-theme-100: var(--color-magenta-100);
+  --color-theme-150: var(--color-magenta-150);
+  --color-theme-200: var(--color-magenta-200);
+  --color-theme-300: var(--color-magenta-300);
+  --color-theme-400: var(--color-magenta-400);
+  --color-theme-500: var(--color-magenta-500);
+  --color-theme-600: var(--color-magenta-600);
+  --color-theme-700: var(--color-magenta-700);
+  --color-theme-800: var(--color-magenta-800);
+  --color-theme-850: var(--color-magenta-850);
+  --color-theme-900: var(--color-magenta-900);
+  --color-theme-950: var(--color-magenta-950);
+}
+
 @utility control-shadow {
   box-shadow:
     0px 1px 1px var(--color-shadow-4),
@@ -278,7 +410,7 @@
   @apply bg-state-selected text-label control-shadow hover:bg-state-selected;
 }
 @utility mosaic-nav-item-active-tinted {
-  @apply bg-state-selected-tint text-label hover:bg-state-selected-tint;
+  @apply bg-state-selected-tint text-label control-shadow hover:bg-state-selected-tint;
 }
 
 @utility glass-surface {

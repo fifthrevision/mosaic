@@ -42,10 +42,11 @@ palette:
     yellow: "#fead3c"
     lime: "oklch(0.731 0.176 120)"
     emerald: "oklch(0.6109 0.1514 158.6)"
-    theme: "#03a2e8"
     teal: "oklch(0.6745 0.139 191.75)"
-    purple: "#897ad7"
-    magenta: "#b9529c"
+    blue: "#03a2e8"
+    indigo: "#767ceb"
+    purple: "#a55fc9"
+    magenta: "#cb5098"
 
 systems:
   # Neutral ramps: tint composited over base; a step is the tint's alpha %.
@@ -72,9 +73,15 @@ systems:
   # Chromatic scales: OKLCH blend from the 500 base toward the sky base
   # (50–400) and the sky tint (600–950). Every stop is listed under emit:
   # these are public utilities, not just there for refs.
+  # Blue under the name the roles use. The .theme-* classes in theme.css
+  # repoint these stops at another hue's scale.
   theme:
     algorithm: scale
-    params: { base: hues.theme }
+    params: { base: hues.blue }
+    emit: [50, 100, 150, 200, 300, 400, 500, 600, 700, 800, 850, 900, 950]
+  blue:
+    algorithm: scale
+    params: { base: hues.blue }
     emit: [50, 100, 150, 200, 300, 400, 500, 600, 700, 800, 850, 900, 950]
   yellow:
     algorithm: scale
@@ -114,6 +121,10 @@ systems:
   shadow:
     algorithm: overlay
     params: { color: "#000000" }
+  indigo:
+    algorithm: scale
+    params: { base: hues.indigo }
+    emit: [50, 100, 150, 200, 300, 400, 500, 600, 700, 800, 850, 900, 950]
 
 defaults:
   scale:
@@ -132,7 +143,7 @@ roles:
     dialog: [surface.canvas, surface.canvas, surface.canvas]
     card: [sky(1), night(1), midnight(5)]
     card-subdued: [sky(3), night(0), midnight(2.5)]
-    figure: [sky(4.5), night(1.5), midnight(3.5)]
+    stage: [sky(4.5), night(1.5), midnight(3.5)]
     floating: [surface.card, surface.card, surface.card]
     scrim: [shadow(7), shadow(10)]
     button: [sky(6.5), night(8), midnight(10)]
@@ -147,7 +158,7 @@ roles:
     # larger step to read the same.
     hover: [sky(3 tint), night(4 tint), midnight(6.5 tint)]
     selected: [sky(0), night(6.5), midnight(12)]
-    selected-tint: [theme(200), theme(800), theme(900)]
+    selected-tint: [theme(150), theme(850), theme(900)]
     active: [sky(8), night(8), midnight(16)]
     button-hover: [sky(8.5), night(12), midnight(14)]
 

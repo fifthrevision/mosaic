@@ -118,9 +118,14 @@ run that passed, a healthy connection.
 
 ### Palette and diff
 
-- `theme-*`, `emerald-*`, `ruby-*`, `yellow-*` (stops 50–950) are public, but
-  they don't change with the mode. Reach for them only when no role fits,
-  and give them a `dark:` counterpart.
+- `theme-*` and the hue scales (`ruby-*`, `mandarin-*`, `yellow-*`, `lime-*`,
+  `emerald-*`, `blue-*`, `teal-*`, `indigo-*`, `purple-*`, `magenta-*`; stops
+  50–950) are public, but they don't change with the mode. Reach for them
+  only when no role fits, and give them a `dark:` counterpart.
+- The theme color is blue by default. A `theme-<hue>` class on the root
+  element (`theme-emerald`, `theme-purple`, …) points `theme-*`, and every
+  role built on it, at that hue's scale. It has to be the root element; set
+  lower, the roles stay blue.
 - `light-*`, `dark-*`, `midnight-*` are the ramps the roles are built from.
   Use the roles.
 - Diffs: `bg-diff-added-line` / `bg-diff-removed-line` for a changed line,

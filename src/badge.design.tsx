@@ -17,7 +17,9 @@ const TONES = [
   "yellow",
   "lime",
   "emerald",
+  "blue",
   "teal",
+  "indigo",
   "purple",
   "magenta",
 ] as const;

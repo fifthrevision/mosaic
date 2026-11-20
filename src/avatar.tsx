@@ -13,8 +13,9 @@ const hueClasses = [
   "bg-yellow-150 text-yellow-700 dark:bg-yellow-700 dark:text-yellow-150",
   "bg-lime-150 text-lime-700 dark:bg-lime-700 dark:text-lime-150",
   "bg-emerald-150 text-emerald-700 dark:bg-emerald-700 dark:text-emerald-150",
-  "bg-theme-150 text-theme-700 dark:bg-theme-700 dark:text-theme-150",
+  "bg-blue-150 text-blue-700 dark:bg-blue-700 dark:text-blue-150",
   "bg-teal-150 text-teal-700 dark:bg-teal-700 dark:text-teal-150",
+  "bg-indigo-150 text-indigo-700 dark:bg-indigo-700 dark:text-indigo-150",
   "bg-purple-150 text-purple-700 dark:bg-purple-700 dark:text-purple-150",
   "bg-magenta-150 text-magenta-700 dark:bg-magenta-700 dark:text-magenta-150",
 ] as const;

@@ -58,7 +58,7 @@ export const Surfaces = () => (
               </div>
             </div>
           </div>
-          <div className="rounded-xl border border-separator-secondary bg-surface-figure p-8 mt-4">
+          <div className="rounded-xl border border-separator-secondary bg-surface-stage p-8 mt-4">
             Surface-figure
           </div>
         </div>
